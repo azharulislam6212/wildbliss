@@ -1,0 +1,62 @@
+{%- if settings.enable_cart_shipping_bar
+  and settings.cart_shipping_bar_threshold > 0
+  and settings.cart_shipping_bar_progress_text != blank
+  and settings.cart_shipping_bar_success_text != blank
+  and settings.cart_shipping_bar_empty_text != blank
+-%}
+  {%- capture bar_html -%}
+    <div class="progress-bar__wrapper hidden">
+
+  
+    <div class="progress-bar__progress " data-progress-bar>
+      <span class="progress-bar__progress-inner" ></span>
+    </div><!-- /.progress-bar__progress -->
+
+      <span class="progress-icon">
+                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="7" r="7" fill="#1C1B18"/>
+                </svg>
+           </span>
+                  </div>
+  {%- endcapture -%}
+
+  <div data-cart-shipping-bar>
+
+      <shipping-bar
+        class="progress-bar"
+        data-money-format="{{- shop.money_format | escape -}}"
+        data-threshold="{{- settings.cart_shipping_bar_threshold | times: 100 -}}"
+        data-discount-percent="8"
+        data-total-price="{{- cart.total_price -}}"
+        data-empty="{%- if cart == empty -%} true {%- else -%} false {%- endif -%}"
+        data-show-currency-code="{{- settings.show_currency_codes -}}"
+      >
+       <div
+          class="shipping-bar  color-{{ settings.shipping_bar_color_scheme }} gradient"
+ 
+        >
+{% comment %}          
+            <span class="shipping-bar__title" data-empty-text>
+                {{- settings.cart_shipping_bar_empty_text -}}
+              </span> {% endcomment %}
+            <div class="shipping-bar__inner">
+              <div class="shipping-bar__content">
+                
+                   <span class="hidden shipping-bar__info__text" data-success-text>
+                      {{- settings.cart_shipping_bar_success_text -}}
+                    </span>
+
+                    <span class="hidden  shipping-bar__info__text" data-progress-text>
+                      {{- settings.cart_shipping_bar_progress_text -}}
+                    </span>
+
+                      {{- bar_html -}}
+              </div>
+            </div>
+
+            </div>
+    
+      </shipping-bar>
+
+  </div>
+{%- endif -%}

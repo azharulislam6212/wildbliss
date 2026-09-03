@@ -1,0 +1,121 @@
+
+.call-to-action-section{
+    position: relative;
+}
+
+.call-to-action__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 4.8rem;
+
+ 
+        /* Border/border-5 */
+        border: 1px solid rgba(var(--color-border));
+        border-radius: 16px;
+}
+
+.call-to-action__heading {
+    margin: 0 0 20px;
+}
+
+ 
+
+.call-to-action__icon-block{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.call-icon-item{
+display: flex;
+flex-direction: column;
+align-items: start;
+padding: 0 0;
+  gap: 6.4rem;
+
+  /* Contact Card */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 16px;
+gap: 64px;
+/* Border/border-5 */
+border: 1px solid #E3E2DD;
+border-radius: 12px;
+ 
+}
+
+.call-icon{
+  line-height: 0;
+  /* Icon */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 8px;
+width: 40px;
+height: 40px;
+/* Primary */
+background: rgba(var(--color-accent));
+border-radius: 8px;
+
+}
+.call-icon svg, .call-icon img{
+  width: 20px;
+  height: 20px;
+}
+
+.call-to-action__text{
+    margin-bottom: 70px;
+}
+
+
+.call-icon-title {
+    font-family: var(--font-heading-family);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: .01em;
+    margin: 0 0 8px;
+}
+
+.call-icon-text ,
+.call-icon-text p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: .01em;
+    color: rgba(var(--color-foreground));
+    margin: 0;
+}
+.call-icon-text a {
+    transition: .3s ease;
+    text-decoration: none;
+    color: rgba(var(--color-foreground));
+}
+.call-icon-text a:hover {
+    color: rgba(var(--color-accent));
+}
+@media screen and (max-width: 750px) {
+
+.call-to-action__inner {
+    padding: 20px ;
+            grid-template-columns: 1fr;
+}
+
+.call-to-action__icon-block{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+}

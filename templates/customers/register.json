@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-register",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "Create an Account",
+        "heading_size": "h1",
+        "image": "shopify:\/\/shop_images\/Image_Wrapper.png",
+        "image_ratio": "portrait",
+        "term_condition_text": "I agree to the all Terms & Conditions.",
+        "card_color": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 136,
+        "padding_top_tab": 50,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 68,
+        "padding_bottom_mobile": 60
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

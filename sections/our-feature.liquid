@@ -1,0 +1,159 @@
+{{ 'our-feature.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="info-cards-section"
+  style="
+    --outer-bg-color: {{ section.settings.outer_bg_color }};
+    --content-bg-color: {{ section.settings.content_bg_color }};
+    --title-color: {{ section.settings.title_color }};
+    --description-color: {{ section.settings.description_color }};
+    --icon-bg-color: {{ section.settings.icon_bg_color }};
+    --icon-color: {{ section.settings.icon_color }};
+    --separator-color: {{ section.settings.separator_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="info-cards-container">
+    {% for block in section.blocks %}
+      <div class="info-card" {{ block.shopify_attributes }}>
+        <div class="info-card-icon-wrapper">
+          {% if block.settings.icon_image != blank %}
+            <img
+              src="{{ block.settings.icon_image | image_url: width: 60 }}"
+              alt="{{ block.settings.title | escape }}"
+              loading="lazy"
+              width="40"
+              height="40"
+              class="info-card-icon"
+            >
+          {% else %}
+            <img
+              src="/placeholder.svg?height=40&width=40"
+              alt="Placeholder icon"
+              loading="lazy"
+              width="40"
+              height="40"
+              class="info-card-icon"
+            >
+          {% endif %}
+        </div>
+        <h3 class="info-card-title">{{ block.settings.title }}</h3>
+        <div class="info-card-description">{{ block.settings.description }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Our Feature",
+  "tag": "section",
+  "class": "section-info-cards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Color Scheme"
+    },
+    {
+      "type": "color",
+      "id": "outer_bg_color",
+      "label": "Outer background color",
+      "default": "#E6ECF7"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "Card background color",
+      "default": "#E6ECF7"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Card title color",
+      "default": "#333366"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Card description color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#6699FF"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Separator line color",
+      "default": "#D0D8E8"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Information Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card Title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>This is a short description for the card.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our ",
+      "category": "Custom",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

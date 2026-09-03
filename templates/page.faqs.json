@@ -1,0 +1,306 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "hied_page_title": false,
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "faq_page_section_UQL8zz": {
+      "type": "faq-page-section",
+      "blocks": {
+        "faq_tab_FCa9nm": {
+          "type": "faq_tab",
+          "settings": {
+            "title": "Product",
+            "deafult_open": false,
+            "heading_1": "How will my order be packaged and shipped?",
+            "row_content_1": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_2": "How long can I safely store my meat in the freezer?",
+            "row_content_2": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>",
+            "heading_3": "What is the safest way to thaw my steak?",
+            "row_content_3": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>",
+            "heading_4": "What is the safest way to thaw my steak?",
+            "row_content_4": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>",
+            "heading_5": "Can I change my delivery option to local pickup after ordering?",
+            "row_content_5": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<br\/><br\/><\/p>",
+            "heading_6": "What is the difference between USDA Prime and Wagyu?",
+            "row_content_6": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<br\/><br\/><\/p>",
+            "heading_7": "",
+            "row_content_7": "<p> <\/p>",
+            "heading_8": "",
+            "row_content_8": "<p> <\/p>",
+            "heading_9": "",
+            "row_content_9": "<p> <\/p>",
+            "heading_10": "",
+            "row_content_10": "<p> <\/p>"
+          }
+        },
+        "faq_tab_UDLHVf": {
+          "type": "faq_tab",
+          "settings": {
+            "title": "Ordering",
+            "deafult_open": false,
+            "heading_1": "Collapsible row",
+            "row_content_1": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_2": "Collapsible row",
+            "row_content_2": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_3": "Collapsible row",
+            "row_content_3": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_4": "Collapsible row",
+            "row_content_4": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_5": "Collapsible row",
+            "row_content_5": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_6": "Collapsible row",
+            "row_content_6": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_7": "Collapsible row",
+            "row_content_7": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_8": "Collapsible row",
+            "row_content_8": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_9": "Collapsible row",
+            "row_content_9": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_10": "Collapsible row",
+            "row_content_10": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
+        },
+        "faq_tab_pkDapn": {
+          "type": "faq_tab",
+          "settings": {
+            "title": "Shipping",
+            "deafult_open": false,
+            "heading_1": "Collapsible row",
+            "row_content_1": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_2": "Collapsible row",
+            "row_content_2": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_3": "Collapsible row",
+            "row_content_3": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_4": "Collapsible row",
+            "row_content_4": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_5": "Collapsible row",
+            "row_content_5": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_6": "Collapsible row",
+            "row_content_6": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_7": "Collapsible row",
+            "row_content_7": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_8": "Collapsible row",
+            "row_content_8": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_9": "Collapsible row",
+            "row_content_9": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_10": "Collapsible row",
+            "row_content_10": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
+        },
+        "faq_tab_yaKmXH": {
+          "type": "faq_tab",
+          "settings": {
+            "title": "Refund",
+            "deafult_open": false,
+            "heading_1": "Collapsible row",
+            "row_content_1": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_2": "Collapsible row",
+            "row_content_2": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_3": "Collapsible row",
+            "row_content_3": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_4": "Collapsible row",
+            "row_content_4": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_5": "Collapsible row",
+            "row_content_5": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_6": "Collapsible row",
+            "row_content_6": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_7": "Collapsible row",
+            "row_content_7": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_8": "Collapsible row",
+            "row_content_8": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_9": "Collapsible row",
+            "row_content_9": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_10": "Collapsible row",
+            "row_content_10": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
+        },
+        "faq_tab_YYwgPP": {
+          "type": "faq_tab",
+          "settings": {
+            "title": "Storage",
+            "deafult_open": false,
+            "heading_1": "Collapsible row",
+            "row_content_1": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_2": "Collapsible row",
+            "row_content_2": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_3": "Collapsible row",
+            "row_content_3": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_4": "Collapsible row",
+            "row_content_4": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_5": "Collapsible row",
+            "row_content_5": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_6": "Collapsible row",
+            "row_content_6": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_7": "Collapsible row",
+            "row_content_7": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_8": "Collapsible row",
+            "row_content_8": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_9": "Collapsible row",
+            "row_content_9": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_10": "Collapsible row",
+            "row_content_10": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
+        },
+        "faq_tab_WBcEA4": {
+          "type": "faq_tab",
+          "settings": {
+            "title": "Account",
+            "deafult_open": false,
+            "heading_1": "Collapsible row",
+            "row_content_1": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_2": "Collapsible row",
+            "row_content_2": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_3": "Collapsible row",
+            "row_content_3": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_4": "Collapsible row",
+            "row_content_4": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_5": "Collapsible row",
+            "row_content_5": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_6": "Collapsible row",
+            "row_content_6": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_7": "Collapsible row",
+            "row_content_7": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_8": "Collapsible row",
+            "row_content_8": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_9": "Collapsible row",
+            "row_content_9": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_10": "Collapsible row",
+            "row_content_10": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
+        },
+        "faq_tab_GKp8CF": {
+          "type": "faq_tab",
+          "settings": {
+            "title": "Gift Card",
+            "deafult_open": false,
+            "heading_1": "Collapsible row",
+            "row_content_1": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_2": "Collapsible row",
+            "row_content_2": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_3": "Collapsible row",
+            "row_content_3": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_4": "Collapsible row",
+            "row_content_4": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_5": "Collapsible row",
+            "row_content_5": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_6": "Collapsible row",
+            "row_content_6": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_7": "Collapsible row",
+            "row_content_7": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_8": "Collapsible row",
+            "row_content_8": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_9": "Collapsible row",
+            "row_content_9": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "heading_10": "Collapsible row",
+            "row_content_10": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_tab_FCa9nm",
+        "faq_tab_UDLHVf",
+        "faq_tab_pkDapn",
+        "faq_tab_yaKmXH",
+        "faq_tab_YYwgPP",
+        "faq_tab_WBcEA4",
+        "faq_tab_GKp8CF"
+      ],
+      "name": "Faq Page Section",
+      "settings": {
+        "page_width": "container",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h0",
+        "text": "<p>Follow these essential steps to ensure the ultimate flavor and texture.<\/p>",
+        "disclosure_toggle": "plus",
+        "color_accent": "#ff0000",
+        "color_scheme": "",
+        "card_color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    },
+    "call_to_actions_Rn3FBL": {
+      "type": "call-to-actions",
+      "blocks": {
+        "heading_GR4mUc": {
+          "type": "heading",
+          "settings": {
+            "heading": "Still have questions?",
+            "heading_size": "h2"
+          }
+        },
+        "text_VNdefG": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We're here to help you, and we pride ourselves on offering the highest quality of customer service.<\/p>",
+            "text_style": "body",
+            "text_size": "large"
+          }
+        },
+        "button_Axih4U": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact Us",
+            "button_link": "shopify:\/\/pages\/contact",
+            "button_style": "primary"
+          }
+        },
+        "icon_block_GBCwpk": {
+          "type": "icon_block",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Vector.svg",
+            "title": "Address",
+            "text": "<p>700 Atlantic St  Roseville, CA 95678<\/p>"
+          }
+        },
+        "icon_block_qbgzwd": {
+          "type": "icon_block",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Icon_6.svg",
+            "title": "Contact",
+            "text": "<p><a href=\"tel:(916) 782 - 2705\" title=\"tel:(916) 782 - 2705\">(916) 782 - 2705<\/a><br\/><a href=\"tel:hello@example.com\" title=\"tel:hello@example.com\">hello@example.com<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_GR4mUc",
+        "text_VNdefG",
+        "button_Axih4U",
+        "icon_block_GBCwpk",
+        "icon_block_qbgzwd"
+      ],
+      "name": "Call to actions",
+      "settings": {
+        "page_width": "container",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-4",
+        "padding_top": 0,
+        "padding_bottom": 64,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_page_section_UQL8zz",
+    "call_to_actions_Rn3FBL"
+  ]
+}

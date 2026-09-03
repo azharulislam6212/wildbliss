@@ -1,0 +1,279 @@
+{{ 'marquee.css' | asset_url | stylesheet_tag }}
+{{ 'marquee-text.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .section-{{ section.id }}-padding {
+         padding-top: {{ section.settings.padding_top_mobile }}px;
+         padding-bottom: {{ section.settings.padding_bottom_moblie }}px;
+   }
+
+  @media screen and (min-width: 769px) {
+    .section-{{ section.id }}-padding {
+         padding-top: {{ section.settings.padding_top_tab }}px;
+         padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+     }
+  }
+{% endstyle %}
+
+
+
+<div id="{{ section.settings.them_section_id |  default:"marquee_text" }}"   class="marquee-text  section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+    {% unless section.settings.full_width %}<div class="container">{% endunless %}
+    {%- if section.blocks.size > 0 -%}
+      <div class="running-content marquee">
+        <marquee-content
+          data-speed="{{ section.settings.speed }}"
+          class="running-content-wrap"
+          style="--marquee-duration: {{ 1000 | divided_by: section.settings.speed }}s;"
+        >
+          {%- capture marquee_item -%}
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'marquee_text' -%}
+                <div class="running-content-item running-content-text rte"  {{ block.shopify_attributes }}>
+
+                  {% if block.settings.svg_icon != blank %}
+                    <div class="running-content__img">
+                          {% render "icon-img" with image: block.settings.svg_icon  %}
+                    </div>
+                  {% endif %}
+
+                  <div class="running-content__text">
+    {{- block.settings.text -}}
+                  </div>
+
+              
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+          <div class="marquee-container js-marquee-items {{ section.settings.pause_when_hover | default: '' | replace: 'true', 'marquee--animation-pause' }}">
+            {%- case section.blocks.size -%}
+              {%- when 1 -%}
+                {%- for i in (1..12) -%}
+                  <div class="js-marquee-item marquee-item  marquee__items--animate  marquee--{{- section.settings.moving_direction }}">
+                    {{- marquee_item -}}
+                  </div>
+                {%- endfor -%}
+              {%- when 2, 3 -%}
+                {%- for i in (1..7) -%}
+                  <div class="js-marquee-item marquee-item marquee__items--animate  marquee--{{- section.settings.moving_direction }}">
+                    {{- marquee_item -}}
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..5) -%}
+                  <div class="js-marquee-item marquee-item  marquee__items--animate marquee--{{- section.settings.moving_direction }}">
+                    {{- marquee_item -}}
+                  </div>
+                {%- endfor -%}
+            {%- endcase -%}
+          </div>
+        </marquee-content>
+      </div>
+    {% endif %}
+{% unless section.settings.full_width %} </div>{% endunless %}
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Text",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"]
+  },
+  "blocks": [
+    {
+      "type": "marquee_text",
+      "name": "Marquee Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Promotion text"
+        },
+        {
+          "type": "image_picker",
+          "label": "Svg Icon",
+          "id": "svg_icon"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "Full Width"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "select",
+      "id": "speed",
+      "label": "Speed",
+      "default": "50",
+      "options": [
+        {
+          "value": "50",
+          "label": "50"
+        },
+        {
+          "value": "100",
+          "label": "100"
+        },
+        {
+          "value": "150",
+          "label": "150"
+        },
+        {
+          "value": "200",
+          "label": "200"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Movine Direction",
+      "id": "moving_direction",
+      "options": [
+        {
+          "value": "animation-direction",
+          "label": "animation-direction"
+        },
+        {
+          "value": "animation-reverse",
+          "label": "animation-reverse"
+        }
+      ],
+      "default": "animation-direction"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_when_hover",
+      "label": "Pause On Hover",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_moblie",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Text",
+        "blocks": [
+        {
+          "type": "marquee_text"
+        },
+        {
+          "type": "marquee_text"
+        },
+        {
+          "type": "marquee_text"
+        },
+               {
+          "type": "marquee_text"
+        },
+        {
+          "type": "marquee_text"
+        },
+        {
+          "type": "marquee_text"
+        },
+               {
+          "type": "marquee_text"
+        },
+        {
+          "type": "marquee_text"
+        },
+        {
+          "type": "marquee_text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

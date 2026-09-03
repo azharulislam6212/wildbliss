@@ -1,0 +1,877 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor_BFntgf": {
+          "type": "vendor",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "body"
+          }
+        },
+        "title_E7BRtY": {
+          "type": "title",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "rating_9WpgXp": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price_FGjn8D": {
+          "type": "price",
+          "settings": {}
+        },
+        "inventory_37E8WQ": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": false
+          }
+        },
+        "variant_picker_wN9KQ6": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "square"
+          }
+        },
+        "subscription_UwFPQQ": {
+          "type": "subscription",
+          "settings": {}
+        },
+        "buy_buttons_cmNQyQ": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "collapsible_tab_APdL9m": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Description",
+            "icon": "none",
+            "content": "{{ product.description }}",
+            "page": ""
+          }
+        },
+        "collapsible_tab_gHHGJj": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What's inside",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_6kiDNp": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Sourcing & testing",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_DkbbQL": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & returns",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor_BFntgf",
+        "title_E7BRtY",
+        "description",
+        "rating_9WpgXp",
+        "price_FGjn8D",
+        "inventory_37E8WQ",
+        "variant_picker_wN9KQ6",
+        "subscription_UwFPQQ",
+        "buy_buttons_cmNQyQ",
+        "collapsible_tab_APdL9m",
+        "collapsible_tab_gHHGJj",
+        "collapsible_tab_6kiDNp",
+        "collapsible_tab_DkbbQL"
+      ],
+      "settings": {
+        "page_width": "container",
+        "layout": "image_first",
+        "gallery_type": "grid-collage",
+        "gallery_size": "6",
+        "gallery_image_size": "1-1",
+        "enable_zoom": true,
+        "disable_zoom_icon": false,
+        "slides_per_view": "1",
+        "partial_slide": false,
+        "enable_navigation": true,
+        "enable_mobile_thumbs": true,
+        "enable_sticky_info": false,
+        "enable_sticky_gallery": true,
+        "color_accent": "#ff0000",
+        "color_scheme": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "icon_card_blocks_xiinxq": {
+      "type": "icon-card-blocks",
+      "blocks": {
+        "icon_card_tyccxB": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "",
+            "title": "Premium Quality",
+            "text": "USDA Prime, hand-selected",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_Pa3thr": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "",
+            "title": "Always Fresh",
+            "text": "Never frozen",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_qzjnED": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "",
+            "title": "Custom Cut",
+            "text": "Cut to your specifications",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_9L9Nrx": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "",
+            "title": "Pick or Delivery",
+            "text": "what works for you",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "icon_card_tyccxB",
+        "icon_card_Pa3thr",
+        "icon_card_qzjnED",
+        "icon_card_9L9Nrx"
+      ],
+      "name": "Icon Card Blocks",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 32,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 30,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "product_tab_list_bKxFGD": {
+      "type": "product-tab-list",
+      "blocks": {
+        "description_xbq6xz": {
+          "type": "description",
+          "settings": {
+            "svg_icon": "<svg width=\"12\" height=\"11\" viewBox=\"0 0 12 11\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.0003 5.50028C12.0003 5.63289 11.9476 5.76006 11.8538 5.85383C11.7601 5.9476 11.6329 6.00028 11.5003 6.00028H6.00028C5.86767 6.00028 5.74049 5.9476 5.64672 5.85383C5.55296 5.76006 5.50028 5.63289 5.50028 5.50028C5.50028 5.36767 5.55296 5.24049 5.64672 5.14672C5.74049 5.05296 5.86767 5.00028 6.00028 5.00028H11.5003C11.6329 5.00028 11.7601 5.05296 11.8538 5.14672C11.9476 5.24049 12.0003 5.36767 12.0003 5.50028ZM6.00028 2.00028H11.5003C11.6329 2.00028 11.7601 1.9476 11.8538 1.85383C11.9476 1.76006 12.0003 1.63289 12.0003 1.50028C12.0003 1.36767 11.9476 1.24049 11.8538 1.14672C11.7601 1.05296 11.6329 1.00028 11.5003 1.00028H6.00028C5.86767 1.00028 5.74049 1.05296 5.64672 1.14672C5.55296 1.24049 5.50028 1.36767 5.50028 1.50028C5.50028 1.63289 5.55296 1.76006 5.64672 1.85383C5.74049 1.9476 5.86767 2.00028 6.00028 2.00028ZM11.5003 9.00028H6.00028C5.86767 9.00028 5.74049 9.05296 5.64672 9.14672C5.55296 9.24049 5.50028 9.36767 5.50028 9.50028C5.50028 9.63289 5.55296 9.76006 5.64672 9.85383C5.74049 9.9476 5.86767 10.0003 6.00028 10.0003H11.5003C11.6329 10.0003 11.7601 9.9476 11.8538 9.85383C11.9476 9.76006 12.0003 9.63289 12.0003 9.50028C12.0003 9.36767 11.9476 9.24049 11.8538 9.14672C11.7601 9.05296 11.6329 9.00028 11.5003 9.00028ZM3.14653 0.146528L1.50028 1.7934L0.854028 1.14653C0.760208 1.05271 0.63296 1 0.500278 1C0.367596 1 0.240348 1.05271 0.146528 1.14653C0.0527077 1.24035 9.88558e-10 1.3676 0 1.50028C-9.88558e-10 1.63296 0.0527077 1.76021 0.146528 1.85403L1.14653 2.85403C1.19296 2.90052 1.24811 2.9374 1.30881 2.96256C1.36951 2.98772 1.43457 3.00067 1.50028 3.00067C1.56599 3.00067 1.63105 2.98772 1.69175 2.96256C1.75245 2.9374 1.80759 2.90052 1.85403 2.85403L3.85403 0.854028C3.94785 0.760208 4.00056 0.63296 4.00056 0.500278C4.00056 0.367596 3.94785 0.240348 3.85403 0.146528C3.76021 0.0527077 3.63296 0 3.50028 0C3.3676 0 3.24035 0.0527077 3.14653 0.146528ZM3.14653 4.14653L1.50028 5.7934L0.854028 5.14653C0.760208 5.05271 0.63296 5 0.500278 5C0.367596 5 0.240348 5.05271 0.146528 5.14653C0.0527077 5.24035 0 5.3676 0 5.50028C0 5.56598 0.0129401 5.63103 0.0380814 5.69173C0.0632227 5.75242 0.100073 5.80757 0.146528 5.85403L1.14653 6.85403C1.19296 6.90052 1.24811 6.9374 1.30881 6.96256C1.36951 6.98772 1.43457 7.00067 1.50028 7.00067C1.56599 7.00067 1.63105 6.98772 1.69175 6.96256C1.75245 6.9374 1.80759 6.90052 1.85403 6.85403L3.85403 4.85403C3.94785 4.76021 4.00056 4.63296 4.00056 4.50028C4.00056 4.3676 3.94785 4.24035 3.85403 4.14653C3.76021 4.05271 3.63296 4 3.50028 4C3.3676 4 3.24035 4.05271 3.14653 4.14653ZM3.14653 8.14653L1.50028 9.7934L0.854028 9.14653C0.807573 9.10007 0.752423 9.06322 0.691726 9.03808C0.63103 9.01294 0.565975 9 0.500278 9C0.434581 9 0.369526 9.01294 0.30883 9.03808C0.248133 9.06322 0.192983 9.10007 0.146528 9.14653C0.100073 9.19298 0.0632227 9.24813 0.0380814 9.30883C0.0129401 9.36953 0 9.43458 0 9.50028C0 9.56598 0.0129401 9.63103 0.0380814 9.69173C0.0632227 9.75242 0.100073 9.80757 0.146528 9.85403L1.14653 10.854C1.19296 10.9005 1.24811 10.9374 1.30881 10.9626C1.36951 10.9877 1.43457 11.0007 1.50028 11.0007C1.56599 11.0007 1.63105 10.9877 1.69175 10.9626C1.75245 10.9374 1.80759 10.9005 1.85403 10.854L3.85403 8.85403C3.94785 8.76021 4.00056 8.63296 4.00056 8.50028C4.00056 8.3676 3.94785 8.24035 3.85403 8.14653C3.76021 8.05271 3.63296 8 3.50028 8C3.3676 8 3.24035 8.05271 3.14653 8.14653Z\" fill=\"CurrentColor\"\/>\n<\/svg>",
+            "title": "Description & Details",
+            "heading": "About the Product",
+            "text": "<p>Rich marbling. Bold flavor. Our Prime Ribeye is cut from the finest USDA Prime beef for a steak that's tender, juicy, and full of flavor.<br\/><\/p><ul><li>USDA Prime, hand-selected<\/li><li>Well-marbled for maximum flavor<\/li><li>Wet-aged for tenderness<\/li><li>Cut fresh to order<\/li><\/ul>",
+            "block_text_1": "<p><strong>Breed<\/strong><br\/>Black Angus<\/p>",
+            "block_text_2": "<p><strong>Origin<\/strong><br\/>Victoria, Australia<\/p>",
+            "block_text_3": "<p><strong>Age<\/strong><br\/>28-day dry-aged<\/p>",
+            "block_text_4": "<p><strong>Marbling Score<\/strong><br\/>MB4+ (High)<\/p>",
+            "block_text_5": "<p><strong>Feed<\/strong><br\/>100% Pasture-fed<\/p>",
+            "block_text_6": "<p><strong>Hormones<\/strong><br\/>HGP-free<\/p>",
+            "info_title": "Product Info",
+            "product_info": "<p><strong>Grade:<\/strong> USDA Prime<\/p><p><strong>Cut:<\/strong> Ribeye<\/p><p><strong>Source:<\/strong> Midwestern, USA<br\/><br\/><strong>Aging:<\/strong> Wet-aged 21+ days<\/p><p><strong>Packaging:<\/strong> Vacuum sealed<\/p><p><strong>Freezer friendly:<\/strong> Yes<\/p>"
+          }
+        },
+        "preparation_Cmg8pg": {
+          "type": "preparation",
+          "settings": {
+            "svg_icon": "<svg width=\"16\" height=\"13\" viewBox=\"0 0 16 13\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M5.5 2.5V0.5C5.5 0.367392 5.55268 0.240215 5.64645 0.146447C5.74022 0.0526784 5.86739 0 6 0C6.13261 0 6.25979 0.0526784 6.35356 0.146447C6.44732 0.240215 6.5 0.367392 6.5 0.5V2.5C6.5 2.63261 6.44732 2.75979 6.35356 2.85355C6.25979 2.94732 6.13261 3 6 3C5.86739 3 5.74022 2.94732 5.64645 2.85355C5.55268 2.75979 5.5 2.63261 5.5 2.5ZM8 3C8.13261 3 8.25979 2.94732 8.35356 2.85355C8.44732 2.75979 8.5 2.63261 8.5 2.5V0.5C8.5 0.367392 8.44732 0.240215 8.35356 0.146447C8.25979 0.0526784 8.13261 0 8 0C7.86739 0 7.74022 0.0526784 7.64645 0.146447C7.55268 0.240215 7.5 0.367392 7.5 0.5V2.5C7.5 2.63261 7.55268 2.75979 7.64645 2.85355C7.74022 2.94732 7.86739 3 8 3ZM10 3C10.1326 3 10.2598 2.94732 10.3536 2.85355C10.4473 2.75979 10.5 2.63261 10.5 2.5V0.5C10.5 0.367392 10.4473 0.240215 10.3536 0.146447C10.2598 0.0526784 10.1326 0 10 0C9.86739 0 9.74022 0.0526784 9.64645 0.146447C9.55268 0.240215 9.5 0.367392 9.5 0.5V2.5C9.5 2.63261 9.55268 2.75979 9.64645 2.85355C9.74022 2.94732 9.86739 3 10 3ZM15.8 5.9L14 7.25V11C14 11.5304 13.7893 12.0391 13.4142 12.4142C13.0391 12.7893 12.5304 13 12 13H4C3.46957 13 2.96086 12.7893 2.58579 12.4142C2.21072 12.0391 2 11.5304 2 11V7.25L0.200002 5.9C0.0939154 5.82044 0.0237809 5.70199 0.0050273 5.57071C-0.0137263 5.43944 0.0204371 5.30609 0.100002 5.2C0.179567 5.09391 0.298016 5.02378 0.429291 5.00503C0.560567 4.98627 0.693915 5.02043 0.800002 5.1L2 6V4.5C2 4.36739 2.05268 4.24021 2.14645 4.14645C2.24022 4.05268 2.36739 4 2.5 4H13.5C13.6326 4 13.7598 4.05268 13.8536 4.14645C13.9473 4.24021 14 4.36739 14 4.5V6L15.2 5.1C15.3061 5.02043 15.4394 4.98627 15.5707 5.00503C15.702 5.02378 15.8204 5.09391 15.9 5.2C15.9796 5.30609 16.0137 5.43944 15.995 5.57071C15.9762 5.70199 15.9061 5.82044 15.8 5.9ZM13 5H3V11C3 11.2652 3.10536 11.5196 3.2929 11.7071C3.48043 11.8946 3.73479 12 4 12H12C12.2652 12 12.5196 11.8946 12.7071 11.7071C12.8946 11.5196 13 11.2652 13 11V5Z\" fill=\"CurrentColor\"\/>\n<\/svg>",
+            "title": "Preparation",
+            "text": "<p><strong>Thaw in refrigerator.<\/strong><br\/>Remove fillets from plastic wrap.<br\/><br\/><strong>Bake:<\/strong><br\/>Preheat oven to 400 °F. Place salmon fillets on a foil lined baking sheet. Bake for 10 to 12 minutes.<br\/><br\/><strong>Grill:<\/strong><br\/>Grill salmon fillets over medium heat 4 to 5 minutes per side.<br\/><br\/><strong>Microwave:<\/strong><br\/>Place salmon fillets in a microwave safe dish. Cover with plastic wrap, venting one corner.<br\/>Microwave on high 3 to 4  minutes, rotating halfway through cooking.<br\/><br\/><strong>Air Fryer (1500 Watt):<\/strong><br\/>Preheat air fryer to 350°F. Lightly  spray basket with nonstick cooking spray. Remove salmon from packaging  and place desired number of servings in air fryer, leaving 1\/2\" between  pieces. Cook for 10-12 minutes or until temperature reaches 145°F.<\/p>"
+          }
+        },
+        "packaging_delivery_6pP6NA": {
+          "type": "packaging_delivery",
+          "settings": {
+            "svg_icon": "<svg width=\"13\" height=\"14\" viewBox=\"0 0 13 14\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.48 3.13317L6.98 0.12379C6.83305 0.0425919 6.66789 0 6.5 0C6.33211 0 6.16695 0.0425919 6.02 0.12379L0.52 3.13441C0.36293 3.22036 0.231815 3.34689 0.140345 3.50081C0.0488751 3.65472 0.000406411 3.83037 0 4.00942V9.98691C0.000406411 10.166 0.0488751 10.3416 0.140345 10.4955C0.231815 10.6494 0.36293 10.776 0.52 10.8619L6.02 13.8725C6.16695 13.9537 6.33211 13.9963 6.5 13.9963C6.66789 13.9963 6.83305 13.9537 6.98 13.8725L12.48 10.8619C12.6371 10.776 12.7682 10.6494 12.8597 10.4955C12.9511 10.3416 12.9996 10.166 13 9.98691V4.01004C12.9999 3.83068 12.9516 3.65464 12.8601 3.50036C12.7686 3.34609 12.6373 3.21926 12.48 3.13317ZM6.5 0.99879L11.5212 3.74879L9.66063 4.76754L4.63875 2.01754L6.5 0.99879ZM6.5 6.49879L1.47875 3.74879L3.5975 2.58879L8.61875 5.33879L6.5 6.49879ZM1 4.62379L6 7.36004V12.7219L1 9.98754V4.62379ZM12 9.98504L7 12.7219V7.36254L9 6.26816V8.49879C9 8.6314 9.05268 8.75858 9.14645 8.85234C9.24021 8.94611 9.36739 8.99879 9.5 8.99879C9.63261 8.99879 9.75979 8.94611 9.85355 8.85234C9.94732 8.75858 10 8.6314 10 8.49879V5.72067L12 4.62379V9.98442V9.98504Z\" fill=\"CurrentColor\"\/>\n<\/svg>",
+            "title": "Packaging & Delivery",
+            "text": "<p>Each steak is vacuum-sealed to order and packed inside an insulated box with gel ice packs rated for up to 24 hours of temperature control during transit.<\/p>",
+            "block_text_1": "<p><strong>Packaging<\/strong><br\/>Vacuum-sealed BPA-free<\/p>",
+            "block_text_2": "<p><strong>Box<\/strong><br\/>Insulated + gel ice packs<\/p>",
+            "block_text_3": "<p><strong>Delivery Days<\/strong><br\/>Tue, Thu, Sat<\/p>",
+            "block_text_4": "<p><strong>Pickup<\/strong><br\/>Daily 8 AM – 6 PM<\/p>"
+          }
+        },
+        "reviews_XrjriV": {
+          "type": "reviews",
+          "settings": {
+            "svg_icon": "<svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M13.5 3H2.50002C2.2348 3 1.98045 3.10536 1.79291 3.29289C1.60537 3.48043 1.50002 3.73478 1.50002 4V14C1.49889 14.1906 1.55277 14.3775 1.65521 14.5382C1.75764 14.699 1.90427 14.8268 2.07752 14.9062C2.2099 14.9677 2.35406 14.9997 2.50002 15C2.73477 14.9994 2.96173 14.9157 3.14064 14.7638L3.14627 14.7594L5.18752 13H13.5C13.7652 13 14.0196 12.8946 14.2071 12.7071C14.3947 12.5196 14.5 12.2652 14.5 12V4C14.5 3.73478 14.3947 3.48043 14.2071 3.29289C14.0196 3.10536 13.7652 3 13.5 3ZM13.5 12H5.00002C4.87996 12.0001 4.76394 12.0433 4.67314 12.1219L2.50002 14V4H13.5V12ZM5.50002 7C5.50002 6.86739 5.5527 6.74021 5.64646 6.64645C5.74023 6.55268 5.86741 6.5 6.00002 6.5H10C10.1326 6.5 10.2598 6.55268 10.3536 6.64645C10.4473 6.74021 10.5 6.86739 10.5 7C10.5 7.13261 10.4473 7.25979 10.3536 7.35355C10.2598 7.44732 10.1326 7.5 10 7.5H6.00002C5.86741 7.5 5.74023 7.44732 5.64646 7.35355C5.5527 7.25979 5.50002 7.13261 5.50002 7ZM5.50002 9C5.50002 8.86739 5.5527 8.74021 5.64646 8.64645C5.74023 8.55268 5.86741 8.5 6.00002 8.5H10C10.1326 8.5 10.2598 8.55268 10.3536 8.64645C10.4473 8.74021 10.5 8.86739 10.5 9C10.5 9.13261 10.4473 9.25979 10.3536 9.35355C10.2598 9.44732 10.1326 9.5 10 9.5H6.00002C5.86741 9.5 5.74023 9.44732 5.64646 9.35355C5.5527 9.25979 5.50002 9.13261 5.50002 9Z\" fill=\"CurrentColor\"\/>\n<\/svg>",
+            "title": "Reviews",
+            "review_liquid": "<!-- Start of Judge.me code -->\n{% assign has_legacy = false %}\n{% if product.metafields.judgeme.widget.size > 20 %}\n  {% assign has_legacy = true %}\n{% endif %}\n<div style='clear:both'><\/div>\n<div\n  id='judgeme_product_reviews'\n  class='jdgm-widget jdgm-review-widget'\n  data-product-title='{{ product.title | escape }}'\n  data-id='{{ product.id }}'\n  data-product-id='{{ product.id }}'\n  data-widget='review'\n  data-auto-install='false'\n  data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}'\n  data-entry-point='review_widget.js'\n  data-entry-key='review-widget\/main.js'\n>\n  {% if has_legacy %}\n    <div class='jdgm-legacy-widget-content' style='display: none;'>\n      {{ product.metafields.judgeme.widget }}\n    <\/div>\n  {% endif %}\n<\/div>\n{% if product.metafields.judgeme.review_widget_data %}\n  <script>\n    jdgm.data ||= {};\n    jdgm.data.reviewWidget ||= {};\n    jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}\n  <\/script>\n{% endif %}\n<!-- End of Judge.me code -->"
+          }
+        }
+      },
+      "block_order": [
+        "description_xbq6xz",
+        "preparation_Cmg8pg",
+        "packaging_delivery_6pP6NA",
+        "reviews_XrjriV"
+      ],
+      "name": "Product tab list",
+      "settings": {
+        "page_width": "container-fluid",
+        "color_accent": "#ff0000",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "color_scheme_content": "",
+        "padding_top": 32,
+        "padding_bottom": 64,
+        "padding_top_tab": 30,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "multicard_image_block_wfciEL": {
+      "type": "multicard-image-block",
+      "blocks": {
+        "card_HHmYYY": {
+          "type": "card",
+          "settings": {
+            "heading": "Award-Winning Wagyu",
+            "text": "We've been writing extensively about A5 Wagyu to give you some  background on the Japanese beef and its well-earned reputation for rich  marbling.",
+            "text_align": "vertical-bottom horizontal-center",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3) 43.75%, rgba(0, 0, 0, 0.4) 100%)"
+          }
+        },
+        "card_EniGwk": {
+          "type": "card",
+          "settings": {
+            "heading": "Kago Myths & Facts: J.Wagyu & American Wagyu",
+            "text": "We've been writing extensively about A5 Wagyu to give you some  background on the Japanese beef and its well-earned reputation for rich  marbling.",
+            "text_align": "vertical-bottom horizontal-center",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3) 43.75%, rgba(0, 0, 0, 0.4) 100%)"
+          }
+        },
+        "card_Jf6FFK": {
+          "type": "card",
+          "settings": {
+            "heading": "Wagyu & American Wagyu",
+            "text": "We've been writing extensively about A5 Wagyu to give you some  background on the Japanese beef and its well-earned reputation for rich  marbling.",
+            "text_align": "vertical-bottom horizontal-center",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3) 43.75%, rgba(0, 0, 0, 0.4) 100%)"
+          }
+        },
+        "card_Kyf8fG": {
+          "type": "card",
+          "settings": {
+            "heading": "Kago Melt-In-Your-Mouth Flavor",
+            "text": "We've been writing extensively about A5 Wagyu to give you some  background on the Japanese beef and its well-earned reputation for rich  marbling.",
+            "text_align": "vertical-bottom horizontal-center",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3) 43.75%, rgba(0, 0, 0, 0.4) 100%)"
+          }
+        },
+        "card_CU4FKm": {
+          "type": "card",
+          "settings": {
+            "heading": "Kago Melt-In-Your-Mouth Flavor",
+            "text": "We've been writing extensively about A5 Wagyu to give you some  background on the Japanese beef and its well-earned reputation for rich  marbling.",
+            "text_align": "vertical-bottom horizontal-center",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3) 43.75%, rgba(0, 0, 0, 0.4) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "card_HHmYYY",
+        "card_EniGwk",
+        "card_Jf6FFK",
+        "card_Kyf8fG",
+        "card_CU4FKm"
+      ],
+      "name": "Multi card image",
+      "settings": {
+        "enable_divider": false,
+        "divider_color": "#dddcd5",
+        "page_width": "container-fluid",
+        "pre_text": "",
+        "heading": "Recipes To Make Your Mouth Water",
+        "heading_size": "h1",
+        "offer_title": "🔥 Hurry up ! Sale end in:",
+        "offer_end_date": "2026-09-31T23:59:59",
+        "color_scheme": "scheme-2",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    },
+    "icon_text_blocks_6Vjxxg": {
+      "type": "icon-text-blocks",
+      "blocks": {
+        "icon_text_fbVbrU": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "title": "Top Quality",
+            "text": "Exceeds USDA Prime grade."
+          }
+        },
+        "icon_text_NzJG8D": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "title": "Prime Marbling",
+            "text": "90% of American Wagyu beef earns the USDA Prime grade, compared to just 3% of conventional U.S. beef."
+          }
+        },
+        "icon_text_9GyHt9": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "title": "Natural & Pure",
+            "text": "100% naturally raised with no added hormones or artificial growth promoters. Just pure, clean, and honestly produced beef."
+          }
+        },
+        "image_block_dbyckM": {
+          "type": "image_block",
+          "settings": {}
+        },
+        "icon_text_CjGrpt": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "title": "Rare Luxury",
+            "text": "Less than 1% of U.S. cattle population is Wagyu."
+          }
+        },
+        "icon_text_9ndVWY": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "title": "Omega-Rich",
+            "text": "High in heart-healthy unsaturated fats, lower cholesterol than other red meats."
+          }
+        },
+        "icon_text_FULzK3": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "title": "Artisanal Butchery",
+            "text": "Hand-carved by expert master butchers to precise specs, ensuring maximum yield, clean edges, and zero unnecessary waste."
+          }
+        }
+      },
+      "block_order": [
+        "icon_text_fbVbrU",
+        "icon_text_NzJG8D",
+        "icon_text_9GyHt9",
+        "image_block_dbyckM",
+        "icon_text_CjGrpt",
+        "icon_text_9ndVWY",
+        "icon_text_FULzK3"
+      ],
+      "name": "Icon text Blocks",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "step_card_AzrEHY": {
+      "type": "step-card",
+      "blocks": {
+        "step_card_kFbkcN": {
+          "type": "step_card",
+          "settings": {
+            "title": "Rest at room temperature",
+            "text": "Remove from fridge 30 minutes before cooking. Pat dry with paper towel."
+          }
+        },
+        "step_card_W7PiJP": {
+          "type": "step_card",
+          "settings": {
+            "title": "Season generously",
+            "text": "Kosher salt and cracked black pepper on all sides. Keep it simple — the beef does the talking."
+          }
+        },
+        "step_card_AbwrGJ": {
+          "type": "step_card",
+          "settings": {
+            "title": "High heat sear",
+            "text": "Cast iron or BBQ screaming hot. 2–3 min per side for medium-rare (internal temp 54–57°C \/ 130–135°F)."
+          }
+        },
+        "step_card_DqpmgE": {
+          "type": "step_card",
+          "settings": {
+            "title": "Baste with butter",
+            "text": "Add a knob of butter, garlic, and thyme. Baste continuously for the final 60 seconds."
+          }
+        },
+        "step_card_EcXDCm": {
+          "type": "step_card",
+          "settings": {
+            "title": "Rest before cutting",
+            "text": "Transfer to a board and rest for 5–8 minutes. Never skip this step."
+          }
+        }
+      },
+      "block_order": [
+        "step_card_kFbkcN",
+        "step_card_W7PiJP",
+        "step_card_AbwrGJ",
+        "step_card_DqpmgE",
+        "step_card_EcXDCm"
+      ],
+      "name": "Step Card Blocks",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "Preparation & Safe Handling",
+        "heading_size": "h1",
+        "text": "<p> Follow these essential steps to ensure the ultimate flavor and texture.<\/p>",
+        "color_scheme": "scheme-2",
+        "color_scheme_card": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 48,
+        "padding_bottom_tab": 48,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "icon_card_text_carousel_jfDAUi": {
+      "type": "icon-card-text-carousel",
+      "blocks": {
+        "icon_text_BpG4F7": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "text": "If freezing, keep in original vacuum packaging. Thaw overnight in fridge — never on the bench"
+          }
+        },
+        "icon_text_9hA4C4": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "text": "Packed in vacuum-sealed food-grade packaging to extend freshness and lock in natural juices"
+          }
+        },
+        "icon_text_iQqUb7": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "text": "If freezing, keep in original vacuum packaging. Thaw overnight in fridge — never on the bench"
+          }
+        },
+        "icon_text_mDVRjq": {
+          "type": "icon_text",
+          "settings": {
+            "svg_icon": "",
+            "text": "Do not refreeze after thawing. Discard if colour turns grey or any off-odours develop"
+          }
+        },
+        "image_block_ztmeb7": {
+          "type": "image_block",
+          "settings": {}
+        },
+        "image_block_CK6DQd": {
+          "type": "image_block",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "icon_text_BpG4F7",
+        "icon_text_9hA4C4",
+        "icon_text_iQqUb7",
+        "icon_text_mDVRjq",
+        "image_block_ztmeb7",
+        "image_block_CK6DQd"
+      ],
+      "name": "Icon card carousel",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#dddcd5",
+        "page_width": "container-fluid",
+        "heading": "Storage & Freshness",
+        "heading_size": "h1",
+        "text": "<p>From our blast-freezer to your table—how to keep your premium cuts perfectly preserved.<\/p>",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": false,
+        "enable_pagination": false,
+        "enable_pagination_mobile": false,
+        "enable_navigation": true,
+        "enable_navigation_desktop": true,
+        "color_scheme_swiper": "",
+        "color_accent": "#ff0000",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 48,
+        "padding_bottom_tab": 48,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "Others Products",
+        "heading": "You May Also Like",
+        "heading_size": "h1",
+        "products_to_show": 4,
+        "column": "4",
+        "column_medium": "3",
+        "column_mobile": "1",
+        "color_accent": "#ff0000",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "quick_add": "standard",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "faq_page_section_NPFNyE": {
+      "type": "faq-section",
+      "blocks": {
+        "collapsible_row_AdrJPE": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "How will my order be packaged and shipped?",
+            "icon": "none",
+            "row_content": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>"
+          }
+        },
+        "collapsible_row_m3q37k": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "What is the safest way to thaw my steak?",
+            "icon": "none",
+            "row_content": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>"
+          }
+        },
+        "collapsible_row_rPRp4y": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "What is the safest way to thaw my steak?",
+            "icon": "none",
+            "row_content": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>"
+          }
+        },
+        "collapsible_row_MDKUbi": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "Can I change my delivery option to local pickup after ordering?",
+            "icon": "none",
+            "row_content": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>"
+          }
+        },
+        "collapsible_row_aXnx3K": {
+          "type": "collapsible_row",
+          "settings": {
+            "deafult_open": false,
+            "heading": "What is the difference between USDA Prime and Wagyu?",
+            "icon": "none",
+            "row_content": "<p>Because our cuts are immediately flash-frozen and vacuum-sealed, they can be safely stored in your freezer for up to 6 months without losing any flavor, tenderness, or moisture. Keep the original vacuum packaging fully sealed until you are ready to thaw and cook.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_AdrJPE",
+        "collapsible_row_m3q37k",
+        "collapsible_row_rPRp4y",
+        "collapsible_row_MDKUbi",
+        "collapsible_row_aXnx3K"
+      ],
+      "name": "Faq Section",
+      "settings": {
+        "enable_border": true,
+        "page_width": "container-fluid",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h1",
+        "text": "<p>Follow these essential steps to ensure the ultimate flavor and texture.<\/p>",
+        "disclosure_toggle": "plus",
+        "color_accent": "#ff0000",
+        "color_scheme": "scheme-1",
+        "card_color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 48,
+        "padding_bottom_tab": 48,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    },
+    "1754717456e979fd41": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "sticky_product_bar": {
+      "type": "sticky-product-bar",
+      "blocks": {
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        }
+      },
+      "block_order": [
+        "buy_buttons"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_stikcy_product": true,
+        "color_scheme": "scheme-9ab283a1-7cb4-429e-b553-ebe8284dbb7f"
+      }
+    },
+    "instafeed_wpTynf": {
+      "type": "instafeed",
+      "blocks": {
+        "media_item_dEFqC7": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "shopify:\/\/collections\/beef",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_rgkmRJ": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_VMCHgq": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_krUgMD": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": false,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_iarYUT": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": false,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_jRzJPW": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_yxqHX4": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        },
+        "media_item_MGdq8Y": {
+          "type": "media_item",
+          "settings": {
+            "image_over_text": "Meals for a Week",
+            "image_url": "",
+            "enable_video": true,
+            "source": "uploaded",
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "enable_autoplay": true,
+            "enable_loop_video": true,
+            "enable_mute_video": true,
+            "play_button_display": "always"
+          }
+        }
+      },
+      "block_order": [
+        "media_item_dEFqC7",
+        "media_item_rgkmRJ",
+        "media_item_VMCHgq",
+        "media_item_krUgMD",
+        "media_item_iarYUT",
+        "media_item_jRzJPW",
+        "media_item_yxqHX4",
+        "media_item_MGdq8Y"
+      ],
+      "name": "Instagram Feed",
+      "settings": {
+        "enable_divider": false,
+        "divider_color": "#ff0000",
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "text": "<p> <\/p>",
+        "alignment": "center",
+        "image_ratio": "portrait",
+        "autoplay_enabled": true,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_pagination": false,
+        "enable_navigation": false,
+        "color_scheme_swiper": "",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+        "color_accent": "#ff0000",
+        "padding_top": 80,
+        "padding_bottom": 64,
+        "padding_top_tab": 70,
+        "padding_bottom_tab": 50,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "icon_card_blocks_xiinxq",
+    "product_tab_list_bKxFGD",
+    "multicard_image_block_wfciEL",
+    "icon_text_blocks_6Vjxxg",
+    "step_card_AzrEHY",
+    "icon_card_text_carousel_jfDAUi",
+    "related-products",
+    "faq_page_section_NPFNyE",
+    "1754717456e979fd41",
+    "sticky_product_bar",
+    "instafeed_wpTynf"
+  ]
+}

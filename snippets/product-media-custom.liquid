@@ -1,0 +1,283 @@
+{% comment %}
+  Renders single product media
+  Accepts:
+  - media: {Object} Liquid media object
+  - product_ref: {Object} Liquid Product object
+  Usage:
+  {%- render 'product-media', media: product_ref.featured_media, product_ref: product_ref -%}
+{% endcomment %}
+
+{%- assign media_size = media_size | default: 'portrait' -%}
+{%- assign media_aspect_ratio = media.aspect_ratio | default: media.preview_image.aspect_ratio -%}
+
+<div class="product__image">
+  {%- capture media_image -%}
+     {% render 'responsive-img' with image: media.preview_image %}
+
+  {%- endcapture -%}
+
+  {%- capture media_html -%}
+    <div
+      class="media media--{{ media_size }}"
+      {% if media_size == 'aspect-ratio' %}
+        style="aspect-ratio: {{ media_aspect_ratio }};"
+      {% endif %}
+      data-media-id="{{- media.id -}}"
+    >
+      {{- media_image -}}
+    </div><!-- /.media -->
+  {%- endcapture -%}
+
+  {%- if media.media_type == 'image' -%}
+    {%- if enable_zoom -%}
+
+      <a
+        href="{{- media.preview_image | image_url: width: media.preview_image.width -}}"
+        class="product__gallery-opener block"
+        data-pswp-image
+        data-pswp-src="{{- media.preview_image | image_url: width: media.preview_image.width -}}"
+        data-pswp-srcset="{{- image_srcset -}}"
+        data-pswp-width="{{- media.preview_image.width -}}"
+        data-pswp-height="{{- media.preview_image.height -}}"
+        target="_blank"
+      >
+        {%- unless disable_zoom_icon -%}
+          <span class="product__gallery-opener__icon motion-reduce">
+                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6874 7.875C10.6874 8.02418 10.6282 8.16726 10.5227 8.27275C10.4172 8.37824 10.2741 8.4375 10.1249 8.4375H8.43742V10.125C8.43742 10.2742 8.37815 10.4173 8.27266 10.5227C8.16717 10.6282 8.0241 10.6875 7.87492 10.6875C7.72573 10.6875 7.58266 10.6282 7.47717 10.5227C7.37168 10.4173 7.31242 10.2742 7.31242 10.125V8.4375H5.62492C5.47573 8.4375 5.33266 8.37824 5.22717 8.27275C5.12168 8.16726 5.06242 8.02418 5.06242 7.875C5.06242 7.72582 5.12168 7.58274 5.22717 7.47725C5.33266 7.37176 5.47573 7.3125 5.62492 7.3125H7.31242V5.625C7.31242 5.47582 7.37168 5.33274 7.47717 5.22725C7.58266 5.12176 7.72573 5.0625 7.87492 5.0625C8.0241 5.0625 8.16717 5.12176 8.27266 5.22725C8.37815 5.33274 8.43742 5.47582 8.43742 5.625V7.3125H10.1249C10.2741 7.3125 10.4172 7.37176 10.5227 7.47725C10.6282 7.58274 10.6874 7.72582 10.6874 7.875ZM16.1479 16.148C16.0956 16.2003 16.0336 16.2418 15.9653 16.2701C15.897 16.2984 15.8238 16.3129 15.7499 16.3129C15.676 16.3129 15.6028 16.2984 15.5345 16.2701C15.4662 16.2418 15.4042 16.2003 15.3519 16.148L11.8321 12.6274C10.6071 13.6478 9.03577 14.1566 7.44512 14.048C5.85447 13.9394 4.36692 13.2218 3.29193 12.0444C2.21693 10.8669 1.63725 9.32037 1.67348 7.72643C1.7097 6.13249 2.35904 4.61388 3.48642 3.4865C4.6138 2.35913 6.13241 1.70978 7.72635 1.67356C9.32029 1.63734 10.8668 2.21701 12.0443 3.29201C13.2217 4.36701 13.9394 5.85456 14.048 7.4452C14.1566 9.03585 13.6477 10.6071 12.6273 11.8322L16.1479 15.352C16.2002 15.4043 16.2417 15.4663 16.27 15.5346C16.2983 15.6029 16.3129 15.6761 16.3129 15.75C16.3129 15.8239 16.2983 15.8971 16.27 15.9654C16.2417 16.0337 16.2002 16.0957 16.1479 16.148ZM7.87492 12.9375C8.87618 12.9375 9.85497 12.6406 10.6875 12.0843C11.52 11.528 12.1689 10.7374 12.5521 9.81234C12.9352 8.88728 13.0355 7.86938 12.8401 6.88736C12.6448 5.90533 12.1626 5.00328 11.4546 4.29527C10.7466 3.58727 9.84459 3.10511 8.86256 2.90977C7.88053 2.71444 6.86263 2.81469 5.93758 3.19786C5.01253 3.58103 4.22188 4.2299 3.6656 5.06243C3.10933 5.89495 2.81242 6.87373 2.81242 7.875C2.81391 9.2172 3.34775 10.504 4.29683 11.4531C5.24591 12.4022 6.53271 12.936 7.87492 12.9375Z" fill="currentColor"/>
+</svg>
+
+          </span>
+        {%- endunless -%}
+
+        {{- media_html -}}
+      </a>
+      <!-- /.product__gallery-opener -->
+    {%- else -%}
+      {{- media_html -}}
+    {%- endif -%}
+
+  {%- else -%}
+    {%- capture deferred_media_html -%}
+
+            <button class="deferred-media__button" id="Deferred-Poster-Modal-{{- media.id -}}" type="button">
+              {%- if media.media_type == 'model' -%}
+              <span class="media media--{{ media_size }}"
+                {% if media_size == 'aspect-ratio' %}
+                  style="aspect-ratio: {{ media_aspect_ratio }}"
+                {% endif %}
+              >
+                {{- media_image -}}
+              </span>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.54087 11.9232C9.74287 11.803 9.99324 11.7981 10.1998 11.9102L16.3181 15.2316C16.533 15.3482 16.6667 15.5731 16.6667 15.8175V22.7904C16.6667 23.0255 16.5429 23.2432 16.3409 23.3634C16.1389 23.4835 15.8886 23.4885 15.682 23.3763L9.56369 20.055C9.34886 19.9383 9.21509 19.7135 9.21509 19.4691V12.4961C9.21509 12.2611 9.33887 12.0434 9.54087 11.9232ZM10.5484 13.6166V19.0724L15.3334 21.67V16.2142L10.5484 13.6166Z" fill="currentColor"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6885 8.41064C15.8858 8.30639 16.1221 8.3077 16.3181 8.41414L22.4364 11.7355C22.6524 11.8528 22.7864 12.0793 22.785 12.3251C22.7837 12.5709 22.6472 12.796 22.4299 12.9108L16.3116 16.1448C16.1144 16.249 15.8781 16.2477 15.682 16.1413L9.56369 12.8199C9.3477 12.7026 9.21373 12.4761 9.2151 12.2303C9.21646 11.9845 9.35293 11.7594 9.57022 11.6446L15.6885 8.41064ZM11.2935 12.2418L16.0043 14.7991L20.7066 12.3136L15.9959 9.75633L11.2935 12.2418Z" fill="currentColor"/>
+                  <path d="M22.1184 12.4961L16.0001 15.8175V22.7904L22.1184 19.469V12.4961Z" fill="currentColor"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M22.4591 11.9232C22.2571 11.803 22.0068 11.7981 21.8002 11.9102L15.6819 15.2316C15.467 15.3482 15.3333 15.5731 15.3333 15.8175V22.7904C15.3333 23.0255 15.4571 23.2432 15.6591 23.3634C15.8611 23.4835 16.1114 23.4885 16.318 23.3763L22.4363 20.055C22.6511 19.9383 22.7849 19.7135 22.7849 19.4691V12.4961C22.7849 12.2611 22.6611 12.0434 22.4591 11.9232ZM21.4516 13.6166V19.0724L16.6666 21.67V16.2142L21.4516 13.6166Z" fill="currentColor"/>
+                  <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="currentColor"/>
+                </svg>
+
+              {%- endif -%}
+            </button>
+
+            <template>
+              <div class="deferred-media__wrapper media media--{{ media_size }}"
+                {% if media_size == 'aspect-ratio' %}
+                  style="aspect-ratio: {{ media_aspect_ratio }}"
+                {% endif %}
+              >
+                {%- case media.media_type -%}
+                  {%- when 'model' -%}
+                    {{- media | media_tag: image_size: '2048x', toggleable: true -}}
+                {%- endcase -%}
+              </div><!-- /.deferred-media__wrapper -->
+            </template>
+
+            <div
+              class="media {% if is_gallery_media %}media--fit-contain{% else %}media--{{ media_size }}{% endif %}"
+              {% if media_size == 'aspect-ratio' %}
+                style="aspect-ratio: {{ media_aspect_ratio }}"
+              {% endif %}
+              data-template-output
+            ></div>
+          {%- endcapture -%}
+
+    {%- capture xr_button_html -%}
+      {%- assign xr_button_value = 'products.product.xr_button' | t -%}
+      {%- capture xr_button_attr -%}
+        aria-label="{{- 'products.product.xr_button_label' | t -}}"
+        data-shopify-xr
+        data-shopify-model3d-id="{{- media.id -}}"
+        data-shopify-title="{{- product_ref.title | escape -}}"
+        data-shopify-xr-hidden
+      {%- endcapture -%}
+      <button
+      class="button button--full-width product__xr-button"
+      type="button"
+      {{ xr_button_attr }}
+    >
+      <span class="svg-wrapper">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.54087 11.9232C9.74287 11.803 9.99324 11.7981 10.1998 11.9102L16.3181 15.2316C16.533 15.3482 16.6667 15.5731 16.6667 15.8175V22.7904C16.6667 23.0255 16.5429 23.2432 16.3409 23.3634C16.1389 23.4835 15.8886 23.4885 15.682 23.3763L9.56369 20.055C9.34886 19.9383 9.21509 19.7135 9.21509 19.4691V12.4961C9.21509 12.2611 9.33887 12.0434 9.54087 11.9232ZM10.5484 13.6166V19.0724L15.3334 21.67V16.2142L10.5484 13.6166Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6885 8.41064C15.8858 8.30639 16.1221 8.3077 16.3181 8.41414L22.4364 11.7355C22.6524 11.8528 22.7864 12.0793 22.785 12.3251C22.7837 12.5709 22.6472 12.796 22.4299 12.9108L16.3116 16.1448C16.1144 16.249 15.8781 16.2477 15.682 16.1413L9.56369 12.8199C9.3477 12.7026 9.21373 12.4761 9.2151 12.2303C9.21646 11.9845 9.35293 11.7594 9.57022 11.6446L15.6885 8.41064ZM11.2935 12.2418L16.0043 14.7991L20.7066 12.3136L15.9959 9.75633L11.2935 12.2418Z" fill="currentColor"/>
+        <path d="M22.1184 12.4961L16.0001 15.8175V22.7904L22.1184 19.469V12.4961Z" fill="currentColor"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.4591 11.9232C22.2571 11.803 22.0068 11.7981 21.8002 11.9102L15.6819 15.2316C15.467 15.3482 15.3333 15.5731 15.3333 15.8175V22.7904C15.3333 23.0255 15.4571 23.2432 15.6591 23.3634C15.8611 23.4835 16.1114 23.4885 16.318 23.3763L22.4363 20.055C22.6511 19.9383 22.7849 19.7135 22.7849 19.4691V12.4961C22.7849 12.2611 22.6611 12.0434 22.4591 11.9232ZM21.4516 13.6166V19.0724L16.6666 21.67V16.2142L21.4516 13.6166Z" fill="currentColor"/>
+        <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="currentColor"/>
+      </svg>
+      
+      </span>
+      {{ xr_button_value  }}
+    </button>
+    {%- endcapture -%}
+
+    {%- if is_gallery_media -%}
+      {%- if media.media_type != 'model' -%}
+        {%- case media.media_type -%}
+          {%- when 'external_video' -%}
+            <div
+              class="media media--{{ media_size }}"
+              {% if media_size == 'aspect-ratio' %}
+                style="aspect-ratio: {{ media_aspect_ratio }}"
+              {% endif %}
+            >
+              <product-load-video
+                class="product-main-video"
+                data-video-type="youtube"
+                data-video-id="{{ media.external_id }}"
+              >
+                <template>
+                  <iframe
+                    src="https://www.youtube.com/embed/{{ media.external_id }}?autoplay=1&mute=1&loop=1&playlist={{ media.external_id }}&playsinline=1&controls=0"
+                    frameborder="0"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                </template>
+              </product-load-video>
+            </div>
+          {%- when 'video' -%}
+            <div
+              class="media media--{{ media_size }}"
+              {% if media_size == 'aspect-ratio' %}
+                style="aspect-ratio: {{ media_aspect_ratio }}"
+              {% endif %}
+            >
+              <product-load-video class="product-main-video" data-video-type="local_video">
+                {% capture local_video %}
+               {{- media | video_tag: autoplay: true, controls: false, loop: true, preload: 'none' -}}
+             {% endcapture %}
+                {{ local_video | replace: '<source src="', '<source data-src="' }}
+              </product-load-video>
+            </div>
+        {%- endcase -%}
+
+      {%- else -%}
+        <product-model class="deferred-media relative">
+          {{- deferred_media_html -}}
+
+          {{- xr_button_html -}}
+        </product-model>
+        <!-- /.deferred-media -->
+      {%- endif -%}
+
+    {%- else -%}
+
+    {% unless media.media_type == 'video' or media.media_type == 'external_video' %}
+      
+
+      <product-modal-opener
+        class="product__gallery-opener large-up-hide"
+        data-modal="#ProductModal-{{- product_ref.id -}}"
+        data-url="{{- routes.root_url -}}products/{{- product_ref.handle -}}?section_id=product-gallery-modal&active-media-id={{- media.id -}}&color-style={{- section.settings.style -}}&media-type={{- media.media_type -}}"
+        data-type="{{- media.media_type -}}"
+      >
+        <span class="product__gallery-opener__icon motion-reduce">
+          {%- if media.media_type == 'model' -%}
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.54087 11.9232C9.74287 11.803 9.99324 11.7981 10.1998 11.9102L16.3181 15.2316C16.533 15.3482 16.6667 15.5731 16.6667 15.8175V22.7904C16.6667 23.0255 16.5429 23.2432 16.3409 23.3634C16.1389 23.4835 15.8886 23.4885 15.682 23.3763L9.56369 20.055C9.34886 19.9383 9.21509 19.7135 9.21509 19.4691V12.4961C9.21509 12.2611 9.33887 12.0434 9.54087 11.9232ZM10.5484 13.6166V19.0724L15.3334 21.67V16.2142L10.5484 13.6166Z" fill="currentColor"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6885 8.41064C15.8858 8.30639 16.1221 8.3077 16.3181 8.41414L22.4364 11.7355C22.6524 11.8528 22.7864 12.0793 22.785 12.3251C22.7837 12.5709 22.6472 12.796 22.4299 12.9108L16.3116 16.1448C16.1144 16.249 15.8781 16.2477 15.682 16.1413L9.56369 12.8199C9.3477 12.7026 9.21373 12.4761 9.2151 12.2303C9.21646 11.9845 9.35293 11.7594 9.57022 11.6446L15.6885 8.41064ZM11.2935 12.2418L16.0043 14.7991L20.7066 12.3136L15.9959 9.75633L11.2935 12.2418Z" fill="currentColor"/>
+              <path d="M22.1184 12.4961L16.0001 15.8175V22.7904L22.1184 19.469V12.4961Z" fill="currentColor"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M22.4591 11.9232C22.2571 11.803 22.0068 11.7981 21.8002 11.9102L15.6819 15.2316C15.467 15.3482 15.3333 15.5731 15.3333 15.8175V22.7904C15.3333 23.0255 15.4571 23.2432 15.6591 23.3634C15.8611 23.4835 16.1114 23.4885 16.318 23.3763L22.4363 20.055C22.6511 19.9383 22.7849 19.7135 22.7849 19.4691V12.4961C22.7849 12.2611 22.6611 12.0434 22.4591 11.9232ZM21.4516 13.6166V19.0724L16.6666 21.67V16.2142L21.4516 13.6166Z" fill="currentColor"/>
+              <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="currentColor"/>
+            </svg>
+          {%- else -%}
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8336 20.4509L20.5793 15.9999L13.8336 11.5489L13.8336 20.4509ZM21.3136 17.1128C22.1123 16.5858 22.1123 15.414 21.3136 14.887L14.5679 10.436C13.6814 9.85111 12.5002 10.4869 12.5002 11.5489L12.5002 20.4509C12.5002 21.513 13.6814 22.1488 14.5679 21.5638L21.3136 17.1128Z" fill="currentColor"/>
+              <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="currentColor"/>
+            </svg>
+          {%- endif -%}
+        </span>
+        <div
+          class="media media--{{ media_size }}"
+          {% if media_size == 'aspect-ratio' %}
+            style="aspect-ratio: {{ media_aspect_ratio }}"
+          {% endif %}
+        >
+          {{- media_image -}}
+        </div>
+        <button class="product__gallery-toggle" type="button" aria-haspopup="dialog" data-media-id="{{- media.id -}}">
+          <span class="visually-hidden">
+            {{- 'products.product.media.open_media' | t: index: position -}}
+          </span>
+        </button>
+      </product-modal-opener>
+
+          {% endunless %}
+
+      {%- if media.media_type != 'model' -%}
+        {%- case media.media_type -%}
+          {%- when 'external_video' -%}
+            <div
+              class="media media--{{ media_size }}"
+              {% if media_size == 'aspect-ratio' %}
+                style="aspect-ratio: {{ media_aspect_ratio }}"
+              {% endif %}
+            >
+              <product-load-video
+                class="product-main-video"
+                data-video-type="youtube"
+                data-video-id="{{ media.external_id }}"
+              >
+                <template>
+                  <iframe
+                    src="https://www.youtube.com/embed/{{ media.external_id }}?autoplay=1&mute=1&loop=1&playlist={{ media.external_id }}&playsinline=1&controls=0"
+                    frameborder="0"
+                    allow="autoplay; fullscreen"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                </template>
+              </product-load-video>
+            </div>
+          {%- when 'video' -%}
+            <div
+              class="media media--{{ media_size }}"
+              {% if media_size == 'aspect-ratio' %}
+                style="aspect-ratio: {{ media_aspect_ratio }}"
+              {% endif %}
+            >
+
+            <product-load-video class="product-main-video" data-video-type="local_video">
+              {% capture local_video %}
+                                  {{- media | video_tag: autoplay: true, controls: false, loop: true, preload: 'none' -}}
+                              {% endcapture %}
+              {{ local_video | replace: '<source src="', '<source data-src="' }}
+            </product-load-video>
+
+            </div>
+        {%- endcase -%}
+
+        
+      {%- else -%}
+        <product-model class="deferred-media small-hide medium-hide relative">
+          {{- deferred_media_html -}}
+
+          {{- xr_button_html -}}
+        </product-model>
+        <!-- /.deferred-media -->
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+</div>
+<!-- /.product__image -->

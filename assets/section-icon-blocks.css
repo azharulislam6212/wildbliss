@@ -1,0 +1,121 @@
+.icon-blocks-seciton {
+    position: relative;
+}
+
+.icon-block__item {
+    position: relative;
+
+}
+
+.icon-block__item:nth-child(2n):before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 0;
+    height: 100%;
+    width: fit-content;
+    border-right: 1px dashed rgb(var(--color-border));
+}
+
+.icon-block__item:last-child {
+    border: 0;
+}
+
+.icon-row {
+    --bs-gutter-x: 2.4rem;
+}
+
+.icon-block__icon {
+    box-sizing: border-box;
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+    width: 63px;
+    height: 63px;
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 12px;
+    margin-bottom: 32px;
+}
+
+.icon-block__icon svg,
+.icon-block__icon img {
+    width: 28px;
+    height: 28px;
+}
+
+.icon-blocks-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.8rem;
+}
+
+.icon-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 60px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+
+.icon-block__content {
+    margin-bottom: 3.6em;
+}
+
+.icon-block__title {
+    font-family: var(--font-heading-family);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 130%;
+    text-align: center;
+    letter-spacing: -0.04em;
+    margin: 0 0 4px;
+}
+
+.icon-block__text {
+    margin: 0;
+    font-family: var(--font-body-family);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    /* or 21px */
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: rgb(var(--color-foreground));
+}
+
+.icon-block__item .button {
+    border-radius: 100px;
+}
+
+
+@media (max-width: 768px) {
+
+.icon-blocks-wrapper {
+    grid-template-columns: 1fr;
+}
+
+
+.icon-block__item:nth-child(2n):before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -24px;
+     height: 1px;
+       width: 100%;
+       background-repeat: 0;
+    border-top: 1px dashed rgb(var(--color-border));
+}
+
+
+.icon-block {
+    padding: 2rem;
+}
+}

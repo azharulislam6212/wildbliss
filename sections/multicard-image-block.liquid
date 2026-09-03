@@ -1,0 +1,392 @@
+{{ 'section-multi-card.css' | asset_url | stylesheet_tag }}
+
+ 
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}">
+    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+
+<div
+  id="{{ section.settings.them_section_id |  default:"collage-section" }}"
+  class="multi-card-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header  text-center col-12 m-auto">
+          <div class="section--header__inner">
+            {% if section.settings.pre_text != blank %}
+              <p class="section--pre-text">{{ section.settings.pre_text }}</p>
+            {% endif %}
+            <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+              {{ section.settings.heading }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    {%- endunless -%}
+
+
+    <div class="collage-multi-card">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'card' -%}
+            <div class="multi-card" {{ block.shopify_attributes }}>
+              <div class="multi-card__image"  style="--overlay-color: {{ block.settings.overlay_color }}; --shape-color: {{ block.settings.shape_color }} ">
+                {% if block.settings.image != blank %}
+                  {% render 'responsive-img' with image: block.settings.image %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+
+              <div
+                class="multi-card__content color-{{ block.settings.color_scheme }}   {{ block.settings.text_align }}"
+                style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};"
+              >
+
+
+                <collapsible-content {{ block.shopify_attributes }}>
+               
+                  
+                    <details  class="disclosure disclosure--row" >
+                      <summary>
+                        <div class="disclosure-header">
+                          <span class="disclosure__count">
+                            {{- forloop.index  | prepend: '0'-}}
+                          </span>
+
+                          <h4 class="disclosure__title">
+                            {{- block.settings.heading -}}
+                          </h4>
+                        </div>
+                      </summary>
+                      <div class="disclosure__panel has-motion">
+                        <div class="disclosure__content rte">
+                          <div class="row__content">
+                                  {{ block.settings.text }}
+                          </div>
+                        </div>
+                      </div>
+                    </details>
+                  
+                
+              </collapsible-content>
+
+
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Multi card image",
+  "class": "section",
+  "tag": "section",
+  "max_blocks": 5,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#DDDCD5",
+      "label": "Divider color"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "pre_text",
+      "label": "Pre text",
+      "default": "Todays Deals"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+  {
+      "type": "inline_richtext",
+      "id": "offer_title",
+      "default": "🔥 Hurry up ! Sale end in:",
+      "label": "Offer title"
+    },
+  {
+      "type": "inline_richtext",
+      "id": "offer_end_date",
+      "default": "2026-09-31T23:59:59",
+      "label": "Offer date"
+    },
+ 
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "ENJOY $1 OFF PER POUND"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "The perfect centerpiece for a memorable Mother’s Day mea"
+        },
+         {
+          "type": "select",
+          "id": "text_align",
+          "label": "t:sections.image-banner.settings.desktop_content_alignment.label",
+          "default": "vertical-center horizontal-left",
+          "options": [
+            {
+              "value": "vertical-top horizontal-left",
+              "label": "Top left"
+            },
+            {
+              "value": "vertical-top horizontal-center",
+              "label": "Top center"
+            },
+            {
+              "value": "vertical-top horizontal-right",
+              "label": "Top right"
+            },
+            {
+              "value": "vertical-center horizontal-left",
+              "label": "Center left"
+            },
+            {
+              "value": "vertical-center horizontal-center",
+              "label": "Center"
+            },
+            {
+              "value": "vertical-center horizontal-right",
+              "label": "Center right"
+            },
+            {
+              "value": "vertical-bottom horizontal-left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "vertical-bottom horizontal-center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "vertical-bottom horizontal-right",
+              "label": "Bottom right"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "color_accent",
+          "label": "Accent Color",
+          "default": "#A5A5A5"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        },
+           {
+          "type": "color_background",
+          "id": "overlay_color",
+          "label": "Overlay Color",
+          "default": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51))"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi card image",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

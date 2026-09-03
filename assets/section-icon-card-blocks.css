@@ -1,0 +1,162 @@
+.icon-cards-seciton {
+    position: relative;
+}
+
+.icon-card__item {
+    position: relative;
+
+}
+
+.icon-card__icon {
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    isolation: isolate;
+
+    width: 56px;
+    height: 56px;
+
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 9px;
+    margin-bottom: 4.8rem;
+    position: relative;
+}
+
+.count-text{
+    /* Count */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 18px;
+height: 18px;
+    left: 42px;
+    top: 40.01px;
+
+/* Text/text-5 */
+background: #454442;
+/* Base/base-6 */
+border: 4px solid #F0F0F0;
+border-radius: 100px;
+
+ 
+
+/* 700/XXS */
+font-family:  var(--font-body-family);
+font-style: normal;
+font-weight: 600;
+font-size: 10px;
+line-height: 150%;
+/* identical to box height, or 15px */
+letter-spacing: 0.01em;
+
+color: #FFFFFF;
+
+ 
+
+
+}
+
+.icon-card__icon svg,
+.icon-card__icon img {
+    width: 28px;
+    height: 28px;
+}
+
+.icon-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+    align-items: stretch;
+}
+
+.icon-card {
+
+
+    /* FeatureCard */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px;
+
+    /* Border/border-4 */
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 8px;
+    height: 100%;
+
+}
+
+
+.icon-card__content + .button{
+    margin-top: 3.2rem;
+}
+
+.icon-card__title {
+    font-family: var(--font-heading-family);
+    font-style: normal;
+    font-weight: 600;
+font-size: 16px;
+line-height: 150%;
+/* identical to box height, or 24px */
+letter-spacing: 0.01em;
+
+    margin: 0 0 4px;
+}
+
+.icon-card__text {
+    margin: 0;
+    font-family: var(--font-body-family);
+    font-style: normal;
+ 
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        /* identical to box height, or 21px */
+        letter-spacing: 0.01em;
+        
+    color: rgb(var(--color-foreground));
+}
+
+.icon-card__item .button {
+    border-radius: 100px;
+}
+
+
+@media (max-width: 768px) {
+
+    .icon-cards-wrapper {
+        grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+    }
+
+
+    .icon-card {
+        padding: 2rem;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+      .icon-card {
+        padding: 1.2rem;
+    }
+
+
+}

@@ -1,0 +1,286 @@
+{% if section.settings.enable_stikcy_product %}
+  {{ 'sticky-product-section.css' | asset_url | stylesheet_tag }}
+  <sticky-component>
+    <div class="sticky-product color-{{ section.settings.color_scheme }} gradient">
+      <button
+        class="sticky-product__close d-none hidden"
+        type="button"
+        aria-label="{{ 'accessibility.close' | t }}"
+      >
+   
+      </button>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="sticky-product__wrap">
+              <div class="sticky-product__image">
+                <div class="sticky-product__img-wrap media">
+                  {% if product.featured_media.image != blank %}
+              
+                  {% render 'responsive-img' with image: product.featured_media.image %}
+                        
+                {% endif %}
+                </div>
+                <div class="sticky-product__content">
+                  <div class="product__title" {{ block.shopify_attributes }}>
+                    <h1>{{ product.title | escape }}</h1>
+                    <a href="{{ product.url }}" class="product__title">
+                      <h2 class="h1">
+                        {{ product.title | escape }}
+                      </h2>
+                    </a>
+                  </div>
+{% comment %} 
+                  {% liquid
+                  assign rating_decimal = 0
+                  assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+                  if decimal >= 0.3 and decimal <= 0.7
+                    assign rating_decimal = 0.5
+                  elsif decimal > 0.7
+                    assign rating_decimal = 1
+                  endif
+                %}
+                <div class="product-rating">
+                  <div
+                    class="rating  color-{{ settings.review_color_scheme }}"
+                    role="img"
+                    aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}"
+                  >
+                    {% if product.metafields.reviews.rating.value.rating != blank %}
+                      <span
+                        aria-hidden="true"
+                        class="rating-star"
+                        style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
+                      ></span>
+                    {% else %}
+                      <span
+                        aria-hidden="true"
+                        class="rating-star empty"
+                        style="--rating: 5; --rating-max: 5.0; --rating-decimal: 0;"
+                      ></span>
+                    {% endif %}
+                  </div>
+                  <p class="rating-text caption">
+                    <span aria-hidden="true">
+                      {{- product.metafields.reviews.rating.value }} /
+                      {{- product.metafields.reviews.rating.value.scale_max -}}
+                    </span>
+                  </p>
+                  {% if settings.show_text_and_stars %}
+                    <p class="rating-count caption color-{{ settings.review_color_scheme }}">
+                      {% if product.metafields.reviews.rating_count != blank %}
+                        <span aria-hidden="true">
+                          {% if settings.show_only_count %}
+                            ({{ product.metafields.reviews.rating_count }})
+                          {% else %}
+                            (
+                            {{-
+                              'products.product.rating_counts'
+                              | t: rating_count: product.metafields.reviews.rating_count
+                            -}}
+                            )
+                          {% else %}
+                            (
+                            {{-
+                              'products.product.rating_count'
+                              | t: rating_count: product.metafields.reviews.rating_count
+                            -}}
+                            )
+                          {% endif %}
+                        </span>
+                      {% else %}
+                        <span aria-hidden="true"
+                          >(
+                          {{- 'products.product.no-reviews' | t -}}
+                          )</span
+                        >
+                      {% endif %}
+
+                      <span class="visually-hidden">
+                        {{- product.metafields.reviews.rating_count }}
+                        {{ 'accessibility.total_reviews' | t -}}
+                      </span>
+                    </p>
+                  {% endif %}
+                </div> {% endcomment %}
+
+                  <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                    {%- render 'price',
+                      product: product,
+                      use_variant: true,
+                      show_badges: false,
+                      price_class: 'price--large'
+                    -%}
+                  </div>
+                </div>
+              </div>
+              {%- assign product_form_id = 'product-form-' | append: section.id -%}
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'variant_picker' -%}
+                    <div class="sticky-product__varient-wrap" {{ block.shopify_attributes }}>
+                      <div class="sticky-product__varient">
+                        {% render 'product-variant-picker',
+                          product: product,
+                          block: block,
+                          product_form_id: product_form_id
+                        %}
+                      </div>
+                    </div>
+                  {%- when 'buy_buttons' -%}
+                    <div class="sticky-product__cart-wrap" {{ block.shopify_attributes }}>
+                      <div class="sticky-product__cart">
+                        {%- render 'buy-buttons',
+                          block: block,
+                          product: product,
+                          product_form_id: product_form_id,
+                          section_id: section.id,
+                          show_pickup_availability: true
+                        -%}
+                      </div>
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sticky-component>
+{% endif %}
+{% schema %}
+{
+  "name": "Sticky product bar",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_stikcy_product",
+      "default": true,
+      "label": "Enable Sticky Bar"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-6"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "variant_picker",
+      "name": "t:sections.main-product.blocks.variant_picker.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__1.label"
+            },
+            {
+              "value": "button",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
+            }
+          ],
+          "default": "button",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-product.blocks.variant_picker.settings.swatches.content",
+          "info": "t:sections.main-product.blocks.variant_picker.settings.swatches.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "color_swatches",
+          "default": true,
+          "label": "t:sections.main-product.blocks.variant_picker.settings.swatches.label"
+        },
+        {
+          "type": "text",
+          "id": "option_name",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.swatches.option.label",
+          "default": "Color",
+          "info": "t:sections.main-product.blocks.variant_picker.settings.swatches.option.info"
+        },
+        {
+          "type": "select",
+          "id": "swatch_style",
+          "options": [
+            {
+              "value": "varient_image",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.swatches.swatch_style.option_1"
+            },
+            {
+              "value": "color_swatch",
+              "label": "t:sections.main-product.blocks.variant_picker.settings.swatches.swatch_style.option_2"
+            }
+          ],
+          "default": "color_swatch",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.swatches.swatch_style.label"
+        },
+        {
+        "type": "select",
+        "id": "swatch_button_style",
+        "options": [
+          {
+            "value": "circular",
+            "label": "Circular"
+          },
+          {
+            "value": "round",
+            "label": "Round"
+          }
+        ],
+        "default": "circular",
+        "label": "t:sections.main-product.blocks.variant_picker.settings.swatches.swatch_button_style.label"
+      }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "variant_picker",
+        "settings": {
+          "picker_type": "button",
+          "color_swatches": true,
+          "swatch_style": "color_swatch",
+          "swatch_button_style": "squre"
+        }
+      },
+      {
+        "type": "buy_buttons"
+      }
+    ]
+  }
+}
+{% endschema %}

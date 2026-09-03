@@ -1,0 +1,532 @@
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'section-faq.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+
+  .section-{{ section.id }}-padding {
+    --color-accent: {{ section.settings.color_accent.red }}, 
+    {{ section.settings.color_accent.green }}, 
+    {{ section.settings.color_accent.blue }};
+    --color-link: {{ section.settings.color_accent.red }}, 
+    {{ section.settings.color_accent.green }}, 
+    {{ section.settings.color_accent.blue }};
+  }
+
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<div id="{{ section.settings.them_section_id |  default:"faq_section" }}" class="faq-wrapper section-{{ section.id }}-padding  color-{{ section.settings.color_scheme }} gradient">
+  <div class="{{ section.settings.page_width }}">
+
+    <div class="faq--container">
+
+
+      {%- unless section.settings.heading == blank -%}
+
+        <div class="section--header">
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+          {% if section.settings.text != blank %}
+            <div class="section--text">{{ section.settings.text }}</div>
+          {% endif %}
+        </div>
+
+      {%- endunless -%}
+
+      <div class="faq-tab-container">
+
+        <tabbed-content>
+
+          <div class="tablist__faq--card color-{{ section.settings.color_scheme_card }} gradient">
+            <div class="tablist tablist__faq relative no-js-hidden">
+              <div class="tablist__scroller " role="tablist">
+                {%- for block in section.blocks -%}
+                  <div class="tab__item">
+                    <button
+                      type="button"
+                      class="tablist__tab"
+                      id="tab-{{ forloop.index }}-{{ block.id }}"
+                      role="tab"
+                      aria-controls="panel-{{ forloop.index }}-{{ block.id }}"
+                      aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                      {{ block.settings.title }}
+                    </button>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+
+            <div class="faq-tab--content">
+              <div class="faq-tab--wrapper  color-{{ section.settings.color_scheme_content }} gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+                {%- for block in section.blocks -%}
+                  {%- case block.type -%}
+                    {%- when 'faq_tab' -%}
+                      <div
+                        id="panel-{{  forloop.index }}-{{ block.id }}"
+                        role="tabpanel"
+                        tabindex="0"
+                        aria-labelledby="tab-{{ forloop.index }}-{{ block.id }}"
+                        {% unless forloop.first %}
+                        hidden
+                        {% endunless %}
+                        {{ block.shopify_attributes }}>
+                        <div class="faq-tab__row">
+                           
+
+                        <h3 class="faq-tab__title">{{ block.settings.title }}</h3>
+
+
+                        <div class="faq-tab" >
+                        {% for i in (1..10) %}
+                          {% assign heading_key = 'heading_' | append: i %}
+                          {% assign content_key = 'row_content_' | append: i %}
+
+                          {% assign heading = block.settings[heading_key] %}
+                          {% assign content = block.settings[content_key] %}
+
+                          {% if heading != blank and content != blank %}
+                            
+                          <collapsible-content >
+                                    <div class="disclosure__flex   {% if block.settings.deafult_open and i == '1' %} open {% endif %}">
+                                      <div class="disclosure__box">
+                                        <details
+                                          class="disclosure disclosure--row color-{{ section.settings.card_color_scheme}} gradient"
+                                          style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+                                          {% if block.settings.deafult_open and i == '1' %}
+                                          open
+                                          {% endif %}
+                                          
+                                          >
+                                          <summary>
+                                            <div class="disclosure-header">
+                                              <h4 class="disclosure__title">
+                                                
+                                                {{- heading -}}
+                                              </h4>
+
+                                              <div class="disclosure__icon">
+                                                <span class="disclosure__toggle">
+                                                  {%- if section.settings.disclosure_toggle == 'plus' -%}
+
+                                                    <svg
+                                                      class="plus-icon"
+                                                      width="12"
+                                                      height="12"
+                                                      viewBox="0 0 12 12"
+                                                      fill="none"
+                                                      xmlns="http://www.w3.org/2000/svg">
+                                                      <path d="M12 6C12 6.13261 11.9473 6.25979 11.8536 6.35355C11.7598 6.44732 11.6326 6.5 11.5 6.5H6.5V11.5C6.5 11.6326 6.44732 11.7598 6.35355 11.8536C6.25979 11.9473 6.13261 12 6 12C5.86739 12 5.74021 11.9473 5.64645 11.8536C5.55268 11.7598 5.5 11.6326 5.5 11.5V6.5H0.5C0.367392 6.5 0.240215 6.44732 0.146447 6.35355C0.0526785 6.25979 0 6.13261 0 6C0 5.86739 0.0526785 5.74021 0.146447 5.64645C0.240215 5.55268 0.367392 5.5 0.5 5.5H5.5V0.5C5.5 0.367392 5.55268 0.240215 5.64645 0.146447C5.74021 0.0526785 5.86739 0 6 0C6.13261 0 6.25979 0.0526785 6.35355 0.146447C6.44732 0.240215 6.5 0.367392 6.5 0.5V5.5H11.5C11.6326 5.5 11.7598 5.55268 11.8536 5.64645C11.9473 5.74021 12 5.86739 12 6Z" fill="currentColor" />
+                                                    </svg>
+
+                                                    <svg
+                                                      class="minus-icon"
+                                                      width="12"
+                                                      height="1"
+                                                      viewBox="0 0 12 1"
+                                                      fill="none"
+                                                      xmlns="http://www.w3.org/2000/svg">
+                                                      <path d="M12 0.5C12 0.632608 11.9473 0.759786 11.8536 0.853554C11.7598 0.947322 11.6326 1 11.5 1H0.5C0.367392 1 0.240215 0.947322 0.146447 0.853554C0.0526785 0.759786 0 0.632608 0 0.5C0 0.367392 0.0526785 0.240215 0.146447 0.146447C0.240215 0.0526785 0.367392 0 0.5 0H11.5C11.6326 0 11.7598 0.0526785 11.8536 0.146447C11.9473 0.240215 12 0.367392 12 0.5Z" fill="currentColor" />
+                                                    </svg>
+
+                                                  {%- else -%}
+                                                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                                                  {%- endif -%}
+                                                </span>
+                                              </div>
+                                            </div>
+                                          </summary>
+                                          <div class="disclosure__panel has-motion">
+                                            <div class="disclosure__content rte">
+                                              <div class="row__content">
+                                                {{ content }}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </details>
+                                      </div>
+
+
+                                    </div>
+                                  </collapsible-content>
+
+
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+
+                        </div>
+                      </div>
+
+                  {%- endcase -%}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+        </tabbed-content>
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Faq Page Section",
+    "tag": "section",
+    "class": "section",
+
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "container",
+            "label": "Container"
+          }, {
+            "value": "container-fluid",
+            "label": "Full Width"
+          }
+        ],
+        "default": "container-fluid",
+        "label": "Layout Width"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "Section heading",
+        "label": "Heading"
+      },
+      {
+        "type": "select",
+        "id": "heading_size",
+        "options": [
+          {
+            "value": "h2",
+            "label": "t:sections.all.heading_size.options__1.label"
+          },
+          {
+            "value": "h1",
+            "label": "t:sections.all.heading_size.options__2.label"
+          },
+          {
+            "value": "h0",
+            "label": "t:sections.all.heading_size.options__3.label"
+          },
+          {
+            "value": "hxl",
+            "label": "t:sections.all.heading_size.options__4.label"
+          }, {
+            "value": "hxxl",
+            "label": "t:sections.all.heading_size.options__5.label"
+          }
+        ],
+        "default": "hxl",
+        "label": "t:sections.all.heading_size.label"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "default": "t:sections.image-with-text.blocks.text.settings.text.default",
+        "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+      }, {
+        "type": "select",
+        "id": "disclosure_toggle",
+        "label": "Toggler Icon",
+        "options": [
+          {
+            "value": "arrow",
+            "label": "Arrow"
+          }, {
+            "value": "plus",
+            "label": "Plus"
+          }
+        ],
+        "default": "plus"
+      }, {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#FFCD2E"
+      }, {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      }, {
+        "type": "color_scheme",
+        "id": "card_color_scheme",
+        "label": "Card Color",
+        "default": "scheme-3"
+      }, {
+        "type": "header",
+        "content": "Section padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 120
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 120
+      }, {
+        "type": "range",
+        "id": "padding_top_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Tab",
+        "default": 80
+      }, {
+        "type": "range",
+        "id": "padding_bottom_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Tab",
+        "default": 80
+      }, {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 48
+      }, {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 48
+      }, {
+        "type": "text",
+        "id": "them_section_id",
+        "label": "Section Id"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "faq_tab",
+        "name": "Faq Tab",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "default": "Ordering",
+            "label": "Title"
+          },
+          {
+            "type": "checkbox",
+            "id": "deafult_open",
+            "default": false,
+            "label": "Default Open (Frist Block only)"
+          },
+          {
+            "type": "header",
+            "content": "Block 1"
+          },
+          {
+            "type": "text",
+            "id": "heading_1",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_1",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          }, {
+            "type": "header",
+            "content": "Block 2"
+          }, {
+            "type": "text",
+            "id": "heading_2",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_2",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          }, {
+            "type": "header",
+            "content": "Block 3"
+          }, {
+            "type": "text",
+            "id": "heading_3",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_3",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          }, {
+            "type": "header",
+            "content": "Block 4"
+          }, {
+            "type": "text",
+            "id": "heading_4",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_4",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          }, {
+            "type": "header",
+            "content": "Block 5"
+          }, {
+            "type": "text",
+            "id": "heading_5",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_5",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          }, {
+            "type": "header",
+            "content": "Block 6"
+          }, {
+            "type": "text",
+            "id": "heading_6",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_6",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          },
+          {
+            "type": "header",
+            "content": "Block 7"
+          }, {
+            "type": "text",
+            "id": "heading_7",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_7",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          },
+            {
+            "type": "header",
+            "content": "Block 8"
+          }, {
+            "type": "text",
+            "id": "heading_8",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_8",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          },
+           {
+            "type": "header",
+            "content": "Block 9"
+          }, {
+            "type": "text",
+            "id": "heading_9",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_9",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          },
+         {
+            "type": "header",
+            "content": "Block 10"
+          }, {
+            "type": "text",
+            "id": "heading_10",
+            "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "row_content_10",
+            "default":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Faq Page Section",
+        "blocks": [
+          {
+            "type": "faq_tab"
+          },
+          {
+            "type": "faq_tab"
+          },
+          {
+            "type": "faq_tab"
+          },
+          {
+            "type": "faq_tab"
+          }, {
+            "type": "faq_tab"
+          }, {
+            "type": "faq_tab"
+          }, {
+            "type": "faq_tab"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

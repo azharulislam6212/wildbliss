@@ -1,0 +1,424 @@
+{{ 'section-our-history.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div
+  id="{{ section.settings.them_section_id |  default:"our-history-section" }}"
+  class="our-history-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    <div class="our-history-wrapper">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'text_block' -%}
+            <div class="our-history-content color-{{ block.settings.color_scheme }}">
+              <div class="our-history-content-inner">
+
+                  {% if block.settings.pre_text != blank %}
+                  <p class="our-history--pre-text">{{ block.settings.pre_text }}</p>
+                {% endif %}
+
+
+                {% if block.settings.heading != blank %}
+                  <h2 class="our-history-heading {{ section.settings.heading_size }}">
+                    {{ block.settings.heading }}
+                  </h2>
+                {% endif %}
+
+                {% if block.settings.text != blank %}
+                  <div class="our-history-text rte">
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.button_text != blank %}
+                  <a
+                    href="{{ block.settings.button_url | default: '#' }}"
+                    class="button button--{{ block.settings.button_style }}"
+                  >
+                    <span class="button--text">
+                      {{ block.settings.button_text }}
+                    </span>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+
+          {%- when 'card_block' -%}
+            <div class="our-history-card">
+           
+
+
+            {% for i in (1..6) %}
+            {% assign text_key = 'text_' | append: i %}
+            {% assign text = block.settings[text_key] %}
+
+            {% if text != blank %}
+              <div class="our-history-card-item">
+
+             <span class="history-icon">
+              <svg width="50" height="89" viewBox="0 0 50 89" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 0.5H12C15.0376 0.5 17.5 2.96243 17.5 6V12C17.5 15.0376 15.0376 17.5 12 17.5H6C2.96243 17.5 0.5 15.0376 0.5 12V6C0.5 2.96243 2.96243 0.5 6 0.5Z" stroke="#EAE9E5"/>
+              <g filter="url(#filter0_d_{{i}})">
+              <rect x="5" y="5" width="8" height="8" rx="3" fill="#FF0000"/>
+              </g>
+              <rect x="8.5" y="18" width="1" height="71" fill="url(#paint0_linear_{{i}})"/>
+              <defs>
+              <filter id="filter0_d_{{i}}" x="5" y="5" width="10" height="10" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dx="1" dy="1"/>
+              <feGaussianBlur stdDeviation="0.5"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.59 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_550_6296"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_550_6296" result="shape"/>
+              </filter>
+              <linearGradient id="paint0_linear_{{i}}" x1="9" y1="18" x2="9" y2="89" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#EAE9E5"/>
+              <stop offset="1" stop-color="#FF9191" stop-opacity="0"/>
+              </linearGradient>
+              </defs>
+              </svg>
+
+             </span>
+
+             
+             <div class="our-history-line-text">
+              {{ text }}
+             </div>
+
+              </div>
+            {% endif %}
+          {% endfor %}
+
+                  
+
+             
+       
+            </div>
+
+          {%- when 'image' -%}
+          
+              <div class="our-history-image">
+                {% if block.settings.image_link != blank %}
+                  <a href="{{ block.settings.image_link }}">
+                {% endif %}
+
+                {% if block.settings.image != blank %}
+                  {% render 'responsive-img' with image: block.settings.image %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+
+                {% if block.settings.image_link != blank %}
+                  </a>
+                {% endif %}
+              </div>
+         
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}">
+    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Our history",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#DDDCD5",
+      "label": "Divider color"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card_block",
+      "name": "Card Block",
+      "limit": 1,
+      "settings": [
+        
+        {
+          "type": "richtext",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "<p><strong>January - 1917</strong></p><p>J.J. and B.A Simon found Table Supply Meat Company in Omaha, NE. </p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "<p><strong>January - 1917</strong></p><p>J.J. and B.A Simon found Table Supply Meat Company in Omaha, NE. </p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text_3",
+          "label": "Text 3",
+          "default": "<p><strong>January - 1917</strong></p><p>J.J. and B.A Simon found Table Supply Meat Company in Omaha, NE. </p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text_4",
+          "label": "Text 4",
+          "default": "<p><strong>January - 1917</strong></p><p>J.J. and B.A Simon found Table Supply Meat Company in Omaha, NE. </p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text_5",
+          "label": "Text 5",
+          "default": "<p><strong>January - 1917</strong></p><p>J.J. and B.A Simon found Table Supply Meat Company in Omaha, NE. </p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text_6",
+          "label": "Text 6",
+          "default": "<p><strong>January - 1917</strong></p><p>J.J. and B.A Simon found Table Supply Meat Company in Omaha, NE. </p>"
+        },
+        {
+          "type": "color",
+          "id": "color_accent",
+          "label": "Accent Color",
+          "default": "#FFCD2E"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image url"
+        }
+      ]
+    },
+    {
+      "type": "text_block",
+      "name": "Text Block",
+      "limit": 1,
+      "settings": [
+          {
+          "type": "inline_richtext",
+          "id": "pre_text",
+          "label": "Pre Text",
+          "default": "Our History"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Roseville Meat Company.  A modern day, old fashioned meat market"
+        },
+
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>As a local, family-owned business, we offer an extensive line of beef, pork, poultry, lamb, veal, marinated products, and exotic meats such as buffalo and venison.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button",
+          "default": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "primary-outline",
+              "label": "Primary outline"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "secondary-outline",
+              "label": "Secondary outline"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "color",
+          "id": "color_accent",
+          "label": "Accent Color",
+          "default": "#A5A5A5"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Our history",
+      "blocks": [
+        {
+          "type": "text_block"
+        },
+        {
+          "type": "card_block"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

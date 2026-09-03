@@ -1,0 +1,381 @@
+{
+  "sections": {
+    "gift-bunlde-header": {
+      "type": "gift-bunlde-header",
+      "blocks": {
+        "heading_cyfAxr": {
+          "type": "heading",
+          "settings": {
+            "heading": "Find the Perfect Gift",
+            "heading_size": "h1"
+          }
+        },
+        "text_HjUpgn": {
+          "type": "text",
+          "settings": {
+            "text": "Send them delicious food they'll crave! Delivered to their door, these gift boxes are guaranteed to delight."
+          }
+        }
+      },
+      "block_order": [
+        "heading_cyfAxr",
+        "text_HjUpgn"
+      ],
+      "settings": {
+        "allow_transparent_header": false,
+        "page_width": "container-fluid",
+        "banner_height": "small",
+        "text_align": "vertical-center horizontal-left",
+        "color_accent": "#a5a5a5",
+        "color_scheme": "scheme-2",
+        "overlay_color": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51) 100%)",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 40,
+        "padding_bottom_tab": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "collection_list_g8rdkA": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_3f7PLV": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "pork"
+          }
+        },
+        "featured_collection_FANTKV": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "exotic-meats"
+          }
+        },
+        "featured_collection_bKBpCb": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "seafood"
+          }
+        },
+        "featured_collection_TNHbRz": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "seafood"
+          }
+        },
+        "featured_collection_dCjADT": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "veal-goat"
+          }
+        },
+        "featured_collection_Qif4TY": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "lamb"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_3f7PLV",
+        "featured_collection_FANTKV",
+        "featured_collection_bKBpCb",
+        "featured_collection_TNHbRz",
+        "featured_collection_dCjADT",
+        "featured_collection_Qif4TY"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "Gifts",
+        "heading": "Gifts By Occasion",
+        "heading_size": "h1",
+        "image_ratio": "landscape",
+        "columns_desktop": 3,
+        "columns_tab": 3,
+        "columns_mobile": "2",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "featured_collection_kqCGzM": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "Best Deals",
+        "heading": "Holiday Favorites",
+        "heading_size": "h1",
+        "collection": "beef",
+        "products_to_show": 19,
+        "column": "5",
+        "column_medium": "4",
+        "column_mobile": "1",
+        "enable_desktop_slider": true,
+        "button_label": "View All",
+        "show_view_all": false,
+        "button_style": "primary",
+        "color_scheme": "scheme-2",
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "collection_image_block_3yiBAJ": {
+      "type": "collection-image-block",
+      "blocks": {
+        "card_bDH8VT": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Gift_Card.png",
+            "title": "Wine",
+            "sub_text": "",
+            "link": "shopify:\/\/collections",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51) 100%)"
+          }
+        },
+        "card_RJfUjd": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Gift_Card_1.png",
+            "title": "Private Reserve®",
+            "sub_text": "",
+            "link": "shopify:\/\/collections\/exotic-meats",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51) 100%)"
+          }
+        },
+        "card_XLM9M9": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Gift_Card_2.png",
+            "title": "Gift Cards",
+            "sub_text": "",
+            "link": "shopify:\/\/collections\/poultry",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51) 100%)"
+          }
+        },
+        "card_47Jzia": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Gift_Card_3.png",
+            "title": "Corporate Gifts",
+            "sub_text": "",
+            "link": "shopify:\/\/collections",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51) 100%)"
+          }
+        },
+        "card_Jawgii": {
+          "type": "card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Gift_Card_4.png",
+            "title": "Last Minute Gifts",
+            "sub_text": "",
+            "link": "shopify:\/\/collections\/seafood",
+            "color_accent": "#a5a5a5",
+            "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+            "overlay_color": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "card_bDH8VT",
+        "card_RJfUjd",
+        "card_XLM9M9",
+        "card_47Jzia",
+        "card_Jawgii"
+      ],
+      "name": "Collection image card",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#dddcd5",
+        "page_width": "container-fluid",
+        "pre_text": "GIFTS Category",
+        "heading": "Gifts By Category",
+        "heading_size": "h1",
+        "offer_title": "🔥 Hurry up ! Sale end in:",
+        "offer_end_date": "2026-09-31T23:59:59",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 76,
+        "padding_bottom": 76,
+        "padding_top_tab": 68,
+        "padding_bottom_tab": 68,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    },
+    "section_collection_list_card_7Rrrf3": {
+      "type": "section-collection-list-card",
+      "blocks": {
+        "category_item_XLUNLr": {
+          "type": "category_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_46.png",
+            "title": "Gifts Around $100",
+            "sub_text": "From the thrill of unboxing",
+            "link": ""
+          }
+        },
+        "category_item_TAc8H4": {
+          "type": "category_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_46_1.png",
+            "title": "Gifts Around $150",
+            "sub_text": "Contact the gift experts",
+            "link": ""
+          }
+        },
+        "category_item_wzgEMA": {
+          "type": "category_item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_46_2.png",
+            "title": "Gifts Around $200",
+            "sub_text": "We've got you covered with everything",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_item_XLUNLr",
+        "category_item_TAc8H4",
+        "category_item_wzgEMA"
+      ],
+      "name": "Collection list card",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#730000",
+        "page_width": "container-fluid",
+        "pre_text": "GIFTS Category",
+        "heading": "Shop Gifts By Price",
+        "heading_size": "h1",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "text_alignment": "center",
+        "column": "3",
+        "column_medium": "3",
+        "column_mobile": "1.3",
+        "inside_container": true,
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "enable_center": false,
+        "loop_enabled": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 0,
+        "padding_bottom": 64,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 64,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    },
+    "section_trending_collection_list_7Rrrf6": {
+      "type": "trending-collection-list",
+      "blocks": {
+        "collection_XLUNLr": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_46.png",
+            "title": "Gifts Around $100",
+            "sub_text": "From the thrill of unboxing"
+          }
+        },
+        "collection_TAc8H4": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_46_1.png",
+            "title": "Gifts Around $150",
+            "sub_text": "Contact the gift experts"
+          }
+        },
+        "collection_wzgEMA": {
+          "type": "collection",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_46_2.png",
+            "title": "Gifts Around $200",
+            "sub_text": "We've got you covered with everything"
+          }
+        }
+      },
+      "block_order": [
+        "collection_XLUNLr",
+        "collection_TAc8H4",
+        "collection_wzgEMA"
+      ],
+      "name": "Trending Collection",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#730000",
+        "page_width": "container-fluid",
+        "pre_text": "GIFTS Category",
+        "heading": "Shop Gifts By Price",
+        "heading_size": "h1",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "column": "3",
+        "column_medium": "3",
+        "column_mobile": "1.3",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "enable_center": false,
+        "loop_enabled": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 0,
+        "padding_bottom": 64,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 64,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    }
+  },
+  "order": [
+    "gift-bunlde-header",
+    "collection_list_g8rdkA",
+    "featured_collection_kqCGzM",
+    "collection_image_block_3yiBAJ",
+    "section_collection_list_card_7Rrrf3",
+    "section_trending_collection_list_7Rrrf6"
+  ]
+}

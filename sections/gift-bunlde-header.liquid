@@ -1,0 +1,434 @@
+{{ 'section-page-header.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+
+ .section-{{ section.id }}-padding {
+         --color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+         --color-link: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+       }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  
+  .section-{{ section.id }}-padding.gift-bundle__inner{
+      padding-left: {{ section.settings.padding_top_mobile }}px;
+    padding-right: {{ section.settings.padding_bottom_mobile }}px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+
+    .section-{{ section.id }}-padding.gift-bundle__inner{
+      padding-left: {{ section.settings.padding_top_tab }}px;
+    padding-right: {{ section.settings.padding_bottom_tab }}px;
+  }
+
+
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+  .section-{{ section.id }}-padding.gift-bundle__inner{
+      padding-left: {{ section.settings.padding_top }}px;
+    padding-right: {{ section.settings.padding_bottom }}px;
+  }
+  }
+{%- endstyle -%}
+
+<section
+  class="page-header"
+  {% if section.settings.allow_transparent_header %}
+  allow-transparent-header
+  {% endif %}>
+
+
+  <div class="page-banner">
+    
+
+    <div class="page-banner__content">
+
+      <div class="{{ section.settings.page_width }}">
+
+        <div class="page-banner__inner gift-bundle__inner  {{ section.settings.text_align }}  section-{{ section.id }}-padding  color-{{ section.settings.color_scheme }}">
+
+
+            {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'pre_heading' -%}
+
+
+          {%- if block.settings.pre_heading != blank -%}
+            <p class="page-banner-pre_heading">
+              <svg
+                width="24"
+                height="1"
+                viewBox="0 0 24 1"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <line
+                  y1="0.5"
+                  x2="24"
+                  y2="0.5"
+                  stroke="currentColor" />
+              </svg>
+
+              {{ block.settings.pre_heading }}
+            </p>
+          {%- endif -%}
+
+          {%- when 'heading' -%}
+
+          {% if block.settings.heading != blank %}
+            <h1 class="page-banner__title  {{ block.settings.heading_size }}">
+              {{ block.settings.heading }}
+            </h1>
+          {% endif %}
+
+        {%- when 'text' -%}
+          {%- if block.settings.text != blank -%}
+            <p class="page-banner__text rte">
+              {{ block.settings.text }}
+            </p>
+          {%- endif -%}
+
+          {%- when 'button' -%}
+          {%- if block.settings.button_text != blank -%}
+            <a href="{{ block.settings.button_url }}" class="button  button--{{ block.settings.button_style }}">
+              <span class="button--text">
+                {{- block.settings.button_text -}}
+                {%- if block.settings.button_style == 'link' -%}
+
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.122 7.30977L8.18453 11.2473C8.10244 11.3294 7.9911 11.3755 7.875 11.3755C7.7589 11.3755 7.64756 11.3294 7.56547 11.2473C7.48338 11.1652 7.43726 11.0538 7.43726 10.9377C7.43726 10.8216 7.48338 10.7103 7.56547 10.6282L10.7565 7.43774H2.1875C2.07147 7.43774 1.96019 7.39165 1.87814 7.3096C1.79609 7.22756 1.75 7.11628 1.75 7.00024C1.75 6.88421 1.79609 6.77293 1.87814 6.69088C1.96019 6.60884 2.07147 6.56274 2.1875 6.56274H10.7565L7.56547 3.37227C7.48338 3.29018 7.43726 3.17884 7.43726 3.06274C7.43726 2.94665 7.48338 2.8353 7.56547 2.75321C7.64756 2.67112 7.7589 2.625 7.875 2.625C7.9911 2.625 8.10244 2.67112 8.18453 2.75321L12.122 6.69071C12.1627 6.73134 12.195 6.7796 12.217 6.83271C12.239 6.88582 12.2503 6.94275 12.2503 7.00024C12.2503 7.05774 12.239 7.11467 12.217 7.16778C12.195 7.22089 12.1627 7.26914 12.122 7.30977Z" fill="currentColor" />
+                  </svg>
+                {%- endif -%}
+
+              </span>
+            </a>
+          {%- endif -%}
+
+
+            {%- endcase -%}
+        {%- endfor -%}
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</section>
+
+{% schema %}
+  {
+    "name": "Gift Page Header",
+    "blocks": [
+      {
+        "type": "pre_heading",
+        "name": "Pre heading",
+        "settings": [
+          {
+            "type": "text",
+            "id": "pre_heading",
+            "label": "Pre heading",
+            "default": "About us"
+          }
+        ]
+      }, {
+        "type": "heading",
+        "name": "Heading",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "default": "Page title",
+            "label": "t:sections.multicolumn.settings.title.label"
+          }, {
+            "type": "select",
+            "id": "heading_size",
+            "options": [
+              {
+                "value": "h2",
+                "label": "t:sections.all.heading_size.options__1.label"
+              },
+              {
+                "value": "h1",
+                "label": "t:sections.all.heading_size.options__2.label"
+              },
+              {
+                "value": "h0",
+                "label": "t:sections.all.heading_size.options__3.label"
+              },
+              {
+                "value": "hxl",
+                "label": "t:sections.all.heading_size.options__4.label"
+              }, {
+                "value": "hxxl",
+                "label": "t:sections.all.heading_size.options__5.label"
+              }
+            ],
+            "default": "h1",
+            "label": "t:sections.all.heading_size.label"
+          }
+        ]
+      }, {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "The perfect centerpiece for a memorable Mother’s Day mea"
+          }
+        ]
+      },
+       {
+        "type": "button",
+        "name": "Button",
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button",
+            "default": "Button Label"
+          }, {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+          }, {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button style",
+            "options": [
+              {
+                "value": "primary",
+                "label": "Primary"
+              },
+              {
+                "value": "primary-outline",
+                "label": "Primary outline"
+              },
+              {
+                "value": "secondary",
+                "label": "Secondary"
+              },
+              {
+                "value": "secondary-outline",
+                "label": "Secondary outline"
+              }, {
+                "value": "link",
+                "label": "Link"
+              }
+            ],
+            "default": "primary"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "allow_transparent_header",
+        "label": "Allow transparent header",
+        "info": "This setting only applies when this section is the first one.",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "container",
+            "label": "Container"
+          }, {
+            "value": "container-fluid",
+            "label": "Full Width"
+          }
+        ],
+        "default": "container-fluid",
+        "label": "Layout Width"
+      },
+      {
+        "type": "select",
+        "id": "banner_height",
+        "label": "Banner Height",
+        "options": [
+          {
+            "value": "orignal",
+            "label": "Orginal"
+          },
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          }, {
+            "value": "exlarge",
+            "label": "Exlarge"
+          }
+        ],
+        "default": "large"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },  {
+        "type": "select",
+        "id": "text_align",
+        "label": "t:sections.image-banner.settings.desktop_content_alignment.label",
+        "default": "vertical-center horizontal-left",
+        "options": [
+          {
+            "value": "vertical-top horizontal-left",
+            "label": "Top left"
+          },
+          {
+            "value": "vertical-top horizontal-center",
+            "label": "Top center"
+          },
+          {
+            "value": "vertical-top horizontal-right",
+            "label": "Top right"
+          },
+          {
+            "value": "vertical-center horizontal-left",
+            "label": "Center left"
+          }, {
+            "value": "vertical-center horizontal-center",
+            "label": "Center"
+          }, {
+            "value": "vertical-center horizontal-right",
+            "label": "Center right"
+          }, {
+            "value": "vertical-bottom horizontal-left",
+            "label": "Bottom left"
+          }, {
+            "value": "vertical-bottom horizontal-center",
+            "label": "Bottom center"
+          }, {
+            "value": "vertical-bottom horizontal-right",
+            "label": "Bottom right"
+          }
+        ]
+      }, {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#A5A5A5"
+      }, {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      }, {
+        "type": "color_background",
+        "id": "overlay_color",
+        "label": "Overlay Color",
+        "default": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51))"
+      }, {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 64
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 64
+      }, {
+        "type": "range",
+        "id": "padding_top_tab",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Tab",
+        "default": 40
+      }, {
+        "type": "range",
+        "id": "padding_bottom_tab",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Tab",
+        "default": 40
+      }, {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 24
+      }, {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 24
+      }
+    ],
+    "presets": [
+      {
+        "name": "Gift Page Header",
+        "category": "Custom",
+          "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        }
+      ]
+      }
+    ]
+  }
+{% endschema %}

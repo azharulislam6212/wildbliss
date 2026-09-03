@@ -1,0 +1,338 @@
+{{ 'before-after.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div
+  class="before-after section-{{ section.id }}-padding  color-{{- section.settings.color_scheme }} gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+
+     {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header text-center col-12 m-auto">
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        </div>
+      </div>
+    {%- endunless -%}
+ 
+    <div class="row">
+      <div class="col-12 col-lg-10 m-auto">
+            <before-after-images >
+          <div class="before-image--wrapper  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"   {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+            {% endif %}>
+            <div
+              class="before-image media {%if section.settings.enable_round %}media-round{% endif %} media--{{ section.settings.height}}"
+              {% if section.settings.height == 'adapt' and section.settings.before_image != blank %}
+                style="padding-bottom: {{ 1 | divided_by: section.settings.before_image.aspect_ratio | times: 100 }}%;"
+              {% endif %}
+
+              {% if section.settings.before_image == blank %}
+                 style="padding-bottom: 50%;"
+              {% endif %}
+              
+            >
+              {% if section.settings.before_image != blank %}
+                {% render 'responsive-img' with image: section.settings.before_image %}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+
+              {% if section.settings.before_text != blank %}
+                  <div class="before__text">
+                {{ section.settings.before_text}}
+                </div>
+              {% endif %}
+               
+
+            </div>
+
+            <div
+              class="after-image js-after-image media {%if section.settings.enable_round %}media-round{% endif %}  media--{{ section.settings.height}}"
+              {% if section.settings.height == 'adapt' and section.settings.before_image != blank %}
+                style="padding-bottom: {{ 1 | divided_by: section.settings.before_image.aspect_ratio | times: 100 }}%;"
+              {% endif %}
+                    {% if section.settings.after_image == blank %}
+                 style="padding-bottom: 50%;"
+              {% endif %}
+            >
+              {% if section.settings.after_image != blank %}
+                {% render 'responsive-img' with image: section.settings.after_image %}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+
+              {% if section.settings.after_text != blank %}
+                 <div class="after__text">
+                  {{ section.settings.after_text}}
+                </div>
+              {% endif %}
+        
+            </div>
+
+            <div class="split-cursor-wrapper">
+              <div class="split-cursor js-split-cursor">
+                <button class="drag-button" tabindex="0" role="button" aria-label="Split Cursor">
+                                 <svg width="87" height="87" viewBox="0 0 87 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0.5" y="0.0307617" width="86" height="86" rx="43" fill="#4770DB"/>
+                            <path d="M43.498 19.0615C44.9164 19.0615 46.0664 20.2115 46.0664 21.6299V64.4316C46.0664 65.85 44.9164 67 43.498 67C42.0797 67 40.9297 65.85 40.9297 64.4316V21.6299C40.9297 20.2115 42.0797 19.0615 43.498 19.0615ZM31.5137 25.9102C32.9317 25.9103 34.0818 27.0595 34.082 28.4775V57.584C34.0818 59.002 32.9317 60.1512 31.5137 60.1514C30.0955 60.1514 28.9456 59.0021 28.9453 57.584V28.4775C28.9456 27.0594 30.0955 25.9102 31.5137 25.9102ZM55.4824 25.9102C56.9006 25.9102 58.0505 27.0594 58.0508 28.4775V57.584C58.0505 59.0021 56.9006 60.1514 55.4824 60.1514C54.0644 60.1512 52.9143 59.002 52.9141 57.584V28.4775C52.9143 27.0595 54.0643 25.9103 55.4824 25.9102Z" fill="#EBEEFF"/>
+                            </svg>
+
+                </button>
+              </div>
+            </div>
+          </div>
+        </before-after-images>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Beofore After",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+      {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+   {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "header",
+      "content": "Image Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "before_image",
+      "label": "Before Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "before_text",
+      "default": "Before",
+      "label": "Before Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "after_image",
+      "label": "After Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "after_text",
+      "default": "After",
+      "label": "After Text"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium",
+      "label": "Image Height"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.has_cards_info",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sub_title",
+      "name": "Sub Title",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "It’s Not Just Your Weight That Will be Optimized... It’s Also Your Brain!",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "The Gut-Brain Axis: Your Second Brain",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "The gut-brain axis is the powerful link between your gut and your brain, directly impacting mood, focus, and overall well-being",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before After"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,483 @@
+{{ 'section-team-carousel.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+<div
+  id="{{ section.settings.them_section_id |  default:"team-section" }}"
+  class="team-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header text-center col-12 m-auto">
+             {% if section.settings.pre_text != blank %}
+              <p class="section--pre-text">{{ section.settings.pre_text }}</p>
+            {% endif %}
+
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+
+             {% if section.settings.text != blank %}
+            <div class="section--text">{{ section.settings.text }}</div>
+          {% endif %}
+
+
+        </div>
+      </div>
+    {%- endunless -%}
+
+    {% liquid
+      assign desktop_column = 3
+      assign tab_column = 3
+      assign mobile_column = 1
+
+      assign enable_pagination = section.settings.enable_pagination
+ 
+      assign enable_navigation = section.settings.enable_navigation
+      assign autoplay = section.settings.autoplay_enabled
+      assign loop = section.settings.loop_enabled
+      assign delay = section.settings.autoplay_timeout | times: 1000
+      assign freemode = false
+    %}
+
+    <slideshow-swiper>
+      <div
+        class="slideshow__swiper swiper team-slider"
+        data-centeredslides="false"
+        data-slidesDesktop="{{desktop_column}}"
+        data-slidesTab="{{tab_column}}"
+        data-slidesMobile="{{mobile_column}}"
+        data-autoPlay="{{ autoplay }}"
+        data-delay="{{ delay }}"
+        data-loop="{{ loop }}"
+        data-freemode="{{ freemode }}"
+        data-freemomentum="false"
+        data-mousewheel="false"
+        data-desktopspace="24"
+        data-tabspace="16"
+        data-mobilespace="16"
+      >
+        <div class="swiper-wrapper team-blocks row row-cols-1 row-cols-md-2 row-cols-lg-3">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'team_block' -%}
+                <div class="team-card__item swiper-slide col" {{ block.shopify_attributes }}>
+                  <div class="team-card">
+                    <div class="team-image">
+                      {% if block.settings.image != blank %}
+                        {% render 'responsive-img' with image: block.settings.image %}
+                      {% else %}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {% endif %}
+
+                      
+                        <ul class="list-unstyled team-social-social" role="list">
+
+                          {%- if block.settings.social_instagram_link != blank -%}
+                            <li class="team-social__item">
+                              <a href="{{ block.settings.social_instagram_link }}" class="link list-social__link">
+                                <span class="svg-icon">
+                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 1.44062C10.1375 1.44062 10.3906 1.45 11.2313 1.4875C12.0125 1.52187 12.4344 1.65313 12.7156 1.7625C13.0875 1.90625 13.3563 2.08125 13.6344 2.35938C13.9156 2.64062 14.0875 2.90625 14.2313 3.27813C14.3406 3.55938 14.4719 3.98438 14.5063 4.7625C14.5438 5.60625 14.5531 5.85938 14.5531 7.99375C14.5531 10.1313 14.5438 10.3844 14.5063 11.225C14.4719 12.0063 14.3406 12.4281 14.2313 12.7094C14.0875 13.0813 13.9125 13.35 13.6344 13.6281C13.3531 13.9094 13.0875 14.0813 12.7156 14.225C12.4344 14.3344 12.0094 14.4656 11.2313 14.5C10.3875 14.5375 10.1344 14.5469 8 14.5469C5.8625 14.5469 5.60938 14.5375 4.76875 14.5C3.9875 14.4656 3.56563 14.3344 3.28438 14.225C2.9125 14.0813 2.64375 13.9063 2.36563 13.6281C2.08438 13.3469 1.9125 13.0813 1.76875 12.7094C1.65938 12.4281 1.52813 12.0031 1.49375 11.225C1.45625 10.3813 1.44688 10.1281 1.44688 7.99375C1.44688 5.85625 1.45625 5.60313 1.49375 4.7625C1.52813 3.98125 1.65938 3.55938 1.76875 3.27813C1.9125 2.90625 2.0875 2.6375 2.36563 2.35938C2.64688 2.07812 2.9125 1.90625 3.28438 1.7625C3.56563 1.65313 3.99063 1.52187 4.76875 1.4875C5.60938 1.45 5.8625 1.44062 8 1.44062ZM8 0C5.82813 0 5.55625 0.009375 4.70313 0.046875C3.85313 0.084375 3.26875 0.221875 2.7625 0.41875C2.23438 0.625 1.7875 0.896875 1.34375 1.34375C0.896875 1.7875 0.625 2.23438 0.41875 2.75938C0.221875 3.26875 0.084375 3.85 0.046875 4.7C0.009375 5.55625 0 5.82812 0 8C0 10.1719 0.009375 10.4438 0.046875 11.2969C0.084375 12.1469 0.221875 12.7313 0.41875 13.2375C0.625 13.7656 0.896875 14.2125 1.34375 14.6562C1.7875 15.1 2.23438 15.375 2.75938 15.5781C3.26875 15.775 3.85 15.9125 4.7 15.95C5.55313 15.9875 5.825 15.9969 7.99688 15.9969C10.1688 15.9969 10.4406 15.9875 11.2938 15.95C12.1438 15.9125 12.7281 15.775 13.2344 15.5781C13.7594 15.375 14.2063 15.1 14.65 14.6562C15.0938 14.2125 15.3688 13.7656 15.5719 13.2406C15.7688 12.7313 15.9063 12.15 15.9438 11.3C15.9813 10.4469 15.9906 10.175 15.9906 8.00313C15.9906 5.83125 15.9813 5.55938 15.9438 4.70625C15.9063 3.85625 15.7688 3.27188 15.5719 2.76562C15.375 2.23438 15.1031 1.7875 14.6563 1.34375C14.2125 0.9 13.7656 0.625 13.2406 0.421875C12.7313 0.225 12.15 0.0875 11.3 0.05C10.4438 0.009375 10.1719 0 8 0Z" fill="currentColor"/>
+                                <path d="M8 3.89062C5.73125 3.89062 3.89062 5.73125 3.89062 8C3.89062 10.2688 5.73125 12.1094 8 12.1094C10.2688 12.1094 12.1094 10.2688 12.1094 8C12.1094 5.73125 10.2688 3.89062 8 3.89062ZM8 10.6656C6.52813 10.6656 5.33437 9.47188 5.33437 8C5.33437 6.52813 6.52813 5.33437 8 5.33437C9.47188 5.33437 10.6656 6.52813 10.6656 8C10.6656 9.47188 9.47188 10.6656 8 10.6656Z" fill="currentColor"/>
+                                <path d="M13.2312 3.72805C13.2312 4.2593 12.8 4.68743 12.2719 4.68743C11.7406 4.68743 11.3125 4.25618 11.3125 3.72805C11.3125 3.1968 11.7438 2.76868 12.2719 2.76868C12.8 2.76868 13.2312 3.19993 13.2312 3.72805Z" fill="currentColor"/>
+                              </svg>
+                                </span>
+                                <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+
+                            {%- if block.settings.social_twitter_link != blank -%}
+                            <li class="team-social__item">
+                              <a href="{{ block.settings.social_twitter_link }}" class="link list-social__link">
+                                <span class="svg-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.2149 1.26929H14.4639L9.55054 6.88495L15.3307 14.5266H10.8049L7.26009 9.89198L3.20403 14.5266H0.953684L6.20902 8.52002L0.664062 1.26929H5.3048L8.50899 5.50551L12.2149 1.26929ZM11.4256 13.1805H12.6718L4.62766 2.54471H3.29037L11.4256 13.1805Z" fill="currentColor"/>
+                                </svg>
+
+                                </span>
+                                <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if block.settings.social_pinterest_link != blank -%}
+                            <li class="team-social__item">
+                              <a href="{{ block.settings.social_pinterest_link }}" class="link list-social__link">
+                                <span class="svg-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 0C3.58125 0 0 3.58125 0 8C0 11.3906 2.10938 14.2844 5.08437 15.45C5.01562 14.8156 4.95 13.8469 5.1125 13.1562C5.25938 12.5312 6.05 9.18125 6.05 9.18125C6.05 9.18125 5.80937 8.70313 5.80937 7.99375C5.80937 6.88125 6.45312 6.05 7.25625 6.05C7.9375 6.05 8.26875 6.5625 8.26875 7.17812C8.26875 7.86562 7.83125 8.89062 7.60625 9.84062C7.41875 10.6375 8.00625 11.2875 8.79062 11.2875C10.2125 11.2875 11.3062 9.7875 11.3062 7.625C11.3062 5.70937 9.93125 4.36875 7.96562 4.36875C5.69062 4.36875 4.35313 6.075 4.35313 7.84062C4.35313 8.52812 4.61875 9.26562 4.95 9.66562C5.01562 9.74375 5.025 9.81563 5.00625 9.89375C4.94688 10.1469 4.80938 10.6906 4.78438 10.8C4.75 10.9469 4.66875 10.9781 4.51562 10.9062C3.51562 10.4406 2.89062 8.98125 2.89062 7.80625C2.89062 5.28125 4.725 2.96563 8.175 2.96563C10.95 2.96563 13.1062 4.94375 13.1062 7.5875C13.1062 10.3438 11.3688 12.5625 8.95625 12.5625C8.14688 12.5625 7.38437 12.1406 7.12187 11.6438C7.12187 11.6438 6.72188 13.1719 6.625 13.5469C6.44375 14.2406 5.95625 15.1125 5.63125 15.6438C6.38125 15.875 7.175 16 8 16C12.4187 16 16 12.4187 16 8C16 3.58125 12.4187 0 8 0Z" fill="currentColor"/>
+                              </svg>
+                                </span>
+                                <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+
+                          {%- if block.settings.social_tiktok_link != blank -%}
+                            <li class="team-social__item">
+                              <a href="{{ block.settings.social_tiktok_link }}" class="link list-social__link">
+                                <span class="svg-icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.3843 0H8.68781V10.8985C8.68781 12.1971 7.65073 13.2638 6.36011 13.2638C5.06949 13.2638 4.0324 12.1971 4.0324 10.8985C4.0324 9.6232 5.04645 8.57969 6.29099 8.53333V5.79711C3.54842 5.84347 1.33594 8.09276 1.33594 10.8985C1.33594 13.7276 3.59451 16 6.38317 16C9.17179 16 11.4304 13.7044 11.4304 10.8985V5.31013C12.4444 6.05218 13.6889 6.49276 15.0026 6.51596V3.77971C12.9745 3.71015 11.3843 2.04058 11.3843 0Z" fill="currentColor"/>
+                                </svg>
+
+                                </span>
+                                <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+
+                        </ul>
+
+
+
+                    </div>
+
+                    <div class="team-card__contentt">
+                      {% if block.settings.name != blank %}
+                        <h2 class="team-name">{{ block.settings.name }}</h2>
+                      {% endif %}
+
+                      {% if block.settings.designation != blank %}
+                        <p class="team-designation">{{ block.settings.designation }}</p>
+                      {% endif %}
+
+                      {% if block.settings.text != blank %}
+                        <p class="team-card__text rte">{{ block.settings.text }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+
+        {% if enable_navigation  %}
+               <div class="swiper-navigation">
+          <div
+            class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}"
+            style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+          >
+            <div class="swiper-button-prev">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.1875 11.375L4.8125 7L9.1875 2.625" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="swiper-button-next">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.8125 11.375L9.1875 7L4.8125 2.625" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if enable_pagination  %}
+          <div class="pagination-wrap  color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+      </div>
+    </slideshow-swiper>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Team Carousel",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+        {
+      "type": "text",
+      "id": "pre_text",
+      "label": "Pre text",
+      "default": "Todays Deals"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.image-with-text.blocks.text.settings.text.default",
+      "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#FF0000"
+      },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "team_block",
+      "name": "Team",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Person name"
+        },
+        {
+          "type": "text",
+          "id": "designation",
+          "label": "Designation",
+          "default": "Licensed Esthetician"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "As a licensed esthetician, my passion lies in helping people feel confident in their skin through intentional care, education, and results-driven treatments."
+        },
+        {
+          "type": "header",
+          "content": "Social"
+        },
+        {
+          "type": "url",
+          "id": "social_instagram_link",
+          "label": "Instagram"
+        },
+        {
+          "type": "url",
+          "id": "social_twitter_link",
+          "label": "Twitter"
+        },
+        {
+          "type": "url",
+          "id": "social_pinterest_link",
+          "label": "Printrest"
+        },
+        {
+          "type": "url",
+          "id": "social_tiktok_link",
+          "label": "Tiktalk"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team Carousel",
+      "blocks": [
+        {
+          "type": "team_block"
+        },
+        {
+          "type": "team_block"
+        },
+        {
+          "type": "team_block"
+        },
+        {
+          "type": "team_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

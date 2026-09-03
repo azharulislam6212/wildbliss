@@ -1,0 +1,514 @@
+{{ 'hero-slider-section.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .section-{{ section.id }}-padding {
+           padding-top: {{ section.settings.padding_top_mobile }}px;
+           padding-bottom: {{ section.settings.padding_bottom_moblie }}px;
+     }
+
+    @media screen and (min-width: 769px) {
+      .section-{{ section.id }}-padding {
+           padding-top: {{ section.settings.padding_top_tab }}px;
+           padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+    }
+
+    @media screen and (min-width: 1025px) {
+      .section-{{ section.id }}-padding {
+          padding-top: {{ section.settings.padding_top }}px;
+          padding-bottom: {{ section.settings.padding_bottom }}px;
+       }
+    }
+{% endstyle %}
+
+{% liquid
+  assign desktop_column = 1.08
+  assign tab_column = 1.08
+  assign mobile_column = 1.08
+
+  assign enable_pagination = section.settings.enable_pagination
+  assign enable_navigation = section.settings.enable_navigation
+  assign enable_scroll = section.settings.enable_scroll
+  assign autoplay = section.settings.autoplay_enabled
+  assign loop = section.settings.loop_enabled
+  assign delay = section.settings.autoplay_timeout | times: 1000
+  assign freemode = false
+%}
+
+<div
+  class="hero-slider-wrap"
+  {% if section.settings.allow_transparent_header %}
+    allow-transparent-header
+  {% endif %}
+>
+  <div
+    id="{{ section.settings.them_section_id |  default:"hero_slider" }}"
+    class="hero-slider  color-{{ section.settings.color_scheme }} gradient"
+  >
+    <slideshow-swiper>
+      <div
+        class="slideshow__swiper swiper {%if enable_pagination %} enable-pagination {% endif %}"
+        data-centeredslides="true"
+        data-slidesDesktop="{{desktop_column}}"
+        data-slidesTab="{{tab_column}}"
+        data-slidesMobile="{{mobile_column}}"
+        data-autoPlay="{{ autoplay }}"
+        data-delay="{{ delay }}"
+        data-loop="{{ loop }}"
+        data-freemode="{{ freemode }}"
+        data-freemomentum="false"
+        data-mousewheel="false"
+        data-desktopspace="8"
+        data-tabspace="8"
+        data-mobilespace="4"
+      >
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'slide' -%}
+                <div class="swiper-slide slider__item" {{ block.shopify_attributes }}>
+                  <div class="slider__wrap slider--height-{{ section.settings.hero_slider_heright }} color-{{ block.settings.color_scheme }} gradient">
+
+                  <div class="hero__behind-image">
+                             {% if block.settings.image != blank %}
+                                {% render 'responsive-img' with image: block.settings.image , class:"mobile-hidden" %}
+
+                                {% if block.settings.image_mobile != blank %}
+                                  {% render 'responsive-img' with image: block.settings.image_mobile class:"desktop-hidden" %}
+                                {% else %}
+                                  {% render 'responsive-img' with image: block.settings.image  class:"desktop-hidden" %}
+                                {% endif %}
+
+                                {%- else -%}
+                                        {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                         
+                              {% endif %}
+                  </div>
+                          
+                    <div class="hero-slider__content  section-{{ section.id }}-padding">
+                      <div class="container-fluid hero-slider__container">
+                        <div class="row align-items-stretch hero-slider__row">
+                          <div class="col-12">
+                            <div class="hero-slider__wrap">
+                              <div class="hero-slider__text-block">
+
+                                {%- if block.settings.pre_text != blank -%}
+                                  <p
+                                    class="hero-slider__pre_text"
+                                    {{ block.shopify_attributes }}
+                                  > <svg width="11" height="22" viewBox="0 0 11 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="6.2262" y="-2.72391" width="5" height="26.3451" transform="rotate(18.2252 6.2262 -2.72391)" fill="white"/>
+</svg>
+
+                                    {{ block.settings.pre_text }}
+                                  </p>
+                                {%- endif -%}
+
+                                {%- if block.settings.title != blank -%}
+                                  <h2
+                                    class="hero-slider__title inline-richtext {{ block.settings.heading_size }}"
+                                    {{ block.shopify_attributes }}
+                                  >
+                                    {{ block.settings.title }}
+                                  </h2>
+                                {%- endif -%}
+
+                                {%- if block.settings.text != blank -%}
+                                  <p class="hero-slider__text rte" {{ block.shopify_attributes }}>
+                                    {{ block.settings.text }}
+                                  </p>
+                                {%- endif -%}
+
+                                <div class="hero__rating-inner">
+                                  {%- if block.settings.button_text != blank -%}
+                                    <a
+                                      href="{{ block.settings.button_url }}"
+                                      class="button button--icon button--{{ block.settings.button_style }}"
+                                      {{ block.shopify_attributes }}
+                                    >
+                                      
+                                      <span class="button--text">{{- block.settings.button_text -}}</span>
+                                    </a>
+                                  {%- endif -%}
+                                  {%- if block.settings.button_text_2 != blank -%}
+                                    <a
+                                      href="{{ block.settings.button_url_2 }}"
+                                      class="button button--icon button--{{ block.settings.button_style_2 }}"
+                                      {{ block.shopify_attributes }}
+                                    >
+                                      <span class="button--text">{{- block.settings.button_text_2 -}}</span>
+                                    </a>
+                                  {%- endif -%}
+ 
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                       
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+        {% if enable_navigation %}
+          <div class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-button-prev">
+             <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"/>
+                  </svg>
+
+            </div>
+            <div class="swiper-button-next">
+              <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"/>
+                </svg>
+
+            </div>
+          </div>
+        {% endif %}
+        {% if enable_pagination %}
+          <div class="pagination-wrap-style-2 color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+
+        {% if enable_scroll %}
+          <div class="scrollbar-wrap color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-scrollbar"></div>
+          </div>
+        {% endif %}
+      </div>
+    </slideshow-swiper>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Hero slider",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+              {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Behind Image"
+        },
+      {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Behind Image mobile"
+        },
+         {
+          "type": "inline_richtext",
+          "id": "pre_text",
+          "label": "Pre text",
+          "default": "GET 50% OFF"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "slider Title"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.heading_size.options__4.label"
+            },
+            {
+              "value": "hxxl",
+              "label": "t:sections.all.heading_size.options__5.label"
+            }
+          ],
+          "default": "h0",
+          "label": "t:sections.all.heading_size.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "text",
+          "default": "Share information about your brand with your customers. and  welcome customers to your store."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button",
+          "default": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+                    {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "primary-outline",
+              "label": "Primary outline"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "secondary-outline",
+              "label": "Secondary outline"
+            }
+          ],
+          "default": "primary"
+        },
+             {
+          "type": "text",
+          "id": "button_text_2",
+          "label": "Button",
+          "default": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_url_2",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "button_style_2",
+          "label": "Button style",
+          "options": [
+                 {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "primary-outline",
+              "label": "Primary outline"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "secondary-outline",
+              "label": "Secondary outline"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "hero_slider_heright",
+      "label": "Slider Height",
+      "options": [
+        {
+          "value": "orignal",
+          "label": "Orginal"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "exlarge",
+          "label": "Exlarge"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll",
+      "label": "Enable Scroll",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_moblie",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero slider",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

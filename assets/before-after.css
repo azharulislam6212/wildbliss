@@ -1,0 +1,171 @@
+.before-image--wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+      border-radius: 20px;
+}
+
+.before-image {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.after-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  clip-path: inset(0 0 0 calc(var(--before-after-initial-drag-position, 50%)));
+
+}
+
+.split-cursor-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.split-cursor {
+  display: grid;
+  position: relative;
+  width: max-content;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+  will-change: transform;
+  place-items: center;
+  left: var(--before-after-initial-drag-position);
+  transform: translateX(-50%);
+}
+
+.split-cursor::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+    width: 10px;
+    background: rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}
+
+.drag-button {
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+  /* Button */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 12px;
+background: rgba(0, 0, 0, 0.2);
+border-radius: 100px;
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+.drag-button svg {
+  pointer-events: none;
+}
+
+.before-image--wrapper .media--small {
+  height: 24rem;
+}
+
+.before-image--wrapper .media--medium {
+  height: 30rem;
+}
+
+.before-image--wrapper .media--large {
+  height: 50.3rem;
+}
+
+
+  .before__text{
+        top: auto !important;
+        bottom: 20px !important;
+    right: auto !important;;
+    left: 20px !important;
+    font-family: var(--font-heading-family);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 150%;
+    color: rgb(var(--color-foreground));
+        background-color: rgb(var(--color-background));
+        border-radius: 10px;
+        text-align: center;
+        width: 133px !important;
+        height: 58px !important;
+        padding: 10px 27px;
+        
+  }
+  .after__text{
+    top: auto !important;
+   bottom: 20px !important;
+    right: 20px;
+    left: auto !important;
+    font-family: var(--font-heading-family);
+   font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 150%;
+       color: rgb(var(--color-foreground));
+       background-color: rgb(var(--color-background));
+    text-align: center;
+      border-radius: 10px;
+            width: 133px !important;
+        height: 58px !important;
+        padding: 10px 27px;
+        
+  }
+
+
+
+@media screen and (min-width: 769px) {
+  .before-image--wrapper .media--small {
+    height: 35rem;
+  }
+
+  .before-image--wrapper .media--medium {
+    height: 50.3rem;
+  }
+
+  .before-image--wrapper .media--large {
+    height: 65rem;
+  }
+
+
+}
+
+@media screen and (max-width: 768px) {
+  .before__text,
+  .after__text{
+    display: none !important;
+  }
+
+  .drag-button {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+}
+
+.split-cursor:before {
+    width: 4px;
+}
+}

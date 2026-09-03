@@ -1,0 +1,410 @@
+{{ 'section-call-to-action.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+
+  .section-{{ section.id }}-padding {
+    --color-accent: {{ section.settings.color_accent.red }}, {{ section.settings.color_accent.green }},  {{ section.settings.color_accent.blue }};
+    --color-link: {{ section.settings.color_accent.red }}, 
+    {{ section.settings.color_accent.green }}, 
+    {{ section.settings.color_accent.blue }};
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  class="call-to-action-section color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding gradient  isolate {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+  data-cascade
+  {% endif %}>
+  <div class="{{ section.settings.page_width }}">
+    <div class="row  align-items-start">
+      <div class="col-12">
+        <div class="call-to-action__inner">
+          <div class="call-to-action__block">
+            {%- for block in section.blocks -%}
+              {% case block.type %}
+                {%- when 'heading' -%}
+                  <h2 class="call-to-action__heading inline-richtext {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                    {{ block.settings.heading }}
+                  </h2>
+                {%- when 'caption' -%}
+                  <p class="call-to-action__text image-with-text__text--caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }} {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+                    {{ block.settings.caption | escape }}
+                  </p>
+                {%- when 'text' -%}
+                  <div class="call-to-action__text rte {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }} " {{ block.shopify_attributes }}>
+                    {{ block.settings.text }}
+                  </div>
+                {%- when 'button' -%}
+                  {%- if block.settings.button_label != blank -%}
+                    <a
+                      {% if block.settings.button_link == blank %}
+                      role="link"
+                      aria-disabled="true"
+                      {% else %}
+                      href="{{ block.settings.button_link }}"
+                      {% endif %}
+                      class="button button--icon button--{{  block.settings.button_style }}"
+                      {{ block.shopify_attributes }}>
+
+
+                      {{ block.settings.button_label | escape }}
+                    </a>
+                  {%- endif -%}
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+          <div class="call-to-action__icon-block">
+            {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'icon_block' %}
+                <div class="call-icon-item  color-{{ section.settings.color_scheme_card }} gradient   {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"  style=" --color-accent: {{ section.settings.color_accent.red }}, {{ section.settings.color_accent.green }},  {{ section.settings.color_accent.blue }};">
+                  {% if block.settings.icon != blank %}
+                    <div class="call-icon">
+                      {% render 'icon-img' with image: block.settings.icon %}
+                    </div>
+                  {% endif %}
+
+                  <div class="call-icon-text">
+                    <h3 class="call-icon-title">{{ block.settings.title }}</h3>
+                    {{ block.settings.text }}
+                  </div>
+                </div>
+            {% endcase %}
+          {% endfor %}
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Call to actions",
+    "class": "section",
+    "tag": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "container",
+            "label": "Container"
+          }, {
+            "value": "container-fluid",
+            "label": "Full Width"
+          }
+        ],
+        "default": "container-fluid",
+        "label": "Layout Width"
+      },
+             {
+          "type": "color",
+          "id": "color_accent",
+          "label": "Accent Color",
+          "default": "#FF0000"
+        },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme_card",
+        "label": "Card Color scheme",
+        "default": "scheme-2"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 120
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 120
+      }, {
+        "type": "range",
+        "id": "padding_top_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Tab",
+        "default": 80
+      }, {
+        "type": "range",
+        "id": "padding_bottom_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Tab",
+        "default": 80
+      }, {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 48
+      }, {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 48
+      }
+    ],
+    "blocks": [
+      {
+        "type": "heading",
+        "name": "t:sections.image-with-text.blocks.heading.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "default": "Have a question?",
+            "label": "t:sections.image-with-text.blocks.heading.settings.heading.label"
+          }, {
+            "type": "select",
+            "id": "heading_size",
+            "options": [
+              {
+                "value": "h2",
+                "label": "t:sections.all.heading_size.options__1.label"
+              },
+              {
+                "value": "h1",
+                "label": "t:sections.all.heading_size.options__2.label"
+              },
+              {
+                "value": "h0",
+                "label": "t:sections.all.heading_size.options__3.label"
+              },
+              {
+                "value": "hxl",
+                "label": "t:sections.all.heading_size.options__4.label"
+              }, {
+                "value": "hxxl",
+                "label": "t:sections.all.heading_size.options__5.label"
+              }
+            ],
+            "default": "h1",
+            "label": "t:sections.all.heading_size.label"
+          }
+        ]
+      }, 
+      {
+        "type": "caption",
+        "name": "t:sections.image-with-text.blocks.caption.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "caption",
+            "default": "t:sections.image-with-text.blocks.caption.settings.text.default",
+            "label": "t:sections.image-with-text.blocks.caption.settings.text.label"
+          }, {
+            "type": "select",
+            "id": "text_style",
+            "options": [
+              {
+                "value": "subtitle",
+                "label": "t:sections.image-with-text.blocks.caption.settings.text_style.options__1.label"
+              }, {
+                "value": "caption-with-letter-spacing",
+                "label": "t:sections.image-with-text.blocks.caption.settings.text_style.options__2.label"
+              }
+            ],
+            "default": "caption-with-letter-spacing",
+            "label": "t:sections.image-with-text.blocks.caption.settings.text_style.label"
+          },
+           {
+            "type": "select",
+            "id": "text_size",
+            "options": [
+              {
+                "value": "extra",
+                "label": "Extra Small"
+              }, {
+                "value": "small",
+                "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.options__1.label"
+              }, {
+                "value": "medium",
+                "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.options__2.label"
+              }, {
+                "value": "large",
+                "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.options__3.label"
+              }
+            ],
+            "default": "medium",
+            "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.label"
+          }
+        ]
+      },
+       {
+        "type": "text",
+        "name": "t:sections.image-with-text.blocks.text.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "default": "t:sections.image-with-text.blocks.text.settings.text.default",
+            "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+          }, {
+            "type": "select",
+            "id": "text_style",
+            "options": [
+              {
+                "value": "body",
+                "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__1.label"
+              }, {
+                "value": "subtitle",
+                "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__2.label"
+              }, {
+                "value": "caption-with-letter-spacing",
+                "label": "t:sections.image-with-text.blocks.caption.settings.text_style.options__2.label"
+              }
+            ],
+            "default": "body",
+            "label": "t:sections.image-with-text.blocks.text.settings.text_style.label"
+          }, {
+            "type": "select",
+            "id": "text_size",
+            "options": [
+              {
+                "value": "extra",
+                "label": "Extra Small"
+              }, {
+                "value": "small",
+                "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.options__1.label"
+              }, {
+                "value": "medium",
+                "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.options__2.label"
+              }, {
+                "value": "large",
+                "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.options__3.label"
+              }
+            ],
+            "default": "medium",
+            "label": "t:sections.image-with-text.blocks.caption.settings.caption_size.label"
+          }
+        ]
+      }, 
+      {
+        "type": "button",
+        "name": "t:sections.image-with-text.blocks.button.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_label",
+            "default": "t:sections.image-with-text.blocks.button.settings.button_label.default",
+            "label": "t:sections.image-with-text.blocks.button.settings.button_label.label",
+            "info": "t:sections.image-with-text.blocks.button.settings.button_label.info"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "t:sections.image-with-text.blocks.button.settings.button_link.label"
+          }, {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button style",
+            "options": [
+              {
+                "value": "primary",
+                "label": "Primary"
+              }, {
+                "value": "secondary",
+                "label": "Secondary"
+              }
+            ],
+            "default": "primary"
+          }
+        ]
+      },
+               {
+          "type": "icon_block",
+          "name": "Icon block",
+          "limit": 2,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "icon",
+              "label": "icon/image"
+            }, {
+              "type": "text",
+              "id": "title",
+              "label": "Title",
+              "default": "Our Phone:"
+            }, {
+              "type": "richtext",
+              "id": "text",
+              "label": "Text",
+              "default": "<p>541-345-0354</p>"
+            }
+          ]
+        },
+    ],
+    "presets": [
+      {
+        "name": "Call to actions",
+        "blocks": [
+          {
+            "type": "heading"
+          }, {
+            "type": "text"
+          }, {
+            "type": "button"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

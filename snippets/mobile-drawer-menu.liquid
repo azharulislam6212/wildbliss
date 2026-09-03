@@ -1,0 +1,177 @@
+<nav class="menu-drawer__navigation custom-scroll" data-lenis-prevent>
+  <ul class="menu-drawer__menu menu-drawer__parent has-submenu list-menu" role="list">
+    {%- for link in mobile_menu_linklist.links -%}
+      {%- assign submenu = false -%}
+      {%- assign megamenu = false -%}
+      {%- assign expands = false -%}
+      {%- if link.links != blank -%}
+        {%- assign submenu = true -%}
+        {%- assign expands = true -%}
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {% assign link_title = block.settings.link_title | handleize %}
+        {% assign menu_title = link.title | handleize %}
+
+        {%- if link_title == menu_title -%}
+          {%- assign megamenu = true -%}
+          {%- assign expands = true -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+  
+        {%- if expands -%}
+          {%- if megamenu -%}
+               <li class="parent-element"> 
+
+                 <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+              <summary
+                id="HeaderDrawer-{{ link.handle }}"
+                class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+              >
+                {{ link.title | escape }}
+                <span class="menu__toggle">
+                  <svg width="16" height="16" class="caret-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.354 6.35375L8.35403 11.3538C8.30759 11.4002 8.25245 11.4371 8.19175 11.4623C8.13105 11.4874 8.06599 11.5004 8.00028 11.5004C7.93457 11.5004 7.86951 11.4874 7.80881 11.4623C7.74811 11.4371 7.69296 11.4002 7.64653 11.3538L2.64653 6.35375C2.55271 6.25993 2.5 6.13268 2.5 6C2.5 5.86732 2.55271 5.74007 2.64653 5.64625C2.74035 5.55243 2.8676 5.49972 3.00028 5.49972C3.13296 5.49972 3.26021 5.55243 3.35403 5.64625L8.00028 10.2931L12.6465 5.64625C12.693 5.59979 12.7481 5.56294 12.8088 5.5378C12.8695 5.51266 12.9346 5.49972 13.0003 5.49972C13.066 5.49972 13.131 5.51266 13.1917 5.5378C13.2524 5.56294 13.3076 5.59979 13.354 5.64625C13.4005 5.6927 13.4373 5.74786 13.4625 5.80855C13.4876 5.86925 13.5006 5.9343 13.5006 6C13.5006 6.0657 13.4876 6.13075 13.4625 6.19145C13.4373 6.25214 13.4005 6.3073 13.354 6.35375Z" fill="currentColor"/>
+</svg>
+
+                </span>
+              </summary>
+              <div
+                id="link-{{ link.handle | escape }}"
+                class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                tabindex="-1"
+              >
+                <div class="menu-drawer__inner-submenu">
+
+           
+
+
+                       {%- render 'mobile-mega-list', link: link -%}
+
+
+
+
+                </div>
+              </div>
+            </details>
+
+            
+                </li>
+          {%- elsif submenu -%}
+                 <li class="parent-element">  
+
+            <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+              <summary
+                id="HeaderDrawer-{{ link.handle }}"
+                class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+              >
+                {{ link.title | escape }}
+                <span class="menu__toggle">
+                <svg width="16" height="16" class="caret-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.354 6.35375L8.35403 11.3538C8.30759 11.4002 8.25245 11.4371 8.19175 11.4623C8.13105 11.4874 8.06599 11.5004 8.00028 11.5004C7.93457 11.5004 7.86951 11.4874 7.80881 11.4623C7.74811 11.4371 7.69296 11.4002 7.64653 11.3538L2.64653 6.35375C2.55271 6.25993 2.5 6.13268 2.5 6C2.5 5.86732 2.55271 5.74007 2.64653 5.64625C2.74035 5.55243 2.8676 5.49972 3.00028 5.49972C3.13296 5.49972 3.26021 5.55243 3.35403 5.64625L8.00028 10.2931L12.6465 5.64625C12.693 5.59979 12.7481 5.56294 12.8088 5.5378C12.8695 5.51266 12.9346 5.49972 13.0003 5.49972C13.066 5.49972 13.131 5.51266 13.1917 5.5378C13.2524 5.56294 13.3076 5.59979 13.354 5.64625C13.4005 5.6927 13.4373 5.74786 13.4625 5.80855C13.4876 5.86925 13.5006 5.9343 13.5006 6C13.5006 6.0657 13.4876 6.13075 13.4625 6.19145C13.4373 6.25214 13.4005 6.3073 13.354 6.35375Z" fill="currentColor"/>
+</svg>
+                </span>
+              </summary>
+              <div
+                id="link-{{ link.handle | escape }}"
+                class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                tabindex="-1"
+              >
+                <div class="menu-drawer__inner-submenu">
+                  <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                    {%- for childlink in link.links -%}
+                      <li>
+                        {%- if childlink.links == blank -%}
+                          <a
+                            id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                            href="{{ childlink.url }}"
+                            class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            {{ childlink.title | escape }}
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            </details>
+            </li>
+
+            {% if link.links != blank %}
+
+              {% for childlink in link.links %}
+                {% if childlink.links != blank %}
+                   <li class="parent-element"> 
+                  <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
+                    <summary
+                      id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                      class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                    >
+                      {{ childlink.title | escape }}
+                      <span class="menu__toggle">
+                        <svg width="16" height="16" class="caret-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.354 6.35375L8.35403 11.3538C8.30759 11.4002 8.25245 11.4371 8.19175 11.4623C8.13105 11.4874 8.06599 11.5004 8.00028 11.5004C7.93457 11.5004 7.86951 11.4874 7.80881 11.4623C7.74811 11.4371 7.69296 11.4002 7.64653 11.3538L2.64653 6.35375C2.55271 6.25993 2.5 6.13268 2.5 6C2.5 5.86732 2.55271 5.74007 2.64653 5.64625C2.74035 5.55243 2.8676 5.49972 3.00028 5.49972C3.13296 5.49972 3.26021 5.55243 3.35403 5.64625L8.00028 10.2931L12.6465 5.64625C12.693 5.59979 12.7481 5.56294 12.8088 5.5378C12.8695 5.51266 12.9346 5.49972 13.0003 5.49972C13.066 5.49972 13.131 5.51266 13.1917 5.5378C13.2524 5.56294 13.3076 5.59979 13.354 5.64625C13.4005 5.6927 13.4373 5.74786 13.4625 5.80855C13.4876 5.86925 13.5006 5.9343 13.5006 6C13.5006 6.0657 13.4876 6.13075 13.4625 6.19145C13.4373 6.25214 13.4005 6.3073 13.354 6.35375Z" fill="currentColor"/>
+</svg>
+                      </span>
+                    </summary>
+                    <div
+                      id="childlink-{{ childlink.handle | escape }}"
+                      class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                    >
+                    
+                      <ul
+                        class="menu-drawer__menu list-menu"
+                        role="list"
+                        tabindex="-1"
+                      >
+                        {%- for grandchildlink in childlink.links -%}
+                          <li>
+                            <a
+                              id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                              href="{{ grandchildlink.url }}"
+                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                              {% if grandchildlink.current %}
+                                aria-current="page"
+                              {% endif %}
+                            >
+                              {{ grandchildlink.title | escape }}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  </details>
+                    </li>
+                {% endif %}
+              {%- endfor -%}
+                
+            {% endif %}
+
+         
+          {%- endif -%}
+
+        {%- else -%}
+
+            <li class="parent-element"> 
+          <a
+            id="HeaderDrawer-{{ link.handle }}"
+            href="{{ link.url }}"
+            class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            {{ link.title | escape }}
+          </a>
+
+          </li>
+        {%- endif -%}
+      
+    {%- endfor -%}
+  </ul>
+</nav>

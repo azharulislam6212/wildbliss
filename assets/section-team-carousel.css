@@ -1,0 +1,128 @@
+.team-section{
+box-sizing: border-box;
+}
+
+.team-section .section--text{
+  max-width: 648px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-image{
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.team-image img{
+   opacity: 0.86;
+    transition: 0.3s ease;
+    transform: scale(1);
+}
+
+
+.team-social-social{
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    transition: 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+}
+
+.team-social-social .list-social__link{
+box-sizing: border-box;
+/* Auto layout */
+display: inline-flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 40px;
+height: 40px;
+
+background: #FFFFFF;
+/* Light */
+border: 1px solid #EBEEFF;
+border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.team-social-social .list-social__link:hover{
+    background-color: rgba(var(--color-accent));
+    border: 1px solid rgba(var(--color-accent));
+      transition: 0.3s ease;
+      color: #FFFFFF;
+}
+
+.team-card:hover .team-image img{
+  opacity: 1;
+  /* transform: scale(1.012); */
+  transform: scale(1.012);
+}
+
+.team-card:hover .team-social-social {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.team-card__contentt{
+    padding-top: 20px;
+}
+.team-name{
+ 
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 150%;
+/* identical to box height, or 24px */
+letter-spacing: 0.01em;
+
+margin: 0 0 0px;
+}
+
+.team-designation{
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+letter-spacing: 0.01em;
+color: rgba(var(--color-foreground));
+ 
+margin: 0 0  16px;
+font-family: var(--font-body-family);
+}
+
+.team-card__text{
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+/* or 21px */
+letter-spacing: 0.01em;
+font-family: var(--font-body-family);
+color: rgba(var(--color-foreground), 0.6);
+}
+
+
+@media screen and (max-width: 750px) {
+.team-card .team-image img{
+  opacity: 1;
+  transform: scale(1.012);
+}
+
+.team-card .team-social-social {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+ 
+}

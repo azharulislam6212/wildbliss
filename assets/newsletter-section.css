@@ -1,0 +1,82 @@
+.newsletter__wrapper {
+  padding: 2rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter__wrapper {
+     padding: 6rem 4.8rem;
+     border-radius: 3.2rem;
+  }
+}
+
+.newsletter__wrapper > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.newsletter__wrapper > * + * {
+  margin-top: 1rem;
+}
+
+.newsletter__wrapper > * + .newsletter-form {
+  margin-top: 3rem;
+}
+
+.newsletter__subheading {
+  max-width: 70rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.newsletter-form__field-wrapper .newsletter-form__message {
+  margin-top: 1.5rem;
+}
+
+.newsletter__button {
+  margin-top: 3rem;
+  width: fit-content;
+}
+
+@media screen and (min-width: 750px) {
+  .newsletter__button {
+    flex-shrink: 0;
+    margin: 0 0 0 1rem;
+  }
+}
+
+
+
+.newsletter_shape_left{
+  max-width: 12%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 0;
+      margin: 0;
+}
+
+
+.newsletter_shape_right{
+  max-width: 12%;
+    position: absolute;
+  right: 0;
+  bottom: 0;
+    line-height: 0;
+        margin: 0;
+}
+
+
+
+@media screen and (max-width: 750px) {
+.newsletter_shape_left{
+max-width: 80px;
+}
+.newsletter_shape_right{
+  max-width: 80px;
+  right: 15px;
+}
+}

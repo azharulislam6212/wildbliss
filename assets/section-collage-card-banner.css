@@ -1,0 +1,164 @@
+.collage-grid-section{
+    position: relative;
+}
+
+.collage-card{
+    display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(300px, auto);
+     gap: 24px;
+    }
+
+.banner-card{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    border-radius: 2.4rem;
+    box-sizing: border-box;
+}
+
+
+.banner-card__image{
+    grid-area: 1 / 1 / 2 / 2;
+    line-height: 0;
+    position: relative;
+}
+.banner-card__image::before{
+    content: "";
+
+isolation: isolate;
+
+position: absolute;
+width: 100%;
+height: 100%;
+left: 0px;
+top: 0px;
+background: var(--overlay-color);
+border-radius: 12px;
+}
+.banner-card__image::after{
+  content: "";
+
+isolation: isolate;
+
+position: absolute;
+width: 301px;
+height: 301px;
+left: -47px;
+bottom: -62.66px;
+
+background: var(--shape-color);
+filter: blur(50px);
+
+}
+
+
+.banner-card__image img, .banner-card__image svg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.banner-card__content{
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: transparent;
+    padding: 2.4rem;
+    display: flex;
+    z-index: 1;
+}
+
+
+
+.banner-card:first-child {
+  grid-column: span 1;
+}
+
+.banner-card:nth-child(2) {
+   grid-row: span 2;
+}
+
+.banner-card:nth-child(3) {
+   grid-column: span 1;
+}
+
+
+
+.banner-card__title{
+font-style: normal;
+font-weight: 500;
+line-height: 130%;
+/* or 52px */
+letter-spacing: -0.04em;
+margin: 0 0 16px;
+ 
+}
+
+
+.banner-card__title em{
+    font-style: normal;
+    display: block;
+}
+
+.banner-sub_heading{
+font-family: var(--font-family-heading);
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 130%;
+/* or 23px */
+letter-spacing: -0.04em;
+ margin: 0 0 8px;
+}
+
+.banner-card__text{
+    margin: 0 0 32px;
+}
+
+ 
+.offer--box{
+    display: flex;
+    align-items: start;
+    gap: 18px;
+    justify-content: end;
+}
+ 
+.offer-title{
+    margin: 0 0;
+}
+@media screen and (max-width: 1080px) {
+.collage-card {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-auto-rows: minmax(300px,auto);
+    gap: 24px;
+}
+ .offer--box{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 18px;
+    justify-content: center;
+    text-align: left;
+}
+
+}
+
+@media screen and (max-width: 768px) {
+.collage-card {
+    grid-template-columns: repeat(1,1fr);
+    grid-auto-rows: minmax(300px,auto);
+
+}
+.banner-card__content {
+    padding: 3rem;
+}
+
+  .collage-card-section  .section--header__flex {
+    flex-direction: column;
+    align-items: start;
+ 
+}
+}
+
+
+ 

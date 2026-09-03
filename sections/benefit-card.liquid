@@ -1,0 +1,485 @@
+{{ 'section-benefit-card.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+ {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+<div
+  class="benefit-card-blocks  color-{{ section.settings.color_scheme }} gradient  isolate {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}>
+
+    {% if section.settings.bg_image != blank %}
+    <div class="benefit-bg">
+      {% render 'responsive-img' with image: section.settings.bg_image %}
+    </div>
+  {% endif %}
+
+
+  <div class="benefit-content section-{{ section.id }}-padding">
+
+
+  <div class="{{ section.settings.page_width }}">
+    {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header text-center col-12 m-auto">
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+          {% if section.settings.text != blank %}
+             <p class="section--text">{{ section.settings.text }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {%- endunless -%}
+    <div class="row align-items-stretch">
+      <div class="col-12 col-md-4">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'card_block_left' -%}
+              <div
+                class="benefit-card color-{{ block.settings.color_scheme_card }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                {% if block.settings.title != blank %}
+                  <h3 class="benefit-card__title">{{ block.settings.title }}</h3>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <p class="benefit-card__text">
+                    {{ block.settings.text }}
+                  </p>
+                {% endif %}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+      <div class="col-12 col-md-4">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'image_block' -%}
+              <div
+                class="image-card media media--portrait {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                  {% if block.settings.image != blank %}
+                    {% render 'responsive-img' with image: block.settings.image %}
+                  {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+      <div class="col-12 col-md-4">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'card_block_right' -%}
+              <div
+                class="benefit-card color-{{ block.settings.color_scheme_card }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                {{ block.shopify_attributes }}
+                {% if settings.animations_reveal_on_scroll %}
+                  data-cascade
+                  style="--animation-order: {{ forloop.index }};"
+                {% endif %}
+              >
+                {% if block.settings.title != blank %}
+                  <h3 class="benefit-card__title">{{ block.settings.title }}</h3>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <p class="benefit-card__text">
+                    {{ block.settings.text }}
+                  </p>
+                {% endif %}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 text-center button--action">
+
+
+
+                        {%- if section.settings.buy_now != blank and  product != blank -%}
+                          {%- liquid
+                            assign check_against_inventory = true
+                            if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+                              assign check_against_inventory = false
+                            endif
+                            if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+                              assign quantity_rule_soldout = true
+                            endif
+                          -%}
+
+                          <product-form
+                            class="product-form"
+                            data-hide-errors=""
+                            data-section-id="{{ section.id }}"
+                          >
+                            {%- form 'product',
+                              product,
+                              id: product_form_id,
+                              class: 'form',
+                              novalidate: 'novalidate',
+                              data-type: 'add-to-cart-form'
+                            -%}
+                              <input
+                                type="hidden"
+                                name="id"
+                                value="{{ product.selected_or_first_available_variant.id }}"
+                                {% if product.selected_or_first_available_variant.available == false
+                                  or quantity_rule_soldout
+                                  or product.selected_or_first_available_variant == null
+                                %}
+                                  disabled
+                                {% endif %}
+                                class="product-variant-id"
+                              >
+
+                              <button
+                                type="submit"
+                                class="button button--icon button--{{  section.settings.button_style }}"
+                                {% if product.selected_or_first_available_variant.available == false
+                                  or quantity_rule_soldout
+                                  or product.selected_or_first_available_variant == null
+                                %}
+                                  disabled
+                                {% endif %}
+                              >
+                                {%- if product.selected_or_first_available_variant == null -%}
+                                  {{ 'products.product.unavailable' | t }}
+                                {%- elsif product.selected_or_first_available_variant.available == false
+                                  or quantity_rule_soldout
+                                -%}
+                                  {{ 'products.product.sold_out' | t }}
+                                {%- else -%}
+
+                           
+
+                                {{ section.settings.button_label | escape }}
+
+                                {%- endif -%}
+
+                                {%- render 'loading-spinner' -%}
+                              </button>
+                            {%- endform -%}
+                          </product-form>
+
+                        {% else %}
+
+
+                        {%- if section.settings.button_label != blank -%}
+                              <a
+                                {% if section.settings.button_link == blank %}
+                                  role="link" aria-disabled="true"
+                                {% else %}
+                                  href="{{ section.settings.button_link }}"
+                                {% endif %}
+                                class="button button--icon button--{{  section.settings.button_style }}"
+                    
+                              >
+                            
+
+                                {{ section.settings.button_label | escape }}
+                              </a>
+                            {%- endif -%}
+
+                    {%- endif -%}
+      </div>
+    </div>
+  </div>
+    </div> 
+</div>
+
+{% schema %}
+{
+  "name": "Benefit card",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+        {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+          "type": "richtext",
+          "id": "text",
+          "default": "t:sections.image-with-text.blocks.text.settings.text.default",
+          "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+     },
+          {
+          "type": "checkbox",
+          "id": "buy_now",
+          "default": false,
+          "label": "Buy Now Enable"
+        },
+         {
+          "type": "text",
+          "id": "button_label",
+          "default": "t:sections.image-with-text.blocks.button.settings.button_label.default",
+          "label": "t:sections.image-with-text.blocks.button.settings.button_label.label",
+          "info": "t:sections.image-with-text.blocks.button.settings.button_label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.image-with-text.blocks.button.settings.button_link.label"
+        },
+           {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            }
+          ],
+          "default": "primary"
+        },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_block",
+      "name": "Image Block",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": " Image"
+        }
+      ]
+    },
+    {
+      "type": "card_block_left",
+      "name": "Card Block left",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "default": "t:sections.multicolumn.blocks.column.settings.title.default",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
+          "label": "t:sections.multicolumn.blocks.column.settings.text.label"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme_card",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-2"
+        }
+      ]
+    },
+       {
+      "type": "card_block_right",
+      "name": "Card Block Right",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "default": "t:sections.multicolumn.blocks.column.settings.title.default",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
+          "label": "t:sections.multicolumn.blocks.column.settings.text.label"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme_card",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-2"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefit card",
+      "blocks": [
+        {
+          "type": "card_block_left"
+        },
+        {
+          "type": "card_block_left"
+        },
+        {
+          "type": "card_block_left"
+        },
+        {
+          "type": "image_block"
+        },
+        {
+          "type": "card_block_right"
+        },
+        {
+          "type": "card_block_right"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

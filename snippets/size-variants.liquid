@@ -1,0 +1,39 @@
+{% assign target_option = "weight" %}
+
+{% for option in product.options_with_values %}
+
+  {% assign option_name = option.name | downcase %}
+
+  {% if option_name == target_option %}
+
+    <variant-weight-select>
+
+      <div class="vs-box">
+        <span class="vs-selected">{{ option.selected_value }}</span>
+        <span class="vs-arrow">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.0153 4.76528L6.26528 8.51528C6.23045 8.55014 6.18909 8.5778 6.14357 8.59667C6.09804 8.61555 6.04925 8.62526 5.99996 8.62526C5.95068 8.62526 5.90189 8.61555 5.85636 8.59667C5.81084 8.5778 5.76948 8.55014 5.73465 8.51528L1.98465 4.76528C1.91429 4.69491 1.87476 4.59948 1.87476 4.49996C1.87476 4.40045 1.91429 4.30502 1.98465 4.23465C2.05502 4.16429 2.15045 4.12476 2.24996 4.12476C2.34948 4.12476 2.44491 4.16429 2.51528 4.23465L5.99996 7.71981L9.48465 4.23465C9.51949 4.19981 9.56086 4.17217 9.60638 4.15332C9.6519 4.13446 9.70069 4.12476 9.74996 4.12476C9.79924 4.12476 9.84803 4.13446 9.89355 4.15332C9.93907 4.17217 9.98044 4.19981 10.0153 4.23465C10.0501 4.26949 10.0778 4.31086 10.0966 4.35638C10.1155 4.4019 10.1252 4.45069 10.1252 4.49996C10.1252 4.54924 10.1155 4.59803 10.0966 4.64355C10.0778 4.68907 10.0501 4.73044 10.0153 4.76528Z" fill="CurrentColor"/>
+</svg>
+
+        </span>
+      </div>
+
+      <ul class="vs-dropdown custom-scroll" data-lenis-prevent>
+
+        {% for value in option.values %}
+
+          <li
+            class="vs-item"
+            data-value="{{ value }}"  data-position="{{ option.position }}" >
+            {{ value }}
+          </li>
+
+        {% endfor %}
+
+      </ul>
+
+    </variant-weight-select>
+
+  {% endif %}
+
+{% endfor %}

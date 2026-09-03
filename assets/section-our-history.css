@@ -1,0 +1,107 @@
+
+
+.our-history-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.4rem;
+  align-items: stretch;
+}
+
+.our-history-content,
+.our-history-card,
+.our-history-image {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+
+
+.our-history-content-inner {
+  max-width: 40rem;
+}
+
+.our-history-heading {
+
+font-style: normal;
+font-weight: 600;
+font-size: 40px;
+line-height: 130%;
+/* identical to box height, or 52px */
+letter-spacing: -0.04em;
+color: rgba(var(--color-heading));
+margin: 0 0 2rem;
+}
+
+.our-history-text + .button{
+  margin-top: 4rem;
+}
+
+ 
+ 
+ 
+
+.our-history--pre-text{
+    /* Features PRODUTCS */
+
+font-family: var(--font-body-family);
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 130%;
+/* identical to box height, or 16px */
+text-transform: uppercase;
+
+/* Text/text-5 */
+color: #454442;
+
+opacity: 0.6;
+
+ margin: 0;
+}
+
+ 
+
+.our-history__heading{
+  margin: 0;
+
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+letter-spacing: 0.01em;
+}
+
+
+.our-history-card-item{
+    display: flex;
+    align-items: start;
+}
+
+.our-history-line-text{
+    margin-bottom: 24px;
+}
+.our-history-line-text>*{
+    margin: 0;
+}
+
+
+
+@media screen and (max-width: 991px) {
+  .our-history-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .our-history-content,
+  .our-history-card,
+  .our-history-image {
+    min-height: auto;
+    height: auto;
+  }
+
+  .our-history-image {
+    height: 40rem;
+  }
+
+ 
+}

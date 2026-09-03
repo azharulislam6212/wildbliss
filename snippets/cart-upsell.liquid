@@ -1,0 +1,102 @@
+{%- liquid
+  assign title = title | default: false
+  assign resources = resources | default: false
+  assign url = url | default: false
+  if recommendations.performed and recommendations.products_count > 0
+    assign resources = recommendations.products
+  endif
+
+  assign image_ratio = settings.upsell_product_image_ratio | default: 'square'
+  assign enable_pagination = settings.cart_upsell_enable_pagination
+  assign enable_navigation = settings.cart_upsell_enable_navigation
+  assign loop = settings.cart_upsell_loop_enabled
+  assign upsell_color_scheme = settings.cart_upsell_color_scheme_navigation
+  assign autoplay = settings.cart_upsell_autoplay_enabled
+  assign delay = settings.cart_upsell_autoplay_timeout | times: 1000
+  assign freemode = false
+-%}
+ 
+
+{%- if resources or url -%}
+  {%- if settings.enable_cart_upsell -%}
+      <div class="cart-upsell__products {% if url and recommendations.products_count == 0 %} hidden{% endif %}" {% if url %} data-cart-drawer-upsells data-url="{{- url -}}"{% endif %} data-recommendations-products-count="{{- recommendations.products_count -}}">
+         <slideshow-swiper>
+        <div class="cart-upsell__header">
+          {% if title %}
+            <h4 class="cart-upsell__title">{{ title }}</h4>
+          {% endif %}
+
+             {% if enable_pagination %}
+        <div class="pagination-wrap color-{{ upsell_color_scheme }}">
+          <div class="swiper-pagination"></div>
+        </div>
+      {% endif %}
+
+             {% if enable_navigation %}
+          <div class="swiper-navigation-flex color-{{ upsell_color_scheme }}">
+            <div class="swiper-button-prev">
+             <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"/>
+                  </svg>
+
+            </div>
+            <div class="swiper-button-next">
+               <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"/>
+                </svg>
+            </div>
+          </div>
+        {% endif %}
+
+        </div>
+        <div class="swiper slideshow__swiper cart-drawer-suggest-products-wrapper" 
+         tabindex="-1" role="group"
+                                data-centeredslides="false"
+                                data-slidesDesktop="2"
+                                data-slidesTab="2"
+                                data-slidesMobile="2"
+                                data-autoPlay="{{ autoplay }}"
+                                data-delay="{{ delay }}"
+                                data-loop="{{ loop }}"
+                                data-paginationType="bullets"
+                                data-freemode="{{ freemode }}"
+                                data-freemomentum="false"
+                                data-mousewheel="false"
+                                data-desktopspace="8"
+                                data-tabspace="8"
+                                data-mobilespace="8"
+        >
+          <div class="swiper-wrapper cart-drawer-suggest-products">
+            {%- for product in resources -%}
+              <div
+                class="swiper-slide"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="Slide {{ forloop.index }} of {{ forloop.length }}"
+              >
+                                    {% assign quick_add = 'standard' %}
+                                      {% render 'card-product',
+                                        card_product: product,
+                                        media_aspect_ratio: image_ratio,
+                                        show_secondary_image: false,
+                                        lazy_load: false,
+                                        skip_styles: skip_card_product_styles,
+                                        quick_add: quick_add,
+                                        add_button_style: 'text',
+                                        section_id: section.id,
+                                        horizontal_class: false,
+                                        horizontal_quick_add: false,
+                                        badge: false,
+                                        siblings: false
+                                      %}
+              </div>
+            {%- endfor -%}
+          </div>
+
+   
+
+        </div>
+       </slideshow-swiper>
+      </div>
+  {%- endif -%}
+{%- endif -%}

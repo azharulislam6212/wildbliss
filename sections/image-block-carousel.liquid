@@ -1,0 +1,588 @@
+{{ 'component-video.css' | asset_url | stylesheet_tag }}
+{{ 'section-image-block-carousel.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+<div
+  id="{{ section.settings.them_section_id |  default:"block-section" }}"
+  class="block-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header text-{{ section.settings.alignment }} col-12 m-auto">
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+          {% if section.settings.text != blank %}
+            <div class="section--text">{{ section.settings.text }}</div>
+          {% endif %}
+        </div>
+      </div>
+    {%- endunless -%}
+
+    {% liquid
+      assign desktop_column = 4
+      assign tab_column = 3
+      assign mobile_column = 1
+
+      assign enable_pagination = section.settings.enable_pagination
+ 
+      assign enable_navigation = section.settings.enable_navigation
+      assign autoplay = section.settings.autoplay_enabled
+      assign loop = section.settings.loop_enabled
+      assign delay = section.settings.autoplay_timeout | times: 1000
+      assign freemode = false
+
+ 
+    %}
+
+    <slideshow-swiper>
+      <div
+        class="slideshow__swiper swiper block-slider"
+        data-centeredslides="false"
+        data-slidesDesktop="{{desktop_column}}"
+        data-slidesTab="{{tab_column}}"
+        data-slidesMobile="{{mobile_column}}"
+        data-autoPlay="{{ autoplay }}"
+        data-delay="{{ delay }}"
+        data-loop="{{ loop }}"
+        data-freemode="{{ freemode }}"
+        data-freemomentum="false"
+        data-mousewheel="false"
+        data-desktopspace="40"
+        data-tabspace="24"
+        data-mobilespace="16"
+      >
+        <div class="swiper-wrapper team-blocks row   row-cols-1 row-cols-lg-5">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'custom_block' -%}
+
+                {% liquid
+  assign block_settings = block.settings
+ 
+  assign ratio = section.settings.image_ratio
+ 
+    assign image = block_settings.image | default: false
+
+  assign image_link = block_settings.image_url  
+  assign image_ratio = ratio | default: 'portrait'
+  if image_ratio == 'adapt' and image == false
+    assign image_ratio = false
+  endif
+
+  assign enable_video = block_settings.enable_video
+
+  assign video_ratio = ratio | default: 'portrait'
+  assign source = block_settings.source
+  assign video_url = block_settings.video_url
+
+  assign uploaded_video = block_settings.uploaded_video
+  assign cover_image = block_settings.cover_image
+
+  if uploaded_video != blank and source == 'uploaded'
+    assign cover_image = uploaded_video.preview_image
+  endif
+
+  assign autoplay = block_settings.enable_autoplay
+  assign loop = block_settings.enable_loop_video | default: false
+  assign muted = block_settings.enable_video_mute
+  assign play_button_display = block_settings.play_button_display
+ 
+ 
+
+  assign video_type = video_url.type | default: 'local_video'
+  if source == 'uploaded'
+    assign video_type = 'local_video'
+  endif
+
+ %}
+
+
+                <div class="block-card__item swiper-slide col" {{ block.shopify_attributes }}>
+                  <div
+                    class="block-card color-{{ section.settings.color_scheme_card }} gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    {% if settings.animations_reveal_on_scroll %}
+                      data-cascade
+                      style="--animation-order: {{ forloop.index }};"
+                    {% endif %}
+                  >
+                    {%- if enable_video -%}
+
+           
+                        <div
+                        class="block-image  video-media  {% if video_ratio != blank %} media media--{{ video_ratio }} {% endif %}"
+                        {% if video_ratio == 'adapt' and source != blank %}
+                          style="padding-bottom: {% render 'aspect-ratio' with uploaded_video.preview_image.aspect_ratio as aspect_ratio %}%;"
+                        {% endif %}
+                      >
+                      
+
+                       {% render 'video',
+                        video_type: video_type,
+                        source: source,
+                        video_url: video_url,
+                        uploaded_video: uploaded_video,
+                        cover_image: cover_image,
+                        autoplay: autoplay,
+                        muted: muted,
+                        loop: loop,
+                        play_button_display: play_button_display,
+                        uniq_id: section.id,
+                        class: ''
+                      %}
+
+                          </div>
+
+
+                    {%- else -%}
+                      {%- if image_link != blank -%}
+                        <a href="{{ image_link }}" class="gallery-card-image-wrapper">
+                      {%- endif -%}
+ 
+                      <div
+                        class="block-image {% if image_ratio != blank %} media media--{{ image_ratio }} {% endif %}"
+                        {% if image_ratio  == 'adapt'    %}
+                          style="padding-bottom: {% render 'aspect-ratio' with  image.aspect_ratio as aspect_ratio %}%;"
+                        {% endif %}
+                      >
+                        {% if image != blank %}
+                          {% render 'responsive-img' with image: image %}
+                        {% else %}
+                          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                        {% endif %}
+                      </div>
+
+                      {%- if image_link != blank -%}
+                        </a>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </div>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+
+        {% if enable_navigation %}
+          <div class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-button-prev">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.1875 11.375L4.8125 7L9.1875 2.625" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="swiper-button-next">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.8125 11.375L9.1875 7L4.8125 2.625" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        {% endif %}
+        {% if enable_pagination%}
+          <div class="pagination-wrap  color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+      </div>
+    </slideshow-swiper>
+  </div>
+</div>
+
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}"> 
+  <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Image block carousel",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+        {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#DDDCD5",
+      "label": "Divider color"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.image-with-text.blocks.text.settings.text.default",
+      "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "label": "adapt",
+          "value": "adapt"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        }
+      ],
+      "default": "landscape",
+      "label": "Image Ratio"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "custom_block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "Image link"
+        },
+        {
+          "type": "header",
+          "content": "Video"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_video",
+          "label": "Enable video",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Source",
+          "default": "uploaded",
+          "visible_if": "{{ block.settings.enable_video  == true }}",
+          "options": [
+            {
+              "value": "external",
+              "label": "External url"
+            },
+            {
+              "value": "uploaded",
+              "label": "Uploaded"
+            }
+          ]
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube", "vimeo"],
+          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+          "visible_if": "{{ block.settings.source  == 'external' }}",
+          "label": "URL"
+        },
+        {
+          "type": "video",
+          "id": "uploaded_video",
+          "visible_if": "{{ block.settings.source  == 'uploaded' and  block.settings.enable_video  == true }}",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "cover_image",
+          "visible_if": "{{ block.settings.source  == 'external' and  block.settings.enable_video  == true  }}",
+          "label": "Cover image"
+        },
+        {
+          "type": "header",
+          "content": "Video settings",
+          "visible_if": "{{ block.settings.enable_video  == true  }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_autoplay",
+          "label": "Autoplay",
+          "default": true,
+          "visible_if": "{{ block.settings.enable_video  == true  }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_loop_video",
+          "label": "Loop video",
+          "visible_if": "{{ block.settings.enable_autoplay  ==  false and  block.settings.enable_video  == true }}",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_mute_video",
+          "label": "Mute video",
+          "visible_if": "{{ block.settings.enable_autoplay  ==  false  and  block.settings.enable_video  == true  }}",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "play_button_display",
+          "label": "Play button display",
+          "default": "always",
+          "visible_if": "{{ block.settings.enable_video  == true  }}",
+          "options": [
+            {
+              "label": "On hover/focus",
+              "value": "on-hover"
+            },
+            {
+              "label": "Always",
+              "value": "always"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image block carousel",
+      "blocks": [
+        {
+          "type": "custom_block"
+        },
+        {
+          "type": "custom_block"
+        },
+        {
+          "type": "custom_block"
+        },
+        {
+          "type": "custom_block"
+        },
+        {
+          "type": "custom_block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

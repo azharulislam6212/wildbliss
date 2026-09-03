@@ -1,0 +1,83 @@
+
+.card-blocks{
+    position: relative;
+}
+
+.card-blocks .section--header{
+    max-width: 600px;
+}
+
+.card-block{
+    /* ProvenCard */
+
+box-sizing: border-box;
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 24px;
+gap: 12px;
+border: 2px solid rgba(var(--color-foreground), 0.2);
+border-radius: 40px;
+}
+
+.card-block__icon{
+    max-width: 160px;
+    flex: 0 0 160px;
+    line-height: 0;
+    border-radius: 20px;
+        overflow: hidden;
+}
+
+
+.card-block__icon  img{
+    width: 100%;
+    height: 100%;
+            transition: 0.3s ease;
+}
+
+.card-block__content{
+    flex: 1;
+}
+
+.card-block__title{
+font-style: normal;
+font-weight: 700;
+font-size: 25px;
+line-height: 150%;
+margin: 0 0 16px;
+padding-bottom: 16px;
+border-bottom: 1px solid rgba(var(--color-accent));
+}
+
+.card-block__text{
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+color: rgba(var(--color-foreground), 0.7);
+}
+.card-block:hover{
+    background-color: rgb(71, 112, 219, 0.10);
+    transition: 0.3s ease;
+}
+
+.card-block:hover .card-block__icon img{
+    transform: scale(1.12);
+        transition: 0.3s ease;
+}
+
+ 
+
+@media screen and (max-width: 768px) {
+
+.card-block {
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.card-block__icon {
+    margin-bottom: 20px;
+}
+
+}

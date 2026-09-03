@@ -1,0 +1,282 @@
+{{ 'marquee.css' | asset_url | stylesheet_tag }}
+{{ 'section-icon-with-text-scroller.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    @media screen and (min-width:768px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{% endstyle %}
+<section class="icon-text-scroller  section-{{ section.id }}-padding  color-{{ section.settings.color_scheme }} gradient">
+  <div class="icon-text-scroller__inner running-content marquee">
+
+    <marquee-content
+        data-speed="{{ section.settings.speed }}"
+        class="running-content-wrap"
+        style="--marquee-duration: {{ 1000 | divided_by: section.settings.speed }}s;"
+      >
+    {%- capture marquee_item -%}
+    {% for block in section.blocks %}
+      {% if block.type == 'item' %}
+
+      <div class="running-content-item running-content-text  running-content-footer rte"  {{ block.shopify_attributes }}>
+
+        <div class="icon-text-scroller__item"  >
+          {% if block.settings.icon != blank %}
+            <div class="icon-text-scroller__icon">
+
+              {% render 'icon-img' with image: block.settings.icon %}
+              
+            </div>
+          {% endif %}
+          <div class="icon-text-scroller__text">
+            {% if block.settings.title != blank %}
+              <strong class="icon-text-scroller__title">{{ block.settings.title }}</strong>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <span class="icon-text-scroller__subtitle">{{ block.settings.subtitle }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+    
+          <div class="icon-text-scroller__divider"></div>
+         
+
+         </div>
+
+      {% endif %}
+    {% endfor %}
+       {%- endcapture -%}
+
+
+            <div class="marquee-container js-marquee-items {{ section.settings.pause_when_hover | default: '' | replace: 'true', 'marquee--animation-pause' }}">
+          {%- case section.blocks.size -%}
+            {%- when 1 -%}
+              {%- for i in (1..12) -%}
+                <div class="js-marquee-item marquee-item  marquee__items--animate  marquee--{{- section.settings.moving_direction }}">
+                  {{- marquee_item -}}
+                </div>
+              {%- endfor -%}
+            {%- when 2, 3 -%}
+              {%- for i in (1..7) -%}
+                <div class="js-marquee-item marquee-item marquee__items--animate  marquee--{{- section.settings.moving_direction }}">
+                  {{- marquee_item -}}
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for i in (1..5) -%}
+                <div class="js-marquee-item marquee-item  marquee__items--animate marquee--{{- section.settings.moving_direction }}">
+                  {{- marquee_item -}}
+                </div>
+              {%- endfor -%}
+          {%- endcase -%}
+        </div>
+  </marquee-content>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Icon With Text Scroller",
+  "tag": "section",
+  "class": "icon-text-scroller-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Marquee Text"
+    },
+    {
+      "type": "select",
+      "id": "speed",
+      "label": "Speed",
+      "default": "50",
+      "options": [
+        {
+          "value": "50",
+          "label": "50"
+        },
+        {
+          "value": "100",
+          "label": "100"
+        },
+        {
+          "value": "150",
+          "label": "150"
+        },
+        {
+          "value": "200",
+          "label": "200"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "Movine Direction",
+      "id": "moving_direction",
+      "options": [
+        {
+          "value": "animation-direction",
+          "label": "animation-direction"
+        },
+        {
+          "value": "animation-reverse",
+          "label": "animation-reverse"
+        }
+      ],
+      "default": "animation-direction"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_when_hover",
+      "label": "Pause On Hover",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Icon Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Short supporting text."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon With Text Scroller",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "title": "Hand-Cut Daily",
+            "subtitle": "Master butcher quality."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Vacuum Sealed",
+            "subtitle": "Locked-in freshness."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Premium Source",
+            "subtitle": "Selected for superior marbling."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Since 1946",
+            "subtitle": "Over 80 years of local trust."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

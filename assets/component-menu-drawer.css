@@ -1,0 +1,113 @@
+/* Parent menu */
+.menu-drawer__menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ 
+
+/* menu item */
+.menu-drawer__menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* remove default arrow */
+.menu-drawer details > summary {
+  list-style: none;
+}
+
+.menu-drawer details > summary::-webkit-details-marker {
+  display: none;
+}
+
+
+/* submenu collapsed */
+.menu-drawer__submenu {
+  height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:
+    height .35s cubic-bezier(.2,.6,.4,1),
+    opacity .25s ease;
+}
+
+
+/* submenu open */
+details[open].menu-opening > .menu-drawer__submenu,
+details[open] > .menu-drawer__submenu {
+ 
+  opacity: 1;
+ 
+}
+
+
+/* child menu */
+.menu-drawer__inner-submenu ul {
+  padding: 0 0;
+  margin: 0;
+}
+.menu-drawer__inner-submenu{
+  padding-top: 2rem;
+  padding-left: 0;
+}
+.menu-drawer__inner-submenu li {
+  list-style: none;
+  margin-bottom: 0.8rem;
+}
+
+
+.menu-drawer__inner-submenu a {
+  display: inline-block;
+ 
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+letter-spacing: 0.01em;
+
+/* Text/text-5 */
+color: rgb(var(--color-forground));
+
+
+ 
+
+}
+
+
+/* plus minus icon */
+/* icon wrapper */
+.menu__toggle {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+/* caret icon */
+.menu__toggle .caret-icon {
+  display: block;
+  transition: transform .2s ease;
+}
+
+
+/* open state rotate */
+details[open] .menu__toggle .caret-icon,
+details.menu-opening .menu__toggle .caret-icon {
+  transform: scaleY(-1);
+}
+
+
+.menu-drawer__inner-submenu .mega-menu-title {
+    font-size: 14px;
+    line-height: 150%;
+}

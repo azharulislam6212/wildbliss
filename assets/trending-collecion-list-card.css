@@ -1,0 +1,194 @@
+/* ── Shop By Category ── */
+.trending-list-card {
+  overflow: hidden;
+}
+
+
+/* Slider wrapper */
+.trending-list-card__slider-wrapper {
+  overflow: visible;
+}
+
+.trending-list-card__slider-wrapper .swiper-wrapper {
+  display: flex;
+}
+
+
+/* Cards */
+.trending-list-card__card {
+
+  /* Catgeory Card 5 */
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 8px 14px;
+  gap: 16px;
+
+  text-align: center;
+  /* Border/border-4 */
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 2rem;
+ transition: border-color 0.2s ease,
+            background-color 0.2s ease,
+            transform 0.2s ease;
+  text-decoration: none;
+  color: rgb(var(--color-heading));
+
+}
+
+
+.trending-list-card__card-image {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+
+
+  line-height: 0;
+  transition:  border-color 0.2s ease, transform 0.2s ease;
+
+}
+
+.trending-list-card__card-image::before{
+ content: '';
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ left: 0;
+ top: 0;
+background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+border-radius: 16px;
+ visibility: hidden;
+ opacity: 0;
+ transition: 0.2s ease;
+}
+.trending-list-card__card:hover .trending-list-card__card-image::before{
+  opacity: 1;
+  visibility: visible;
+}
+.trending-list-card__card:hover {
+  border-color: rgb(var(--color-accent));
+ 
+ 
+}
+.trending-list-card__header{
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 4px;
+    width: 100%;
+        padding: 0 1.6rem
+}
+.trending-list-card__card-arrow{
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+width: 40px;
+height: 40px;
+
+background: transparent;
+/* Border/border-6 */
+border: 1px solid rgb(var(--color-border));
+border-radius: 12px;
+
+ transition: 0.3s ease;
+}
+.trending-list-card__card-image img{
+ transition: 0.3s ease;
+}
+.trending-list-card__card:hover .trending-list-card__card-image img{
+  transform: scale(1.02);
+}
+
+.trending-list-card__card:hover {
+  border-color: rgb(var(--color-accent));
+  background-color: #fff;
+}
+.trending-list-card__card:hover .trending-list-card__card-arrow{
+ background: rgb(var(--color-accent));
+ color: rgb(var(--color-background));
+ 
+}
+.trending-list-card__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.trending-list-card__placeholder {
+  width: 100%;
+  height: 100%;
+}
+ 
+.trending-list-card__inner{
+    text-align: left;
+}
+.trending-list-card__card-title {
+ font-family: var(--font-heading-family);
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 130%;
+/* identical to box height, or 29px */
+letter-spacing: -0.04em;
+
+  margin: 0;
+  color: currentColor;
+}
+
+.trending-list-card__card-sub_text{
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 24px */
+letter-spacing: 0.01em;
+
+ color:rgb(var(--color-foreground));
+ margin: 4px 0 0;
+ 
+ }
+
+
+ .trending-list-card__product-count{
+    font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 24px */
+letter-spacing: 0.01em;
+
+ color:rgb(var(--color-foreground));
+ margin: 0 0 0;
+ }
+ 
+
+ .trending-list__content{
+      width: 100%;
+    text-align: left;
+        padding: 0 1.6rem;
+            margin-bottom: 1.6rem;
+ }

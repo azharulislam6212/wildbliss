@@ -1,0 +1,20 @@
+.product-feed{
+    padding-bottom: 0.2rem;
+}
+
+ .product-feed-container .swiper-slide {
+    height: auto;
+}
+
+.product-feed-container{
+      --bs-gutter-x: 0.8rem;
+    --bs-gutter-y: 0.8rem;  
+}
+
+@media screen and (max-width:1080px) {
+.product-feed-container{
+      --bs-gutter-x: 0.4rem;
+    --bs-gutter-y: 0.4rem;  
+}
+
+}

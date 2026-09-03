@@ -1,0 +1,1131 @@
+<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+ {{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+<style>
+  header-drawer {
+    justify-self: start;
+  }
+
+  {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
+    .scrolled-past-header .header__heading-logo-wrapper {
+      width: 75%;
+    }
+  {%- endif -%}
+
+  {%- if section.settings.menu_type_desktop != "drawer" -%}
+    @media screen and (min-width: 990px) {
+      header-drawer {
+        display: none;
+      }
+    }
+  {%- endif -%}
+
+  .menu-drawer-container {
+    display: flex;
+  }
+
+  .list-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .list-menu--inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+ 
+  .list-menu__item {
+    display: flex;
+    align-items: center;
+    line-height: calc(1 + 0.3 / var(--font-body-scale));
+  }
+
+  .list-menu__item--link {
+    text-decoration: none;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    line-height: calc(1 + 0.8 / var(--font-body-scale));
+  }
+
+  @media screen and (min-width: 750px) {
+    .list-menu__item--link {
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+  }
+</style>
+
+{%- style -%}
+  .header {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom:{{ section.settings.padding_bottom_moblie }}px;
+  }
+
+  .section-header {
+    position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
+    margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-header {
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .header {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+ 
+   .header:not(.drawer-menu) .menu-link-item,   .header:not(.drawer-menu) .header__icon{
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+ 
+  }
+{%- endstyle -%}
+
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app_block = true
+    endif
+  endfor
+-%}
+
+  {%- liquid
+    assign social_links = false
+    assign localization_forms = false
+
+    if settings.social_twitter_link != blank or settings.social_facebook_link != blank or settings.social_pinterest_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_vimeo_link != blank or settings.social_tiktok_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank
+      assign social_links = true
+    endif
+
+    if localization.available_countries.size > 1 and section.settings.enable_country_selector or section.settings.enable_language_selector and localization.available_languages.size > 1
+      assign localization_forms = true
+    endif
+
+      if section.settings.menu
+        assign main_menu_linklist = section.settings.menu
+      else
+        assign main_menu_linklist = 'main-menu'
+      endif
+      assign mobile_menu_linklist = main_menu_linklist
+
+
+       assign transparent = false
+  if section.settings.transparent 
+      assign transparent = true
+   endif 
+
+  if template == 'index' and section.settings.transparent_on_home  
+     assign transparent = true
+   endif 
+
+  if  template == 'product'
+      if section.settings.transparent_product 
+          assign transparent = true
+          else 
+          assign transparent = false
+          endif
+   endif 
+
+
+  -%}
+
+
+
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="{% if transparent %} is-transparent {% endif %}">
+
+
+{% capture logo %}
+
+     {%- if request.page_type == 'index' -%}
+        <h1 class="header__heading">
+      {%- endif -%}
+          <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+            {%- if section.settings.logo != blank -%}
+              <div class="header__heading-logo-wrapper header-grid__logo {% if  section.settings.transparent_logo == blank %} header-grid__logo--one-image {% endif %}" style="--logo-width: {{ section.settings.logo_width | default: 200 | times: 0.1 }}rem; --logo-width-mobile: {{ section.settings.logo_width_mobile | default: 150 | times: 0.1 }}rem;">
+                  {%- if section.settings.logo != blank -%}
+        {%- assign logo = section.settings.logo -%}
+        {%- assign logo_image_size_2x = logo.width | times: 2 | at_most: 5760 -%}
+        <img
+          srcset="{{ logo | image_url: width: logo.width }} 1x, {{ logo | image_url: width: logo_image_size_2x }} 2x"
+          src="{{- logo | image_url: width: logo.width -}}"
+          loading="lazy"
+          width="{{- logo.width -}}"
+          height="{{- logo.height -}}"
+          loading="lazy"
+          alt="{{- logo.alt | default: shop.name | escape -}}"
+          style="object-position: {{ logo.presentation.focal_point }}"
+        >
+      {%- endif -%}
+      {%- if transparent and section.settings.logo != blank -%}
+        {%- if section.settings.transparent_logo != blank -%}
+          {%- assign transparent_logo = section.settings.transparent_logo | default: logo -%}
+          {%- assign transparent_logo_width_size_2x = transparent_logo.width | times: 2 | at_most: 5760 %}
+          <img
+            srcset="{{ transparent_logo | image_url: width: transparent_logo.width }} 1x, {{ transparent_logo | image_url: width: transparent_logo_width_size_2x }} 2x"
+            src="{{- transparent_logo | image_url: width: transparent_logo.width -}}"
+            width="{{- transparent_logo.width -}}"
+            height="{{- transparent_logo.height -}}"
+            loading="lazy"
+            alt="{{- transparent_logo.alt | default: shop.name | escape -}}"
+            style="object-position: {{ transparent_logo.presentation.focal_point }}"
+          >
+        {%- endif -%}
+      {%- endif -%}
+              </div>
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {%- endif -%}
+  
+{% endcapture %}
+ 
+  {%- liquid
+  assign has_social_icons = true
+  if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+    assign has_social_icons = false
+  endif
+ %}
+
+
+  {% capture drawer %}
+
+    <menu-drawer-custom> 
+  <nav class="mobile-drawer header__drawer"
+    data-drawer="hamburger"
+    aria-label="main-menu"
+    id="header-menu">
+    <div class="drawer__content gradient motion-reduce color-{{ section.settings.mega_color_scheme }}">
+      <div class="drawer__top">
+        <div class="drawer__top__left">
+
+         
+             <a href="{{ routes.root_url }}" class="heading-logo">
+            {%- if section.settings.logo != blank -%}
+              <div  >
+
+          {% render 'responsive-img' with image: section.settings.logo  %}
+
+              </div>
+            {%- else -%}
+              <span class="h2">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+  
+            
+        </div>
+        <div class="drawer__top__right">
+
+      
+        <button class="drawer__button drawer__close_button"
+          data-first-focus
+          data-drawer-toggle="hamburger"
+          aria-label="drawer-close">
+           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.854 12.1463C12.9005 12.1927 12.9373 12.2479 12.9625 12.3086C12.9876 12.3693 13.0006 12.4343 13.0006 12.5C13.0006 12.5657 12.9876 12.6308 12.9625 12.6915C12.9373 12.7521 12.9005 12.8073 12.854 12.8538C12.8076 12.9002 12.7524 12.9371 12.6917 12.9622C12.631 12.9873 12.566 13.0003 12.5003 13.0003C12.4346 13.0003 12.3695 12.9873 12.3088 12.9622C12.2481 12.9371 12.193 12.9002 12.1465 12.8538L8.00028 8.70688L3.85403 12.8538C3.76021 12.9476 3.63296 13.0003 3.50028 13.0003C3.3676 13.0003 3.24035 12.9476 3.14653 12.8538C3.05271 12.7599 3 12.6327 3 12.5C3 12.3673 3.05271 12.2401 3.14653 12.1463L7.2934 8L3.14653 3.85375C3.05271 3.75993 3 3.63269 3 3.5C3 3.36732 3.05271 3.24007 3.14653 3.14625C3.24035 3.05243 3.3676 2.99973 3.50028 2.99973C3.63296 2.99973 3.76021 3.05243 3.85403 3.14625L8.00028 7.29313L12.1465 3.14625C12.2403 3.05243 12.3676 2.99973 12.5003 2.99973C12.633 2.99973 12.7602 3.05243 12.854 3.14625C12.9478 3.24007 13.0006 3.36732 13.0006 3.5C13.0006 3.63269 12.9478 3.75993 12.854 3.85375L8.70715 8L12.854 12.1463Z" fill="currentColor"/>
+</svg>
+
+
+        </button>
+        </div>
+
+      </div>
+
+      <div class="drawer__inner_custom">
+
+         {% render 'mobile-drawer-menu', mobile_menu_linklist:  mobile_menu_linklist %}
+
+    
+      </div>
+    </div>
+
+    <span class="drawer__underlay" data-drawer-underlay> </span>
+  </nav>
+  </menu-drawer-custom>
+{% endcapture %}
+
+
+   <div class="header-wrapper"  style="--sticky-background-color: {{ section.settings.sticky_header_background.red }},{{ section.settings.sticky_header_background.green }},{{ section.settings.sticky_header_background.blue }};  --sticky-text-color: {{ section.settings.sticky_text_color.red}},{{ section.settings.sticky_text_color.green }},{{ section.settings.sticky_text_color.blue }}">
+
+  <header class="header  {{ section.settings.page_width }} color-{{ section.settings.color_scheme }} gradient  {% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}  header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }}{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+   
+    {% if  section.settings.menu != blank and section.settings.mobile_logo_position contains 'center' %}
+      <button class="header__mobile__button" data-drawer-toggle="hamburger" aria-label="Open menu" aria-haspopup="true" aria-expanded="true" aria-controls="header-menu">
+    
+      <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="12" height="2" rx="1" fill="currentColor"/>
+    <rect y="6" width="15" height="2" rx="1" fill="currentColor"/>
+    <rect y="12" width="12" height="2" rx="1" fill="currentColor"/>
+    </svg>
+
+      </button>
+     {% endif %}
+  
+  
+    {%- liquid
+
+ 
+      
+
+       if section.settings.logo_position == 'top-left' or section.settings.menu == blank or section.settings.logo_position == 'top-center'
+           render 'header-search', input_id: 'Search-In-Modal'  
+
+      endif
+
+    -%}
+
+    
+
+    {%- if section.settings.logo_position != 'middle-center' -%}
+           {{ logo }}
+    {%- endif -%}
+
+ 
+
+     {%- liquid
+      if section.settings.menu != blank
+        if section.settings.menu_type_desktop == 'menu'
+          render 'header-main-menu'
+        endif
+      endif
+    %} 
+
+
+
+
+    {%- if section.settings.logo_position == 'middle-center' -%}
+        {{ logo }}
+    {%- endif -%}
+
+    <div class="header__icons {% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+   
+
+   
+
+      
+    {%- if section.settings.enable_country_selector or  section.settings.enable_language_selector -%}
+    <div class="desktop-localization-wrapper">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {% endif %}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <localization-form class="small-hide medium-hide" data-prevent-hide>
+            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  
+       {% if section.settings.show_icons %}
+
+       {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+
+      {%- if shop.customer_accounts_enabled != false and section.settings.enable_customer_avatar -%}
+        <a
+          href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+          class="header__icon header__icon--account link focus-inset"
+          rel="nofollow"
+        >
+          {%- if section.settings.enable_customer_avatar -%}
+            <account-icon>
+              {%- if customer and customer.has_avatar? -%}
+                {{ customer | avatar }}
+              {%- else -%}
+                <span class="svg-icon">
+
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.1735 14.6896C14.9836 12.6326 13.15 11.1576 11.0102 10.4584C12.0686 9.82826 12.891 8.86812 13.351 7.7254C13.8109 6.58268 13.8831 5.32056 13.5563 4.13287C13.2296 2.94518 12.522 1.89759 11.5422 1.15097C10.5624 0.404356 9.36466 0 8.13284 0C6.90102 0 5.70325 0.404356 4.72349 1.15097C3.74372 1.89759 3.03612 2.94518 2.70936 4.13287C2.3826 5.32056 2.45474 6.58268 2.91471 7.7254C3.37467 8.86812 4.19703 9.82826 5.2555 10.4584C3.11565 11.1568 1.28206 12.6318 0.0922159 14.6896C0.0485822 14.7608 0.0196403 14.8399 0.0070978 14.9225C-0.00544473 15.005 -0.00133381 15.0892 0.019188 15.1701C0.0397098 15.251 0.0762269 15.3269 0.126585 15.3935C0.176942 15.46 0.24012 15.5158 0.312392 15.5576C0.384663 15.5993 0.464563 15.6262 0.547378 15.6365C0.630193 15.6469 0.714246 15.6406 0.794576 15.6179C0.874907 15.5953 0.949888 15.5568 1.0151 15.5047C1.08031 15.4526 1.13442 15.388 1.17425 15.3146C2.64612 12.7709 5.24768 11.2521 8.13284 11.2521C11.018 11.2521 13.6196 12.7709 15.0914 15.3146C15.1313 15.388 15.1854 15.4526 15.2506 15.5047C15.3158 15.5568 15.3908 15.5953 15.4711 15.6179C15.5514 15.6406 15.6355 15.6469 15.7183 15.6365C15.8011 15.6262 15.881 15.5993 15.9533 15.5576C16.0256 15.5158 16.0887 15.46 16.1391 15.3935C16.1895 15.3269 16.226 15.251 16.2465 15.1701C16.267 15.0892 16.2711 15.005 16.2586 14.9225C16.246 14.8399 16.2171 14.7608 16.1735 14.6896ZM3.75784 5.62713C3.75784 4.76183 4.01443 3.91597 4.49516 3.19651C4.97589 2.47704 5.65917 1.91629 6.4586 1.58515C7.25803 1.25402 8.13769 1.16738 8.98636 1.33619C9.83503 1.505 10.6146 1.92168 11.2264 2.53353C11.8383 3.14539 12.255 3.92494 12.4238 4.77361C12.5926 5.62227 12.5059 6.50194 12.1748 7.30137C11.8437 8.10079 11.2829 8.78407 10.5635 9.26481C9.844 9.74554 8.99813 10.0021 8.13284 10.0021C6.9729 10.0009 5.86082 9.53955 5.04062 8.71935C4.22042 7.89914 3.75908 6.78707 3.75784 5.62713Z" fill="currentColor"/>
+                  </svg>
+
+            </span>
+                          {%- endif -%}
+                        </account-icon>
+                      {%- else -%}
+                        <span class="svg-icon">
+                         <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.1735 14.6896C14.9836 12.6326 13.15 11.1576 11.0102 10.4584C12.0686 9.82826 12.891 8.86812 13.351 7.7254C13.8109 6.58268 13.8831 5.32056 13.5563 4.13287C13.2296 2.94518 12.522 1.89759 11.5422 1.15097C10.5624 0.404356 9.36466 0 8.13284 0C6.90102 0 5.70325 0.404356 4.72349 1.15097C3.74372 1.89759 3.03612 2.94518 2.70936 4.13287C2.3826 5.32056 2.45474 6.58268 2.91471 7.7254C3.37467 8.86812 4.19703 9.82826 5.2555 10.4584C3.11565 11.1568 1.28206 12.6318 0.0922159 14.6896C0.0485822 14.7608 0.0196403 14.8399 0.0070978 14.9225C-0.00544473 15.005 -0.00133381 15.0892 0.019188 15.1701C0.0397098 15.251 0.0762269 15.3269 0.126585 15.3935C0.176942 15.46 0.24012 15.5158 0.312392 15.5576C0.384663 15.5993 0.464563 15.6262 0.547378 15.6365C0.630193 15.6469 0.714246 15.6406 0.794576 15.6179C0.874907 15.5953 0.949888 15.5568 1.0151 15.5047C1.08031 15.4526 1.13442 15.388 1.17425 15.3146C2.64612 12.7709 5.24768 11.2521 8.13284 11.2521C11.018 11.2521 13.6196 12.7709 15.0914 15.3146C15.1313 15.388 15.1854 15.4526 15.2506 15.5047C15.3158 15.5568 15.3908 15.5953 15.4711 15.6179C15.5514 15.6406 15.6355 15.6469 15.7183 15.6365C15.8011 15.6262 15.881 15.5993 15.9533 15.5576C16.0256 15.5158 16.0887 15.46 16.1391 15.3935C16.1895 15.3269 16.226 15.251 16.2465 15.1701C16.267 15.0892 16.2711 15.005 16.2586 14.9225C16.246 14.8399 16.2171 14.7608 16.1735 14.6896ZM3.75784 5.62713C3.75784 4.76183 4.01443 3.91597 4.49516 3.19651C4.97589 2.47704 5.65917 1.91629 6.4586 1.58515C7.25803 1.25402 8.13769 1.16738 8.98636 1.33619C9.83503 1.505 10.6146 1.92168 11.2264 2.53353C11.8383 3.14539 12.255 3.92494 12.4238 4.77361C12.5926 5.62227 12.5059 6.50194 12.1748 7.30137C11.8437 8.10079 11.2829 8.78407 10.5635 9.26481C9.844 9.74554 8.99813 10.0021 8.13284 10.0021C6.9729 10.0009 5.86082 9.53955 5.04062 8.71935C4.22042 7.89914 3.75908 6.78707 3.75784 5.62713Z" fill="currentColor"/>
+</svg>
+
+
+            </span>
+          {%- endif -%}
+        
+            <span class="hidden-medium">
+              {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+            </span>
+         
+        </a>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+        {%- endcase -%}
+      {%- endfor -%}
+
+    <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset {%- unless template.name == 'cart' -%} cart-link-icon {% endunless %}"  id="cart-icon-bubble"  >
+          {% if cart == empty %}
+            <span class="svg-icon">
+   <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.33878 11.8127L1.92086 11.6671L1.92086 11.6671L1.33878 11.8127ZM1.01704 6.5615L1.48995 6.93076L1.48997 6.93074L1.01704 6.5615ZM15.2208 6.5615L14.7479 6.93073L14.7479 6.93078L15.2208 6.5615ZM14.8991 11.8127L15.4812 11.9582L15.4812 11.9582L14.8991 11.8127ZM13.5389 15.0705L13.9081 15.5434L13.9082 15.5434L13.5389 15.0705ZM13.777 3.84554L13.1981 4.00337L13.1981 4.00338L13.777 3.84554ZM13.2005 2.27455L13.6822 1.91685L13.6822 1.9168L13.2005 2.27455ZM12.2863 1.57627L12.5047 1.01744L12.5047 1.01742L12.2863 1.57627ZM2.46098 3.84554L3.03984 4.00338L3.03985 4.00338L2.46098 3.84554ZM3.03749 2.27455L2.55579 1.91682L2.55579 1.91682L3.03749 2.27455ZM3.95166 1.57627L3.73325 1.01743L3.73325 1.01743L3.95166 1.57627ZM5.38564 8.93333C5.38564 8.60196 5.11702 8.33333 4.78564 8.33333C4.45427 8.33333 4.18564 8.60196 4.18564 8.93333H4.78564H5.38564ZM4.18564 12.2667C4.18564 12.598 4.45427 12.8667 4.78564 12.8667C5.11702 12.8667 5.38564 12.598 5.38564 12.2667H4.78564H4.18564ZM12.0523 8.93333C12.0523 8.60196 11.7837 8.33333 11.4523 8.33333C11.1209 8.33333 10.8523 8.60196 10.8523 8.93333H11.4523H12.0523ZM10.8523 12.2667C10.8523 12.598 11.1209 12.8667 11.4523 12.8667C11.7837 12.8667 12.0523 12.598 12.0523 12.2667H11.4523H10.8523ZM8.71898 8.93333C8.71898 8.60196 8.45035 8.33333 8.11898 8.33333C7.78761 8.33333 7.51898 8.60196 7.51898 8.93333H8.11898H8.71898ZM7.51898 12.2667C7.51898 12.598 7.78761 12.8667 8.11898 12.8667C8.45035 12.8667 8.71898 12.598 8.71898 12.2667H8.11898H7.51898ZM1.33878 11.8127L1.92086 11.6671C1.5588 10.2189 1.30469 9.19629 1.22521 8.41449C1.14732 7.64834 1.25188 7.23566 1.48995 6.93076L1.01704 6.5615L0.544123 6.19224C0.0315027 6.84876 -0.0605501 7.63174 0.0313652 8.53586C0.121689 9.42433 0.4038 10.5466 0.756692 11.9582L1.33878 11.8127ZM1.01704 6.5615L1.48997 6.93074C1.72805 6.62579 2.10307 6.42426 2.86524 6.314C3.64298 6.20149 4.69666 6.2 6.18949 6.2V5.6V5C4.73448 5 3.57729 4.9985 2.69343 5.12637C1.794 5.25648 1.05671 5.5357 0.544107 6.19226L1.01704 6.5615ZM6.18949 5.6V6.2H10.0484V5.6V5H6.18949V5.6ZM10.0484 5.6V6.2C11.5412 6.2 12.5949 6.20149 13.3726 6.314C14.1348 6.42426 14.5098 6.62579 14.7479 6.93073L15.2208 6.5615L15.6937 6.19227C15.1812 5.5357 14.4439 5.25648 13.5444 5.12637C12.6606 4.9985 11.5034 5 10.0484 5V5.6ZM15.2208 6.5615L14.7479 6.93078C14.986 7.23567 15.0906 7.64835 15.0127 8.41449C14.9332 9.1963 14.6791 10.2189 14.3171 11.6672L14.8991 11.8127L15.4812 11.9582C15.8341 10.5466 16.1162 9.42432 16.2065 8.53586C16.2984 7.63173 16.2064 6.84874 15.6937 6.19222L15.2208 6.5615ZM14.8991 11.8127L14.3171 11.6671C14.0861 12.5908 13.9248 13.2318 13.7421 13.7115C13.5651 14.1761 13.3905 14.4251 13.1696 14.5976L13.5389 15.0705L13.9082 15.5434C14.3654 15.1864 14.6435 14.716 14.8635 14.1387C15.0776 13.5766 15.2574 12.8535 15.4812 11.9582L14.8991 11.8127ZM13.5389 15.0705L13.1696 14.5976C12.9487 14.7701 12.6648 14.879 12.1712 14.9381C11.6615 14.999 11.0005 15 10.0484 15V15.6V16.2C10.9712 16.2 11.7163 16.201 12.3137 16.1296C12.927 16.0562 13.4509 15.9004 13.9081 15.5434L13.5389 15.0705ZM10.0484 15.6V15H6.18949V15.6V16.2H10.0484V15.6ZM6.18949 15.6V15C5.23744 15 4.57638 14.999 4.06672 14.9381C3.5731 14.879 3.28916 14.7701 3.06827 14.5976L2.69902 15.0705L2.32976 15.5434C2.78702 15.9004 3.31089 16.0562 3.92424 16.1296C4.52156 16.201 5.26666 16.2 6.18949 16.2V15.6ZM2.69902 15.0705L3.06827 14.5976C2.84737 14.4251 2.67279 14.1761 2.4958 13.7115C2.31307 13.2319 2.15177 12.5908 1.92086 11.6671L1.33878 11.8127L0.756692 11.9582C0.980512 12.8535 1.16026 13.5766 1.37443 14.1387C1.59434 14.716 1.87252 15.1864 2.32976 15.5434L2.69902 15.0705ZM14.369 6.01666L14.9478 5.85883L14.3558 3.6877L13.777 3.84554L13.1981 4.00338L13.7901 6.1745L14.369 6.01666ZM13.777 3.84554L14.3558 3.68771C14.1412 2.9003 14.0001 2.34499 13.6822 1.91685L13.2005 2.27455L12.7188 2.63225C12.869 2.83459 12.9563 3.11644 13.1981 4.00337L13.777 3.84554ZM13.2005 2.27455L13.6822 1.9168C13.3818 1.51245 12.9738 1.20078 12.5047 1.01744L12.2863 1.57627L12.0679 2.13509C12.3272 2.23645 12.5528 2.40876 12.7188 2.6323L13.2005 2.27455ZM12.2863 1.57627L12.5047 1.01742C12.008 0.823302 11.4351 0.833332 10.619 0.833332V1.43333V2.03333C11.5383 2.03333 11.8331 2.04336 12.0679 2.13511L12.2863 1.57627ZM1.86898 6.01666L2.44784 6.1745L3.03984 4.00338L2.46098 3.84554L1.88211 3.6877L1.29011 5.85883L1.86898 6.01666ZM2.46098 3.84554L3.03985 4.00338C3.28169 3.1164 3.36893 2.8346 3.51918 2.63227L3.03749 2.27455L2.55579 1.91682C2.23783 2.34498 2.0968 2.90034 1.88211 3.6877L2.46098 3.84554ZM3.03749 2.27455L3.51918 2.63228C3.68518 2.40875 3.91075 2.23645 4.17007 2.1351L3.95166 1.57627L3.73325 1.01743C3.26413 1.20078 2.85609 1.51246 2.55579 1.91682L3.03749 2.27455ZM3.95166 1.57627L4.17007 2.1351C4.40479 2.04336 4.69962 2.03333 5.61898 2.03333V1.43333V0.833332C4.80287 0.833332 4.22996 0.8233 3.73325 1.01743L3.95166 1.57627ZM5.61898 1.43333H6.21898C6.21898 1.30447 6.32345 1.2 6.45231 1.2V0.599998V-1.54972e-06C5.66071 -1.54972e-06 5.01898 0.641728 5.01898 1.43333H5.61898ZM6.45231 0.599998V1.2H9.78564V0.599998V-1.54972e-06H6.45231V0.599998ZM9.78564 0.599998V1.2C9.91451 1.2 10.019 1.30446 10.019 1.43333H10.619H11.219C11.219 0.641737 10.5773 -1.54972e-06 9.78564 -1.54972e-06V0.599998ZM10.619 1.43333H10.019C10.019 1.5622 9.91451 1.66666 9.78564 1.66666V2.26666V2.86666C10.5773 2.86666 11.219 2.22493 11.219 1.43333H10.619ZM9.78564 2.26666V1.66666H6.45231V2.26666V2.86666H9.78564V2.26666ZM6.45231 2.26666V1.66666C6.32345 1.66666 6.21898 1.56219 6.21898 1.43333H5.61898H5.01898C5.01898 2.22494 5.66071 2.86666 6.45231 2.86666V2.26666ZM4.78564 8.93333H4.18564V12.2667H4.78564H5.38564V8.93333H4.78564ZM11.4523 8.93333H10.8523V12.2667H11.4523H12.0523V8.93333H11.4523ZM8.11898 8.93333H7.51898V12.2667H8.11898H8.71898V8.93333H8.11898Z" fill="currentColor"/>
+</svg>
+            </span>
+          {% else %}
+            <span class="svg-icon">
+             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.33878 11.8127L1.92086 11.6671L1.92086 11.6671L1.33878 11.8127ZM1.01704 6.5615L1.48995 6.93076L1.48997 6.93074L1.01704 6.5615ZM15.2208 6.5615L14.7479 6.93073L14.7479 6.93078L15.2208 6.5615ZM14.8991 11.8127L15.4812 11.9582L15.4812 11.9582L14.8991 11.8127ZM13.5389 15.0705L13.9081 15.5434L13.9082 15.5434L13.5389 15.0705ZM13.777 3.84554L13.1981 4.00337L13.1981 4.00338L13.777 3.84554ZM13.2005 2.27455L13.6822 1.91685L13.6822 1.9168L13.2005 2.27455ZM12.2863 1.57627L12.5047 1.01744L12.5047 1.01742L12.2863 1.57627ZM2.46098 3.84554L3.03984 4.00338L3.03985 4.00338L2.46098 3.84554ZM3.03749 2.27455L2.55579 1.91682L2.55579 1.91682L3.03749 2.27455ZM3.95166 1.57627L3.73325 1.01743L3.73325 1.01743L3.95166 1.57627ZM5.38564 8.93333C5.38564 8.60196 5.11702 8.33333 4.78564 8.33333C4.45427 8.33333 4.18564 8.60196 4.18564 8.93333H4.78564H5.38564ZM4.18564 12.2667C4.18564 12.598 4.45427 12.8667 4.78564 12.8667C5.11702 12.8667 5.38564 12.598 5.38564 12.2667H4.78564H4.18564ZM12.0523 8.93333C12.0523 8.60196 11.7837 8.33333 11.4523 8.33333C11.1209 8.33333 10.8523 8.60196 10.8523 8.93333H11.4523H12.0523ZM10.8523 12.2667C10.8523 12.598 11.1209 12.8667 11.4523 12.8667C11.7837 12.8667 12.0523 12.598 12.0523 12.2667H11.4523H10.8523ZM8.71898 8.93333C8.71898 8.60196 8.45035 8.33333 8.11898 8.33333C7.78761 8.33333 7.51898 8.60196 7.51898 8.93333H8.11898H8.71898ZM7.51898 12.2667C7.51898 12.598 7.78761 12.8667 8.11898 12.8667C8.45035 12.8667 8.71898 12.598 8.71898 12.2667H8.11898H7.51898ZM1.33878 11.8127L1.92086 11.6671C1.5588 10.2189 1.30469 9.19629 1.22521 8.41449C1.14732 7.64834 1.25188 7.23566 1.48995 6.93076L1.01704 6.5615L0.544123 6.19224C0.0315027 6.84876 -0.0605501 7.63174 0.0313652 8.53586C0.121689 9.42433 0.4038 10.5466 0.756692 11.9582L1.33878 11.8127ZM1.01704 6.5615L1.48997 6.93074C1.72805 6.62579 2.10307 6.42426 2.86524 6.314C3.64298 6.20149 4.69666 6.2 6.18949 6.2V5.6V5C4.73448 5 3.57729 4.9985 2.69343 5.12637C1.794 5.25648 1.05671 5.5357 0.544107 6.19226L1.01704 6.5615ZM6.18949 5.6V6.2H10.0484V5.6V5H6.18949V5.6ZM10.0484 5.6V6.2C11.5412 6.2 12.5949 6.20149 13.3726 6.314C14.1348 6.42426 14.5098 6.62579 14.7479 6.93073L15.2208 6.5615L15.6937 6.19227C15.1812 5.5357 14.4439 5.25648 13.5444 5.12637C12.6606 4.9985 11.5034 5 10.0484 5V5.6ZM15.2208 6.5615L14.7479 6.93078C14.986 7.23567 15.0906 7.64835 15.0127 8.41449C14.9332 9.1963 14.6791 10.2189 14.3171 11.6672L14.8991 11.8127L15.4812 11.9582C15.8341 10.5466 16.1162 9.42432 16.2065 8.53586C16.2984 7.63173 16.2064 6.84874 15.6937 6.19222L15.2208 6.5615ZM14.8991 11.8127L14.3171 11.6671C14.0861 12.5908 13.9248 13.2318 13.7421 13.7115C13.5651 14.1761 13.3905 14.4251 13.1696 14.5976L13.5389 15.0705L13.9082 15.5434C14.3654 15.1864 14.6435 14.716 14.8635 14.1387C15.0776 13.5766 15.2574 12.8535 15.4812 11.9582L14.8991 11.8127ZM13.5389 15.0705L13.1696 14.5976C12.9487 14.7701 12.6648 14.879 12.1712 14.9381C11.6615 14.999 11.0005 15 10.0484 15V15.6V16.2C10.9712 16.2 11.7163 16.201 12.3137 16.1296C12.927 16.0562 13.4509 15.9004 13.9081 15.5434L13.5389 15.0705ZM10.0484 15.6V15H6.18949V15.6V16.2H10.0484V15.6ZM6.18949 15.6V15C5.23744 15 4.57638 14.999 4.06672 14.9381C3.5731 14.879 3.28916 14.7701 3.06827 14.5976L2.69902 15.0705L2.32976 15.5434C2.78702 15.9004 3.31089 16.0562 3.92424 16.1296C4.52156 16.201 5.26666 16.2 6.18949 16.2V15.6ZM2.69902 15.0705L3.06827 14.5976C2.84737 14.4251 2.67279 14.1761 2.4958 13.7115C2.31307 13.2319 2.15177 12.5908 1.92086 11.6671L1.33878 11.8127L0.756692 11.9582C0.980512 12.8535 1.16026 13.5766 1.37443 14.1387C1.59434 14.716 1.87252 15.1864 2.32976 15.5434L2.69902 15.0705ZM14.369 6.01666L14.9478 5.85883L14.3558 3.6877L13.777 3.84554L13.1981 4.00338L13.7901 6.1745L14.369 6.01666ZM13.777 3.84554L14.3558 3.68771C14.1412 2.9003 14.0001 2.34499 13.6822 1.91685L13.2005 2.27455L12.7188 2.63225C12.869 2.83459 12.9563 3.11644 13.1981 4.00337L13.777 3.84554ZM13.2005 2.27455L13.6822 1.9168C13.3818 1.51245 12.9738 1.20078 12.5047 1.01744L12.2863 1.57627L12.0679 2.13509C12.3272 2.23645 12.5528 2.40876 12.7188 2.6323L13.2005 2.27455ZM12.2863 1.57627L12.5047 1.01742C12.008 0.823302 11.4351 0.833332 10.619 0.833332V1.43333V2.03333C11.5383 2.03333 11.8331 2.04336 12.0679 2.13511L12.2863 1.57627ZM1.86898 6.01666L2.44784 6.1745L3.03984 4.00338L2.46098 3.84554L1.88211 3.6877L1.29011 5.85883L1.86898 6.01666ZM2.46098 3.84554L3.03985 4.00338C3.28169 3.1164 3.36893 2.8346 3.51918 2.63227L3.03749 2.27455L2.55579 1.91682C2.23783 2.34498 2.0968 2.90034 1.88211 3.6877L2.46098 3.84554ZM3.03749 2.27455L3.51918 2.63228C3.68518 2.40875 3.91075 2.23645 4.17007 2.1351L3.95166 1.57627L3.73325 1.01743C3.26413 1.20078 2.85609 1.51246 2.55579 1.91682L3.03749 2.27455ZM3.95166 1.57627L4.17007 2.1351C4.40479 2.04336 4.69962 2.03333 5.61898 2.03333V1.43333V0.833332C4.80287 0.833332 4.22996 0.8233 3.73325 1.01743L3.95166 1.57627ZM5.61898 1.43333H6.21898C6.21898 1.30447 6.32345 1.2 6.45231 1.2V0.599998V-1.54972e-06C5.66071 -1.54972e-06 5.01898 0.641728 5.01898 1.43333H5.61898ZM6.45231 0.599998V1.2H9.78564V0.599998V-1.54972e-06H6.45231V0.599998ZM9.78564 0.599998V1.2C9.91451 1.2 10.019 1.30446 10.019 1.43333H10.619H11.219C11.219 0.641737 10.5773 -1.54972e-06 9.78564 -1.54972e-06V0.599998ZM10.619 1.43333H10.019C10.019 1.5622 9.91451 1.66666 9.78564 1.66666V2.26666V2.86666C10.5773 2.86666 11.219 2.22493 11.219 1.43333H10.619ZM9.78564 2.26666V1.66666H6.45231V2.26666V2.86666H9.78564V2.26666ZM6.45231 2.26666V1.66666C6.32345 1.66666 6.21898 1.56219 6.21898 1.43333H5.61898H5.01898C5.01898 2.22494 5.66071 2.86666 6.45231 2.86666V2.26666ZM4.78564 8.93333H4.18564V12.2667H4.78564H5.38564V8.93333H4.78564ZM11.4523 8.93333H10.8523V12.2667H11.4523H12.0523V8.93333H11.4523ZM8.11898 8.93333H7.51898V12.2667H8.11898H8.71898V8.93333H8.11898Z" fill="currentColor"/>
+</svg>
+
+            </span>
+          {% endif %}
+        <span class="hidden-medium">{{ 'templates.cart.cart' | t }}</span>
+      
+          <div class="cart-count-bubble">
+            {%- if cart.item_count < 100 -%}     
+              <span aria-hidden="true">{{ cart.item_count}}</span>
+               {%- endif -%}
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+            {%- if cart != empty -%}
+        {%- endif -%}
+      </a>
+
+           {% endif %}
+
+      {% if  section.settings.menu != blank and section.settings.mobile_logo_position contains 'left' %}
+      <button class="header__mobile__button" data-drawer-toggle="hamburger" aria-label="Open menu" aria-haspopup="true" aria-expanded="true" aria-controls="header-menu">
+        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="12" height="2" rx="1" fill="currentColor"/>
+        <rect y="6" width="15" height="2" rx="1" fill="currentColor"/>
+        <rect y="12" width="12" height="2" rx="1" fill="currentColor"/>
+        </svg>
+
+      </button>
+      {% endif %}
+
+
+    </div>
+  </header>
+  </div>
+
+
+</{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+
+{{ drawer }}
+  
+
+{%- if settings.cart_type == "notification" -%}
+  {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
+{%- endif -%}
+
+
+{% javascript %}
+  class StickyHeader extends HTMLElement {
+    constructor() {
+      super();
+      this._resizeHandler = null;
+    }
+
+    connectedCallback() {
+      this.header = document.querySelector('.section-header');
+      this.header_wrapper = document.querySelector('.header-wrapper');
+      this.headerIsAlwaysSticky =
+        this.getAttribute('data-sticky-type') === 'always' ||
+        this.getAttribute('data-sticky-type') === 'reduce-logo-size';
+      this.headerBounds = {};
+
+      this.setHeaderHeight();
+
+      // Resize fix
+      this.debouncedSetHeaderHeight = this.debounce(this.setHeaderHeight.bind(this), 100);
+      window.addEventListener('resize', this.debouncedSetHeaderHeight);
+
+      // matchMedia fix with rAF
+      window.matchMedia('(max-width: 990px)').addEventListener('change', () => {
+        requestAnimationFrame(() => this.setHeaderHeight());
+      });
+
+      if (this.headerIsAlwaysSticky) {
+        this.header.classList.add('shopify-section-header-sticky');
+      }
+
+      this.currentScrollTop = 0;
+      this.preventReveal = false;
+      this.predictiveSearch = this.querySelector('predictive-search');
+
+      this.onScrollHandler = this.onScroll.bind(this);
+      this.hideHeaderOnScrollUp = () => (this.preventReveal = true);
+
+      this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+      window.addEventListener('scroll', this.onScrollHandler, false);
+
+      this.createObserver();
+    }
+
+    disconnectedCallback() {
+      this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
+      window.removeEventListener('scroll', this.onScrollHandler);
+      window.removeEventListener('resize', this.debouncedSetHeaderHeight);
+    }
+
+    setHeaderHeight() {
+      if (!this.header) return;
+      document.documentElement.style.setProperty('--header-height', `${this.header_wrapper.offsetHeight}px`);
+    }
+
+    createObserver() {
+      const observer = new IntersectionObserver((entries, observer) => {
+        this.headerBounds = entries[0].intersectionRect;
+        observer.disconnect();
+      });
+
+      observer.observe(this.header);
+    }
+
+    onScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (this.predictiveSearch && this.predictiveSearch.isOpen) return;
+
+      if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        this.header.classList.add('scrolled-past-header');
+        if (this.preventHide) return;
+        requestAnimationFrame(this.hide.bind(this));
+      } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
+        this.header.classList.add('scrolled-past-header');
+        if (!this.preventReveal) {
+          requestAnimationFrame(this.reveal.bind(this));
+        } else {
+          window.clearTimeout(this.isScrolling);
+
+          this.isScrolling = setTimeout(() => {
+            this.preventReveal = false;
+          }, 66);
+
+          requestAnimationFrame(this.hide.bind(this));
+        }
+      } else if (scrollTop <= this.headerBounds.top) {
+        this.header.classList.remove('scrolled-past-header');
+        requestAnimationFrame(this.reset.bind(this));
+      }
+
+      this.currentScrollTop = scrollTop;
+    }
+
+    hide() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
+      this.closeMenuDisclosure();
+      this.closeSearchModal();
+    }
+
+    reveal() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.add('shopify-section-header-sticky', 'animate');
+      this.header.classList.remove('shopify-section-header-hidden');
+    }
+
+    reset() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.remove('shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate');
+    }
+
+    closeMenuDisclosure() {
+      this.disclosures = this.disclosures || this.header.querySelectorAll('header-menu');
+      this.disclosures.forEach((disclosure) => disclosure.close());
+    }
+
+    closeSearchModal() {
+      this.searchModal = this.searchModal || this.header.querySelector('details-modal');
+      if (this.searchModal != null) {
+        this.searchModal.close(false);
+      }
+    }
+
+    // Utility: debounce
+    debounce(func, wait = 100) {
+      let timeout;
+      return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    }
+  }
+
+  customElements.define('sticky-header', StickyHeader);
+{% endjavascript %}
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {% if settings.logo %}
+      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% endif %}
+    "sameAs": [
+      {{ settings.social_twitter_link | json }},
+      {{ settings.social_facebook_link | json }},
+      {{ settings.social_pinterest_link | json }},
+      {{ settings.social_instagram_link | json }},
+      {{ settings.social_tiktok_link | json }},
+      {{ settings.social_tumblr_link | json }},
+      {{ settings.social_snapchat_link | json }},
+      {{ settings.social_youtube_link | json }},
+      {{ settings.social_vimeo_link | json }}
+    ],
+    "url": {{ request.origin | append: page.url | json }}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ request.origin | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "class": "section-header",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:sections.header.settings.logo_position.options__2.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.header.settings.logo_position.options__3.label"
+        },
+        {
+          "value": "middle-left",
+          "label": "t:sections.header.settings.logo_position.options__1.label"
+        },
+        {
+          "value": "middle-center",
+          "label": "t:sections.header.settings.logo_position.options__4.label"
+        },
+        {
+          "value": "nav-middle-center",
+          "label": "Menu Center"
+        }
+      ],
+      "default": "middle-left",
+      "label": "t:sections.header.settings.logo_position.label",
+      "info": "t:sections.header.settings.logo_help.content"
+    },
+    {
+      "type": "select",
+      "id": "mobile_logo_position",
+      "options": [
+        {
+          "value": "center",
+          "label": "t:sections.header.settings.mobile_logo_position.options__1.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.header.settings.mobile_logo_position.options__2.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.header.settings.mobile_logo_position.label"
+    },
+        {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 400,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 200
+    },
+        {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "min": 50,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo width - Mobile",
+      "default": 150
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "select",
+      "id": "menu_type_desktop",
+      "options": [
+            {
+          "value": "menu",
+          "label": "Menu"
+        },
+        {
+          "value": "drawer",
+          "label": "t:sections.header.settings.menu_type_desktop.options__3.label"
+        }
+      ],
+      "default": "menu",
+      "label": "t:sections.header.settings.menu_type_desktop.label"
+    },
+    {
+      "type": "select",
+      "id": "sticky_header_type",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.header.settings.sticky_header_type.options__1.label"
+        },
+        {
+          "value": "on-scroll-up",
+          "label": "t:sections.header.settings.sticky_header_type.options__2.label"
+        },
+        {
+          "value": "always",
+          "label": "t:sections.header.settings.sticky_header_type.options__3.label"
+        },
+        {
+          "value": "reduce-logo-size",
+          "label": "t:sections.header.settings.sticky_header_type.options__4.label"
+        }
+      ],
+      "default": "on-scroll-up",
+      "label": "t:sections.header.settings.sticky_header_type.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": true,
+      "label": "t:sections.header.settings.show_line_separator.label"
+    },
+      {
+      "type": "checkbox",
+      "id": "show_icons",
+      "default": true,
+      "label": "Icons"
+    },
+   {
+      "type": "header",
+      "content": "Transparent"
+    },
+        {
+      "type": "image_picker",
+      "id": "transparent_logo",
+      "label": "Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_on_home",
+      "label": "Transparent on home page"
+    },
+   {
+      "type": "checkbox",
+      "id": "transparent",
+      "label": "Transparent on all pages"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__1.content"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "menu_color_scheme",
+      "label": "t:sections.header.settings.menu_color_scheme.label",
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "mega_color_scheme",
+      "label": "Mega menu and drawer",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "sticky_header_background",
+      "label": "Sticky header Background",
+      "default": "#ffffff"
+    },
+        {
+      "type": "color",
+      "id": "sticky_text_color",
+      "label": "Sticky text color",
+      "default": "#0A0A0A"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__utilities.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_country_selector.label",
+      "info": "t:sections.header.settings.enable_country_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_language_selector.label",
+      "info": "t:sections.header.settings.enable_language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_customer_avatar",
+      "default": true,
+      "label": "t:sections.header.settings.enable_customer_avatar.label",
+      "info": "t:sections.header.settings.enable_customer_avatar.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.header.settings.margin_bottom.label",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_moblie",
+      "min": 0,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+     {
+      "name": "Menu block",
+      "type": "menu_block",
+      "settings": [
+                {
+          "type": "text",
+          "id": "link_title",
+          "label": "Mega menu trigger",
+          "info": "Enter the name of the menu item you'd like to apply a mega menu."
+        },
+       {
+          "type": "text",
+          "id": "quick_menu_title",
+          "label": "Quick Links"
+        },
+        {
+          "type": "link_list",
+          "label": "Choose menu",
+          "id": "block_menu"
+        },
+          {
+          "type": "checkbox",
+          "id": "enable_promotion",
+          "label": "Enable promotion",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+          {
+          "type": "inline_richtext",
+          "id": "title",
+           "default": "Curated Gift Boxes",
+           "label": "Title"
+        },
+       {
+          "type": "text",
+          "id": "link_text",
+           "default": "SHOP NOW",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link url"
+        },
+           {
+          "type": "select",
+          "id": "text_align",
+          "label": "t:sections.image-banner.settings.desktop_content_alignment.label",
+          "default": "vertical-center horizontal-left",
+          "options": [
+            {
+              "value": "vertical-top horizontal-left",
+              "label": "Top left"
+            },
+            {
+              "value": "vertical-top horizontal-center",
+              "label": "Top center"
+            },
+            {
+              "value": "vertical-top horizontal-right",
+              "label": "Top right"
+            },
+            {
+              "value": "vertical-center horizontal-left",
+              "label": "Center left"
+            },
+            {
+              "value": "vertical-center horizontal-center",
+              "label": "Center"
+            },
+            {
+              "value": "vertical-center horizontal-right",
+              "label": "Center right"
+            },
+            {
+              "value": "vertical-bottom horizontal-left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "vertical-bottom horizontal-center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "vertical-bottom horizontal-right",
+              "label": "Bottom right"
+            }
+          ]
+        },
+         {
+      "type": "color_scheme",
+      "id": "promotion_color_scheme",
+      "label": "t:sections.header.settings.menu_color_scheme.label",
+      "default": "scheme-5"
+    },
+      {
+          "type": "color_background",
+          "id": "overlay_color",
+          "label": "Overlay color"
+        }
+      ]
+    },
+         {
+      "name": "Image blocks",
+      "type": "image_blocks",
+      "settings": [
+         {
+          "type": "text",
+          "id": "link_title",
+          "label": "Mega menu trigger",
+          "info": "Enter the name of the menu item you'd like to apply a mega menu."
+        },
+       {
+          "type": "text",
+          "id": "image_title",
+          "label": "FEATURED COLECTONS"
+        },
+          {
+          "type": "header",
+          "content": "Promotion block One"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_promotion",
+          "label": "Enable promotion",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+          {
+          "type": "inline_richtext",
+          "id": "title",
+           "default": "Curated Gift Boxes",
+           "label": "Title"
+        },
+       {
+          "type": "text",
+          "id": "link_text",
+           "default": "Shop Now",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link url"
+        },
+         {
+          "type": "color_scheme",
+          "id": "promotion_color_scheme",
+          "label": "t:sections.header.settings.menu_color_scheme.label",
+          "default": "scheme-5"
+        },
+
+        {
+          "type": "header",
+          "content": "Promotion block two"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_promotion_2",
+          "label": "Enable promotion",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image"
+        },
+          {
+          "type": "inline_richtext",
+          "id": "title_2",
+           "default": "Curated Gift Boxes",
+           "label": "Title"
+        },
+       {
+          "type": "text",
+          "id": "link_text_2",
+           "default": "SHOP NOW",
+          "label": "Link text"
+        },
+        {
+          "type": "url",
+          "id": "link_url_2",
+          "label": "Link url"
+        },
+         {
+          "type": "color_scheme",
+          "id": "promotion_color_scheme_2",
+          "label": "t:sections.header.settings.menu_color_scheme.label",
+          "default": "scheme-5"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

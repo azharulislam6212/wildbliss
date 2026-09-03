@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "Welcome Back  👋",
+        "heading_size": "h1",
+        "image": "shopify:\/\/shop_images\/Image_Wrapper.png",
+        "image_ratio": "portrait",
+        "enable_shop_login_button": false,
+        "card_color": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 200,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 100,
+        "padding_top_mobile": 68,
+        "padding_bottom_mobile": 60
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

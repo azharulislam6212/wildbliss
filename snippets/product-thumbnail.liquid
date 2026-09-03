@@ -1,0 +1,175 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{% comment %}
+  Renders a product thumbnail with a modal-opener
+
+  Accepts:
+  - media: {Object} Product Media object
+  - media_count: {Number} Number of media objects
+  - position: {String} Position of the media. Used for accessible label.
+  - desktop_layout: {String} Layout of the media for desktop.
+  - mobile_layout: {String} Layout of the media for mobile.
+  - loop: {Boolean} Enable video looping (optional)
+  - modal_id: {String} The product modal that will be shown by clicking the thumbnail
+  - xr_button: {Boolean} Renders the "View in your space" button (shopify-xr-button) if the media is a 3D Model
+  - constrain_to_viewport: {Boolean} Force media height to fit within viewport
+  - media_fit: {String} Method ("contain" or "cover") to fit image into container
+  - media_width: {Float} The width percentage that the media column occupies on desktop.
+  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+
+  Usage:
+  {% render 'product-thumbnail',
+    media: media,
+    position: forloop.index,
+    loop: section.settings.enable_video_looping,
+    modal_id: section.id
+  %}
+{% endcomment %}
+
+{%- liquid
+  unless lazy_load == false
+    assign lazy = 'lazy'
+  endunless
+
+  assign desktop_columns = 1
+  if desktop_layout == 'columns' and media_count > 1
+    assign desktop_columns = 2
+  endif
+
+  assign mobile_columns = 1
+  if mobile_layout == 'columns' and media_count > 1
+    assign mobile_columns = 2
+  endif
+
+  if media.media_type == 'image'
+    assign image_class = 'image-magnify-' | append: section.settings.image_zoom
+  endif
+-%}
+
+{%- capture sizes -%}
+  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: media_width | divided_by: desktop_columns | round }}px, (min-width: 990px) calc({{ media_width | times: 100 | divided_by: desktop_columns }}vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / {{ mobile_columns }} - 4rem)
+{%- endcapture -%}
+
+<div
+  class="product-media-container media-type-{{ media.media_type }} media-fit-{{ media_fit }}  media media--square global-media-settings gradient{% if constrain_to_viewport %} constrain-height{% endif %}"
+  style="--ratio: {{ media.aspect_ratio | default: 1.0 }}; --preview-ratio: {{ media.preview_image.aspect_ratio | default: 1.0 }};"
+>
+  <modal-opener
+    class="product__modal-opener product__modal-opener--{{ media.media_type }}"
+    data-modal="#ProductModal-{{ modal_id }}"
+  >
+    <span
+      class="product__media-icon motion-reduce quick-add-hidden{% if media.media_type == 'image' %} product__media-icon--{{ section.settings.image_zoom }}{% endif %}"
+      aria-hidden="true"
+    >
+      {% case media.media_type %}
+        {% when 'video', 'external_video' %}
+          <span class="svg-wrapper">
+            {{- 'icon-play.svg' | inline_asset_content -}}
+          </span>
+        {% when 'model' %}
+          <span class="svg-wrapper">
+            {{- 'icon-3d-model.svg' | inline_asset_content -}}
+          </span>
+        {% else %}
+          <span class="svg-ic">
+          <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.0003 12C17.0003 12.2652 16.8949 12.5196 16.7074 12.7071C16.5199 12.8946 16.2655 13 16.0003 13H13.0003V16C13.0003 16.2652 12.8949 16.5196 12.7074 16.7071C12.5199 16.8946 12.2655 17 12.0003 17C11.7351 17 11.4807 16.8946 11.2932 16.7071C11.1056 16.5196 11.0003 16.2652 11.0003 16V13H8.00029C7.73507 13 7.48071 12.8946 7.29318 12.7071C7.10564 12.5196 7.00029 12.2652 7.00029 12C7.00029 11.7348 7.10564 11.4804 7.29318 11.2929C7.48071 11.1053 7.73507 11 8.00029 11H11.0003V7.99998C11.0003 7.73476 11.1056 7.48041 11.2932 7.29287C11.4807 7.10534 11.7351 6.99998 12.0003 6.99998C12.2655 6.99998 12.5199 7.10534 12.7074 7.29287C12.8949 7.48041 13.0003 7.73476 13.0003 7.99998V11H16.0003C16.2655 11 16.5199 11.1053 16.7074 11.2929C16.8949 11.4804 17.0003 11.7348 17.0003 12ZM26.7078 26.7075C26.6149 26.8005 26.5046 26.8742 26.3832 26.9245C26.2618 26.9749 26.1317 27.0008 26.0003 27.0008C25.8689 27.0008 25.7387 26.9749 25.6173 26.9245C25.4959 26.8742 25.3857 26.8005 25.2928 26.7075L19.0353 20.4487C16.8574 22.2628 14.064 23.1673 11.2362 22.9743C8.40838 22.7812 5.76385 21.5054 3.85275 19.4122C1.94164 17.319 0.911103 14.5695 0.975503 11.7359C1.0399 8.90219 2.19429 6.20243 4.19851 4.19821C6.20274 2.19398 8.9025 1.0396 11.7362 0.975197C14.5698 0.910797 17.3193 1.94134 19.4125 3.85244C21.5057 5.76355 22.7815 8.40808 22.9746 11.2359C23.1676 14.0637 22.2631 16.8571 20.449 19.035L26.7078 25.2925C26.8008 25.3854 26.8745 25.4956 26.9248 25.617C26.9752 25.7384 27.0011 25.8686 27.0011 26C27.0011 26.1314 26.9752 26.2615 26.9248 26.3829C26.8745 26.5043 26.8008 26.6146 26.7078 26.7075ZM12.0003 21C13.7803 21 15.5204 20.4721 17.0004 19.4832C18.4805 18.4943 19.634 17.0887 20.3152 15.4441C20.9964 13.7996 21.1746 11.99 20.8274 10.2442C20.4801 8.49834 19.6229 6.89469 18.3642 5.63602C17.1056 4.37735 15.5019 3.52018 13.7561 3.17291C12.0103 2.82565 10.2007 3.00388 8.55613 3.68506C6.9116 4.36625 5.50599 5.5198 4.51706 6.99985C3.52813 8.47989 3.00029 10.2199 3.00029 12C3.00293 14.3861 3.95199 16.6738 5.63925 18.361C7.3265 20.0483 9.61415 20.9973 12.0003 21Z" fill="#4770DB"/>
+</svg>
+
+          </span>
+      {% endcase %}
+    </span>
+    {%- render 'loading-spinner' -%}
+    <div class="product__media media media--transparent">
+      {{
+        media.preview_image
+        | image_url: width: 1946
+        | image_tag:
+          class: image_class,
+          loading: lazy,
+          sizes: sizes,
+          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+      }}
+    </div>
+    <button
+      class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}"
+      type="button"
+      aria-haspopup="dialog"
+      data-media-id="{{ media.id }}"
+    >
+      <span class="visually-hidden">
+        {{ 'products.product.media.open_media' | t: index: position }}
+      </span>
+    </button>
+  </modal-opener>
+
+  {%- if media.media_type != 'image' -%}
+    {%- if media.media_type == 'model' -%}
+      <product-model class="deferred-media media media--transparent" data-media-id="{{ media.id }}">
+    {%- else -%}
+      <deferred-media class="deferred-media media media--transparent" data-media-id="{{ media.id }}">
+    {%- endif -%}
+    <button id="Deferred-Poster-Modal-{{ media.id }}" class="deferred-media__poster" type="button">
+      <span class="deferred-media__poster-button motion-reduce">
+        {%- if media.media_type == 'model' -%}
+          <span class="visually-hidden">{{ 'products.product.media.play_model' | t }}</span>
+          <span class="svg-wrapper">
+            {{- 'icon-3d-model.svg' | inline_asset_content -}}
+          </span>
+        {%- else -%}
+          <span class="visually-hidden">{{ 'products.product.media.play_video' | t }}</span>
+          <span class="svg-wrapper">
+            {{- 'icon-play.svg' | inline_asset_content -}}
+          </span>
+        {%- endif -%}
+      </span>
+      {{
+        media.preview_image
+        | image_url: width: 1946
+        | image_tag:
+          loading: lazy,
+          sizes: sizes,
+          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+      }}
+    </button>
+    <template>
+      {%- liquid
+        case media.media_type
+          when 'external_video'
+            assign video_class = 'js-' | append: media.host
+            if media.host == 'youtube'
+              echo media | external_video_url: autoplay: true, loop: loop, playlist: media.external_id | external_video_tag: class: video_class, loading: 'lazy'
+            else
+              echo media | external_video_url: autoplay: true, loop: loop | external_video_tag: class: video_class, loading: 'lazy'
+            endif
+          when 'video'
+            echo media | media_tag: image_size: '2048x', autoplay: true, loop: loop, controls: true, preload: 'none'
+          when 'model'
+            echo media | media_tag: image_size: '2048x', toggleable: true
+        endcase
+      -%}
+    </template>
+
+    {%- if media.media_type == 'model' -%}
+      </product-model>
+      {%- if xr_button -%}
+        <button
+          class="button button--full-width product__xr-button"
+          type="button"
+          aria-label="{{ 'products.product.xr_button_label' | t }}"
+          data-shopify-xr
+          data-shopify-model3d-id="{{ media.id }}"
+          data-shopify-title="{{ product.title | escape }}"
+          data-shopify-xr-hidden
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-3d-model.svg' | inline_asset_content -}}
+          </span>
+          {{ 'products.product.xr_button' | t }}
+        </button>
+      {%- endif -%}
+    {%- else -%}
+      </deferred-media>
+    {%- endif -%}
+  {%- endif -%}
+</div>

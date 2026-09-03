@@ -1,0 +1,25 @@
+{% comment %}
+Usage:
+{% render 'responsive-img', image: image, class: 'product-image', is_hero: true %}
+{% endcomment %}
+{%- if sizes == blank -%}
+  {%- assign sizes = '100vw' -%}   
+{%- endif -%}
+{%- assign loading_attr = 'lazy' -%}
+{%- assign fetchpriority_attr = '' -%}
+
+{%- if is_hero -%}
+  {%- assign loading_attr = 'eager' -%}
+  {%- assign fetchpriority_attr = 'fetchpriority="high"' -%}
+{%- endif -%}
+
+{{
+  image
+  | image_url: width: 900
+  | image_tag:
+    loading: loading_attr,
+    widths: '50, 75, 100, 150, 198, 432, 642, 750, 900',
+    sizes: sizes,
+    class: class,
+    fetchpriority: fetchpriority_attr
+}}

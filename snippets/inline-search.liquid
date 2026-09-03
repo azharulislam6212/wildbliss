@@ -1,0 +1,62 @@
+
+     <div class="header__search--inline">
+        {%- if settings.predictive_search_enabled -%}
+          <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+        {%- else -%}
+          <search-form class="search-modal__form">
+        {%- endif -%}
+            <form action="{{ routes.search_url }}" method="get" role="search" class="search search-inline-form">
+              <div class="field">
+                <label class="field__label hidden" for="{{ input_id }}" >{{ 'general.search.search' | t }}</label>
+                <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.70841 12.25C9.76899 12.25 12.2501 9.76892 12.2501 6.70834C12.2501 3.64776 9.76899 1.16667 6.70841 1.16667C3.64784 1.16667 1.16675 3.64776 1.16675 6.70834C1.16675 9.76892 3.64784 12.25 6.70841 12.25Z" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M10.7917 10.7917L12.8334 12.8333" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+
+                </button>
+                <input class="search__input field__input"
+                  id="{{ input_id }}"
+                  type="search"
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.search' | t }}"
+                  {%- if settings.predictive_search_enabled -%}
+                    role="combobox"
+                    aria-expanded="false"
+                    aria-owns="predictive-search-results"
+                    aria-controls="predictive-search-results"
+                    aria-haspopup="listbox"
+                    aria-autocomplete="list"
+                    autocorrect="off"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                  {%- endif -%}
+                >
+                <input type="hidden" name="options[prefix]" value="last">
+                <button type="reset" class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}" aria-label="{{ 'general.search.reset' | t }}">
+                 
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.854 12.1462C12.9005 12.1927 12.9373 12.2479 12.9625 12.3086C12.9876 12.3692 13.0006 12.4343 13.0006 12.5C13.0006 12.5657 12.9876 12.6308 12.9625 12.6914C12.9373 12.7521 12.9005 12.8073 12.854 12.8538C12.8076 12.9002 12.7524 12.9371 12.6917 12.9622C12.631 12.9873 12.566 13.0003 12.5003 13.0003C12.4346 13.0003 12.3695 12.9873 12.3088 12.9622C12.2481 12.9371 12.193 12.9002 12.1465 12.8538L8.00028 8.70687L3.85403 12.8538C3.76021 12.9476 3.63296 13.0003 3.50028 13.0003C3.3676 13.0003 3.24035 12.9476 3.14653 12.8538C3.05271 12.7599 3 12.6327 3 12.5C3 12.3673 3.05271 12.2401 3.14653 12.1462L7.2934 8L3.14653 3.85375C3.05271 3.75993 3 3.63268 3 3.5C3 3.36732 3.05271 3.24007 3.14653 3.14625C3.24035 3.05243 3.3676 2.99972 3.50028 2.99972C3.63296 2.99972 3.76021 3.05243 3.85403 3.14625L8.00028 7.29312L12.1465 3.14625C12.2403 3.05243 12.3676 2.99972 12.5003 2.99972C12.633 2.99972 12.7602 3.05243 12.854 3.14625C12.9478 3.24007 13.0006 3.36732 13.0006 3.5C13.0006 3.63268 12.9478 3.75993 12.854 3.85375L8.70715 8L12.854 12.1462Z" fill="currentColor"/>
+</svg>
+
+                </button>
+          
+              </div>
+  
+              {%- if settings.predictive_search_enabled -%}
+                <div class="predictive-search predictive-search--header custom-scroll" tabindex="-1" data-lenis-prevent data-predictive-search>
+                    {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
+                </div>
+  
+                <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+              {%- endif -%}
+            </form>
+          {%- if settings.predictive_search_enabled -%}
+            </predictive-search>
+          {%- else -%}
+            </search-form>
+          {%- endif -%}
+      
+      </div>

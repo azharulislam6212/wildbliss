@@ -1,0 +1,615 @@
+{{ 'component-video.css' | asset_url | stylesheet_tag }}
+{{ 'instagram-feed-section.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+         --color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+         --color-link: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+       }
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+<div
+  id="{{ section.settings.them_section_id |  default:"instafeed-section" }}"
+  class="instafeed-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  {%- unless section.settings.heading == blank -%}
+    <div class="{{ section.settings.page_width }}">
+      <div class="row">
+        <div class="section--header text-{{ section.settings.alignment }} col-12 m-auto">
+          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+          {% if section.settings.text != blank %}
+            <div class="section--text">{{ section.settings.text }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {%- endunless -%}
+
+  {% liquid
+    assign desktop_column = 4.2
+    assign tab_column = 4.2
+    assign mobile_column = 1.2
+
+    assign enable_pagination = section.settings.enable_pagination
+    assign enable_navigation = section.settings.enable_navigation
+    assign autoplay = section.settings.autoplay_enabled
+    assign loop = section.settings.loop_enabled
+    assign delay = section.settings.autoplay_timeout | times: 1000
+    assign freemode = false
+  %}
+
+  <slideshow-swiper>
+    <div
+      class="slideshow__swiper swiper"
+      data-centeredslides="true"
+      data-slidesDesktop="{{desktop_column}}"
+      data-slidesTab="{{tab_column}}"
+      data-slidesMobile="{{mobile_column}}"
+      data-autoPlay="{{ autoplay }}"
+      data-delay="{{ delay }}"
+      data-loop="{{ loop }}"
+      data-freemode="{{ freemode }}"
+      data-freemomentum="false"
+      data-mousewheel="false"
+      data-desktopspace="8"
+      data-tabspace="8"
+      data-mobilespace="8"
+    >
+      <div class="swiper-wrapper row row-cols-1 row-cols-sm-3 row-cols-md-4 row-cols-lg-4">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'media_item' -%}
+              {% liquid
+                assign block_settings = block.settings
+
+                assign ratio = section.settings.image_ratio
+
+                assign image = block_settings.image | default: false
+
+                assign image_link = block_settings.image_url
+                assign image_ratio = ratio | default: 'portrait'
+                if image_ratio == 'adapt' and image == false
+                  assign image_ratio = false
+                endif
+
+                assign enable_video = block_settings.enable_video
+
+                assign video_ratio = ratio | default: 'portrait'
+                assign source = block_settings.source
+                assign video_url = block_settings.video_url
+
+                assign uploaded_video = block_settings.uploaded_video
+                assign cover_image = block_settings.cover_image
+
+                if uploaded_video != blank and source == 'uploaded'
+                  assign cover_image = uploaded_video.preview_image
+                endif
+
+                assign autoplay = block_settings.enable_autoplay
+                assign loop = block_settings.enable_loop_video | default: false
+                assign muted = block_settings.enable_video_mute
+                assign play_button_display = block_settings.play_button_display
+
+                assign video_type = video_url.type | default: 'local_video'
+                if source == 'uploaded'
+                  assign video_type = 'local_video'
+                endif
+              %}
+
+              <div class="insta__item swiper-slide col" {{ block.shopify_attributes }}>
+                <div
+                  class="insta-card color-{{ section.settings.color_scheme_card }}"
+                  style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+                >
+                  {%- if enable_video -%}
+                    <div
+                      class="insta-image  video-media  {% if video_ratio != blank %} media media--{{ video_ratio }} {% endif %}"
+                      {% if video_ratio == 'adapt' and source != blank %}
+                        style="padding-bottom: {% render 'aspect-ratio' with uploaded_video.preview_image.aspect_ratio as aspect_ratio %}%;"
+                      {% endif %}
+                    >
+                      {% render 'video',
+                        video_type: video_type,
+                        source: source,
+                        video_url: video_url,
+                        uploaded_video: uploaded_video,
+                        cover_image: cover_image,
+                        autoplay: autoplay,
+                        muted: muted,
+                        loop: loop,
+                        play_button_display: play_button_display,
+                        uniq_id: section.id,
+                        class: ''
+                      %}
+                    </div>
+
+                  {%- else -%}
+                    {%- if image_link != blank -%}
+                      <a href="{{ image_link }}" class="gallery-card-image-wrapper">
+                    {%- endif -%}
+
+                    <div
+                      class="insta-image {% if image_ratio != blank %} media media--{{ image_ratio }} {% endif %}"
+                      {% if image_ratio == 'adapt' %}
+                        style="padding-bottom: {% render 'aspect-ratio' with  image.aspect_ratio as aspect_ratio %}%;"
+                      {% endif %}
+                    >
+                      {% if image != blank %}
+                        {% render 'responsive-img' with image: image %}
+                      {% else %}
+                        {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {% endif %}
+                    </div>
+
+                    {%- if image_link != blank -%}
+                      </a>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  <div class="insta-card__over-content">
+                    {%- if image_link != blank -%}<a href="{{ image_link }}"> {%- endif -%}
+                    <div class="insta-link">
+                      {{ block.settings.image_over_text }}
+
+                      <span class="insta-link-icon">
+                        <svg width="11" height="9" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747274C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
+                        </svg>
+                      </span>
+                    </div>
+
+                    {%- if image_link != blank -%}</a>{%- endif -%}
+                  </div>
+                </div>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+
+      {% if enable_navigation %}
+        <div class="swiper-navigation">
+          <div
+            class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}"
+            style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+          >
+            <div class="swiper-button-prev">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"/>
+                  </svg>
+            </div>
+            <div class="swiper-button-next">
+               <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"/>
+                </svg>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      {% if enable_pagination %}
+        <div
+          class="pagination-wrap  color-{{ section.settings.color_scheme_swiper }}"
+          style="--color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};"
+        >
+          <div class="swiper-pagination"></div>
+        </div>
+      {% endif %}
+    </div>
+  </slideshow-swiper>
+</div>
+
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}">
+    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Instagram Feed",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#FF0000",
+      "label": "Divider color"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.image-with-text.blocks.text.settings.text.default",
+      "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.image-with-text.settings.desktop_content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "label": "adapt",
+          "value": "adapt"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        }
+      ],
+      "default": "portrait",
+      "label": "Image Ratio"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Accent Color",
+      "default": "#FF0000"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 46
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 40
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media_item",
+      "name": "Media Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_over_text",
+          "default": "Meals for a Week",
+          "label": "Image Over Text"
+        },
+        {
+          "type": "url",
+          "id": "image_url",
+          "label": "Image link"
+        },
+        {
+          "type": "header",
+          "content": "Video"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_video",
+          "label": "Enable video",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "source",
+          "label": "Source",
+          "default": "uploaded",
+          "visible_if": "{{ block.settings.enable_video  == true }}",
+          "options": [
+            {
+              "value": "external",
+              "label": "External url"
+            },
+            {
+              "value": "uploaded",
+              "label": "Uploaded"
+            }
+          ]
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube", "vimeo"],
+          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+          "visible_if": "{{ block.settings.source  == 'external' }}",
+          "label": "URL"
+        },
+        {
+          "type": "video",
+          "id": "uploaded_video",
+          "visible_if": "{{ block.settings.source  == 'uploaded' and  block.settings.enable_video  == true }}",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "cover_image",
+          "visible_if": "{{ block.settings.source  == 'external' and  block.settings.enable_video  == true  }}",
+          "label": "Cover image"
+        },
+        {
+          "type": "header",
+          "content": "Video settings",
+          "visible_if": "{{ block.settings.enable_video  == true  }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_autoplay",
+          "label": "Autoplay",
+          "default": true,
+          "visible_if": "{{ block.settings.enable_video  == true  }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_loop_video",
+          "label": "Loop video",
+          "visible_if": "{{ block.settings.enable_autoplay  ==  false and  block.settings.enable_video  == true }}",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_mute_video",
+          "label": "Mute video",
+          "visible_if": "{{ block.settings.enable_autoplay  ==  false  and  block.settings.enable_video  == true  }}",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "play_button_display",
+          "label": "Play button display",
+          "default": "always",
+          "visible_if": "{{ block.settings.enable_video  == true  }}",
+          "options": [
+            {
+              "label": "On hover/focus",
+              "value": "on-hover"
+            },
+            {
+              "label": "Always",
+              "value": "always"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Feed",
+      "blocks": [
+        {
+          "type": "media_item"
+        },
+        {
+          "type": "media_item"
+        },
+        {
+          "type": "media_item"
+        },
+        {
+          "type": "media_item"
+        },
+        {
+          "type": "media_item"
+        },
+        {
+          "type": "media_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

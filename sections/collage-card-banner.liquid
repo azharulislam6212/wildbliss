@@ -1,0 +1,542 @@
+{{ 'section-collage-card-banner.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}">
+    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+
+<div
+  id="{{ section.settings.them_section_id |  default:"collage-section" }}"
+  class="collage-card-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- unless section.settings.heading == blank -%}
+      <div class="row">
+        <div class="section--header  section--header__flex text-left col-12 m-auto">
+          <div class="section--header__inner">
+            {% if section.settings.pre_text != blank %}
+              <p class="section--pre-text">{{ section.settings.pre_text }}</p>
+            {% endif %}
+
+            <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+              {{ section.settings.heading }}
+            </h2>
+          </div>
+
+
+    
+          <div class="offer--box">
+                  <h3 class="offer-title">{{ section.settings.offer_title }}</h3>
+
+<countdown-timer
+  class="count-down-timmer count-down"
+  data-end-date="{{ section.settings.offer_end_date }}"
+>
+ <div class="countdown-wrap">
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            
+      
+          <span class="timer-digit">1</span>
+        
+          <span class="timer-digit">0</span>
+        
+          </div>
+          <span class="timer-label">DAY</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            
+          <span class="timer-digit">0</span>
+        
+          <span class="timer-digit">8</span>
+        
+          </div>
+          <span class="timer-label">HOUR</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            
+          <span class="timer-digit">1</span>
+        
+          <span class="timer-digit">7</span>
+        
+          </div>
+          <span class="timer-label">MINS</span>
+        </div>
+
+        <span class="timer-separator">:</span>
+
+        <div class="timer-group">
+          <div class="timer-digits">
+            
+          <span class="timer-digit">0</span>
+        
+          <span class="timer-digit">8</span>
+        
+          </div>
+          <span class="timer-label">SECS</span>
+        </div>
+
+      </div>
+</countdown-timer>
+
+          </div>
+
+
+        </div>
+      </div>
+    {%- endunless -%}
+
+
+    <div class="collage-card">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'banner' -%}
+            <div class="banner-card" {{ block.shopify_attributes }}>
+              <div class="banner-card__image"  style="--overlay-color: {{ block.settings.overlay_color }}; --shape-color: {{ block.settings.shape_color }} ">
+                {% if block.settings.image != blank %}
+                  {% render 'responsive-img' with image: block.settings.image %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+
+              <div
+                class="banner-card__content color-{{ block.settings.color_scheme }}   {{ block.settings.text_align }}"
+                style=" --color-accent: {{ block.settings.color_accent.red }},{{ block.settings.color_accent.green }},{{ block.settings.color_accent.blue }};"
+              >
+                <div class="banner-card__inner">
+                  <h3 class="banner-card__title {{ block.settings.heading_size }}">{{ block.settings.heading }}</h3>
+
+                  {%- if block.settings.sub_heading != blank -%}
+                    <p class="banner-sub_heading">
+                      {{ block.settings.sub_heading }}
+                    </p>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <p class="banner-card__text rte">
+                      {{ block.settings.text }}
+                    </p>
+                  {%- endif -%}
+
+                  {%- if block.settings.button_text != blank -%}
+                    <a
+                      href="{{ block.settings.button_url }}"
+                      class="button  button--{{ block.settings.button_style }}"
+                    >
+                      <span class="button--text">{{- block.settings.button_text -}}
+                          {%- if block.settings.button_style == 'link' -%}
+
+                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.122 7.30977L8.18453 11.2473C8.10244 11.3294 7.9911 11.3755 7.875 11.3755C7.7589 11.3755 7.64756 11.3294 7.56547 11.2473C7.48338 11.1652 7.43726 11.0538 7.43726 10.9377C7.43726 10.8216 7.48338 10.7103 7.56547 10.6282L10.7565 7.43774H2.1875C2.07147 7.43774 1.96019 7.39165 1.87814 7.3096C1.79609 7.22756 1.75 7.11628 1.75 7.00024C1.75 6.88421 1.79609 6.77293 1.87814 6.69088C1.96019 6.60884 2.07147 6.56274 2.1875 6.56274H10.7565L7.56547 3.37227C7.48338 3.29018 7.43726 3.17884 7.43726 3.06274C7.43726 2.94665 7.48338 2.8353 7.56547 2.75321C7.64756 2.67112 7.7589 2.625 7.875 2.625C7.9911 2.625 8.10244 2.67112 8.18453 2.75321L12.122 6.69071C12.1627 6.73134 12.195 6.7796 12.217 6.83271C12.239 6.88582 12.2503 6.94275 12.2503 7.00024C12.2503 7.05774 12.239 7.11467 12.217 7.16778C12.195 7.22089 12.1627 7.26914 12.122 7.30977Z" fill="currentColor"/>
+                </svg>
+                   {%- endif -%}
+
+                      </span>
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collage card",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#DDDCD5",
+      "label": "Divider color"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "pre_text",
+      "label": "Pre text",
+      "default": "Todays Deals"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section Heading",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+  {
+      "type": "inline_richtext",
+      "id": "offer_title",
+      "default": "🔥 Hurry up ! Sale end in:",
+      "label": "Offer title"
+    },
+  {
+      "type": "inline_richtext",
+      "id": "offer_end_date",
+      "default": "2026-09-31T23:59:59",
+      "label": "Offer date"
+    },
+ 
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "ENJOY $1 OFF PER POUND"
+        },
+          {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h0",
+          "label": "H0"
+        }
+      ],
+      "default": "h3",
+      "label": "t:sections.all.heading_size.label"
+    },
+        {
+          "type": "text",
+          "id": "sub_heading",
+          "label": "Sub heading",
+          "default": "USDA Choice & Prime Filets"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "The perfect centerpiece for a memorable Mother’s Day mea"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button",
+          "default": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "primary-outline",
+              "label": "Primary outline"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "secondary-outline",
+              "label": "Secondary outline"
+            },
+               {
+          "value": "link",
+          "label": "Link"
+        }
+          ],
+          "default": "primary"
+        },
+         {
+          "type": "select",
+          "id": "text_align",
+          "label": "t:sections.image-banner.settings.desktop_content_alignment.label",
+          "default": "vertical-center horizontal-left",
+          "options": [
+            {
+              "value": "vertical-top horizontal-left",
+              "label": "Top left"
+            },
+            {
+              "value": "vertical-top horizontal-center",
+              "label": "Top center"
+            },
+            {
+              "value": "vertical-top horizontal-right",
+              "label": "Top right"
+            },
+            {
+              "value": "vertical-center horizontal-left",
+              "label": "Center left"
+            },
+            {
+              "value": "vertical-center horizontal-center",
+              "label": "Center"
+            },
+            {
+              "value": "vertical-center horizontal-right",
+              "label": "Center right"
+            },
+            {
+              "value": "vertical-bottom horizontal-left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "vertical-bottom horizontal-center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "vertical-bottom horizontal-right",
+              "label": "Bottom right"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "color_accent",
+          "label": "Accent Color",
+          "default": "#A5A5A5"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "t:sections.all.colors.label",
+          "default": "scheme-1"
+        },
+           {
+          "type": "color_background",
+          "id": "overlay_color",
+          "label": "Overlay Color",
+          "default": "linear-gradient(0deg, rgba(0, 0, 0, 0.51), rgba(0, 0, 0, 0.51))"
+        },
+         {
+          "type": "color_background",
+          "id": "shape_color",
+          "label": "Shape Color",
+          "default": "rgba(0, 0, 0, 0.78)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collage card",
+      "blocks": [
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

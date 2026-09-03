@@ -1,0 +1,612 @@
+{{ 'trending-collecion-list-card.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% liquid
+  assign desktop_column = 2.3
+  assign tab_column = 2.3
+  assign mobile_column = 1.3
+
+  assign column = section.settings.column
+  assign column_medium = section.settings.column_medium
+  assign column_mobile = section.settings.column_mobile
+
+  assign desktop_column = column
+  if column == "2.3"  
+    assign desktop_column = 2
+  elsif column == "3.3" 
+   assign desktop_column = 3
+     elsif column == "4.3" 
+   assign desktop_column = 4
+  endif
+
+
+    assign tab_column = column_medium
+  if column_medium == "2.3"  
+    assign tab_column = 2
+  elsif column_medium == "3.3" 
+    assign tab_column = 3
+  endif
+
+    assign mobile_column = column_mobile
+  if column_mobile == "1.3"  
+    assign mobile_column = 1
+ 
+  endif
+
+
+ 
+
+
+  assign enable_center = section.settings.enable_center
+  assign enable_pagination = section.settings.enable_pagination
+  assign enable_navigation = section.settings.enable_navigation
+  assign autoplay = section.settings.autoplay_enabled
+  assign loop = section.settings.loop_enabled
+  assign delay = section.settings.autoplay_timeout | times: 1000
+  assign freemode = false
+%}
+
+<section
+  id="{{ section.settings.them_section_id | escape |  default: "trending_list" }}"
+  class="trending-list-card section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+>
+  <slideshow-swiper>
+    {%- unless section.settings.heading == blank -%}
+      <div class="{{ section.settings.page_width }}">
+        <div class="row">
+          <div class="section--header  section--header__flex  text-left col-12">
+            <div class="section--header__inner">
+              {% if section.settings.pre_text != blank %}
+                <p class="section--pre-text">{{ section.settings.pre_text }}</p>
+              {% endif %}
+
+              <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+                {{ section.settings.heading }}
+              </h2>
+            </div>
+
+
+                {% if enable_navigation %}
+        <div class="swiper-navigation">
+          <div class="swiper-navigation-flex color-{{ section.settings.color_scheme_swiper }}">
+            <div class="swiper-button-prev">
+              <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="swiper-button-next">
+              <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+
+
+          </div>
+        </div>
+      </div>
+    {%- endunless -%}
+
+    
+         <div class="{{ section.settings.page_width }}">
+ 
+
+    <div
+      class="slideshow__swiper swiper trending-list-card__slider-wrapper"
+      data-centeredslides="{{ enable_center }}"
+      data-slidesDesktop="{{ column }}"
+      data-slidesTab="{{ column_medium }}"
+      data-slidesMobile="{{ column_mobile }}"
+      data-autoPlay="{{ autoplay }}"
+      data-delay="{{ delay }}"
+      data-loop="{{ loop }}"
+      data-freemode="{{ freemode }}"
+      data-freemomentum="false"
+      data-mousewheel="false"
+      data-desktopspace="16"
+      data-tabspace="16"
+      data-mobilespace="8"
+    >
+      <div class="swiper-wrapper row  row-cols-{{ mobile_column }} row-cols-sm-{{ mobile_column}} row-cols-md-{{ tab_column }} row-cols-lg-{{ desktop_column }}">
+        {% for block in section.blocks %}
+      
+
+            {%- assign collection = block.settings.collection -%}
+
+            <div class="swiper-slide col">
+              <a
+                class="trending-list-card__card   color-{{ section.settings.color_scheme_card }} gradient"
+
+                {% if collection == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ collection.url }}"
+                {% endif %}
+
+                {{ block.shopify_attributes }}
+              >
+                <div class="trending-list-card__card-image">
+                  {% if block.settings.image != blank %}
+                    {% render 'icon-img' with image: block.settings.image %}
+
+                  {% else %}
+                    {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {% endif %}
+                </div>
+
+                <div class="trending-list__content">
+                  <p class="trending-list-card__card-title">{{ block.settings.title }}</p>
+
+                    {%- if block.settings.sub_text != blank -%}
+                      <p class="trending-list-card__card-sub_text">{{ block.settings.sub_text }}</p>
+                    {%- endif -%}
+
+                </div>
+
+                <div class="trending-list-card__header">
+
+                {%- if collection != blank -%}
+                  
+            
+                  <div class="trending-list-card__inner">
+
+                       <p class="trending-list-card__product-count">   {{ collection.products_count | append: ' Products' }} </p>
+                  
+                  </div>
+
+                   {%- endif -%}
+
+                  <span class="trending-list-card__card-arrow" aria-hidden="true">
+                    <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.8538 5.35403L7.35375 9.85403C7.25993 9.94785 7.13268 10.0006 7 10.0006C6.86732 10.0006 6.74007 9.94785 6.64625 9.85403C6.55243 9.76021 6.49972 9.63296 6.49972 9.50028C6.49972 9.3676 6.55243 9.24035 6.64625 9.14653L10.2931 5.50028H0.5C0.367392 5.50028 0.240215 5.4476 0.146447 5.35383C0.0526785 5.26006 0 5.13289 0 5.00028C0 4.86767 0.0526785 4.74049 0.146447 4.64672C0.240215 4.55296 0.367392 4.50028 0.5 4.50028H10.2931L6.64625 0.854028C6.55243 0.760208 6.49972 0.63296 6.49972 0.500278C6.49972 0.367596 6.55243 0.240348 6.64625 0.146528C6.74007 0.0527077 6.86732 0 7 0C7.13268 0 7.25993 0.0527077 7.35375 0.146528L11.8538 4.64653C11.9002 4.69296 11.9371 4.74811 11.9623 4.80881C11.9874 4.86951 12.0004 4.93457 12.0004 5.00028C12.0004 5.06599 11.9874 5.13105 11.9623 5.19175C11.9371 5.25245 11.9002 5.30759 11.8538 5.35403Z" fill="CurrentColor"/>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+           
+        {% endfor %}
+      </div>
+
+  
+
+      {% if enable_pagination %}
+        <div class="pagination-wrap  color-{{ section.settings.color_scheme_swiper }}">
+          <div class="swiper-pagination"></div>
+        </div>
+      {% endif %}
+
+
+        {%- if section.settings.button_label != blank -%}
+
+                <div class="button--action text-center">
+                        <a
+                    {% if section.settings.button_link %}
+                      href="{{ section.settings.button_link }}"
+                    {% else %}
+                      role="link" aria-disabled="true"
+                    {% endif %}
+                    class="button  button--{{  section.settings.button_style }}"
+                  >
+                    <span class="button--text">
+                      {{- section.settings.button_label | escape -}}
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.122 7.30977L8.18453 11.2473C8.10244 11.3294 7.9911 11.3755 7.875 11.3755C7.7589 11.3755 7.64756 11.3294 7.56547 11.2473C7.48338 11.1652 7.43726 11.0538 7.43726 10.9377C7.43726 10.8216 7.48338 10.7103 7.56547 10.6282L10.7565 7.43774H2.1875C2.07147 7.43774 1.96019 7.39165 1.87814 7.3096C1.79609 7.22756 1.75 7.11628 1.75 7.00024C1.75 6.88421 1.79609 6.77293 1.87814 6.69088C1.96019 6.60884 2.07147 6.56274 2.1875 6.56274H10.7565L7.56547 3.37227C7.48338 3.29018 7.43726 3.17884 7.43726 3.06274C7.43726 2.94665 7.48338 2.8353 7.56547 2.75321C7.64756 2.67112 7.7589 2.625 7.875 2.625C7.9911 2.625 8.10244 2.67112 8.18453 2.75321L12.122 6.69071C12.1627 6.73134 12.195 6.7796 12.217 6.83271C12.239 6.88582 12.2503 6.94275 12.2503 7.00024C12.2503 7.05774 12.239 7.11467 12.217 7.16778C12.195 7.22089 12.1627 7.26914 12.122 7.30977Z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                  </a>
+
+                </div>
+                    
+   
+             {%- endif -%}
+
+    </div>
+
+ 
+         </div>
+ 
+  </slideshow-swiper>
+
+</section>
+
+
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}"> 
+  <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Trending Collection",
+  "tag": "section",
+  "settings": [
+        {
+      "type": "checkbox",
+      "id": "enable_divider",
+      "default": true,
+      "label": "Enable divider"
+    },
+     {
+      "type": "color",
+      "id": "divider_color",
+      "default": "#730000",
+      "label": "Divider color"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "pre_text",
+      "label": "Pre text",
+      "default": "Collection List card"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Our Categories",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "View All",
+      "label": "Button Lebel"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button url"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:sections.featured-collection.settings.view_all_style.label",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "primary-outline",
+          "label": "Primary outline"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "secondary-outline",
+          "label": "Secondary outline"
+        },
+        {
+          "value": "link",
+          "label": "Link"
+        }
+      ],
+      "default": "primary"
+    },
+      {
+      "type": "header",
+      "content": "Column Wdith"
+    },
+    {
+      "type": "select",
+      "id": "column",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+          {
+          "value": "2.3",
+          "label": "2.3"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+         {
+          "value": "3.3",
+          "label": "3.3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+         {
+          "value": "4.3",
+          "label": "4.3"
+        }
+      ],
+      "default": "4.3",
+      "label": "Large"
+    },
+    {
+      "type": "select",
+      "id": "column_medium",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+             {
+          "value": "2.3",
+          "label": "2.3"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+         {
+          "value": "3.3",
+          "label": "3.3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "3.3",
+      "label": "Medium"
+    },
+    {
+      "type": "select",
+      "id": "column_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+         {
+          "value": "1.3",
+          "label": "1.3"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1.3",
+      "label": "Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_enabled",
+      "label": "Enable Auto Play",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_timeout",
+      "label": "Chnage Time",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "s"
+    },
+      {
+      "type": "checkbox",
+      "id": "enable_center",
+      "label": "Enable center",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_enabled",
+      "label": "Enable Loop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pagination",
+      "label": "Enable Pagination",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_navigation",
+      "label": "Enable Naviagtion",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_swiper",
+      "label": "Swiper Navigation",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "Color card",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+    {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category name",
+          "default": "Beef"
+        },
+        {
+          "type": "text",
+          "id": "sub_text",
+          "label": "Sub text",
+          "default": "Gifts for any occasion."
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Choose collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trending Collection",
+      "blocks": [
+        { "type": "collection", "settings": { "title": "Steak Packages" } },
+        { "type": "collection", "settings": { "title": "Value Assortments" } },
+        { "type": "collection", "settings": { "title": "Best Sellers" } },
+        { "type": "collection", "settings": { "title": "Free Shipping" } },
+        { "type": "collection", "settings": { "title": "Create A Custom Box" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

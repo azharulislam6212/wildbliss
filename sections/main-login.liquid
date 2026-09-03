@@ -1,0 +1,414 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      margin-bottom: -{{ section.settings.margin_bottom | append: 'px'}};
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+        margin-bottom: -{{ section.settings.margin_bottom_mobile | append: 'px'}};
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+{%- if section.settings.enable_shop_login_button == false -%}
+  {%- assign hide_shop_login_button = true -%}
+{%- endif -%}
+
+<div class="customer login section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="{{ section.settings.page_width }}">
+    <div class="row align-items-stretch">
+      <div class="col-12 col-md-6">
+        <div
+          class="media media--{{ section.settings.image_ratio }}  {%if section.settings.image_ratio == 'adapt' and  section.settings.image == blank %} media-placeholder {% endif %}"
+          {% if section.settings.image_ratio == 'adapt' and section.settings.image != blank %}
+            style="padding-bottom: {{ 1 | divided_by:  section.settings.image.aspect_ratio | times: 100 }}%;"
+          {% endif %}
+        >
+          {% if section.settings.image != blank %}
+            {% render 'responsive-img' with image: section.settings.image %}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-box  color-{{ section.settings.card_color }} gradient">
+
+        <div class="card-box__inner text-left"> 
+          <h1 id="recover" tabindex="-1">
+            {{ 'customer.recover_password.title' | t }}
+          </h1>
+          <div>
+            <p>
+              {{ 'customer.recover_password.subtext' | t }}
+            </p>
+
+            {%- form 'recover_customer_password' -%}
+              {% assign recover_success = form.posted_successfully? %}
+              <div class="form-group">
+                    <label for="RecoverEmail" class="form-lebel">
+                  {{ 'customer.login_page.email' | t }}
+                </label>
+                <input
+                  type="email"
+                  value=""
+                  name="email"
+                  id="RecoverEmail"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  class="form-input"
+                  {% if form.errors %}
+                    aria-invalid="true"
+                    aria-describedby="RecoverEmail-email-error"
+                    autofocus
+                  {% endif %}
+                  placeholder="{{ 'customer.login_page.email' | t }}"
+                >
+            
+              </div>
+              {%- if form.errors -%}
+                <small id="RecoverEmail-email-error" class="form__message">
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{ form.errors.messages.form }}
+                </small>
+              {%- endif -%}
+
+                       <button class="button button--icon button--secondary button--full">
+                              
+
+               <span>       {{ 'customer.login_page.submit' | t }}</span>
+
+              </button>
+
+
+
+     
+
+              <a href="#login" class="recover-link">
+                {{ 'customer.login_page.cancel' | t }}
+              </a>
+            {%- endform -%}
+          </div>
+
+ 
+
+         {%- unless section.settings.heading == blank -%}
+ 
+        <div id="login" tabindex="-1" class="section--header-login">
+          <h1 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h1>
+        </div>
+     
+    {%- endunless -%}
+
+
+          <div>
+            {%- if recover_success == true -%}
+              <h3 class="form__message" tabindex="-1" autofocus>
+                <span class="svg-wrapper">
+                  {{- 'icon-success.svg' | inline_asset_content -}}
+                </span>
+                {{ 'customer.recover_password.success' | t }}
+              </h3>
+            {%- endif -%}
+            {%- form 'customer_login', novalidate: 'novalidate' -%}
+              {%- if form.errors -%}
+                <h2 class="form__message" tabindex="-1" autofocus>
+                  <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{ 'templates.contact.form.error_heading' | t }}
+                </h2>
+                {{ form.errors | default_errors }}
+              {%- endif -%}
+
+              {%- if shop.features.login_with_shop_classic_customer_accounts? -%}
+                <section name="sign-in-with-shop-provider">
+                  {{ shop | login_button: hide_button: hide_shop_login_button }}
+
+                  {%- unless hide_shop_login_button -%}
+                    <p>
+                      {{ 'customer.login_page.alternate_provider_separator' | t }}
+                    </p>
+                  {%- endunless -%}
+                </section>
+              {%- endif -%}
+
+              <div class="form-group">
+                                <label for="CustomerEmail" class="form-lebel">
+                  {{ 'customer.login_page.email' | t }}
+                </label>
+                <input
+                  type="email"
+                  name="customer[email]"
+                  id="CustomerEmail"
+                  autocomplete="email"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  class="form-input"
+                  {% if form.errors contains 'form' %}
+                    aria-invalid="true"
+                  {% endif %}
+                  placeholder="{{ 'customer.login_page.email' | t }}"
+                >
+
+              </div>
+
+              {%- if form.password_needed -%}
+                <div class="form-group">
+                       <label for="CustomerPassword"  class="form-lebel">
+                    {{ 'customer.login_page.password' | t }}
+                  </label>
+                  <input
+                    type="password"
+                    value=""
+                    name="customer[password]"
+                    id="CustomerPassword"
+                              class="form-input"
+                    autocomplete="current-password"
+                    {% if form.errors contains 'form' %}
+                      aria-invalid="true"
+                    {% endif %}
+                    placeholder="{{ 'customer.login_page.password' | t }}"
+                  >
+             
+                </div>
+
+                <a href="#recover" class="recover-link">
+                  {{ 'customer.login_page.forgot_password' | t }}
+                </a>
+              {%- endif -%}
+
+
+
+              <button class="button button--icon button--secondary button--full">
+                          
+
+               <span> {{ 'customer.login_page.sign_in' | t }}</span>
+
+              </button>
+
+              <p class="customer-text-info">
+                Don’t have any account?
+                       <a href="{{ routes.account_register_url }}">
+                Register Now
+              </a>
+              </p>
+
+       
+            {%- endform -%}
+          </div>
+
+          {%- if shop.checkout.guest_login -%}
+            <div>
+              <hr>
+              <h2>{{ 'customer.login_page.guest_title' | t }}</h2>
+
+              {%- form 'guest_login' -%}
+                <button>
+                  {{ 'customer.login_page.guest_continue' | t }}
+                </button>
+              {%- endform -%}
+            </div>
+          {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-login.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+     {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "hxl",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "label": "adapt",
+          "value": "adapt"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "16x9",
+          "value": "16-9"
+        },
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Portrait 2X",
+          "value": "portrait-2x"
+        }
+      ],
+      "default": "portrait",
+      "label": "Image Ratio"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shop_login_button",
+      "label": "t:sections.main-login.shop_login_button.enable",
+      "default": true
+    },
+   {
+      "type": "color_scheme",
+      "id": "card_color",
+      "label": "Card Color",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 48
+    }
+  ]
+}
+{% endschema %}
+ 

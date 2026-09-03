@@ -1,0 +1,83 @@
+.text-cards-seciton {
+    position: relative;
+}
+
+.text-card__item {
+    position: relative;
+
+}
+ 
+.text-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+    align-items: stretch;
+}
+
+.text-card {
+
+
+    /* FeatureCard */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px;
+
+    /* Border/border-4 */
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 8px;
+    height: 100%;
+}
+
+
+.text-card__title {
+    font-family: var(--font-heading-family);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 130%;
+    letter-spacing: -0.04em;
+    margin: 0 0 4rem;
+}
+
+.text-card__text {
+    margin: 0;
+    font-family: var(--font-body-family);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    /* identical to box height, or 21px */
+    letter-spacing: 0.01em;
+    color: rgb(var(--color-foreground));
+}
+
+ 
+
+
+@media (max-width: 768px) {
+
+    .text-cards-wrapper {
+        grid-template-columns: 1fr 1fr;
+           gap: 0.8rem;
+    }
+
+
+    .text-card {
+        padding: 2rem;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+      .text-card {
+        padding: 1.2rem;
+    }
+
+
+}

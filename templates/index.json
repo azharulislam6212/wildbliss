@@ -1,0 +1,365 @@
+{
+  "sections": {
+    "image_banner_8PRCFM": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_Cex7j6": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1"
+          }
+        },
+        "text_n9Vdtd": {
+          "type": "text",
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_YgKRRP": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Cex7j6",
+        "text_n9Vdtd",
+        "buttons_YgKRRP"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "icon_with_text_scroll_dgHgxg": {
+      "type": "icon-with-text-scroll",
+      "blocks": {
+        "item_4yzQxC": {
+          "type": "item",
+          "settings": {
+            "title": "Hand-Cut Daily",
+            "subtitle": "Master butcher quality."
+          }
+        },
+        "item_z9HBtC": {
+          "type": "item",
+          "settings": {
+            "title": "Vacuum Sealed",
+            "subtitle": "Locked-in freshness."
+          }
+        },
+        "item_kh9rUK": {
+          "type": "item",
+          "settings": {
+            "title": "Premium Source",
+            "subtitle": "Selected for superior marbling."
+          }
+        },
+        "item_nUAFQD": {
+          "type": "item",
+          "settings": {
+            "title": "Since 1946",
+            "subtitle": "Over 80 years of local trust."
+          }
+        }
+      },
+      "block_order": [
+        "item_4yzQxC",
+        "item_z9HBtC",
+        "item_kh9rUK",
+        "item_nUAFQD"
+      ],
+      "name": "Icon With Text Scroller",
+      "settings": {
+        "speed": "50",
+        "moving_direction": "animation-direction",
+        "pause_when_hover": false,
+        "color_scheme": "scheme-2",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "padding_top_tab": 32,
+        "padding_bottom_tab": 32,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
+    "featured_collection_6Hk3Kk": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "Features PRODUTCS",
+        "heading": "Best Seller",
+        "heading_size": "h1",
+        "collection": "beef",
+        "products_to_show": 9,
+        "column": "4",
+        "column_medium": "4",
+        "column_mobile": "1",
+        "enable_desktop_slider": true,
+        "button_label": "SHOP ALL",
+        "show_view_all": true,
+        "button_style": "primary",
+        "color_scheme": "",
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": false,
+        "enable_scroll": false,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "testimonial_cards_VpL76A": {
+      "type": "testimonial-cards",
+      "blocks": {
+        "testimonial_jAGR4E": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_6GiBLL": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_dpgwxc": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_37PVcM": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_q3fLbm": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_yVtUWY": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_kq3WD7": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_p79nPa": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_PnMN9j": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_MthjKE": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_PPkV33": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "testimonial_ELKgwM": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!<\/p>",
+            "author_name": "Chaise",
+            "varified_text": "Verified Reviewer",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_jAGR4E",
+        "testimonial_6GiBLL",
+        "testimonial_dpgwxc",
+        "testimonial_37PVcM",
+        "testimonial_q3fLbm",
+        "testimonial_yVtUWY",
+        "testimonial_kq3WD7",
+        "testimonial_p79nPa",
+        "testimonial_PnMN9j",
+        "testimonial_MthjKE",
+        "testimonial_PPkV33",
+        "testimonial_ELKgwM"
+      ],
+      "name": "Testimonial cards",
+      "settings": {
+        "enable_divider": true,
+        "divider_color": "#dddcd5",
+        "page_width": "container-fluid",
+        "pre_text": "Reviews From Our Customers With Satisfied Taste Buds!",
+        "heading": "Voted Best Of The Best 2018-Present!",
+        "heading_size": "h1",
+        "review_bar_title": "<span style=\"text-decoration:underline\">Review us on Google<\/span>",
+        "review_link": "",
+        "review_bar_title_2": "<span style=\"text-decoration:underline\">Review us on Yelp<\/span>",
+        "review_link_2": "",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 76,
+        "padding_bottom": 76,
+        "padding_top_tab": 68,
+        "padding_bottom_tab": 68,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
+      }
+    },
+    "newsletter_custom_YwhjHp": {
+      "type": "newsletter-custom",
+      "blocks": {
+        "pre_text_gY37CW": {
+          "type": "pre_text",
+          "settings": {
+            "pre_text": "Join Our Meat Club"
+          }
+        },
+        "heading_3VH67r": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sign up to Get 10% Off Your Order",
+            "heading_size": "h0"
+          }
+        },
+        "email_form_L3WrT4": {
+          "type": "email_form",
+          "settings": {
+            "text": "<p>By clicking on the “Sign Up” button, I confirm my agreement with the <a href=\"\/policies\/privacy-policy\" title=\"Privacy Policy\">Privacy Policy <\/a>and <a href=\"\/policies\/terms-of-service\" title=\"Terms of Service\">Terms of Use <\/a><\/p>",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "pre_text_gY37CW",
+        "heading_3VH67r",
+        "email_form_L3WrT4"
+      ],
+      "name": "Newsletter Custom",
+      "settings": {
+        "page_width": "container-fluid",
+        "color_accent": "#E7ECD6",
+        "color_scheme": "scheme-1",
+        "color_scheme_secondary": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "image_banner_8PRCFM",
+    "icon_with_text_scroll_dgHgxg",
+    "featured_collection_6Hk3Kk",
+    "testimonial_cards_VpL76A",
+    "newsletter_custom_YwhjHp"
+  ]
+}

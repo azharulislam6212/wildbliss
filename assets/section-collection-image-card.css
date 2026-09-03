@@ -1,0 +1,130 @@
+.collection-block-section{
+    position: relative;
+}
+
+.collage-collection-block {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.collection-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    border-radius: 2.4rem;
+    box-sizing: border-box;
+    flex: 0 0 calc((100% - 0.8rem) / 3);
+    text-decoration: none;
+}
+
+.collection-block:first-child {
+    flex: 0 0 calc((100% - 0.4rem) * 0.5);
+}
+
+.collection-block:nth-child(2) {
+    flex: 0 0 calc((100% - 0.4rem) * 0.5);
+}
+
+.collection-block__image {
+    grid-area: 1 / 1 / 2 / 2;
+    line-height: 0;
+    position: relative;
+    min-height: 240px;
+}
+
+.collection-block__image::before {
+    content: "";
+
+    isolation: isolate;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: var(--overlay-color);
+    border-radius: 12px;
+}
+
+ 
+
+
+.collection-block__image img,
+.collection-block__image svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.collection-block__content {
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    z-index: 1;
+    align-items: end;
+}
+
+
+ 
+
+.collection-block__header{
+background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.87) 100%);
+backdrop-filter: blur(10px);
+padding:  49px 24px 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+    width: 100%;
+}
+ 
+
+.collection-block-arrow{
+    /* Button */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+ 
+width: 32px;
+height: 32px;
+ flex: 0 0 32px;
+
+/* Border/border-6 */
+border: 1px solid rgb(var(--color-foreground));
+border-radius: 12px;
+
+ 
+
+}
+
+.collection-block__card-title{
+ 
+ 
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 150%;
+/* identical to box height, or 27px */
+letter-spacing: 0.01em;
+
+ margin: 0;
+
+}
+
+@media screen and (max-width: 768px) {
+    .collage-collection-block {
+        flex-direction: column;
+
+    }
+
+  
+}

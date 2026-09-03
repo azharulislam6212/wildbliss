@@ -1,0 +1,85 @@
+    <div class="bundles-products__item">
+          <div class="bundles-products__left">
+            <a href="{{ bundle_product.url }}" class="bundles-products__image">
+              {% if bundle_product.featured_image %}
+                {{
+                  bundle_product.featured_image
+                  | image_url: width: 120
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '80,120,160',
+                    alt: bundle_product.title
+                }}
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {% endif %}
+            </a>
+
+            <div class="bundles-products__info">
+              <h4>
+                <a href="{{ bundle_product.url }}">
+                  {{ bundle_product.title }}
+                </a>
+              </h4>
+
+              <span class="bundles-products__price">
+               + {{ bundle_product.price | money }}
+              </span>
+            </div>
+          </div>
+
+
+          {% assign product_form_id = 'quick-add-' | append: section_id | append: bundle_product.id %}
+
+                <product-form data-section-id="{{ section_id }}">
+                {%- form 'product',
+                    bundle_product,
+                    id: product_form_id,
+                    class: 'form js-product-form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+                -%}
+                    <input
+                    type="hidden"
+                    name="id"
+                    value="{{ bundle_product.selected_or_first_available_variant.id }}"
+                    class="product-variant-id"
+                    {% if bundle_product.selected_or_first_available_variant.available == false %}
+                        disabled
+                    {% endif %}
+                    >
+
+                    <button
+                    id="{{ product_form_id }}-submit"
+                    type="submit"
+                    name="add"
+                    class="bundles-products__button"
+                    aria-haspopup="dialog"
+                    aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ bundle_product.id }}"
+                    aria-live="polite"
+                    data-sold-out-message="true"
+                    {% if bundle_product.selected_or_first_available_variant.available == false %}
+                        disabled
+                    {% endif %}
+                    >
+
+                          {%- render 'loading-spinner' -%}
+                    <span class="button--text">
+                        {%- if bundle_product.selected_or_first_available_variant.available -%}
+                        Add
+                        {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                    </span>
+                    <span class="sold-out-message hidden">
+                        {{ 'products.product.sold_out' | t }}
+                    </span>
+                
+              
+                    </button>
+                {%- endform -%}
+                </product-form>
+
+
+       
+        </div>

@@ -1,0 +1,85 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "marquee_text_WLMmgn": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Free shipping over $149"
+          }
+        },
+        "marquee_text_33tByV": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Call us: (916) 782-2705"
+          }
+        },
+        "marquee_text_eHtgV7": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Hand-cut since 1946"
+          }
+        }
+      },
+      "block_order": [
+        "marquee_text_WLMmgn",
+        "marquee_text_33tByV",
+        "marquee_text_eHtgV7"
+      ],
+      "settings": {
+        "full_width": true,
+        "button_label": "About Us",
+        "button_link": "shopify:\/\/pages\/about-us",
+        "speed": "50",
+        "moving_direction": "animation-reverse",
+        "pause_when_hover": false,
+        "color_scheme": "scheme-5",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "padding_top_tab": 12,
+        "padding_bottom_tab": 12,
+        "padding_top_mobile": 12,
+        "padding_bottom_moblie": 12,
+        "them_section_id": ""
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "page_width": "container",
+        "logo_position": "nav-middle-center",
+        "mobile_logo_position": "center",
+        "logo": "shopify:\/\/shop_images\/Wild_Bliss_Organics.png",
+        "logo_width": 145,
+        "logo_width_mobile": 135,
+        "menu": "main-menu",
+        "menu_type_desktop": "menu",
+        "sticky_header_type": "none",
+        "show_line_separator": true,
+        "show_icons": true,
+        "transparent_on_home": false,
+        "transparent": false,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "mega_color_scheme": "scheme-1",
+        "sticky_header_background": "#e3e2dd",
+        "sticky_text_color": "#1c1b18",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 18,
+        "padding_bottom": 18,
+        "padding_top_mobile": 22,
+        "padding_bottom_moblie": 16
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

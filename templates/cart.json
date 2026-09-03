@@ -1,0 +1,74 @@
+{
+  "sections": {
+    "cart": {
+      "type": "main-cart-items",
+      "blocks": {
+        "subtotal_RzrAF4": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "buttons_A7caQk": {
+          "type": "buttons",
+          "settings": {
+            "show_additional_button": false
+          }
+        },
+        "payement_secure_fU84VJ": {
+          "type": "payement_secure",
+          "settings": {
+            "payment__title": "Payment Accepts",
+            "enable_custom_payment_icon": true
+          }
+        },
+        "icon_text_pF9JNa": {
+          "type": "icon_text",
+          "settings": {
+            "icon_1": "shopify:\/\/shop_images\/Icon_4.svg",
+            "text_1": "Store Pickup Available <a href=\"\/collections\/all\" title=\"All products\">Order Now<\/a>",
+            "icon_2": "shopify:\/\/shop_images\/Icon_5.svg",
+            "text_2": "Prefer to order by phone? <a href=\"tel:916-782-2705\" title=\"tel:916-782-2705\">Call Us<\/a>"
+          }
+        },
+        "scroll_item_A8mHfi": {
+          "type": "scroll_item",
+          "settings": {
+            "icon_1": "shopify:\/\/shop_images\/Icon_5eaca3cf-a5de-42d4-965d-b89b77581f86.svg",
+            "title_1": "Free Shippping",
+            "icon_2": "shopify:\/\/shop_images\/Icon_1_39ba54a9-7b2b-4d0c-b55b-2468dc82aa6b.svg",
+            "title_2": "Premium Quality",
+            "icon_3": "shopify:\/\/shop_images\/Icon_2_f0d44847-eb27-44bc-ad79-25507a8c9616.svg",
+            "title_3": "Well cut & packed",
+            "icon_4": "shopify:\/\/shop_images\/Icon_3_057dafe1-c2b0-4137-861e-89144547621b.svg",
+            "title_4": "Secure Payment",
+            "title_5": "",
+            "color_scheme": "scheme-2",
+            "speed": "50",
+            "moving_direction": "animation-direction",
+            "pause_when_hover": false
+          }
+        }
+      },
+      "block_order": [
+        "subtotal_RzrAF4",
+        "buttons_A7caQk",
+        "payement_secure_fU84VJ",
+        "icon_text_pF9JNa",
+        "scroll_item_A8mHfi"
+      ],
+      "settings": {
+        "page_width": "container-fluid",
+        "color_scheme": "scheme-1",
+        "sidebar_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "cart"
+  ]
+}

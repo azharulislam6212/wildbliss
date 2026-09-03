@@ -1,0 +1,548 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "hied_page_title": false,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "section-page-header": {
+      "type": "section-page-header",
+      "blocks": {
+        "pre_heading_LDmk66": {
+          "type": "pre_heading",
+          "settings": {
+            "pre_heading": "About us"
+          }
+        },
+        "heading_qFpiTc": {
+          "type": "heading",
+          "settings": {
+            "heading": "We believe in a meaningful connection between you and the food you eat.",
+            "heading_size": "h1"
+          }
+        },
+        "text_tp6Hn9": {
+          "type": "text",
+          "settings": {
+            "text": "Taste, transparency and convenience <em>— never mutually exclusive. <\/em>"
+          }
+        }
+      },
+      "block_order": [
+        "pre_heading_LDmk66",
+        "heading_qFpiTc",
+        "text_tp6Hn9"
+      ],
+      "settings": {
+        "allow_transparent_header": true,
+        "page_width": "container-fluid",
+        "banner_height": "medium",
+        "image": "shopify:\/\/shop_images\/Hero_Section.png",
+        "text_align": "vertical-center horizontal-left",
+        "color_accent": "#a5a5a5",
+        "color_scheme": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
+        "overlay_color": "linear-gradient(90deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0) 100%)",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_tab": 40,
+        "padding_bottom_tab": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "about_image_with_text_kz4fLw": {
+      "type": "about-image-with-text",
+      "blocks": {
+        "caption_EzGaeE": {
+          "type": "caption",
+          "settings": {
+            "caption": "About Us",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "heading_U9cCAa": {
+          "type": "heading",
+          "settings": {
+            "heading": "A Modern Day, Old Fashioned Meat Market",
+            "heading_size": "h1"
+          }
+        },
+        "image_cynGEf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_26.png",
+            "image_2": "shopify:\/\/shop_images\/Rectangle_27.png",
+            "badge__text": "<h2>70+ <\/h2><p>Years of Trust<\/p>"
+          }
+        },
+        "text_WkppgW": {
+          "type": "text",
+          "settings": {
+            "text": "<h4>Skill handed down from Generation to Generation.<\/h4><p> Roseville Meat Company has been a cornerstone of the Roseville community for over seven decades. What started as a small, neighborhood butcher shop has grown into the  region's premier destination for premium meats — but our values have  never changed.<br\/><br\/>As a local, family-owned business, we've built our  reputation on one thing: offering the very best in fresh meats with the  personal service that only a family business can provide. We know our  customers by name, and we take pride in helping you find exactly what  you need.<\/p>",
+            "text_style": "body",
+            "text_size": "medium"
+          }
+        },
+        "block_quote_PDLNnn": {
+          "type": "block_quote",
+          "settings": {
+            "text": "<p> \"From our family to yours, we offer the very best in fresh meats. That's not just a slogan — it's how we live every single day.\"<br\/><br\/><strong>— The Roseville Meat Company Family<\/strong><\/p>",
+            "color_scheme": "scheme-2"
+          }
+        },
+        "text_XndxUF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From USDA Prime beef and fresh poultry to exotic  selections like buffalo and elk, we carry what others simply can't. And  with our custom processing services, we'll cut, wrap, and prepare your  order exactly the way you want it.<\/p>",
+            "text_style": "body",
+            "text_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "caption_EzGaeE",
+        "heading_U9cCAa",
+        "image_cynGEf",
+        "text_WkppgW",
+        "block_quote_PDLNnn",
+        "text_XndxUF"
+      ],
+      "name": "About image with text",
+      "settings": {
+        "page_width": "container-fluid",
+        "color_accent": "#a5a5a5",
+        "color_scheme": "",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "text_card_Hcd8JJ": {
+      "type": "text-card",
+      "blocks": {
+        "text_card_BFbYRR": {
+          "type": "text_card",
+          "settings": {
+            "title": "Top 3%",
+            "text": "USDA Prime Designation"
+          }
+        },
+        "text_card_9zDneq": {
+          "type": "text_card",
+          "settings": {
+            "title": "< 1%",
+            "text": "Purebred Wagyu Cattle"
+          }
+        },
+        "text_card_aa7MDA": {
+          "type": "text_card",
+          "settings": {
+            "title": "90%",
+            "text": "Elite Marbling Score"
+          }
+        },
+        "text_card_4Qb4xB": {
+          "type": "text_card",
+          "settings": {
+            "title": "21+ Days",
+            "text": "Master Artisanal Wet-Aging"
+          }
+        }
+      },
+      "block_order": [
+        "text_card_BFbYRR",
+        "text_card_9zDneq",
+        "text_card_aa7MDA",
+        "text_card_4Qb4xB"
+      ],
+      "name": "Text Card Blocks",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "",
+        "heading_size": "h1",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "image_mulit_card_dUX9qW": {
+      "type": "image-mulit-card",
+      "blocks": {
+        "image_block_zXBVMe": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_1.png",
+            "pre_text": "Thoughtfully raised",
+            "title": "Ranching & Feeding",
+            "text": "Our cattle are raised on family ranches with the highest standards of animal welfare and sustainability. After grazing, they are finished on  carefully formulated rations developed by our in-house animal  nutritionists."
+          }
+        },
+        "image_block_TQUQHD": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_2_6a86db59-9d77-44d8-b5e0-70e6a3d6878f.png",
+            "pre_text": "Handled with care",
+            "title": "Processing",
+            "text": "We process every animal at our state-of-the-art facilities in Washington  and Idaho. Our master butchers bring exceptional quality and flavor to  every cut through meticulous precision and craftsmanshi"
+          }
+        },
+        "image_block_zWpQXX": {
+          "type": "image_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_3.png",
+            "pre_text": "Convenient Delivery",
+            "title": "Direct To Your Door",
+            "text": "We deliver straight to your door on the date you select, using specialized eco-friendly packaging that keeps your order at peak freshness. You can count on it arriving frozen or partially frozen — perfectly safe and  ready for your freezer"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_zXBVMe",
+        "image_block_TQUQHD",
+        "image_block_zWpQXX"
+      ],
+      "name": "Image multicard",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "OUR PROCESS",
+        "heading": "True Ranch to Table",
+        "heading_size": "h1",
+        "text": "<p>Unlike others, we oversee every step of the process to ensure  exceptional quality at every step in the process. We raise, feed, and  process all of our cattle in our own facilities.<\/p>",
+        "column": "3",
+        "color_accent": "#ff0000",
+        "color_scheme": "",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "video_aqj7N7": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "page_width": "container-fluid",
+        "heading": "Creating a meaningful connection between you and your food.",
+        "heading_size": "h2",
+        "enable_video_looping": false,
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "cover_image": "shopify:\/\/shop_images\/Wrap_4.png",
+        "description": "",
+        "color_accent": "#ff0000",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "image_with_card_geKbjn": {
+      "type": "image-with-card",
+      "blocks": {
+        "caption_93BwTb": {
+          "type": "caption",
+          "settings": {
+            "caption": "snake river farms",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "small"
+          }
+        },
+        "heading_PxCihf": {
+          "type": "heading",
+          "settings": {
+            "heading": "Taste The Difference",
+            "heading_size": "h1"
+          }
+        },
+        "text_yrB39P": {
+          "type": "text",
+          "settings": {
+            "text": "<p>American Wagyu is a hybrid cross of pure Japanese Wagyu and premium American cattle.<\/p>",
+            "text_style": "body",
+            "text_size": "medium"
+          }
+        },
+        "list_text_mzKmqr": {
+          "type": "list_text",
+          "settings": {
+            "text": "<ul><li>Rich, buttery flavor unlike any other beef<\/li><li>Proprietary marbling scale that far exceeds the USDA grading scale<\/li><li>Featured in the world’s finest restaurants and served by renowned chefs including Wolfgang Puck, Thomas Keller, and more<\/li><\/ul>",
+            "text_style": "body",
+            "text_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "caption_93BwTb",
+        "heading_PxCihf",
+        "text_yrB39P",
+        "list_text_mzKmqr"
+      ],
+      "name": "Image with card",
+      "settings": {
+        "page_width": "container-fluid",
+        "image": "shopify:\/\/shop_images\/Image_4_c8a2995d-7e65-49c3-ac53-69bed611104a.png",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "team_carousel_iW94Xb": {
+      "type": "team-carousel",
+      "blocks": {
+        "team_block_YiJcKV": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_31.png",
+            "name": "Don Coppin",
+            "designation": "Head Butcher & Co-Owner",
+            "text": "With over 30 years of experience behind the counter, Don is the heart  and soul of Roseville Meat Company",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_UcRnX3": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_31.png",
+            "name": "Don Coppin",
+            "designation": "Head Butcher & Co-Owner",
+            "text": "With over 30 years of experience behind the counter, Don is the heart  and soul of Roseville Meat Company",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_aGnxhk": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_31.png",
+            "name": "Don Coppin",
+            "designation": "Head Butcher & Co-Owner",
+            "text": "With over 30 years of experience behind the counter, Don is the heart  and soul of Roseville Meat Company",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_7f4PP8": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_31.png",
+            "name": "Don Coppin",
+            "designation": "Head Butcher & Co-Owner",
+            "text": "With over 30 years of experience behind the counter, Don is the heart  and soul of Roseville Meat Company",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        },
+        "team_block_nz8gjx": {
+          "type": "team_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_31.png",
+            "name": "Don Coppin",
+            "designation": "Head Butcher & Co-Owner",
+            "text": "With over 30 years of experience behind the counter, Don is the heart  and soul of Roseville Meat Company",
+            "social_instagram_link": "",
+            "social_twitter_link": "",
+            "social_pinterest_link": "",
+            "social_tiktok_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "team_block_YiJcKV",
+        "team_block_UcRnX3",
+        "team_block_aGnxhk",
+        "team_block_7f4PP8",
+        "team_block_nz8gjx"
+      ],
+      "name": "Team Carousel",
+      "settings": {
+        "page_width": "container-fluid",
+        "pre_text": "Team Members",
+        "heading": "Meet Our Expert Team",
+        "heading_size": "h1",
+        "text": "<p>Our experienced butchers and staff bring decades of knowledge and passion to every customer interaction.<\/p>",
+        "autoplay_enabled": false,
+        "autoplay_timeout": 5,
+        "loop_enabled": true,
+        "enable_pagination": false,
+        "enable_navigation": true,
+        "color_scheme_swiper": "scheme-4",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-1",
+        "color_accent": "#ff0000",
+        "padding_top": 116,
+        "padding_bottom": 116,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    },
+    "our_history_dPyHNj": {
+      "type": "our-history",
+      "blocks": {
+        "text_block_4APTTH": {
+          "type": "text_block",
+          "settings": {
+            "pre_text": "Our History",
+            "heading": "For Nearly 6 Decades",
+            "text": "<p>Snake River Farms was founded on a simple belief: quality matters. What  started as a family operation in American Falls, Idaho by Bob Rebholtz,  <br\/><br\/>Sr, has grown into a legacy of premium American Wagyu and Kurobuta pork  with operations throughout the Northwest.<br\/><br\/>Through decades of dedication to craft and innovation, <br\/><br\/>we've remained  committed to raising the finest beef and pork in America and providing  exceptional customer service.<\/p>",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary",
+            "color_accent": "#a5a5a5",
+            "color_scheme": ""
+          }
+        },
+        "image_yrJUKR": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_39.png",
+            "image_link": ""
+          }
+        },
+        "card_block_BrcdJE": {
+          "type": "card_block",
+          "settings": {
+            "text_1": "<p><strong>January - 1917<\/strong><\/p><p>J.J. and B.A Simon found Table Supply Meat Company in Omaha, NE. <\/p>",
+            "text_2": "<p><strong>September - 1942<br\/><\/strong>Our steaks are served on cross-country trains. Nebraska Beef becomes famous.<\/p>",
+            "text_3": "<p><strong>February - 1952<\/strong><\/p><p>Lester Simon starts selling steak through magazine ads and mail flyers. A first!<\/p>",
+            "text_4": "<p><strong>October - 1966<\/strong><\/p><p>The world gets to know our new name Omaha Steaks<\/p>",
+            "text_5": "<p><strong>December - 2017<\/strong><\/p><p>The first Omaha Steaks retail store opens for business in Nebraska.<\/p>",
+            "text_6": "<p><strong>January - 2022<\/strong><\/p><p>The Simon Family & Omaha Steaks celebrate a centennial.<\/p>",
+            "color_accent": "#ff2e2e"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_4APTTH",
+        "image_yrJUKR",
+        "card_block_BrcdJE"
+      ],
+      "name": "Our history",
+      "settings": {
+        "enable_divider": false,
+        "divider_color": "#dddcd5",
+        "page_width": "container-fluid",
+        "color_scheme": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    },
+    "customer_care_U6h8Y4": {
+      "type": "customer-care",
+      "blocks": {
+        "image_3D4ke4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_41_1.png",
+            "image_link": ""
+          }
+        },
+        "text_block_UJnEck": {
+          "type": "text_block",
+          "settings": {
+            "pre_text": "We're here for you",
+            "heading": "Reach Out To Our Customer Care",
+            "text": "<p>Our team helps you find the perfect steak, learn how to prepare  for your next dinner party, or handle personalized <\/p>",
+            "email_text": "<p><strong>Email<\/strong><\/p><p><a href=\"mailto:hello@example.com\" title=\"mailto:hello@example.com\">hello@example.com<\/a><\/p>",
+            "phone_text": "<p><strong>Phone<\/strong><\/p><p><a href=\"tel:(916) 782 - 2705\" title=\"tel:(916) 782 - 2705\">(916) 782 - 2705<\/a><\/p>",
+            "button_text": "Contact Us",
+            "button_url": "shopify:\/\/pages\/contact-1",
+            "button_style": "primary"
+          }
+        },
+        "images_6J8YUj": {
+          "type": "images",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_42.png",
+            "image_link": "",
+            "image_2": "shopify:\/\/shop_images\/Rectangle_43.png",
+            "image_link_2": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_3D4ke4",
+        "text_block_UJnEck",
+        "images_6J8YUj"
+      ],
+      "name": "Customer care",
+      "settings": {
+        "enable_divider": false,
+        "divider_color": "#dddcd5",
+        "page_width": "container-fluid",
+        "color_scheme": "scheme-1",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 60,
+        "padding_bottom_tab": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "them_section_id": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section-page-header",
+    "about_image_with_text_kz4fLw",
+    "text_card_Hcd8JJ",
+    "image_mulit_card_dUX9qW",
+    "video_aqj7N7",
+    "image_with_card_geKbjn",
+    "team_carousel_iW94Xb",
+    "our_history_dPyHNj",
+    "customer_care_U6h8Y4"
+  ]
+}

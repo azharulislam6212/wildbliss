@@ -1,0 +1,109 @@
+{% liquid
+  assign min_value = filter.min_value.value | default: 0.0 | divided_by: 100.0
+  assign max_value = filter.max_value.value | default: filter.range_max | divided_by: 100.0
+  assign filter_range_max = filter.range_max | divided_by: 100.0 | ceil
+  assign range_min = min_value | divided_by: filter_range_max | times: 100.0
+  assign range_max = max_value | divided_by: filter_range_max | times: 100.0
+%}
+
+<div class="facets__price-wrapper">
+  <div class="field-wrapper">
+    <label for="Filter-{{ filter.label | escape }}-GTE">
+      {{ 'products.facets.from' | t }}
+    </label>
+
+    <div class="field">
+      <span class="field__currency">
+        {{ cart.currency.symbol }}
+      </span>
+
+      <input
+        class="field__input"
+        name="{{ filter.min_value.param_name }}"
+        id="Filter-{{ filter.label | escape }}-GTE"
+        {% if filter.min_value.value %}
+          value="{{ min_value | ceil }}"
+        {% endif %}
+        type="number"
+        dir="ltr"
+        placeholder="0"
+        min="0"
+        max="{{ max_value | ceil }}"
+        step="1"
+        autocomplete="off"
+      >
+    </div>
+  </div>
+
+  <div class="field-wrapper">
+    <label
+      class="font-weight-medium"
+      for="Filter-{{ filter.label | escape }}-LTE"
+    >
+      {{ 'products.facets.to' | t }}
+    </label>
+
+    <div class="field">
+      <span class="field__currency">
+        {{ cart.currency.symbol }}
+      </span>
+
+      <input
+        class="field__input"
+        name="{{ filter.max_value.param_name }}"
+        id="Filter-{{ filter.label | escape }}-LTE"
+        {% if filter.max_value.value %}
+          value="{{ max_value | ceil }}"
+        {% endif %}
+        type="number"
+        dir="ltr"
+        min="0"
+        max="{{ filter_range_max | ceil }}"
+        step="1"
+        placeholder="{{ filter_range_max | ceil }}"
+        autocomplete="off"
+      >
+    </div>
+  </div>
+</div>
+
+<div
+  class="facets__range"
+  style="--range-min: {{ range_min }}%; --range-max: {{ range_max }}%;"
+>
+  <label
+    class="visually-hidden"
+    for="Filter-{{ filter.label | escape }}-Min"
+  >
+    {{ 'products.facets.from' | t }}
+  </label>
+
+  <input
+    type="range"
+    dir="ltr"
+    value="{{ min_value | ceil }}"
+    min="0"
+    max="{{ filter_range_max | ceil }}"
+    step="1"
+    class="field__range"
+    id="Filter-{{ filter.label | escape }}-Min"
+  >
+
+  <label
+    class="visually-hidden"
+    for="Filter-{{ filter.label | escape }}-Max"
+  >
+    {{ 'products.facets.to' | t }}
+  </label>
+
+  <input
+    type="range"
+    dir="ltr"
+    value="{{ max_value | ceil }}"
+    min="0"
+    max="{{ filter_range_max | ceil }}"
+    step="1"
+    class="field__range"
+    id="Filter-{{ filter.label | escape }}-Max"
+  >
+</div>

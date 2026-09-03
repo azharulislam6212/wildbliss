@@ -1,0 +1,521 @@
+{{ 'product-tablist.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+         --color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+         --color-link: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+       }
+
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    @media screen and (min-width:768px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div
+  class="color-{{ section.settings.color_scheme }} isolate gradient"
+>
+  <div
+    class="product-tab-list section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}"
+    id="collection-{{ section.id }}"
+    data-id="{{ section.id }}"
+  >
+    <tabbed-content>
+      <div class="{{ section.settings.page_width }}">
+        <div class="tablist__product--card color-{{ section.settings.color_scheme_card }} gradient">
+          <div class="tablist tablist__product relative no-js-hidden">
+            <div class="tablist__scroller " role="tablist">
+              {%- for block in section.blocks -%}
+                <div class="tab__item">
+                  <button
+                    type="button"
+                    class="tablist__tab"
+                    id="tab-{{ forloop.index }}-{{ block.id }}"
+                    role="tab"
+                    aria-controls="panel-{{ forloop.index }}-{{ block.id }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                  >
+                    {%- if block.settings.svg_icon != blank -%}
+                      <div class="svg-icon">
+                        {{ block.settings.svg_icon }}
+                      </div>
+                    {%- endif -%}
+
+                    {{ block.settings.title }}
+                  </button>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div class="product-tab--content">
+            <div class="product-tab--wrapper  color-{{ section.settings.color_scheme_content }} gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'description' -%}
+                    <div
+                      id="panel-{{  forloop.index }}-{{ block.id }}"
+                      role="tabpanel"
+                      tabindex="0"
+                      aria-labelledby="tab-{{ forloop.index }}-{{ block.id }}"
+                      {% unless forloop.first %}
+                        hidden
+                      {% endunless %}
+                      {{ block.shopify_attributes }}
+                    >
+                      <div class="product-tab__row">
+                        <div class="product-tab__descrion rte">
+                          <h3 class="description-heading">{{ block.settings.heading }}</h3>
+                          {{ block.settings.text }}
+
+                          <div class="tab-list--block">
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_1 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_2 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_3 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_4 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_5 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_6 }}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="product-tab__info">
+                          <h3 class="info-heading">{{ block.settings.info_title }}</h3>
+
+                          {{ block.settings.product_info }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- when 'preparation' -%}
+                    <div
+                      id="panel-{{  forloop.index }}-{{ block.id }}"
+                      role="tabpanel"
+                      tabindex="0"
+                      aria-labelledby="tab-{{ forloop.index }}-{{ block.id }}"
+                      {% unless forloop.first %}
+                        hidden
+                      {% endunless %}
+                      {{ block.shopify_attributes }}
+                    >
+                      <div class="product-tab__row">
+                        <div class="product-tab__descrion rte">
+                          {{ block.settings.text }}
+                        </div>
+                        <div class="product-tab__image">
+                          {% if block.settings.image != blank %}
+                            {% render 'responsive-img' with image:  block.settings.image %}
+                          {% else %}
+                            {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  {%- when 'packaging_delivery' -%}
+                    <div
+                      id="panel-{{  forloop.index }}-{{ block.id }}"
+                      role="tabpanel"
+                      tabindex="0"
+                      aria-labelledby="tab-{{ forloop.index }}-{{ block.id }}"
+                      {% unless forloop.first %}
+                        hidden
+                      {% endunless %}
+                      {{ block.shopify_attributes }}
+                    >
+                          <div class="product-tab__row">
+                        <div class="product-tab__descrion rte">
+                          {{ block.settings.text }}
+                                   <div class="tab-list--block">
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_1 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_2 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_3 }}
+                            </div>
+
+                            <div class="list--block__item">
+                              {{ block.settings.block_text_4 }}
+                            </div>
+ 
+                          </div>
+                        </div>
+                        <div class="product-tab__image">
+                          {% if block.settings.image != blank %}
+                            {% render 'responsive-img' with image:  block.settings.image %}
+                          {% else %}
+                            {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          {% endif %}
+                        </div>
+                      </div>
+                    </div>
+                  {%- when 'reviews' -%}
+                    <div
+                      id="panel-{{  forloop.index }}-{{ block.id }}"
+                      role="tabpanel"
+                      tabindex="0"
+                      aria-labelledby="tab-{{ forloop.index }}-{{ block.id }}"
+                      {% unless forloop.first %}
+                        hidden
+                      {% endunless %}
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.review_liquid }}
+                    </div>
+                {%- endcase -%}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </tabbed-content>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product tab list",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Accent Color",
+      "default": "#FFCD2E"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.has_cards_info",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_card",
+      "label": "Tab card",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_content",
+      "label": "Tab Content",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "svg_icon",
+          "label": "Svg Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Description & Details",
+          "label": "Tab title"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "About the Product",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Rich marbling. Bold flavor. Our Prime Ribeye is cut from the finest USDA Prime beef for a steak that's tender, juicy, and full of flavor.</p>",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_1",
+          "default": "<p>Black Angus</p>",
+          "label": "Block text 1"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_2",
+          "default": "<p>Black Angus</p>",
+          "label": "Block text 2"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_3",
+          "default": "<p>Black Angus</p>",
+          "label": "Block text 3"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_4",
+          "default": "<p>Black Angus</p>",
+          "label": "Block text 4"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_5",
+          "default": "<p>Black Angus</p>",
+          "label": "Block text 5"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_6",
+          "default": "<p>Black Angus</p>",
+          "label": "Block text 6"
+        },
+        {
+          "type": "header",
+          "content": "Product Info"
+        },
+        {
+          "type": "text",
+          "id": "info_title",
+          "default": "Product Info",
+          "label": "Info title"
+        },
+        {
+          "type": "richtext",
+          "id": "product_info",
+          "default": "<p><strong>Grade:</strong> Black Angus</p>",
+          "label": "Product Info"
+        }
+      ]
+    },
+    {
+      "type": "preparation",
+      "name": "Preparation",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "svg_icon",
+          "label": "Svg Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Preparation",
+          "label": "Tab title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": " Image"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Preheat oven to 400 °F. Place salmon fillets on a foil lined baking sheet. Bake for 10 to 12 minutes.</p>",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "packaging_delivery",
+      "name": "Packaging & Delivery",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "svg_icon",
+          "label": "Svg Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Packaging & Delivery",
+          "label": "Tab title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": " Image"
+        },
+        {
+          "type": "header",
+          "content": "Tab content Info"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Each steak is vacuum-sealed to order and packed inside an insulated box with gel ice packs rated for up to 24 hours of temperature control during transit.</p>",
+          "label": "Text"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_1",
+          "default": "<p>Packaging</p>",
+          "label": "Block text 1"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_2",
+          "default": "<p>Box</p>",
+          "label": "Block text 2"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_3",
+          "default": "<p>Delivery Days</p>",
+          "label": "Block text 3"
+        },
+        {
+          "type": "richtext",
+          "id": "block_text_4",
+          "default": "<p>Pickup</p>",
+          "label": "Block text 4"
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "svg_icon",
+          "label": "Svg Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Reviews",
+          "label": "Tab title"
+        },
+        {
+          "type": "liquid",
+          "id": "review_liquid",
+          "label": "Liquid content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product tab list"
+    }
+  ]
+}
+{% endschema %}

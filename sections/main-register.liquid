@@ -1,0 +1,409 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      margin-bottom: -{{ section.settings.margin_bottom | append: 'px'}};
+    }
+    @media screen and (min-width: 992px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top_tab }}px;
+        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+        margin-bottom: -{{ section.settings.margin_bottom_mobile | append: 'px'}};
+      }
+  }
+
+    @media screen and (min-width: 1024px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class="customer register section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="{{ section.settings.page_width }}">
+    <div class="row align-items-stretch">
+      <div class="col-12 col-md-6">
+        <div
+          class="media media--{{ section.settings.image_ratio }}  {%if section.settings.image_ratio == 'adapt' and  section.settings.image == blank %} media-placeholder {% endif %}"
+          {% if section.settings.image_ratio == 'adapt' and section.settings.image != blank %}
+            style="padding-bottom: {{ 1 | divided_by:  section.settings.image.aspect_ratio | times: 100 }}%;"
+          {% endif %}
+        >
+          {% if section.settings.image != blank %}
+            {% render 'responsive-img' with image: section.settings.image %}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card-box  color-{{ section.settings.card_color }} gradient">
+          <div class="card-box__inner text-left">
+        
+            
+         {%- unless section.settings.heading == blank -%}
+ 
+        <div id="login" tabindex="-1" class="section--header-login">
+          <h1 class="section--title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h1>
+        </div>
+     
+    {%- endunless -%}
+
+
+            {%- form 'create_customer', novalidate: 'novalidate' -%}
+              {%- if form.errors -%}
+                <h2 class="form__message" tabindex="-1" autofocus>
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{ 'templates.contact.form.error_heading' | t }}
+                </h2>
+                <ul>
+                  {%- for field in form.errors -%}
+                    <li>
+                      {%- if field == 'form' -%}
+                        {{ form.errors.messages[field] }}
+                      {%- else -%}
+                        <a href="#RegisterForm-{{ field }}">
+                          {{ form.errors.translated_fields[field] | capitalize }}
+                          {{ form.errors.messages[field] }}
+                        </a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              <div class="form-group">
+                    <label for="RegisterForm-FirstName" class="form-lebel">
+                  {{ 'customer.register.first_name' | t }}
+                </label>
+                <input
+                  type="text"
+                  name="customer[first_name]"
+                  id="RegisterForm-FirstName"
+                     class="form-input"
+                  {% if form.first_name %}
+                    value="{{ form.first_name }}"
+                  {% endif %}
+                  autocomplete="given-name"
+                  placeholder="{{ 'customer.register.first_name' | t }}"
+                >
+            
+              </div>
+              <div class="form-group">
+                 <label for="RegisterForm-LastName" class="form-lebel">
+                  {{ 'customer.register.last_name' | t }}
+                </label>
+                <input
+                  type="text"
+                  name="customer[last_name]"
+                  id="RegisterForm-LastName"
+                    class="form-input"
+                  {% if form.last_name %}
+                    value="{{ form.last_name }}"
+                  {% endif %}
+                  autocomplete="family-name"
+                  placeholder="{{ 'customer.register.last_name' | t }}"
+                >
+               
+              </div>
+             <div class="form-group">
+
+               <label for="RegisterForm-email" class="form-lebel">
+                  {{ 'customer.register.email' | t }}
+                </label> 
+         
+                <input
+                  type="email"
+                  name="customer[email]"
+                  id="RegisterForm-email"
+                    class="form-input"
+                  {% if form.email %}
+                    value="{{ form.email }}"
+                  {% endif %}
+                  spellcheck="false"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  aria-required="true"
+                  {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                    aria-describedby="RegisterForm-email-error"
+                  {% endif %}
+                  placeholder="{{ 'customer.register.email' | t }}"
+                >
+              
+              </div>
+              {%- if form.errors contains 'email' -%}
+                <span id="RegisterForm-email-error" class="form__message">
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{ form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email }}.
+                </span>
+              {%- endif -%}
+             <div class="form-group">
+                    <label for="RegisterForm-password" class="form-lebel">
+                  {{ 'customer.register.password' | t }}
+                </label>
+                <input
+                  type="password"
+                  name="customer[password]"
+                  id="RegisterForm-password"
+                  aria-required="true"
+                    class="form-input"
+                  {% if form.errors contains 'password' %}
+                    aria-invalid="true"
+                    aria-describedby="RegisterForm-password-error"
+                  {% endif %}
+                  placeholder="{{ 'customer.register.password' | t }}"
+                >
+            
+              </div>
+              {%- if form.errors contains 'password' -%}
+                <span id="RegisterForm-password-error" class="form__message">
+                  <span class="svg-wrapper">
+                    {{- 'icon-error.svg' | inline_asset_content -}}
+                  </span>
+                  {{ form.errors.translated_fields.password | capitalize }}
+                  {{ form.errors.messages.password }}.
+                </span>
+              {%- endif -%}
+
+              {% if section.settings.term_condition_text != blank %}
+                
+ 
+
+              <div class="checkbox-wrapper-18">
+  <div class="round">
+    <input type="checkbox" id="checkbox-18" />
+    <label for="checkbox-18"> {{ section.settings.term_condition_text }}</label>
+  </div>
+</div>
+             {% endif %}
+
+
+                <button  id="submitBtn" class="button button--icon button--secondary button--full"  {% if section.settings.term_condition_text != blank %} disabled {% endif %}>
+                               
+
+
+               <span> {{ 'customer.register.submit' | t }} </span>
+
+              </button>
+
+
+                <p class="customer-text-info">
+              Already have an account?
+                       <a href="{{ routes.account_login_url }}">
+               Login Now
+              </a>
+              </p>
+
+
+
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+ 
+  document.addEventListener('DOMContentLoaded', function () {
+    const checkbox = document.getElementById('checkbox-18');
+    const button = document.getElementById('submitBtn');
+
+    checkbox.addEventListener('change', function () {
+      button.disabled = !this.checked;
+    });
+  });
+
+
+
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name",
+  "settings": [
+        {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+     {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Section heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "hxl",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "label": "adapt",
+          "value": "adapt"
+        },
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        },
+        {
+          "label": "16x9",
+          "value": "16-9"
+        },
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Portrait 2X",
+          "value": "portrait-2x"
+        }
+      ],
+      "default": "portrait",
+      "label": "Image Ratio"
+    },
+
+        {
+      "type": "inline_richtext",
+      "id": "term_condition_text",
+      "default": "I agree to the all Terms & Conditions.",
+      "label": "Term Contiton Text"
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color",
+      "label": "Card Color",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 48
+    }
+  ]
+}
+{% endschema %}

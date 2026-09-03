@@ -1,0 +1,168 @@
+
+
+.about-us-wrapper {
+  display: grid;
+  grid-template-columns: 1.6fr 0.9fr 1.1fr;
+  gap: 2.4rem;
+  align-items: stretch;
+}
+
+.about-us-content,
+.about-us-card,
+.about-us-image {
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.about-us-content {
+  border: 1px solid rgba(var(--color-border));
+  display: flex;
+}
+
+.about-us-content-inner {
+  max-width: 52.8rem;
+  padding: 4.8rem;
+}
+
+.about-us-heading {
+font-style: normal;
+font-weight: 600;
+font-size: 26px;
+line-height: 130%;
+letter-spacing: -0.04em;
+color: rgba(var(--color-heading));
+margin: 0 0 3.2rem;
+}
+
+.about-us-text {
+  margin-bottom: 4rem;
+  opacity: .8;
+}
+
+.about-us-card {
+  background: #f4f4f4;
+  color: #111;
+  padding: 4rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-us-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #e30613;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 1rem 1.8rem;
+  border-radius: 0 2rem 0 1.6rem;
+}
+
+.about-us-card-avatar{
+  width: 8rem;
+  height: 8rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    margin-bottom: 2.4em;
+        margin-top: 13px;
+}
+.about-us-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-us-card-heading{
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 8px 12px 8px 8px;
+gap: 10px;
+border: 1px solid #DDDCD5;
+border-radius: 8px;
+margin-bottom: 16px;
+}
+
+.about-card__heading{
+  margin: 0;
+
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+letter-spacing: 0.01em;
+}
+
+.about-us-hours-content {
+  margin-bottom: 1.6rem;
+}
+.about-us-bottom-content{
+   margin-bottom: 3.2rem;
+}
+
+.about-us-hours-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1.2rem 1.8rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 1rem;
+  margin: 3rem 0;
+  font-weight: 600;
+}
+
+.about-us-schedule {
+  margin-bottom: 2rem;
+}
+
+.about-us-schedule strong {
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.about-us-link {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  margin-top: 1rem;
+}
+
+.about-us-holiday {
+  margin-top: .8rem;
+}
+
+ 
+
+.about-us-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media screen and (max-width: 991px) {
+  .about-us-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .about-us-content,
+  .about-us-card,
+  .about-us-image {
+    min-height: auto;
+    height: auto;
+  }
+
+  .about-us-image {
+    height: 40rem;
+  }
+
+  .about-us-content-inner,
+  .about-us-card {
+    padding: 3rem;
+  }
+}

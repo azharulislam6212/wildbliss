@@ -1,0 +1,87 @@
+<nav class="header__inline-menu color-{{ section.settings.menu_color_scheme }} gradient">
+    <ul class="list-menu--inline" role="list">
+       {%- for link in section.settings.menu.links -%}
+
+         {%- assign submenu = false -%}
+         {%- assign megamenu = false -%}
+         {%- assign expands = false -%}
+            {%- if link.links != blank -%}
+           {%- assign submenu = true -%}
+           {%- assign expands = true -%}
+           {%- endif -%}
+
+
+     
+
+        {%- for block in section.blocks -%}
+       
+           {% assign link_title = block.settings.link_title | handleize %}
+           {% assign menu_title = link.title | handleize %}
+
+         {%- if link_title == menu_title -%}
+              {%- assign megamenu = true -%}
+           {%- assign expands = true -%}
+         {%- endif -%}
+    
+         {%- endfor -%}
+
+
+
+
+          <li class="{% if expands %} has-dropdown {% endif %} {% if megamenu %} has-mega-menu {% endif %}">
+               <a href="{{ link.url }}" class="menu-link-item {% if link.current %} active {% endif %}" >
+                 <span class="link-text">{{ link.title | escape }} </span>
+                 {% if expands %} 
+                  <span class="arrow-down"> {{- 'icon-caret.svg' | inline_asset_content -}}</span>
+                   {% endif %} 
+                </a>
+
+                     {% if megamenu %}
+
+
+                        
+                         {%- render 'megamenu-menu-list', link: link -%}
+
+
+
+                      {% elsif submenu %}
+
+                           <div class="header__inline-submenu--wrapper"> 
+                                 <ul class="header__inline-submenu color-{{ section.settings.mega_color_scheme }} gradient" role="list">
+                                    {%- for childlink in link.links -%}
+                                    {%- if childlink.links != blank -%}
+                                       <li class="menu-item-has-children">
+                                          <a href="{{ childlink.url }}" class="link-animation">{{ childlink.title | escape }} 
+                                             <span class="sub-arrow-down"> 
+                                                {{- 'icon-caret.svg' | inline_asset_content -}}
+                                             </span></a>
+                                                <div class="header__inline-nested--wrapper">  
+                                          <ul class="header__inline-nested-menu" role="list">
+                                             {%- for grandchild in childlink.links -%}
+                                             <li><a href="{{ grandchild.url }}" class="link-animation">{{ grandchild.title | escape }}</a></li>
+                                          {%- endfor -%}
+                                          </ul>
+                                          </div>
+                                       </li>
+                                       {%- else -%}
+                                       <li><a href="{{ childlink.url }}" class="link-animation">{{ childlink.title | escape }}</a></li>
+                                    {%- endif -%}
+                                 {%- endfor -%}
+                                 </ul>
+                                 </div>
+
+
+                      {% else %}
+
+
+                      {% endif %}
+
+
+          </li>
+
+ 
+           
+      {%- endfor -%}
+    </ul>
+
+ </nav>

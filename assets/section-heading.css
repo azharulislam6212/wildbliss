@@ -1,0 +1,21 @@
+.simple-header {
+  text-align: center;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.simple-header__heading {
+  font-size: 4.5rem;
+}
+
+@media (max-width: 768px) {
+  .simple-header__heading {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-header__heading {
+    font-size: 1.5rem;
+  }
+}

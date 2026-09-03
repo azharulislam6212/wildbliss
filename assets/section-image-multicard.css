@@ -1,0 +1,90 @@
+
+.image-multicard {
+    position: relative;
+}
+
+
+.image-multicard .section--text{
+    max-width: 872px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img-card-row{
+    align-items: stretch;
+}
+.image-card{
+    border-radius: 24px;
+    padding: 24px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.image-card__image{
+    text-align: center;
+    overflow: hidden;
+    border-radius: 12px;
+    line-height: 0;
+}
+
+ 
+.image-card__image img, .image-card__image svg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-card__content{
+    margin-top: 24px;
+}
+
+.image-card__pre_text{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+letter-spacing: 0.01em;
+
+ margin: 0 0 4px;
+ color:rgb(var(--color-accent));
+
+}
+.image-card__title{
+ 
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 130%;
+/* or 23px */
+letter-spacing: -0.04em;
+margin: 0 0 24px;
+}
+
+.image-card__text{
+ 
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+/* or 21px */
+letter-spacing: 0.01em;
+ 
+margin: 0;
+}
+
+
+@media screen and (max-width: 749px) {
+.image-card__text{
+font-size: 16px;
+}
+
+.image-multicard {
+    border-radius: 48px;
+}
+
+}
+

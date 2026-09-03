@@ -1,0 +1,25 @@
+
+.featured-products-grid .section--header {
+    max-width: 117.2rem;
+}
+
+
+.featured-products-grid{
+    position: relative;
+    border-radius: 0 0 40px 40px;
+    border-bottom: 2px solid rgba(var(--color-accent));
+}
+
+.feaured-collection__container .row {
+    --bs-gutter-x: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+
+.feaured-collection__container .row {
+    --bs-gutter-y: 4rem;
+}
+
+
+
+}

@@ -1,0 +1,57 @@
+.inside-blocks{
+    position: relative;
+}
+
+.button-card__flex{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button-card {
+box-sizing: border-box;
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 24px 48px;
+gap: 10px;
+border: 1px solid rgba(71, 112, 219, 0.3);
+border-radius: 100px;
+min-width: 234px;
+}
+
+
+.button-card__title{
+font-family: var(--font-heading-family);
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 150%;
+margin: 0;
+}
+
+.button-card__icon{
+     flex: 0 0 22px;
+     max-width: 22px;
+     line-height: 0;
+}
+
+.button-card__icon img{
+    height: 22px;
+}
+
+
+@media screen and (max-width: 768px) {
+.button-card {
+    padding: 8px;
+    min-width: 126px;
+}
+.button-card__title {
+    font-size: 16px;
+}
+
+}

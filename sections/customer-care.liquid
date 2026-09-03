@@ -1,0 +1,386 @@
+{{ 'section-customer-care.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div
+  id="{{ section.settings.them_section_id |  default:"customer-care-section" }}"
+  class="customer-care-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+  data-cascade
+  {% endif %}>
+  <div class="{{ section.settings.page_width }}">
+    <div class="customer-care-wrapper color-{{ section.settings.color_scheme_card }} gradient ">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'image' -%}
+
+            <div class="customer-care-image">
+              {% if block.settings.image_link != blank %}
+                <a href="{{ block.settings.image_link }}">
+              {% endif %}
+
+              {% if block.settings.image != blank %}
+                {% render 'responsive-img' with image: block.settings.image %}
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+
+              {% if block.settings.image_link != blank %}
+                </a>
+              {% endif %}
+            </div>
+
+          {%- when 'text_block' -%}
+            <div class="customer-care-content">
+              <div class="customer-care-content-inner text-center">
+
+                {% if block.settings.pre_text != blank %}
+                  <p class="customer-care--pre-text">{{ block.settings.pre_text }}</p>
+                {% endif %}
+
+
+                {% if block.settings.heading != blank %}
+                  <h2 class="customer-care-heading {{ section.settings.heading_size }}">
+                    {{ block.settings.heading }}
+                  </h2>
+                {% endif %}
+
+                {% if block.settings.text != blank %}
+                  <div class="customer-care-text rte">
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}
+
+                <div class="customer-care--row">
+
+                  {% if block.settings.email_text != blank %}
+                    <div class="customer-care-row__text rte">
+                      {{ block.settings.email_text }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.phone_text != blank %}
+                    <div class="customer-care-row__text rte">
+                      {{ block.settings.phone_text }}
+                    </div>
+                  {% endif %}
+
+                </div>
+
+                {% if block.settings.button_text != blank %}
+                  <a href="{{ block.settings.button_url | default: '#' }}" class="button button--{{ block.settings.button_style }}">
+                    <span class="button--text">
+                      {{ block.settings.button_text }}
+                    </span>
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+
+          {%- when 'images' -%}
+            <div class="customer-care--images">
+
+
+              {% if block.settings.image_link != blank %}
+                <a href="{{ block.settings.image_link }}">
+              {% endif %}
+
+              <div class="customer-care--img-1">
+                {% if block.settings.image != blank %}
+                  {% render 'responsive-img' with image: block.settings.image %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+
+
+              {% if block.settings.image_link != blank %}
+                </a>
+              {% endif %}
+
+
+              {% if block.settings.image_link_2 != blank %}
+                <a href="{{ block.settings.image_link_2 }}">
+              {% endif %}
+              <div class="customer-care--img-2">
+                {% if block.settings.image_2 != blank %}
+                  {% render 'responsive-img' with image: block.settings.image_2 %}
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}
+              </div>
+
+
+              {% if block.settings.image_link_2 != blank %}
+                </a>
+              {% endif %}
+
+
+            </div>
+
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.enable_divider -%}
+  <div class="{{ section.settings.page_width }}">
+    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
+  </div>
+{%- endif -%}
+{% schema %}
+  {
+    "name": "Customer care",
+    "class": "section",
+    "tag": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_divider",
+        "default": true,
+        "label": "Enable divider"
+      },
+      {
+        "type": "color",
+        "id": "divider_color",
+        "default": "#DDDCD5",
+        "label": "Divider color"
+      },
+      {
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "container",
+            "label": "Container"
+          }, {
+            "value": "container-fluid",
+            "label": "Full Width"
+          }
+        ],
+        "default": "container-fluid",
+        "label": "Layout Width"
+      },
+
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme_card",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-2"
+      },
+      
+      {
+        "type": "header",
+        "content": "Section padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Desktop",
+        "default": 76
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Desktop",
+        "default": 76
+      }, {
+        "type": "range",
+        "id": "padding_top_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Tab",
+        "default": 68
+      }, {
+        "type": "range",
+        "id": "padding_bottom_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Tab",
+        "default": 68
+      }, {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 56
+      }, {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 56
+      }, {
+        "type": "text",
+        "id": "them_section_id",
+        "label": "Section Id"
+      }
+    ],
+    "blocks": [
+
+      {
+        "type": "image",
+        "name": "Image",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "url",
+            "id": "image_link",
+            "label": "Image url"
+          }
+        ]
+      }, {
+        "type": "images",
+        "name": "Images",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "url",
+            "id": "image_link",
+            "label": "Image url"
+          }, {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          }, {
+            "type": "url",
+            "id": "image_link_2",
+            "label": "Image url"
+          }
+        ]
+      }, {
+        "type": "text_block",
+        "name": "Text Block",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "pre_text",
+            "label": "Pre Text",
+            "default": "Our History"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Roseville Meat Company.  A modern day, old fashioned meat market"
+          },
+
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>As a local, family-owned business, we offer an extensive line of beef, pork, poultry, lamb, veal, marinated products, and exotic meats such as buffalo and venison.</p>"
+          },
+          {
+            "type": "richtext",
+            "id": "email_text",
+            "label": "Text Info",
+            "default": "<p>Email</p><p>hello@example.com</p>"
+          }, {
+            "type": "richtext",
+            "id": "phone_text",
+            "label": "Text Info",
+            "default": "<p>Phone</p><p>(916) 782 - 2705</p>"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button",
+            "default": "Button Label"
+          }, {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+          }, {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button style",
+            "options": [
+              {
+                "value": "primary",
+                "label": "Primary"
+              }, {
+                "value": "primary-outline",
+                "label": "Primary outline"
+              }, {
+                "value": "secondary",
+                "label": "Secondary"
+              }, {
+                "value": "secondary-outline",
+                "label": "Secondary outline"
+              }
+            ],
+            "default": "primary"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Customer care",
+        "blocks": [
+          {
+            "type": "image"
+          }, {
+            "type": "text_block"
+          }, {
+            "type": "images"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

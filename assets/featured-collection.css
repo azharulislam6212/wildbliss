@@ -1,0 +1,9 @@
+
+.product-feed{
+    padding-bottom: 0.2rem;
+}
+
+
+ .product-feed .swiper-slide {
+    height: auto;
+}

@@ -1,0 +1,296 @@
+.collage-grid-section{
+    position: relative;
+}
+
+.collage-grid{
+    display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(350px, auto);
+     gap: 24px;
+    }
+
+.banner-grid{
+    display: grid;
+        grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    border-radius: 1.6rem;
+    box-sizing: border-box;
+border: 1px solid #FFC2C2;
+ 
+}
+
+.banner-grid__image{
+    grid-area: 1 / 1 / 2 / 2;
+    line-height: 0;
+}
+.banner-grid__image img, .banner-grid__image svg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.banner-grid__content{
+    grid-area: 1 / 1 / 2 / 2;
+    background-color: transparent;
+    padding: 6rem 4rem;
+}
+
+.banner-grid__product .banner-grid__content{
+    padding: 4rem ;
+    position: relative;
+}
+
+
+.banner-grid:first-child {
+  grid-column: span 1;
+}
+
+.banner-grid:nth-child(2) {
+   grid-row: span 2;
+}
+
+.banner-grid:nth-child(3) {
+   grid-column: span 1;
+}
+
+
+
+.banner-grid__title{
+font-style: normal;
+font-weight: 600;
+font-size: 40px;
+line-height: 130%;
+/* or 52px */
+letter-spacing: -0.04em;
+
+/* Secondary/secondary-5 */
+color: rgb(var(--color-accent));
+
+margin: 0 0 24px;
+ 
+}
+
+
+.banner-grid__title em{
+    font-style: normal;
+    display: block;
+}
+
+.banner-sub_heading{
+font-family: var(--font-family-heading);
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 130%;
+/* or 23px */
+letter-spacing: -0.04em;
+ margin: 0 0 8px;
+}
+
+.banner-grid__text{
+    margin: 0 0 32px;
+}
+
+.banner-grid__product-title{
+    /* Tomahawk Ribeye Bundle */
+ 
+/* 500/H5 */
+font-family: var(--font-family-heading);
+font-style: normal;
+font-weight: 500;
+font-size: 22px;
+line-height: 130%;
+/* or 29px */
+letter-spacing: -0.04em;
+ 
+ margin: 0 0 9px;
+
+}
+
+
+.save-price--badge-top{
+    
+     display: grid;
+        grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0.4rem;
+    align-items: center;
+        position: absolute;
+    right: 4rem;
+    top: 4rem;
+}
+
+.save-price--badge-top svg{
+      grid-area: 1 / 1 / 2 / 2;
+}
+
+.save-price--badge-top .save-price--badge__text{
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+    max-width: 80px;
+}
+
+
+.save-price--badge-top .save-price--badge__text span:nth-child(1){
+    /* SAVE */
+/* H4 */
+font-family:var(--font-family-heading);
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 120%;
+/* or 14px */
+text-align: center;
+letter-spacing: -0.04em;
+
+/* Primary */
+color: #FF0000;
+
+
+ 
+
+}
+.save-price--badge-top .save-price--badge__text span:nth-child(2){
+  
+/* H4 */
+font-family:var(--font-family-heading);
+font-style: normal;
+font-weight: 500;
+font-size: 27px;
+line-height: 120%;
+/* or 32px */
+text-align: center;
+letter-spacing: -0.04em;
+color: #FF0000;
+
+}
+
+.save-price--badge-top .save-price--badge__text span:nth-child(3){
+    /* H4 */
+font-family:var(--font-family-heading);
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 120%;
+/* or 14px */
+text-align: center;
+letter-spacing: -0.04em;
+
+/* Primary */
+color: #FF0000;
+
+}
+
+
+
+
+
+.banner-grid__product__price{
+    margin-bottom: 16rem !important;
+}
+
+
+
+.save-price--badge-bottom{
+     display: grid;
+        grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0.4rem;
+    align-items: center;
+        position: absolute;
+      left: 39%;
+    top: 40%;
+}
+
+.save-price--badge-bottom svg{
+      grid-area: 1 / 1 / 2 / 2;
+}
+
+.save-price--badge-bottom .save-price--badge__text{
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+    max-width: 80px;
+}
+
+
+.save-price--badge-bottom .save-price--badge__text span:nth-child(1){
+     /* H4 */
+font-family:var(--font-family-heading);
+ 
+
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 120%;
+/* or 14px */
+text-align: center;
+letter-spacing: -0.04em;
+ 
+
+/* Off White */
+color: #F4F3EF;
+ 
+ 
+
+}
+.save-price--badge-bottom .save-price--badge__text span:nth-child(2){
+  
+/* H4 */
+font-family:var(--font-family-heading);
+ 
+font-style: normal;
+font-weight: 500;
+font-size: 27px;
+line-height: 120%;
+/* or 32px */
+text-align: center;
+letter-spacing: -0.04em;
+
+/* Off White */
+color: #F4F3EF;
+ 
+
+}
+
+.save-price--badge-bottom .save-price--badge__text span:nth-child(3){
+    /* H4 */
+font-family:var(--font-family-heading);
+ 
+
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 120%;
+/* or 14px */
+text-align: center;
+letter-spacing: -0.04em;
+ 
+
+/* Off White */
+color: #F4F3EF;
+ 
+
+}
+
+@media screen and (max-width: 768px) {
+.collage-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+}
+.banner-grid__product .banner-grid__content {
+    padding: 2rem;
+    position: relative;
+}
+.banner-grid__content {
+    padding: 4rem 2rem;
+}
+.save-price--badge-top {
+ 
+    right: 2rem;
+    top: 36%;
+}
+}

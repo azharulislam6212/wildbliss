@@ -1,0 +1,49 @@
+{% assign product_form_id = 'quick-add-' | append: section_id | append: product.id %}
+
+<product-form data-section-id="{{ section_id }}">
+  {%- form 'product',
+    product,
+    id: product_form_id,
+    class: 'form js-product-form',
+    novalidate: 'novalidate',
+    data-type: 'add-to-cart-form'
+  -%}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ product.selected_or_first_available_variant.id }}"
+      class="product-variant-id"
+      {% if product.selected_or_first_available_variant.available == false %}
+        disabled
+      {% endif %}
+    >
+
+    <button
+      id="{{ product_form_id }}-submit"
+      type="submit"
+      name="add"
+      class="add-to-cart-button {{ class }}"
+      aria-haspopup="dialog"
+      aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+      aria-live="polite"
+      data-sold-out-message="true"
+      {% if product.selected_or_first_available_variant.available == false %}
+        disabled
+      {% endif %}
+    >
+          {%- render 'loading-spinner' -%}
+      <span class="button--text">
+        {%- if product.selected_or_first_available_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </span>
+      <span class="sold-out-message hidden">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+      
+
+    </button>
+  {%- endform -%}
+</product-form>

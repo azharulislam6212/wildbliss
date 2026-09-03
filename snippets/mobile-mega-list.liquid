@@ -1,0 +1,200 @@
+<div class="menu-drawer__mega-menu color-{{ section.settings.mega_color_scheme }} gradient">
+
+                {%- if link.links.size > 0 -%}
+                  <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                    {%- for childlink in link.links -%}
+                      <li>
+                        {%- if childlink.links == blank -%}
+                          <a
+                            id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                            href="{{ childlink.url }}"
+                            class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            {{ childlink.title | escape }}
+                          </a>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                    {%- endif -%}
+
+
+
+                           {%- for block in section.blocks -%}
+                            {%- case block.type -%}
+                                {%- when 'image_blocks' -%}
+                                {% assign link_title = block.settings.link_title | handleize %}
+                                {% assign menu_title = link.title | handleize %}
+
+                                {%- if link_title == menu_title -%}
+                                
+                                    <h3 class="mega-menu-title">{{ block.settings.image_title | escape }}</h3>
+
+                                    <div class="promotion-image__column">
+                                        {%- if block.settings.enable_promotion -%}
+                                        {%- if block.settings.link_url != blank -%}
+                                            <a href="{{ block.settings.link_url }}" class="mega-link">
+                                        {%- endif -%}
+                                        <div class="promotion-image__card color-{{ block.settings.promotion_color_scheme }} gradient">
+                                            <div class="promotion-image__img">
+                                            {%- if block.settings.image != blank -%}
+                                                {% render 'responsive-img' with image: block.settings.image %}
+                                            {%- else -%}
+                                                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                            {%- endif -%}
+                                            </div>
+                                            <div class="promotion-image__text">
+                                            <div class="promotion-image__content  d-flex ">
+                                                {%- if block.settings.title != blank -%}
+                                                <h3 class="promotion-image__title">{{ block.settings.title }}</h3>
+                                                {%- endif -%}
+
+                                                {%- if block.settings.link_text  != blank -%}
+                                                
+                                                
+                                                <div class="promotion-image__btn--label link-animation">
+                                                {{ block.settings.link_text }}
+                                                <svg
+                                                    width="11"
+                                                    height="9"
+                                                    viewBox="0 0 11 9"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747275C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
+                                                </svg>
+                                                </div>
+                                                
+                                                {%- endif -%}
+                                            </div>
+                                            </div>
+                                        </div>
+                                        {%- if block.settings.link_url != blank -%}
+                                            </a>
+                                        {%- endif -%}
+                                        {%- endif -%}
+
+                                        {%- if block.settings.enable_promotion_2 -%}
+                                        {%- if block.settings.link_url_2 != blank -%}
+                                            <a href="{{ block.settings.link_url_2 }}" class="mega-link">
+                                        {%- endif -%}
+                                        <div class="promotion-image__card color-{{ block.settings.promotion_color_scheme }} gradient">
+                                            <div class="promotion-image__img">
+                                            {%- if block.settings.image_2 != blank -%}
+                                                {% render 'responsive-img' with image: block.settings.image_2 %}
+                                            {%- else -%}
+                                                {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                            {%- endif -%}
+                                            </div>
+                                            <div class="promotion-image__text">
+                                            <div class="promotion-image__content  d-flex">
+                                                {%- if block.settings.title_2 != blank -%}
+                                                <h3 class="promotion-image__title">{{ block.settings.title_2 }}</h3>
+                                                {%- endif -%}
+
+                                                
+                                                {%- if block.settings.link_text_2  != blank -%}
+                                                
+                                            
+                                                <div class="promotion-image__btn--label link-animation">
+                                                {{ block.settings.link_text_2 }}
+                                                <svg
+                                                    width="11"
+                                                    height="9"
+                                                    viewBox="0 0 11 9"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747275C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
+                                                </svg>
+                                                </div>
+                                                {%- endif -%}
+                                            </div>
+                                            </div>
+                                        </div>
+                                        {%- if block.settings.link_url_2 != blank -%}
+                                            </a>
+                                        {%- endif -%}
+                                        {%- endif -%}
+                                    </div>
+                                     
+                                {%- endif -%}
+
+                                {%- when 'menu_block' -%}
+                                {% assign link_title = block.settings.link_title | handleize %}
+                                {% assign menu_title = link.title | handleize %}
+
+                                {%- if link_title == menu_title -%}
+
+                                    <div class="mega-menu__block-item">
+ 
+                                    <h3 class="mega-menu-title">{{ block.settings.quick_menu_title | escape }}</h3>
+ 
+                                    {%- if block.settings.block_menu != blank -%}
+                                        <ul class="megamenu-list">
+                                        {% for link in linklists[block.settings.block_menu].links %}
+                                            <li>
+                                            <a href="{{ link.url }}" class="link-animation">{{ link.title | escape }}</a>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
+                                    {%- endif -%}
+
+                                    {%- if block.settings.enable_promotion -%}
+                                        {%- if block.settings.link_url != blank -%}
+                                        <a href="{{ block.settings.link_url }}" class="mega-link">
+                                        {%- endif -%}
+
+                                        <div class="mega-image__card color-{{ block.settings.promotion_color_scheme }} gradient">
+                                        <div class="mega-image__img" style="--overlay: {{ block.settings.overlay_color }}">
+                                            {%- if block.settings.image != blank -%}
+                                            {% render 'responsive-img' with image: block.settings.image %}
+                                            {%- else -%}
+                                            {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                                            {%- endif -%}
+                                        </div>
+                                        <div class="mega-image__text  d-flex {{ block.settings.text_align }} ">
+                                            <div class="mega-image__content link-animation">
+                                            {%- if block.settings.title != blank -%}
+                                                <h3 class="mega-image__title">{{ block.settings.title }}</h3>
+                                            {%- endif -%}
+
+                                            {%- if block.settings.link_text != blank -%} 
+
+                                            <div class="mega-image__btn--label">
+                                                {{ block.settings.link_text }}
+                                                <svg
+                                                width="11"
+                                                height="9"
+                                                viewBox="0 0 11 9"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                <path d="M10.372 4.68477L6.43453 8.62228C6.35244 8.70437 6.2411 8.75049 6.125 8.75049C6.0089 8.75049 5.89756 8.70437 5.81547 8.62228C5.73338 8.54018 5.68726 8.42884 5.68726 8.31274C5.68726 8.19665 5.73338 8.08531 5.81547 8.00321L9.00648 4.81274H0.4375C0.321468 4.81274 0.210188 4.76665 0.128141 4.6846C0.0460937 4.60256 0 4.49128 0 4.37524C0 4.25921 0.0460937 4.14793 0.128141 4.06588C0.210188 3.98384 0.321468 3.93774 0.4375 3.93774H9.00648L5.81547 0.747275C5.73338 0.665182 5.68726 0.55384 5.68726 0.437743C5.68726 0.321647 5.73338 0.210305 5.81547 0.128212C5.89756 0.0461192 6.0089 0 6.125 0C6.2411 0 6.35244 0.0461192 6.43453 0.128212L10.372 4.06571C10.4127 4.10634 10.445 4.1546 10.467 4.20771C10.489 4.26082 10.5003 4.31775 10.5003 4.37524C10.5003 4.43274 10.489 4.48967 10.467 4.54278C10.445 4.59589 10.4127 4.64414 10.372 4.68477Z" fill="currentColor"/>
+                                                </svg>
+                                            </div>
+
+                                            {%- endif -%}
+                                            </div>
+                                        </div>
+                                        </div>
+                                        {%- if block.settings.link_url != blank -%}
+                                        </a>
+                                        {%- endif -%}
+                                    {%- endif -%}
+
+                                     </div>
+                                   
+                            
+                                {%- endif -%}
+                            {%- endcase -%}
+                            {% endfor %}
+
+
+
+
+ 
+</div>
