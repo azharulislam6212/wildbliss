@@ -33,12 +33,12 @@
   <div class="{{  section.settings.page_width}}"> 
   {%- if section.blocks.size > 0 -%}
     <div class="running-content marquee">
-      <marquee-content
+  <marquee-content
         data-speed="{{ section.settings.speed }}"
         class="running-content-wrap"
         style="--marquee-duration: {{ 1000 | divided_by: section.settings.speed }}s;"
       >
-        {%- capture marquee_item -%}
+ {%- capture marquee_item -%}
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'marquee_text' -%}
@@ -51,7 +51,7 @@
                   {% endif %}
 
                   <div class="running-content__text">
-    {{- block.settings.text -}}
+               {{- block.settings.text -}}
                   </div>
 
               
@@ -59,27 +59,13 @@
             {%- endcase -%}
           {%- endfor -%}
         {%- endcapture -%}
-        <div class="marquee-container js-marquee-items {{ section.settings.pause_when_hover | default: '' | replace: 'true', 'marquee--animation-pause' }}">
-          {%- case section.blocks.size -%}
-            {%- when 1 -%}
-              {%- for i in (1..12) -%}
-                <div class="js-marquee-item marquee-item  marquee__items--animate  marquee--{{- section.settings.moving_direction }}">
-                  {{- marquee_item -}}
-                </div>
-              {%- endfor -%}
-            {%- when 2, 3 -%}
-              {%- for i in (1..7) -%}
-                <div class="js-marquee-item marquee-item marquee__items--animate  marquee--{{- section.settings.moving_direction }}">
-                  {{- marquee_item -}}
-                </div>
-              {%- endfor -%}
-            {%- else -%}
-              {%- for i in (1..5) -%}
-                <div class="js-marquee-item marquee-item  marquee__items--animate marquee--{{- section.settings.moving_direction }}">
-                  {{- marquee_item -}}
-                </div>
-              {%- endfor -%}
-          {%- endcase -%}
+
+        <div class="marquee-container js-marquee-items {{ section.settings.pause_when_hover | default: '' | replace: 'true', 'marquee--animation-pause' }} marquee--{{ section.settings.moving_direction }}">
+          <div class="marquee-track marquee__items--animate" data-marquee-track>
+            <div class="marquee-group" data-marquee-group>
+             {{ marquee_item }}
+            </div>
+          </div>
         </div>
       </marquee-content>
     </div>

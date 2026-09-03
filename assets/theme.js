@@ -47,7 +47,7 @@ var Thm = {
           a.addEventListener("click", function (e) {
             if (
               location.pathname.replace(/^\//, "") ===
-                this.pathname.replace(/^\//, "") &&
+              this.pathname.replace(/^\//, "") &&
               location.hostname === this.hostname
             ) {
               var target =
@@ -70,38 +70,100 @@ var Thm = {
     },
     marqueeScroller: function () {
       if (!customElements.get("marquee-content")) {
+
         class Marquee extends HTMLElement {
-          constructor() {
-            super();
-          }
           connectedCallback() {
-            this.init();
+            this.track = this.querySelector("[data-marquee-track]");
+            this.group = this.querySelector("[data-marquee-group]");
+            if (!this.track || !this.group) return;
+
+            this.build = this.build.bind(this);
+            this.build();
+            this.settleAfterImages();
+
+            if ("ResizeObserver" in window) {
+
+              this.observer = new ResizeObserver((entries) => {
+                for (const entry of entries) {
+                  if (entry.target === this.group) this._groupWidth = entry.contentRect.width;
+                  else if (entry.target === this) this._viewport = entry.contentRect.width;
+                }
+                this.schedule();
+              });
+              this.observer.observe(this);
+              this.observer.observe(this.group);
+            }
+
+            if (document.fonts?.ready) document.fonts.ready.then(this.build);
           }
-          calculationPaddingSection() {
-            ((this.heightSection = this.offsetHeight),
-              (this.heightSection =
-                this.heightSection < 18
-                  ? 18
-                  : 96 < this.heightSection
-                    ? 96
-                    : this.heightSection),
-              this.closest(".js-running-content").style.setProperty(
-                "--spacing-padding-block",
-                this.heightSection + "px",
-              ));
+
+          disconnectedCallback() {
+            this.observer?.disconnect();
+            cancelAnimationFrame(this.frame);
           }
-          init() {
-            ((this.distance =
-              this.querySelector(".js-marquee-item").offsetWidth),
-              (this.speed = this.dataset.speed),
-              this.style.setProperty(
-                "--marquee-duration",
-                this.distance / this.speed + "s",
-              ));
+
+          schedule() {
+            cancelAnimationFrame(this.frame);
+            this.frame = requestAnimationFrame(this.build);
+          }
+
+          build() {
+            const existing = this.track.querySelectorAll("[data-marquee-clone]");
+
+            const groupWidth = this._groupWidth ?? this.group.getBoundingClientRect().width;
+            const viewport = this._viewport ?? this.getBoundingClientRect().width;
+
+            if (groupWidth < 1 || viewport < 1) return;
+
+            const copies = Math.ceil(viewport / groupWidth) + 1;
+
+            if (existing.length === copies - 1) return;
+
+            existing.forEach((el) => el.remove());
+
+            const fragment = document.createDocumentFragment();
+            for (let i = 1; i < copies; i += 1) {
+              const clone = this.group.cloneNode(true);
+              clone.setAttribute("data-marquee-clone", "");
+              clone.setAttribute("aria-hidden", "true");
+              clone.removeAttribute("data-marquee-group");
+              clone.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+
+              clone
+                .querySelectorAll('a[href], button, input, select, textarea, [tabindex]')
+                .forEach((el) => el.setAttribute("tabindex", "-1"));
+              fragment.appendChild(clone);
+            }
+            this.track.appendChild(fragment);
+
+            this.style.setProperty("--marquee-group-width", `${groupWidth}px`);
+
+            const speed = Math.abs(parseFloat(this.dataset.speed)) || 50;
+            this.style.setProperty("--marquee-duration", `${groupWidth / speed}s`);
+
+            this.setAttribute("data-marquee-ready", "");
+          }
+
+          settleAfterImages() {
+            const pending = [...this.querySelectorAll("img")].filter((img) => !img.complete);
+            if (!pending.length) return;
+
+            let left = pending.length;
+            const done = () => {
+              if (--left > 0) return;
+              this.schedule();
+            };
+
+            pending.forEach((img) => {
+              img.addEventListener("load", done, { once: true });
+              img.addEventListener("error", done, { once: true });
+            });
           }
         }
+
         customElements.define("marquee-content", Marquee);
       }
+
     },
     drawerToggler: function () {
       const drawerToggleButtons = document.querySelectorAll(
@@ -435,23 +497,23 @@ var Thm = {
               "src",
               this.iframe.getAttribute("data-src"),
             ),
-            this.iframe.addEventListener(
-              "load",
-              function () {
-                ("youtube" == this.dataVideoType &&
-                  this.iframe.contentWindow.postMessage(
-                    '{"event":"command","func":"playVideo","args":""}',
-                    "*",
-                  ),
-                  "vimeo" == this.dataVideoType &&
+              this.iframe.addEventListener(
+                "load",
+                function () {
+                  ("youtube" == this.dataVideoType &&
+                    this.iframe.contentWindow.postMessage(
+                      '{"event":"command","func":"playVideo","args":""}',
+                      "*",
+                    ),
+                    "vimeo" == this.dataVideoType &&
                     this.iframe.contentWindow.postMessage(
                       '{"method":"play"}',
                       "*",
                     ));
-              }.bind(this),
-            )),
+                }.bind(this),
+              )),
             "local_video" == this.dataVideoType &&
-              ((this.local_video = this.querySelector("video")),
+            ((this.local_video = this.querySelector("video")),
               (t = this.local_video
                 .querySelector("source")
                 .getAttribute("data-src")),
@@ -461,17 +523,17 @@ var Thm = {
           Shopify.designMode
             ? this.loadVideo()
             : (["mousemove", "touchstart"].forEach(
-                function (t) {
-                  THMHelper.qs("body").addEventListener(
-                    t,
-                    function (t) {
-                      (this.isMouseenter || this.loadVideo(),
-                        (this.isMouseenter = !0));
-                    }.bind(this),
-                    { once: !0 },
-                  );
-                }.bind(this),
-              ),
+              function (t) {
+                THMHelper.qs("body").addEventListener(
+                  t,
+                  function (t) {
+                    (this.isMouseenter || this.loadVideo(),
+                      (this.isMouseenter = !0));
+                  }.bind(this),
+                  { once: !0 },
+                );
+              }.bind(this),
+            ),
               window.addEventListener(
                 "scroll",
                 function (t) {
@@ -502,7 +564,7 @@ var Thm = {
         connectedCallback() {
           this.execute();
         }
-        disconnectedCallback() {}
+        disconnectedCallback() { }
       }
       customElements.define("thm-load-video", THMLazyLoadingVideo);
 
@@ -520,10 +582,10 @@ var Thm = {
             (this.playPauseButton = this.$(".video-play-pause-button")),
             (this.trigger = this.$(".js-load-media-trigger")),
             this.trigger &&
-              this.trigger.addEventListener(
-                "click",
-                this.handlePlayVideo.bind(this),
-              ));
+            this.trigger.addEventListener(
+              "click",
+              this.handlePlayVideo.bind(this),
+            ));
 
           if (this.playPauseButton) {
             this.playPauseButton.addEventListener(
@@ -612,10 +674,10 @@ var Thm = {
             var t = document.createElement("script"),
               e =
                 ((t.src = "https://www.youtube.com/iframe_api"),
-                (t.onload = () => {
-                  this.onYouTubeIframeAPIReady();
-                }),
-                document.getElementsByTagName("script")[0]);
+                  (t.onload = () => {
+                    this.onYouTubeIframeAPIReady();
+                  }),
+                  document.getElementsByTagName("script")[0]);
             e.parentNode.insertBefore(t, e);
           }
         }
@@ -634,10 +696,10 @@ var Thm = {
             var t = document.createElement("script"),
               e =
                 ((t.src = "https://player.vimeo.com/api/player.js"),
-                (t.onload = () => {
-                  this.onVimeoIframeAPIReady();
-                }),
-                document.getElementsByTagName("script")[0]);
+                  (t.onload = () => {
+                    this.onVimeoIframeAPIReady();
+                  }),
+                  document.getElementsByTagName("script")[0]);
             e.parentNode.insertBefore(t, e);
           }
         }
@@ -2296,7 +2358,7 @@ customElements.define("shipping-bar", ShippingBar);
 
 
 document.addEventListener("DOMContentLoaded", function () {
- 
+
 
   function openDrawer(id) {
     closeDrawers();
@@ -2305,7 +2367,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!drawer) return;
     drawer.classList.add("active");
- 
+
     document.body.classList.add("overflow-hidden");
   }
 
@@ -2314,7 +2376,7 @@ document.addEventListener("DOMContentLoaded", function () {
       drawer.classList.remove("active");
     });
 
- 
+
 
     document.body.classList.remove("overflow-hidden");
   }
@@ -2353,7 +2415,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  
+
 
   document.addEventListener("keyup", function (e) {
     if (e.key === "Escape") {
@@ -2587,11 +2649,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("click", function (e) {
 
-    const trigger = e.target.closest(".drawer-trigger");
+  const trigger = e.target.closest(".drawer-trigger");
 
-    if (!trigger) return;
+  if (!trigger) return;
 
-    openDrawer(trigger.dataset.target);
+  openDrawer(trigger.dataset.target);
 
 });
 
