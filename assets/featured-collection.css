@@ -1,9 +1,206 @@
-
-.product-feed{
-    padding-bottom: 0.2rem;
+/* ---------------------------------------------------------------------------
+   Featured collection
+   --------------------------------------------------------------------------- */
+.featured-collection {
+  position: relative;
 }
 
+/* Header */
+.featured-collection__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 3.6rem;
+}
 
- .product-feed .swiper-slide {
-    height: auto;
+.featured-collection__eyebrow {
+  display: flex;
+  align-items: center;
+  margin: 0 0 1.2rem;
+}
+
+.featured-collection__eyebrow::before {
+  content: "";
+  display: block;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.featured-collection__title {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.featured-collection__title em {
+  font-style: italic;
+  color: rgb(var(--color-sub-heading));
+}
+
+.featured-collection__header-action {
+  flex: 0 0 auto;
+}
+
+.featured-collection__header-action:empty {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .featured-collection__header {
+    padding-bottom: 4.6rem;
+  }
+}
+
+/* View all button */
+.featured-collection__view-all {
+  gap: 0.8rem;
+  min-height: 5.6rem;
+  height: 5.6rem;
+  padding: 0 2.6rem;
+  border-radius: 999px;
+}
+
+.featured-collection__footer-action {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .featured-collection__header-action .featured-collection__view-all + * {
+    display: none;
+  }
+
+  .featured-collection__footer-action {
+    display: none;
+  }
+}
+
+/* Navigation arrows — same arrow mark as the view all button */
+.featured-collection__nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.featured-collection__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.featured-collection__arrow:hover {
+  background-color: rgb(var(--color-primary-button));
+  border-color: rgb(var(--color-primary-button));
+  color: rgb(var(--color-primary-button-text));
+}
+
+.featured-collection__arrow.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Grid */
+.featured-collection__grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.featured-collection__grid > .col {
+  width: auto;
+  max-width: none;
+  padding: 0;
+}
+
+.featured-collection__grid.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.featured-collection__grid.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media screen and (min-width: 750px) {
+  .featured-collection__grid.grid-cols-md-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featured-collection__grid.grid-cols-md-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .featured-collection__grid.grid-cols-md-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .featured-collection__grid.grid-cols-lg-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featured-collection__grid.grid-cols-lg-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .featured-collection__grid.grid-cols-lg-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .featured-collection__grid.grid-cols-lg-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Grid that turns into a carousel on mobile. Swiper is destroyed above the
+   breakpoint, so the grid rules below take over cleanly. */
+@media screen and (min-width: 750px) {
+  .mobile-carousel__swiper.swiper {
+    overflow: visible;
+  }
+
+  .mobile-carousel__swiper > .swiper-wrapper {
+    display: grid;
+    transform: none;
+  }
+
+  mobile-carousel .featured-collection__nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .mobile-carousel__swiper > .swiper-wrapper {
+    display: flex;
+    gap: 0;
+  }
+
+  mobile-carousel .featured-collection__nav {
+    justify-content: center;
+    padding-top: 3.2rem;
+  }
+}
+
+/* Carousel */
+.product-feed {
+  padding-bottom: 0.2rem;
+}
+
+.product-feed .swiper-slide {
+  height: auto;
+}
+
+.featured-collection .card-wrapper,
+.featured-collection .card {
+  height: 100%;
 }

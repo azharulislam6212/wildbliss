@@ -2660,3 +2660,61 @@ document.addEventListener("click", function (e) {
 
 
 
+
+
+/* Turns a grid into a swipeable carousel below a breakpoint, and back into a
+   grid above it. Used by the featured collection section. */
+(function () {
+  if (typeof customElements === "undefined") return;
+  if (customElements.get("mobile-carousel")) return;
+
+  class MobileCarousel extends HTMLElement {
+    connectedCallback() {
+      this.wrapper = this.querySelector(".mobile-carousel__swiper");
+      if (!this.wrapper || typeof Swiper === "undefined") return;
+
+      const breakpoint = parseInt(this.dataset.breakpoint || "750", 10);
+      this.query = window.matchMedia("(max-width: " + (breakpoint - 1) + "px)");
+      this.onChange = this.onChange.bind(this);
+      this.query.addEventListener("change", this.onChange);
+      this.onChange();
+    }
+
+    disconnectedCallback() {
+      if (this.query) this.query.removeEventListener("change", this.onChange);
+      this.teardown();
+    }
+
+    onChange() {
+      if (this.query.matches) {
+        this.build();
+      } else {
+        this.teardown();
+      }
+    }
+
+    build() {
+      if (this.swiper) return;
+
+      this.swiper = new Swiper(this.wrapper, {
+        slidesPerView: parseFloat(this.dataset.slidesmobile) || 1.2,
+        spaceBetween: parseInt(this.dataset.mobilespace || "16", 10),
+        watchOverflow: true,
+        threshold: 10,
+        speed: 500,
+        navigation: {
+          nextEl: this.querySelector(".swiper-button-next"),
+          prevEl: this.querySelector(".swiper-button-prev"),
+        },
+      });
+    }
+
+    teardown() {
+      if (!this.swiper) return;
+      this.swiper.destroy(true, true);
+      this.swiper = null;
+    }
+  }
+
+  customElements.define("mobile-carousel", MobileCarousel);
+})();

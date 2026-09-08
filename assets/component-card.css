@@ -894,3 +894,227 @@ border-radius: var(--border-radius);
     padding: 0;
     margin: 0;
 }
+
+
+/* ---------------------------------------------------------------------------
+   Product card content
+   --------------------------------------------------------------------------- */
+.card__content .card__information {
+  padding: 0;
+}
+
+.card__meta-line {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: var(--font-body-weight);
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.card__content .card__heading {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.9rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: rgb(var(--color-heading));
+}
+
+.card__benefit {
+  margin: 0 0 1.2rem;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.card__botanical {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: rgb(var(--color-sub-heading));
+}
+
+/* Rating */
+.card__rating {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 0 0 1.6rem;
+}
+
+.card__rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  line-height: 0;
+  color: rgb(var(--color-secondary-button));
+}
+
+.card__star--empty {
+  opacity: 0.25;
+}
+
+.card__rating-text {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Price and add to cart share the bottom row */
+.card__footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+.card__price-block {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.card__price-block .price {
+  font-family: var(--font-heading-family);
+  font-size: 2.2rem;
+  line-height: 1.2;
+  color: rgb(var(--color-heading));
+}
+
+.card__price-block .price__container {
+  margin-bottom: 0;
+}
+
+.card__price-block .unit-price {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.card__footer .quick-add {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.card__footer .quick-add .button--add {
+  min-width: 0;
+  min-height: 3.6rem;
+  height: 3.6rem;
+  padding: 0 1.8rem;
+  border-radius: 999px;
+  font-size: 1.4rem;
+}
+
+/* Badges: `__badge:Name` product tags render as `badge--<name>` */
+.card__badge .badge {
+  padding: 0.4rem 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: rgb(var(--color-primary-button));
+  color: rgb(var(--color-primary-button-text));
+}
+
+.card__badge .badge--bestseller {
+  background-color: rgb(var(--color-secondary-button));
+  color: rgb(var(--color-background));
+}
+
+
+/* Content stacks from the top, price and add to cart pin to the bottom */
+.card:not(.card--horizontal) > .card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.card:not(.card--horizontal) > .card__content > .card__information {
+  padding: 0;
+}
+
+.card:not(.card--horizontal) > .card__content > .card__badge {
+  align-self: flex-start;
+  margin-top: 1.2rem;
+}
+
+.card:not(.card--horizontal) > .card__content > .card__badge:empty {
+  display: none;
+}
+
+/* With an image the badges live on the media, so the duplicate below it goes */
+.card--media:not(.card--horizontal) > .card__content > .card__badge {
+  display: none;
+}
+
+/* Badges sit side by side when a product carries more than one */
+.card__badge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Judge.me widget inherits the card's rating rhythm */
+.card__rating--judgeme {
+  display: block;
+  margin: 0 0 1.6rem;
+}
+
+.card__rating--judgeme .jdgm-widget,
+.card__rating--judgeme .jdgm-prev-badge {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.card__rating--judgeme .jdgm-prev-badge__stars {
+  color: rgb(var(--color-secondary-button));
+}
+
+.card__rating--judgeme .jdgm-prev-badge__text {
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Compare-at price */
+.card__price-block .price--on-sale .price__sale {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.6rem;
+}
+
+.card__price-block .price--on-sale .price__sale .price-item--sale {
+  margin: 0;
+  color: rgb(var(--color-heading));
+}
+
+.card__price-block .price--on-sale .price__sale s.price-item--regular,
+.card__price-block .price__regular s.price-item--regular {
+  font-family: var(--font-heading-family);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  color: rgba(var(--color-foreground), 0.45);
+}
+
+.card__price-block .save-price {
+  display: none;
+}
