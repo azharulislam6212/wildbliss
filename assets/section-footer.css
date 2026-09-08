@@ -1354,7 +1354,7 @@ line-height: 150%;
 .footer--style-minimal .footer__blocks-wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 4.8rem;
   margin-left: 0;
   margin-right: 0;
 }
@@ -1460,8 +1460,8 @@ line-height: 150%;
 
 /* Bottom bar */
 .footer--style-minimal .footer__content-bottom__space {
-  padding: 5.8rem 0 0;
-  border-top: 0;
+  padding: 5.4rem 0 0;
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
   flex-wrap: wrap;
   gap: 1.6rem;
 }
@@ -1470,6 +1470,7 @@ line-height: 150%;
 .footer--style-minimal .policy-menu--bottom .copyright__content {
   font-size: 1.4rem;
   line-height: 1.5;
+  letter-spacing: 0;
   color: rgba(var(--color-foreground), 0.6);
 }
 
@@ -1491,12 +1492,12 @@ line-height: 150%;
 
 /* Disclaimer */
 .footer--style-minimal .footer__disclaimer {
-  padding: 3.4rem 0 3.5rem;
+  padding: 2.2rem 0 3.2rem;
   max-width: 118rem;
   font-family: var(--font-heading-family);
   font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.65;
+  font-size: 1.2rem;
+  line-height: 1.5;
   color: rgba(var(--color-accent), 0.9);
 }
 
@@ -1510,30 +1511,54 @@ line-height: 150%;
 
 @media screen and (max-width: 989px) {
   .footer--style-minimal .footer__content-bottom__space {
-    padding-top: 4rem;
+    padding-top: 4.4rem;
   }
 }
 
 @media screen and (max-width: 768px) {
- 
+  .footer--style-minimal .footer__blocks-wrapper > *,
+  .footer--style-minimal .fixed-layout .footer-block:nth-child(1) {
+    margin-bottom: 0;
+  }
 
   .footer--style-minimal .footer__content-bottom__space {
-    padding-top: 3.2rem;
+    padding: 4rem 0 0;
+    border-top: 0;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: flex-start;
+    gap: 0;
   }
 
   .footer--style-minimal .footer__content__right {
     width: 100%;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1.6rem;
+  }
+
+  .footer--style-minimal .policy-menu--bottom {
+    text-align: left;
+  }
+
+  .footer--style-minimal .policy-menu--bottom .policies {
+    gap: 0.4rem 1.6rem;
   }
 
   .footer--style-minimal .footer__disclaimer {
-    padding: 2.4rem 0 3.2rem;
+    padding: 2.2rem 0 3.1rem;
   }
-.footer--style-minimal .footer__blocks-wrapper {
+
+  /* Accordion mode: the disclosure rows carry their own dividers and spacing */
+  .footer--style-minimal .footer__blocks-wrapper--accordion {
     gap: 0;
-}
-.footer--style-minimal .footer-block__heading {
+  }
+
+  .footer--style-minimal .footer__blocks-wrapper--accordion .footer-block__heading {
     margin-bottom: 0;
-}
+  }
+
+  .footer--style-minimal .footer__blocks-wrapper--accordion .footer-block--text {
+    margin-bottom: 4.8rem;
+  }
 }
