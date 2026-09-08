@@ -29,7 +29,8 @@
   }
 {%- endstyle -%}
 
-<footer class="footer color-{{ section.settings.color_scheme }} gradient">
+
+<footer class="footer footer--style-{{ section.settings.footer_style }} color-{{ section.settings.color_scheme }} gradient">
   {% if section.settings.bg_image != blank %}
     <div class="footer__bg">
       {% render 'responsive-img' with image: section.settings.bg_image , class:"desktop__image" %}
@@ -53,6 +54,22 @@
 
     if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false
       assign only_empty_brand = true
+    endif
+
+    assign store_info_blocks = section.blocks | where: 'type', 'store_info'
+    assign show_footer_middle = false
+    if store_info_blocks.size > 0 or section.settings.show_help_box or section.settings.newsletter_enable
+      assign show_footer_middle = true
+    endif
+
+    assign show_footer_policy_row = false
+    if section.settings.show_policy and section.settings.policy_position != 'bottom'
+      assign show_footer_policy_row = true
+    endif
+
+    assign show_footer_payment_row = false
+    if section.settings.payment_enable or section.settings.payment_enable_custom or show_footer_policy_row
+      assign show_footer_payment_row = true
     endif
   -%}
 
@@ -178,7 +195,9 @@
 
                         {%- if block.settings.show_social and has_social_icons -%}
                           <div class="social-info">
-                            <span>Follow Us</span>
+                            {%- if block.settings.show_social_label -%}
+                              <span>Follow Us</span>
+                            {%- endif -%}
                             {%- render 'social-icons', class: 'footer__list-social' -%}
                           </div>
                         {%- endif -%}
@@ -388,7 +407,9 @@
                         {%- endif -%}
                         {%- if block.settings.show_social and has_social_icons -%}
                           <div class="social-info">
-                            <span>Follow Us :</span>
+                            {%- if block.settings.show_social_label -%}
+                              <span>Follow Us :</span>
+                            {%- endif -%}
                             {%- render 'social-icons', class: 'footer__list-social' -%}
                           </div>
                         {%- endif -%}
@@ -494,7 +515,9 @@
 
                         {%- if block.settings.show_social and has_social_icons -%}
                           <div class="social-info">
-                            <span>Follow Us</span>
+                            {%- if block.settings.show_social_label -%}
+                              <span>Follow Us</span>
+                            {%- endif -%}
                             {%- render 'social-icons', class: 'footer__list-social' -%}
                           </div>
                         {%- endif -%}
@@ -615,7 +638,9 @@
 
                         {%- if block.settings.show_social and has_social_icons -%}
                           <div class="social-info">
-                            <span>Follow Us :</span>
+                            {%- if block.settings.show_social_label -%}
+                              <span>Follow Us :</span>
+                            {%- endif -%}
                             {%- render 'social-icons', class: 'footer__list-social' -%}
                           </div>
                         {%- endif -%}
@@ -812,6 +837,7 @@
     {%- endunless -%}
   {%- endif -%}
 
+  {%- if show_footer_middle -%}
   <div
     class="footer__content-middle {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
     {% if settings.animations_reveal_on_scroll %}
@@ -945,6 +971,7 @@
               {%- endcase -%}
             {%- endfor -%}
 
+            {%- if section.settings.show_help_box -%}
             <div class="divider-v-line"></div>
 
             <div class="drawer-info {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -978,6 +1005,7 @@
               </div>
             </div>
             <div class="divider-v-line"></div>
+            {%- endif -%}
 
             {% if section.settings.newsletter_enable %}
               <div class="newsletter-form__content {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -1077,7 +1105,9 @@
       </div>
     </div>
   </div>
+  {%- endif -%}
 
+  {%- if show_footer_payment_row -%}
   <div
     class="footer__content-payment-pilicy {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
     {% if settings.animations_reveal_on_scroll %}
@@ -1207,7 +1237,7 @@
               </div>
             {%- endif -%}
 
-            {%- if section.settings.show_policy -%}
+            {%- if show_footer_policy_row -%}
               <div class="policy-menu {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
     {% if settings.animations_reveal_on_scroll %}
       data-cascade
@@ -1272,6 +1302,7 @@
       </div>
     </div>
   </div>
+  {%- endif -%}
 
   <div
     class="footer__content-bottom {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -1294,6 +1325,40 @@
             </div>
 
             <div class="footer__content__right">
+              {%- if section.settings.show_policy and section.settings.policy_position == 'bottom' -%}
+                <div class="policy-menu policy-menu--bottom{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                  {% if settings.animations_reveal_on_scroll %}
+                    data-cascade
+                  {% endif %}
+                >
+                  <ul class="policies list-unstyled">
+                    {%- if section.settings.menu_policy != blank -%}
+                      {%- for link in section.settings.menu_policy.links -%}
+                        <li>
+                          <small class="copyright__content">
+                            <a
+                              href="{{ link.url }}"
+                              class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
+                            >
+                              {{ link.title | escape }}
+                            </a>
+                          </small>
+                        </li>
+                      {%- endfor -%}
+                    {%- else -%}
+                      {%- for policy in shop.policies -%}
+                        {%- if policy != blank -%}
+                          <li>
+                            <small class="copyright__content">
+                              <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+                            </small>
+                          </li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  </ul>
+                </div>
+              {%- endif -%}
               {% if section.settings.enable_country_selector or section.settings.enable_language_selector %}
                 <div class="footer__localization isolate">
                   {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
@@ -1324,6 +1389,7 @@
                 </div>
               {% endif %}
 
+              {%- if section.settings.show_bottom_badge -%}
               <a href="">
                 <svg width="58" height="40" viewBox="0 0 58 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_212_1156)">
@@ -1343,8 +1409,15 @@
                   </defs>
                 </svg>
               </a>
+              {%- endif -%}
             </div>
           </div>
+
+          {%- if section.settings.disclaimer != blank -%}
+            <div class="footer__disclaimer rte">
+              {{ section.settings.disclaimer }}
+            </div>
+          {%- endif -%}
         </div>
       </div>
     </div>
@@ -1443,6 +1516,12 @@
           "default": true,
           "label": "t:sections.footer.blocks.brand_information.settings.show_social.label",
           "info": "t:sections.footer.blocks.brand_information.settings.show_social.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social_label",
+          "default": true,
+          "label": "Show \"Follow Us\" label"
         }
       ]
     },
@@ -1507,6 +1586,12 @@
           "default": true,
           "label": "t:sections.footer.blocks.brand_information.settings.show_social.label",
           "info": "t:sections.footer.blocks.brand_information.settings.show_social.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social_label",
+          "default": true,
+          "label": "Show \"Follow Us\" label"
         }
       ]
     },
@@ -1625,6 +1710,23 @@
     }
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "footer_style",
+      "label": "Footer style",
+      "info": "Minimal renders the Wild Bliss layout: brand column, link columns, and a plain bottom bar.",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "minimal",
+          "label": "Minimal"
+        }
+      ],
+      "default": "default"
+    },
     {
       "type": "select",
       "id": "page_width",
@@ -1765,6 +1867,12 @@
       "content": "Call to action"
     },
     {
+      "type": "checkbox",
+      "id": "show_help_box",
+      "default": true,
+      "label": "Show help and store locator row"
+    },
+    {
       "type": "text",
       "id": "help_title",
       "label": "Help Title",
@@ -1852,16 +1960,44 @@
       "info": "t:sections.footer.settings.show_policy.info"
     },
     {
+      "type": "select",
+      "id": "policy_position",
+      "label": "Policy links position",
+      "options": [
+        {
+          "value": "middle",
+          "label": "Payment row"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom bar"
+        }
+      ],
+      "default": "middle"
+    },
+    {
       "type": "link_list",
       "id": "menu_policy",
       "default": "footer",
       "label": "Policy Menu"
     },
     {
+      "type": "checkbox",
+      "id": "show_bottom_badge",
+      "default": true,
+      "label": "Show badge in bottom bar"
+    },
+    {
       "type": "liquid",
       "id": "copy_right_content",
       "default": "Copyright &copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url -}}. All Rights Reserved",
       "label": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "info": "Shown under the bottom bar."
     },
     {
       "type": "header",

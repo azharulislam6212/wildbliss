@@ -3,6 +3,12 @@
     "image_banner_8PRCFM": {
       "type": "image-banner",
       "blocks": {
+        "subheading_Cd6Wee": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Wildcrafted Carpathian Herbal Tea"
+          }
+        },
         "heading_Cex7j6": {
           "type": "heading",
           "settings": {
@@ -14,7 +20,7 @@
           "type": "text",
           "settings": {
             "text": "Single-origin herbal teas — hand-pickedfrom untouched mountain meadows, air-dried at the source, and verified topharmacopoeia potency.",
-            "text_style": "body"
+            "text_style": "subtitle"
           }
         },
         "buttons_YgKRRP": {
@@ -22,14 +28,15 @@
           "settings": {
             "button_label_1": "Shop wild teas",
             "button_link_1": "shopify:\/\/collections",
-            "button_style_secondary_1": false,
+            "button_style_1": "primary",
             "button_label_2": "The Wild Bliss difference",
             "button_link_2": "shopify:\/\/products\/organic-wild-hawthorn-tea",
-            "button_style_secondary_2": true
+            "button_style_2": "secondary-outline"
           }
         }
       },
       "block_order": [
+        "subheading_Cd6Wee",
         "heading_Cex7j6",
         "text_n9Vdtd",
         "buttons_YgKRRP"
@@ -37,6 +44,7 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify:\/\/shop_images\/HERO_1.png",
+        "mobile_image": "shopify:\/\/shop_images\/HERO.png",
         "image_overlay_opacity": 0,
         "image_height": "large",
         "image_behavior": "none",
@@ -44,7 +52,6 @@
         "desktop_content_alignment": "left",
         "show_text_box": false,
         "color_scheme": "scheme-2",
-        "stack_images_on_mobile": false,
         "mobile_content_alignment": "left",
         "show_text_below": false
       }
@@ -109,7 +116,7 @@
         "pre_text": "Features PRODUTCS",
         "heading": "Best Seller",
         "heading_size": "h1",
-        "collection": "beef",
+        "collection": "frontpage",
         "products_to_show": 9,
         "column": "4",
         "column_medium": "4",
@@ -345,7 +352,7 @@
       "settings": {
         "page_width": "container-fluid",
         "color_accent": "#e7ecd6",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "color_scheme_secondary": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
         "padding_top": 64,
         "padding_bottom": 64,
