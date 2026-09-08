@@ -17,31 +17,55 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+  .icon-cards-wrapper {
+    --icon-cards-columns: {{ section.settings.columns }};
+  }
+
+  {%- if section.settings.color_accent != blank -%}
+    .icon-cards-{{ section.id }} .icon-cards__title em,
+    .icon-cards-{{ section.id }} .icon-card__text {
+      color: {{ section.settings.color_accent }};
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
 
 <div
-  class="icon-cards-seciton section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  isolate {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  class="icon-cards-seciton icon-cards-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  isolate {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
   {% if settings.animations_reveal_on_scroll %}
     data-cascade
   {% endif %}
 >
   <div class="{{ section.settings.page_width }}">
-    {%- unless section.settings.heading == blank -%}
-      <div class="row">
-        <div class="section--header text-center col-12 m-auto">
-          <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
+    {%- if section.settings.subheading != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="icon-cards__header">
+        {%- if section.settings.subheading != blank -%}
+          <p class="icon-cards__eyebrow sub-heading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="icon-cards__title inline-richtext {{ section.settings.heading_size }}">
             {{ section.settings.heading }}
           </h2>
-        </div>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="icon-cards__intro rte">{{ section.settings.text }}</div>
+        {%- endif -%}
       </div>
-    {%- endunless -%}
+    {%- endif -%}
 
     <div class="icon-cards-wrapper">
       {%- for block in section.blocks -%}
  
+        {%- liquid
+          assign card_url = block.settings.collection.url
+          if card_url == blank
+            assign card_url = block.settings.button_url
+          endif
+        -%}
         <div class="icon-card__item">
-          <div
+          <{% if card_url != blank %}a href="{{ card_url }}"{% else %}div{% endif %}
             class="icon-card  color-{{ section.settings.color_scheme_card }} gradient {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {{ block.shopify_attributes }}
             {% if settings.animations_reveal_on_scroll %}
@@ -58,36 +82,28 @@
               {% else %}
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {% endif %}
-               <span class="count-text">
-                {{ forloop.index  | prepend: '0' }}
-              </span>
             </div>
 
             <div class="icon-card__content">
               {% if block.settings.title != blank %}
                 <h3 class="icon-card__title">{{ block.settings.title }}</h3>
               {% endif %}
-              {% if block.settings.text != blank %}
-                <p class="icon-card__text">
-                  {{ block.settings.text }}
-                </p>
-              {% endif %}
              
             </div>
              {%- if block.settings.button_text != blank -%}
-                <a
-                  href="{{ block.settings.button_url }}"
-                  class="button button--icon button--{{ block.settings.button_style }}"
-                  {{ block.shopify_attributes }}
-                >
+                <span class="icon-card__link">
                   <span class="button--text">{{- block.settings.button_text -}}
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.8538 8.35403L9.35375 12.854C9.25993 12.9478 9.13268 13.0006 9 13.0006C8.86732 13.0006 8.74007 12.9478 8.64625 12.854C8.55243 12.7602 8.49972 12.633 8.49972 12.5003C8.49972 12.3676 8.55243 12.2403 8.64625 12.1465L12.2931 8.50028H2.5C2.36739 8.50028 2.24021 8.4476 2.14645 8.35383C2.05268 8.26006 2 8.13289 2 8.00028C2 7.86767 2.05268 7.74049 2.14645 7.64672C2.24021 7.55296 2.36739 7.50028 2.5 7.50028H12.2931L8.64625 3.85403C8.55243 3.76021 8.49972 3.63296 8.49972 3.50028C8.49972 3.3676 8.55243 3.24035 8.64625 3.14653C8.74007 3.05271 8.86732 3 9 3C9.13268 3 9.25993 3.05271 9.35375 3.14653L13.8538 7.64653C13.9002 7.69296 13.9371 7.74811 13.9623 7.80881C13.9874 7.86951 14.0004 7.93457 14.0004 8.00028C14.0004 8.06599 13.9874 8.13105 13.9623 8.19175C13.9371 8.25245 13.9002 8.30759 13.8538 8.35403Z" fill="currentColor"/>
                     </svg>
                   </span>
-                </a>
+                </span>
               {%- endif -%}
-          </div>
+
+              {% if block.settings.text != blank %}
+                <p class="icon-card__text">{{ block.settings.text }}</p>
+              {% endif %}
+          </{% if card_url != blank %}a{% else %}div{% endif %}>
         </div>
       {%- endfor -%}
     </div>
@@ -100,7 +116,9 @@
   "class": "section",
   "tag": "section",
   "disabled_on": {
-    "groups": ["header"]
+    "groups": [
+      "header"
+    ]
   },
   "settings": [
     {
@@ -120,9 +138,15 @@
       "label": "Layout Width"
     },
     {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find your tea"
+    },
+    {
       "type": "inline_richtext",
       "id": "heading",
-      "default": "Section Heading",
+      "default": "Don't shop by herb. Shop by <em>how you want to feel.</em>",
       "label": "t:sections.multicolumn.settings.title.label"
     },
     {
@@ -150,20 +174,42 @@
           "label": "t:sections.all.heading_size.options__5.label"
         }
       ],
-      "default": "h1",
+      "default": "hxl",
       "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>You don't need to know your linden from your lemon balm. Tell us what your body's asking for, and we'll point you to the wild herbs traditionally trusted for it.</p>"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Highlight color",
+      "info": "Italic text in the heading and the herb line on each card.",
+      "default": "#7a8f55"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+      "default": "scheme-4"
     },
-        {
+    {
       "type": "color_scheme",
       "id": "color_scheme_card",
       "label": "Card color",
-      "default": "scheme-2"
+      "default": "scheme-1"
     },
     {
       "type": "header",
@@ -254,19 +300,26 @@
         {
           "type": "inline_richtext",
           "id": "text",
-          "default": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
-          "label": "t:sections.multicolumn.blocks.column.settings.text.label"
+          "default": "St John's Wort · Linden · Lemon Balm",
+          "label": "Herbs / footnote"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "The whole card links here."
         },
         {
           "type": "text",
           "id": "button_text",
-          "label": "Button",
-          "default": "Button Label"
+          "label": "Link label",
+          "default": "Explore"
         },
         {
           "type": "url",
           "id": "button_url",
-          "label": "Button URL"
+          "label": "Button URL",
+          "info": "Used when no collection is selected."
         },
         {
           "type": "select",

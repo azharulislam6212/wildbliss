@@ -155,3 +155,176 @@
 }
 
 }
+
+/* ---------------------------------------------------------------------------
+   Image with card — two column layout, image beside the copy
+   --------------------------------------------------------------------------- */
+.image-with-card .image-with-text__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin: 0;
+}
+
+.image-with-card .image-with-text__grid > .grid__item {
+  width: auto;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Copy first, image last on mobile */
+.image-with-card .image-with-text__media-item {
+  order: 2;
+}
+
+.image-with-card .image-with-text__text-item {
+  order: 1;
+}
+
+@media screen and (min-width: 990px) {
+  .image-with-card .image-with-text__grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 6.4rem;
+  }
+
+  .image-with-card .image-with-text__media-item {
+    order: 2;
+  }
+
+  .image-with-card .image-with-text__grid--reverse .image-with-text__media-item {
+    order: 0;
+  }
+}
+
+.image-with-card .image-with-text__content {
+  align-items: stretch;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.image-with-card .image-with-text__inner {
+  width: 100%;
+  max-width: none;
+}
+
+/* The frame keeps the design's proportions instead of a fixed pixel height */
+.image-with-card .image-with-text__media,
+.image-with-card .image-with-text__media--small,
+.image-with-card .image-with-text__media--medium,
+.image-with-card .image-with-text__media--large {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 532 / 498;
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.image-with-card .image-with-text__media--adapt {
+  aspect-ratio: auto;
+}
+
+.image-with-card .image-with-text__media img,
+.image-with-card .image-with-text__media .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Eyebrow with the theme's rule mark */
+.image-with-card .image-with-text__text--caption {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 0 1.6rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(var(--color-accent));
+}
+
+.image-with-card .image-with-text__text--caption::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.image-with-card .image-with-text__heading {
+  margin: 0 0 2rem;
+  font-style: italic;
+  line-height: 1.28;
+}
+
+.image-with-card .image-with-text__inner > .image-with-text__text {
+  max-width: 60rem;
+  margin: 0 0 3.2rem;
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.image-with-card .image-with-text__inner > .image-with-text__text > :first-child {
+  margin-top: 0;
+}
+
+.image-with-card .image-with-text__inner > .image-with-text__text > :last-child {
+  margin-bottom: 0;
+}
+
+.image-with-card__item+.button {
+  margin-top: 3.2rem;
+}
+
+/* Numbered items */
+.image-with-card__item {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr);
+  gap: 0 0.8rem;
+  padding-top: 2.8rem;
+}
+
+.image-with-card__item-number {
+  font-family: var(--font-heading-family);
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: rgb(var(--color-accent));
+}
+
+
+.image-with-card__item-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: rgb(var(--color-heading));
+}
+
+.image-with-card__item-text {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.image-with-card__item-text > :first-child {
+  margin-top: 0;
+}
+
+.image-with-card__item-text > :last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .image-with-card__item {
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    padding-top: 2.4rem;
+  }
+}

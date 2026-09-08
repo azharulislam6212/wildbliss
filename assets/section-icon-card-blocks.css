@@ -160,3 +160,165 @@ letter-spacing: 0.01em;
 
 
 }
+
+/* ---------------------------------------------------------------------------
+   Shop by benefit — header, card grid, card as a collection link
+   --------------------------------------------------------------------------- */
+.icon-cards__header {
+  padding-bottom: 4rem;
+}
+
+.icon-cards__eyebrow {
+  display: flex;
+  align-items: center;
+  margin: 0 0 1.2rem;
+}
+
+.icon-cards__eyebrow::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.icon-cards__title {
+  margin: 0;
+  line-height: 1.25;
+}
+
+.icon-cards__title em {
+  font-style: italic;
+  color: rgb(var(--color-sub-heading));
+}
+
+.icon-cards__intro {
+  max-width: 56rem;
+  margin: 1.6rem 0 0;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.icon-cards__intro > :first-child {
+  margin-top: 0;
+}
+
+.icon-cards__intro > :last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .icon-cards__header {
+    padding-bottom: 5.6rem;
+    max-width: 56rem;
+  }
+}
+
+/* Grid */
+.icon-cards-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.8rem;
+}
+
+@media screen and (min-width: 750px) {
+  .icon-cards-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .icon-cards-wrapper {
+    grid-template-columns: repeat(var(--icon-cards-columns, 3), minmax(0, 1fr));
+  }
+}
+
+.icon-card__item {
+  display: flex;
+}
+
+/* Card */
+.icon-cards-wrapper .icon-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2.8rem;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+a.icon-card:hover {
+  border-color: rgba(var(--color-foreground), 0.28);
+}
+
+.icon-cards-wrapper .icon-card__icon {
+  display: flex;
+  align-items: center;
+  margin: 0 0 2.4rem;
+  color: rgb(var(--color-heading));
+}
+
+.icon-cards-wrapper .icon-card__icon svg,
+.icon-cards-wrapper .icon-card__icon img {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: block;
+}
+
+.icon-cards-wrapper .icon-card__content {
+  margin: 0;
+}
+
+.icon-cards-wrapper .icon-card__title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2.2rem;
+  line-height: 1.3;
+  color: rgb(var(--color-heading));
+}
+
+/* Explore link */
+.icon-card__link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.2rem;
+  color: rgb(var(--color-sub-heading));
+}
+
+.icon-card__link .button--text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.icon-card__link svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  transition: transform 0.2s ease;
+}
+
+a.icon-card:hover .icon-card__link svg {
+  transform: translateX(3px);
+}
+
+/* Herbs / footnote */
+.icon-cards-wrapper .icon-card__text {
+  margin: auto 0 0;
+  padding-top: 3rem;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: rgb(var(--color-accent));
+}

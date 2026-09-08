@@ -100,6 +100,20 @@
                   <div class="image-with-text__text rte {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }} " {{ block.shopify_attributes }}>
                     {{ block.settings.text }}
                   </div>
+                {%- when 'numbered_item' -%}
+                  <div class="image-with-card__item" {{ block.shopify_attributes }}>
+                    {%- if block.settings.number != blank -%}
+                      <span class="image-with-card__item-number">{{ block.settings.number }}</span>
+                    {%- endif -%}
+                    <div class="image-with-card__item-body">
+                      {%- if block.settings.heading != blank -%}
+                        <h3 class="image-with-card__item-title">{{ block.settings.heading }}</h3>
+                      {%- endif -%}
+                      {%- if block.settings.text != blank -%}
+                        <div class="image-with-card__item-text rte">{{ block.settings.text }}</div>
+                      {%- endif -%}
+                    </div>
+                  </div>
                 {%- when 'list_text' -%}
                   <div class="image-with-list_text rte {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }} " {{ block.shopify_attributes }}>
                     {{ block.settings.text }}
@@ -212,10 +226,13 @@
   "name": "Image with card",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
-        {
+    {
       "type": "select",
       "id": "page_width",
       "options": [
@@ -319,7 +336,7 @@
     {
       "type": "header",
       "content": "t:sections.image-with-text.settings.header.content"
-    }, 
+    },
     {
       "type": "select",
       "id": "content_layout",
@@ -335,7 +352,7 @@
       ],
       "default": "no-overlap",
       "label": "t:sections.image-with-text.settings.content_layout.label"
-    },       
+    },
     {
       "type": "select",
       "id": "desktop_content_position",
@@ -399,7 +416,7 @@
     {
       "type": "header",
       "content": "t:sections.image-with-text.settings.header_colors.content"
-    },        
+    },
     {
       "type": "color_scheme",
       "id": "section_color_scheme",
@@ -550,7 +567,7 @@
           "type": "select",
           "id": "text_size",
           "options": [
-                {
+            {
               "value": "extra",
               "label": "Extra Small"
             },
@@ -595,7 +612,7 @@
               "value": "subtitle",
               "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__2.label"
             },
-              {
+            {
               "value": "caption-with-letter-spacing",
               "label": "t:sections.image-with-text.blocks.caption.settings.text_style.options__2.label"
             }
@@ -603,11 +620,11 @@
           "default": "body",
           "label": "t:sections.image-with-text.blocks.text.settings.text_style.label"
         },
-           {
+        {
           "type": "select",
           "id": "text_size",
           "options": [
-                {
+            {
               "value": "extra",
               "label": "Extra Small"
             },
@@ -629,7 +646,31 @@
         }
       ]
     },
-       {
+    {
+      "type": "numbered_item",
+      "name": "Numbered item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Wild, not farmed"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>To withstand extreme cold, heat, and natural threats, wild plants develop complex protective compounds that are difficult to reproduce under cultivation.</p>"
+        }
+      ]
+    },
+    {
       "type": "list_text",
       "name": "List text",
       "limit": 1,
@@ -652,7 +693,7 @@
               "value": "subtitle",
               "label": "t:sections.image-with-text.blocks.text.settings.text_style.options__2.label"
             },
-              {
+            {
               "value": "caption-with-letter-spacing",
               "label": "t:sections.image-with-text.blocks.caption.settings.text_style.options__2.label"
             }
@@ -660,11 +701,11 @@
           "default": "body",
           "label": "t:sections.image-with-text.blocks.text.settings.text_style.label"
         },
-           {
+        {
           "type": "select",
           "id": "text_size",
           "options": [
-                {
+            {
               "value": "extra",
               "label": "Extra Small"
             },
@@ -691,7 +732,7 @@
       "name": "t:sections.image-with-text.blocks.button.name",
       "limit": 1,
       "settings": [
-           {
+        {
           "type": "checkbox",
           "id": "buy_now",
           "default": false,
@@ -709,7 +750,7 @@
           "id": "button_link",
           "label": "t:sections.image-with-text.blocks.button.settings.button_link.label"
         },
-           {
+        {
           "type": "select",
           "id": "button_style",
           "label": "Button style",

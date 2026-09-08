@@ -56,117 +56,155 @@
         "show_text_below": false
       }
     },
-    "icon_with_text_scroll_dgHgxg": {
+    "icon_with_text_scroll_ddFtRx": {
       "type": "icon-with-text-scroll",
       "blocks": {
-        "item_4yzQxC": {
+        "item_WDz4An": {
           "type": "item",
           "settings": {
-            "title": "Hand-Cut Daily",
-            "subtitle": "Master butcher quality."
+            "svg_icon": "<svg width=\"19\" height=\"24\" viewbox=\"0 0 19 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M9.47917 0.908447L0.8125 5.24178V11.7418C0.8125 17.1584 4.60417 20.4084 9.47917 22.5751C14.3542 20.4084 18.1458 17.1584 18.1458 11.7418V5.24178L9.47917 0.908447Z\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<path d=\"M6.229 11.7419L8.39567 13.9085L12.729 9.5752\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<\/svg>",
+            "title": "USDA Organic",
+            "subtitle": "Certified at every step, meadow to canister."
           }
         },
-        "item_z9HBtC": {
+        "item_WTLAWE": {
           "type": "item",
           "settings": {
-            "title": "Vacuum Sealed",
-            "subtitle": "Locked-in freshness."
+            "svg_icon": "<svg width=\"22\" height=\"22\" viewbox=\"0 0 22 22\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.5625 20.3125C15.9473 20.3125 20.3125 15.9473 20.3125 10.5625C20.3125 5.17772 15.9473 0.8125 10.5625 0.8125C5.17772 0.8125 0.8125 5.17772 0.8125 10.5625C0.8125 15.9473 5.17772 20.3125 10.5625 20.3125Z\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<path d=\"M6.229 11.1042L9.479 14.3542L14.8957 7.3125\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<\/svg>",
+            "title": "Ecocert Verified",
+            "subtitle": "Independent third-party facilityinspection."
           }
         },
-        "item_kh9rUK": {
+        "item_p8dwtE": {
           "type": "item",
           "settings": {
-            "title": "Premium Source",
-            "subtitle": "Selected for superior marbling."
+            "svg_icon": "<svg width=\"11\" height=\"22\" viewbox=\"0 0 11 22\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M4.40183 0.8125H10.9018M5.48517 0.8125V5.14583M5.48517 5.14583L1.15183 14.8958C0.0685003 17.0625 1.6935 20.3125 4.40183 20.3125H6.5685C9.27683 20.3125 10.9018 17.0625 9.8185 14.8958L5.48517 5.14583Z\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<\/svg>",
+            "title": "Pharmacopoeia Potency",
+            "subtitle": "The gold standard for beneficial-compound content."
           }
         },
-        "item_nUAFQD": {
+        "item_6V4KKY": {
           "type": "item",
           "settings": {
-            "title": "Since 1946",
-            "subtitle": "Over 80 years of local trust."
+            "svg_icon": "<svg width=\"20\" height=\"20\" viewbox=\"0 0 20 20\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M9.51291 18.7212C14.9296 14.3879 18.1796 11.1379 18.1796 5.72124C18.3232 4.57197 18.0045 3.4127 17.2934 2.49846C16.5823 1.58422 15.5372 0.989898 14.3879 0.846239C13.2386 0.702581 12.0794 1.02135 11.1651 1.73243C10.2509 2.4435 9.65657 3.48863 9.51291 4.63791C9.36925 3.48863 8.77493 2.4435 7.86069 1.73243C6.94645 1.02135 5.78718 0.702581 4.63791 0.846239C3.48863 0.989898 2.4435 1.58422 1.73243 2.49846C1.02135 3.4127 0.702581 4.57197 0.846239 5.72124C0.846239 11.1379 4.09624 14.3879 9.51291 18.7212Z\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<\/svg>",
+            "title": "Rooted in the Wild",
+            "subtitle": "Wild foraged whenever possible."
           }
         }
       },
       "block_order": [
-        "item_4yzQxC",
-        "item_z9HBtC",
-        "item_kh9rUK",
-        "item_nUAFQD"
+        "item_WDz4An",
+        "item_WTLAWE",
+        "item_p8dwtE",
+        "item_6V4KKY"
       ],
-      "name": "Icon With Text Scroller",
+      "name": "Icon With Text",
       "settings": {
-        "speed": "50",
-        "moving_direction": "animation-direction",
-        "pause_when_hover": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 32,
-        "padding_bottom": 32,
+        "page_width": "container",
+        "columns": 4,
+        "show_dividers": true,
+        "color_scheme": "",
+        "padding_top": 28,
+        "padding_bottom": 34,
         "padding_top_tab": 32,
         "padding_bottom_tab": 32,
-        "padding_top_mobile": 32,
-        "padding_bottom_mobile": 32
+        "padding_top_mobile": 26,
+        "padding_bottom_mobile": 30
       }
     },
-    "icon_card_blocks_NARfGQ": {
+    "icon_card_blocks_ChmrMG": {
       "type": "icon-card-blocks",
       "blocks": {
-        "icon_card_pTzgii": {
+        "icon_card_tQaVAm": {
           "type": "icon_card",
           "settings": {
-            "svg_icon": "",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
-            "button_text": "Button Label",
+            "svg_icon": "<svg width=\"26\" height=\"27\" viewBox=\"0 0 26 27\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M16.8225 1.29745C14.5388 0.608655 12.1053 0.589936 9.81133 1.24352C7.5173 1.8971 5.45913 3.1955 3.88136 4.98446C2.30359 6.77341 1.27255 8.9777 0.910751 11.3354C0.548953 13.6931 0.871606 16.1051 1.84037 18.2849C2.80914 20.4646 4.38329 22.3204 6.37579 23.6317C8.36829 24.9431 10.6954 25.6549 13.0805 25.6826C15.4657 25.7102 17.8086 25.0526 19.831 23.7877C21.8533 22.5229 23.4701 20.7041 24.4891 18.5474C22.5296 18.4624 20.6326 17.8324 19.0115 16.7282C17.3904 15.624 16.1095 14.0894 15.3129 12.2971C14.5163 10.5047 14.2356 8.52562 14.5022 6.58242C14.7689 4.63921 15.5725 2.80895 16.8225 1.29745Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M9.15576 20.4641C11.0724 17.5891 14.9058 16.6308 17.7808 17.5891\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "title": "Calm & Mood",
+            "text": "St John's Wort · Linden · Lemon Balm",
+            "collection": "",
+            "button_text": "Explore",
             "button_url": "",
             "button_style": "primary"
           }
         },
-        "icon_card_Uwy94B": {
+        "icon_card_7JJDVP": {
           "type": "icon_card",
           "settings": {
-            "svg_icon": "",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
-            "button_text": "Button Label",
+            "svg_icon": "<svg width=\"21\" height=\"30\" viewBox=\"0 0 21 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.3499 1.13977C10.3499 1.13977 19.9333 11.6814 19.9333 19.3481C19.9333 21.8898 18.9236 24.3273 17.1264 26.1245C15.3292 27.9218 12.8916 28.9314 10.3499 28.9314C7.80828 28.9314 5.37072 27.9218 3.57349 26.1245C1.77627 24.3273 0.766602 21.8898 0.766602 19.3481C0.766602 11.6814 10.3499 1.13977 10.3499 1.13977Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "title": "Daily Detox",
+            "text": "Dandelion Root · Burdock · Nettle",
+            "collection": "",
+            "button_text": "Explore",
             "button_url": "",
             "button_style": "primary"
           }
         },
-        "icon_card_xHKdRD": {
+        "icon_card_ypjM8U": {
           "type": "icon_card",
           "settings": {
-            "svg_icon": "",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
-            "button_text": "Button Label",
+            "svg_icon": "<svg width=\"25\" height=\"23\" viewBox=\"0 0 25 23\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.2666 21.9976C5.55827 17.2059 0.766602 13.3726 0.766602 6.66426C0.920034 5.4041 1.42788 4.21335 2.23113 3.23034C3.03439 2.24733 4.10008 1.51241 5.30439 1.11097C6.50871 0.709535 7.80221 0.658053 9.03462 0.96251C10.267 1.26697 11.3878 1.91486 12.2666 2.83093C13.1454 1.91486 14.2662 1.26697 15.4986 0.96251C16.731 0.658053 18.0245 0.709535 19.2288 1.11097C20.4331 1.51241 21.4988 2.24733 22.3021 3.23034C23.1053 4.21335 23.6132 5.4041 23.7666 6.66426C23.7666 13.3726 18.9749 17.2059 12.2666 21.9976Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M3.5166 11.3617H10.2249L12.1416 7.52832L15.0166 15.195L16.9333 11.3617H22.6833\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "title": "Heart & Circulation",
+            "text": "Hawthorn Leaf & Flower",
+            "collection": "",
+            "button_text": "Explore",
             "button_url": "",
             "button_style": "primary"
           }
         },
-        "icon_card_CwBjVJ": {
+        "icon_card_kwypgV": {
           "type": "icon_card",
           "settings": {
-            "svg_icon": "",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.",
-            "button_text": "Button Label",
+            "svg_icon": "<svg width=\"25\" height=\"20\" viewBox=\"0 0 25 20\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.0427 0V19.1667M12.0427 7.66667C9.16774 3.83333 3.41774 3.83333 1.50107 7.66667C-0.415592 12.4583 1.50107 18.2083 6.29274 18.2083C10.1261 18.2083 12.0427 14.375 12.0427 10.5417C12.0427 14.375 13.9594 18.2083 17.7927 18.2083C22.5844 18.2083 24.5011 12.4583 22.5844 7.66667C20.6677 3.83333 14.9177 3.83333 12.0427 7.66667Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "title": "Breathe Easy",
+            "text": "Elderflower · Thyme · Linden",
+            "collection": "",
+            "button_text": "Explore",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_e9QYRr": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"23\" height=\"23\" viewBox=\"0 0 23 23\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M11.3083 21.8501C17.1303 21.8501 21.8499 17.1304 21.8499 11.3084C21.8499 5.48639 17.1303 0.766724 11.3083 0.766724C5.48627 0.766724 0.766602 5.48639 0.766602 11.3084C0.766602 17.1304 5.48627 21.8501 11.3083 21.8501Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "title": "Women's Cycle",
+            "text": "Raspberry Leaf · Yarrow",
+            "collection": "",
+            "button_text": "Explore",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_PcaRkG": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"21\" height=\"28\" viewBox=\"0 0 21 28\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.3499 1.08423C16.0999 6.83423 19.9333 11.6259 19.9333 17.3759C19.9333 19.9176 18.9236 22.3551 17.1264 24.1523C15.3292 25.9496 12.8916 26.9592 10.3499 26.9592C7.80828 26.9592 5.37072 25.9496 3.57349 24.1523C1.77627 22.3551 0.766602 19.9176 0.766602 17.3759C0.766602 11.6259 4.59993 6.83423 10.3499 1.08423Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M10.0166 6.90588V22.2392\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "title": "Bladder & Urinary",
+            "text": "Nettle Leaf · Yarrow Flower",
+            "collection": "",
+            "button_text": "Explore",
             "button_url": "",
             "button_style": "primary"
           }
         }
       },
       "block_order": [
-        "icon_card_pTzgii",
-        "icon_card_Uwy94B",
-        "icon_card_xHKdRD",
-        "icon_card_CwBjVJ"
+        "icon_card_tQaVAm",
+        "icon_card_7JJDVP",
+        "icon_card_ypjM8U",
+        "icon_card_kwypgV",
+        "icon_card_e9QYRr",
+        "icon_card_PcaRkG"
       ],
       "name": "Icon Card Blocks",
       "settings": {
         "page_width": "container",
-        "heading": "Section Heading",
-        "heading_size": "h1",
+        "subheading": "Find your tea",
+        "heading": "Don't shop by herb. Shop by <em>how you want to feel.<\/em>",
+        "heading_size": "hxl",
+        "text": "<p>You don't need to know your linden from your lemon balm. Tell us what your body's asking for, and we'll point you to the wild herbs traditionally trusted for it.<\/p>",
+        "columns": 3,
+        "color_accent": "#7a8f55",
         "color_scheme": "",
         "color_scheme_card": "",
         "padding_top": 120,
@@ -177,51 +215,69 @@
         "padding_bottom_mobile": 48
       }
     },
-    "image_with_card_8Gzkem": {
+    "image_with_card_TwtPxJ": {
       "type": "image-with-card",
       "blocks": {
-        "heading_GQjLan": {
+        "caption_jqC4tB": {
+          "type": "caption",
+          "settings": {
+            "caption": "From the source",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading_eKgVca": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text",
+            "heading": "\"From the untouched meadows of theCarpathians, where wild herbs bloom ingolden light.\"",
             "heading_size": "h1"
           }
         },
-        "text_7ghRMz": {
+        "text_Qb8fi8": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Sourced from wild meadows in the Carpathian Mountains, our<br\/>herbs are hand-picked at peak vitality and air-dried to preserve<br\/>their restorative benefits — one of Europe's last great primeval<br\/>landscapes, where plants grow exactly as they have for<br\/>millennia.<\/p>",
             "text_style": "body",
             "text_size": "medium"
           }
         },
-        "list_text_JDW4iK": {
-          "type": "list_text",
+        "numbered_item_EK9eri": {
+          "type": "numbered_item",
           "settings": {
-            "text": "<ul><li>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/li><\/ul>",
-            "text_style": "body",
-            "text_size": "medium"
+            "number": "01",
+            "heading": "Wild, not farmed",
+            "text": "<p>To withstand extreme cold, heat, and natural threats, wild plants develop<br\/>complex protective compounds that are difficult to reproduce under cultivation.<\/p>"
           }
         },
-        "button_9fN9cm": {
-          "type": "button",
+        "numbered_item_KrzabP": {
+          "type": "numbered_item",
           "settings": {
-            "buy_now": false,
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style": "primary"
+            "number": "02",
+            "heading": "Air-dried at source",
+            "text": "<p>Picked by hand and dried within hours, on-site, locking in freshness and<br\/>botanical character.<\/p>"
+          }
+        },
+        "numbered_item_FDMg6t": {
+          "type": "numbered_item",
+          "settings": {
+            "number": "03",
+            "heading": "Verified, not just claimed",
+            "text": "<p>Ecocert inspects our wild collection areas and processing facility to verify<br\/>compliance with USDA Organic standards.<\/p>"
           }
         }
       },
       "block_order": [
-        "heading_GQjLan",
-        "text_7ghRMz",
-        "list_text_JDW4iK",
-        "button_9fN9cm"
+        "caption_jqC4tB",
+        "heading_eKgVca",
+        "text_Qb8fi8",
+        "numbered_item_EK9eri",
+        "numbered_item_KrzabP",
+        "numbered_item_FDMg6t"
       ],
       "name": "Image with card",
       "settings": {
         "page_width": "container",
+        "image": "shopify:\/\/shop_images\/div.story-visual.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -230,14 +286,14 @@
         "desktop_content_position": "top",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "padding_top_tab": 60,
-        "padding_bottom_tab": 60,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48
+        "section_color_scheme": "scheme-3",
+        "color_scheme": "scheme-3",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 66,
+        "padding_bottom_tab": 66,
+        "padding_top_mobile": 66,
+        "padding_bottom_mobile": 66
       }
     },
     "certification_band_dpNyeD": {
@@ -468,9 +524,9 @@
   },
   "order": [
     "image_banner_8PRCFM",
-    "icon_with_text_scroll_dgHgxg",
-    "icon_card_blocks_NARfGQ",
-    "image_with_card_8Gzkem",
+    "icon_with_text_scroll_ddFtRx",
+    "icon_card_blocks_ChmrMG",
+    "image_with_card_TwtPxJ",
     "certification_band_dpNyeD",
     "featured_collection_6Hk3Kk",
     "subscribe_and_save_nbh33t",
