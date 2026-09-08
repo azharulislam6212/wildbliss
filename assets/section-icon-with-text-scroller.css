@@ -3,6 +3,9 @@
    --------------------------------------------------------------------------- */
 .icon-text-scroller {
   --icon-text-columns: 4;
+  --icon-text-gap: 2.4rem;
+  --icon-text-pad-top: 0px;
+  --icon-text-pad-bottom: 0px;
   position: relative;
 }
 
@@ -14,7 +17,7 @@
 .icon-text-scroller__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.6rem 2.4rem;
+  gap: var(--icon-text-gap);
 }
 
 @media screen and (min-width: 750px) {
@@ -26,7 +29,54 @@
 @media screen and (min-width: 990px) {
   .icon-text-scroller__grid {
     grid-template-columns: repeat(var(--icon-text-columns), minmax(0, 1fr));
-    gap: 2.4rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Dividers between items — vertical on desktop, horizontal on mobile.
+   They run the full height of the section, padding included.
+   --------------------------------------------------------------------------- */
+.icon-text-scroller__item {
+  position: relative;
+}
+
+.icon-text-scroller--split .icon-text-scroller__item::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(var(--color-foreground), 0.12);
+  pointer-events: none;
+}
+
+/* Mobile: a rule above every item but the first */
+@media screen and (max-width: 749px) {
+  .icon-text-scroller--split .icon-text-scroller__item::before {
+    top: calc((var(--icon-text-gap) / 2 + 0.5px) * -1);
+    left: 0;
+    right: 0;
+    height: 1px;
+  }
+
+  .icon-text-scroller--split .icon-text-scroller__item:first-child::before {
+    display: none;
+  }
+}
+
+/* Tablet and up: a full-height rule before every item but the row's first */
+@media screen and (min-width: 750px) {
+  .icon-text-scroller--split .icon-text-scroller__item::before {
+    top: calc(var(--icon-text-pad-top) * -1);
+    bottom: calc(var(--icon-text-pad-bottom) * -1);
+    left: calc((var(--icon-text-gap) / 2 + 0.5px) * -1);
+    width: 1px;
+  }
+
+}
+
+/* Two columns between 750 and 989 — reset the first of each pair only there,
+   the desktop column count is reset from the section's own style block. */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .icon-text-scroller--split .icon-text-scroller__item:nth-child(2n + 1)::before {
+    display: none;
   }
 }
 
@@ -80,8 +130,8 @@
 }
 
 @media screen and (max-width: 749px) {
-  .icon-text-scroller__grid {
-    gap: 2.2rem;
+  .icon-text-scroller {
+    --icon-text-gap: 2.4rem;
   }
 
   .icon-text-scroller__title {

@@ -22,11 +22,36 @@
 
   .icon-text-{{ section.id }} {
     --icon-text-columns: {{ section.settings.columns }};
+    --icon-text-pad-top: {{ section.settings.padding_top_mobile }}px;
+    --icon-text-pad-bottom: {{ section.settings.padding_bottom_mobile }}px;
   }
+
+  @media screen and (min-width: 768px) {
+    .icon-text-{{ section.id }} {
+      --icon-text-pad-top: {{ section.settings.padding_top_tab }}px;
+      --icon-text-pad-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .icon-text-{{ section.id }} {
+      --icon-text-pad-top: {{ section.settings.padding_top }}px;
+      --icon-text-pad-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {%- if section.settings.show_item_dividers -%}
+    /* No divider before the first item of each row */
+    @media screen and (min-width: 990px) {
+      .icon-text-{{ section.id }} .icon-text-scroller__item:nth-child({{ section.settings.columns }}n + 1)::before {
+        display: none;
+      }
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
 <section
-  class="icon-text-scroller icon-text-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_dividers %} icon-text-scroller--ruled{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  class="icon-text-scroller icon-text-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_dividers %} icon-text-scroller--ruled{% endif %}{% if section.settings.show_item_dividers %} icon-text-scroller--split{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
   {% if settings.animations_reveal_on_scroll %}
     data-cascade
   {% endif %}
@@ -68,7 +93,9 @@
   "class": "section",
   "tag": "section",
   "disabled_on": {
-    "groups": ["header"]
+    "groups": [
+      "header"
+    ]
   },
   "settings": [
     {
@@ -101,6 +128,12 @@
       "id": "show_dividers",
       "default": true,
       "label": "Show top and bottom rules"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_item_dividers",
+      "default": true,
+      "label": "Show dividers between items"
     },
     {
       "type": "color_scheme",
