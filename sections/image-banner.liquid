@@ -119,13 +119,14 @@
     <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
-          {%- when 'heading' -%}
-            <h2
-              class="banner__heading inline-richtext {{ block.settings.heading_size }}"
+          {%- when 'subheading' -%}
+            <h3
+              class="banner__subheading inline-richtext"
               {{ block.shopify_attributes }}
             >
-              {{ block.settings.heading }}
-            </h2>
+              {{ block.settings.subheading }}
+            </h3>
+            
           {%- when 'text' -%}
             <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
               <p>{{ block.settings.text }}</p>
@@ -361,6 +362,20 @@
     }
   ],
   "blocks": [
+   {
+      "type": "subheading",
+      "name": "Sub Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "default": "sub heading",
+          "label": "Sub Heading"
+        }
+  
+      ]
+    },
     {
       "type": "heading",
       "name": "t:sections.image-banner.blocks.heading.name",
