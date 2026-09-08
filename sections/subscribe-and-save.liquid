@@ -1,0 +1,427 @@
+{{ 'section-subscribe-and-save.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .subscribe-save-{{ section.id }} {
+    --subscribe-save-radius: {{ section.settings.card_radius }}px;
+  }
+
+  {%- if section.settings.color_accent != blank -%}
+    .subscribe-save-{{ section.id }} {
+      --subscribe-save-accent: {{ section.settings.color_accent }};
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<div
+  class="subscribe-save subscribe-save-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- if section.settings.pre_text != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="subscribe-save__header">
+        {%- if section.settings.pre_text != blank -%}
+          <p class="subscribe-save__eyebrow sub-heading">{{ section.settings.pre_text }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="subscribe-save__title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="subscribe-save__intro rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="subscribe-save__grid">
+      {%- liquid
+        assign promo_blocks = section.blocks | where: 'type', 'promo'
+        assign product_blocks = section.blocks | where: 'type', 'product_card'
+      -%}
+
+      {%- for block in promo_blocks -%}
+        <div
+          class="subscribe-save__panel color-{{ block.settings.color_scheme }} gradient"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.pre_text != blank -%}
+            <p class="subscribe-save__panel-eyebrow sub-heading">{{ block.settings.pre_text }}</p>
+          {%- endif -%}
+
+          {%- if block.settings.heading != blank -%}
+            <h3 class="subscribe-save__panel-title inline-richtext">{{ block.settings.heading }}</h3>
+          {%- endif -%}
+
+          {%- if block.settings.text != blank -%}
+            <div class="subscribe-save__panel-text rte">{{ block.settings.text }}</div>
+          {%- endif -%}
+
+          {%- if block.settings.badge_label != blank or block.settings.badge_text != blank -%}
+            <div class="subscribe-save__badge-row">
+              {%- if block.settings.badge_label != blank -%}
+                <span class="subscribe-save__badge">{{ block.settings.badge_label }}</span>
+              {%- endif -%}
+              {%- if block.settings.badge_text != blank -%}
+                <span class="subscribe-save__badge-text">{{ block.settings.badge_text }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+
+      {%- if product_blocks.size > 0 -%}
+        <div class="subscribe-save__cards">
+          {%- for block in product_blocks -%}
+            {%- liquid
+              assign card_product = block.settings.product
+
+              assign card_title = block.settings.heading
+              if card_title == blank and card_product != blank
+                assign card_title = card_product.title
+              endif
+
+              assign card_url = block.settings.link
+              if card_url == blank and card_product != blank
+                assign card_url = card_product.url
+              endif
+            -%}
+
+            <div
+              class="subscribe-save__card color-{{ block.settings.color_scheme }} gradient"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.label != blank -%}
+                <p class="subscribe-save__card-label sub-heading">{{ block.settings.label }}</p>
+              {%- endif -%}
+
+              {%- if card_title != blank -%}
+                <h3 class="subscribe-save__card-title">
+                  {%- if card_url != blank -%}
+                    <a class="subscribe-save__card-link" href="{{ card_url }}">{{ card_title }}</a>
+                  {%- else -%}
+                    {{ card_title }}
+                  {%- endif -%}
+                </h3>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <p class="subscribe-save__card-text">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- if card_product != blank -%}
+                <p class="subscribe-save__price">
+                  <span class="subscribe-save__price-current">
+                    {{- card_product.price | money -}}
+                  </span>
+                  {%- if card_product.compare_at_price > card_product.price -%}
+                    <s class="subscribe-save__price-compare">
+                      {{- card_product.compare_at_price | money -}}
+                    </s>
+                  {%- endif -%}
+                </p>
+              {%- elsif block.settings.placeholder_text != blank -%}
+                <p class="subscribe-save__placeholder">{{ block.settings.placeholder_text }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Subscribe and save",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container-fluid",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "pre_text",
+      "label": "Subheading",
+      "default": "Make it a ritual"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Curated trios & <em>Subscribe & Save.</em>"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "hxxl",
+          "label": "t:sections.all.heading_size.options__5.label"
+        }
+      ],
+      "default": "hxl",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pair the right herbs for the result you want, and let them arrive on your schedule — never run out, and save on every delivery.</p>"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 10
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section colors",
+      "default": "scheme-6"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Highlight color",
+      "info": "Colors italic text in the section heading.",
+      "default": "#7a8f55"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 104
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 76
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 58
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promo",
+      "name": "Promo panel",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "pre_text",
+          "label": "Subheading",
+          "default": "Subscribe & save"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Your tea, <em>on your rhythm.</em>"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Choose your favorites, set a delivery cadence, and we'll handle the rest. Skip, swap or cancel anytime.</p>"
+        },
+        {
+          "type": "text",
+          "id": "badge_label",
+          "label": "Badge label",
+          "default": "Save 15%"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text",
+          "default": "on every recurring order + free shipping"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Panel colors",
+          "default": "scheme-2"
+        }
+      ]
+    },
+    {
+      "type": "product_card",
+      "name": "Product card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "The title, price and link are pulled from this product."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "3-Tea bundle"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Title",
+          "info": "Leave empty to use the product title."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "Linden &middot; St John's Wort &middot; Lemon Balm — for winding down."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link",
+          "info": "Leave empty to link to the product."
+        },
+        {
+          "type": "text",
+          "id": "placeholder_text",
+          "label": "Placeholder text",
+          "info": "Shown in place of the price when no product is selected.",
+          "default": "Select a product to show pricing"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Card colors",
+          "default": "scheme-1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscribe and save",
+      "blocks": [
+        {
+          "type": "promo"
+        },
+        {
+          "type": "product_card"
+        },
+        {
+          "type": "product_card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

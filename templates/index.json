@@ -116,7 +116,7 @@
         "pre_text": "Features PRODUTCS",
         "heading": "Best Seller",
         "heading_size": "h1",
-        "collection": "frontpage",
+        "collection": "feartured-collection",
         "products_to_show": 9,
         "column": "4",
         "column_medium": "4",
@@ -144,6 +144,68 @@
         "padding_bottom_tab": 60,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40
+      }
+    },
+    "subscribe_and_save_nbh33t": {
+      "type": "subscribe-and-save",
+      "blocks": {
+        "promo_BLinMb": {
+          "type": "promo",
+          "settings": {
+            "pre_text": "Subscribe & save",
+            "heading": "Your tea, <em>on your rhythm.<\/em>",
+            "text": "<p>Choose your favorites, set a delivery cadence, and we'll handle the rest. Skip, swap or cancel anytime.<\/p>",
+            "badge_label": "Save 15%",
+            "badge_text": "on every recurring order + free shipping",
+            "color_scheme": ""
+          }
+        },
+        "product_card_Qzp7dc": {
+          "type": "product_card",
+          "settings": {
+            "product": "organic-wild-elderflower",
+            "label": "3-Tea bundle",
+            "heading": "",
+            "description": "Linden · St John's Wort · Lemon Balm — for winding down.",
+            "link": "",
+            "placeholder_text": "Select a product to show pricing",
+            "color_scheme": ""
+          }
+        },
+        "product_card_LA8BCU": {
+          "type": "product_card",
+          "settings": {
+            "product": "organic-wild-elderflower",
+            "label": "3-Tea bundle",
+            "heading": "",
+            "description": "Linden · St John's Wort · Lemon Balm — for winding down.",
+            "link": "",
+            "placeholder_text": "Select a product to show pricing",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "promo_BLinMb",
+        "product_card_Qzp7dc",
+        "product_card_LA8BCU"
+      ],
+      "name": "Subscribe and save",
+      "settings": {
+        "page_width": "container",
+        "pre_text": "Make it a ritual",
+        "heading": "Curated trios & <em>Subscribe & Save.<\/em>",
+        "heading_size": "hxl",
+        "text": "<p>Pair the right herbs for the result you want, and let them arrive on your schedule — never run out, and save on every delivery.<\/p>",
+        "card_radius": 10,
+        "color_scheme": "",
+        "color_accent": "#7a8f55",
+        "padding_top": 104,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 76,
+        "padding_top_mobile": 64,
+        "padding_bottom_mobile": 58
       }
     },
     "testimonial_cards_VpL76A": {
@@ -208,6 +270,7 @@
     "image_banner_8PRCFM",
     "icon_with_text_scroll_dgHgxg",
     "featured_collection_6Hk3Kk",
+    "subscribe_and_save_nbh33t",
     "testimonial_cards_VpL76A"
   ]
 }
