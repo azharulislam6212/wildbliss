@@ -35,7 +35,7 @@
     "card_style": "card",
     "card_image_padding": 0,
     "card_text_alignment": "left",
-    "card_color_scheme": "scheme-1",
+    "card_color_scheme": "scheme-f8827df6-c877-42ce-9d47-bcd11a096c56",
     "card_border_thickness": 1,
     "card_border_opacity": 100,
     "card_corner_radius": 20,
@@ -300,6 +300,28 @@
           "secondary_button_label_hover": "#fffdf4",
           "border": "#e2e5e3",
           "input_color": "#ffffff",
+          "input_color_text": "#4e5c50",
+          "shadow": "#4e5c50"
+        }
+      },
+      "scheme-f8827df6-c877-42ce-9d47-bcd11a096c56": {
+        "settings": {
+          "accent": "#66794A",
+          "background": "#fffdf4",
+          "background_gradient": "",
+          "heading": "#4e5c50",
+          "sub_heading": "#5C6A5E",
+          "text": "#4e5c50",
+          "primary_button": "#4e5c50",
+          "primary_button_label": "#fffdf4",
+          "primary_button_hover": "#a05e12",
+          "primary_button_label_hover": "#fffdf4",
+          "secondary_button": "#d58c3f",
+          "secondary_button_label": "#fffdf4",
+          "secondary_button_hover": "#a05e12",
+          "secondary_button_label_hover": "#fffdf4",
+          "border": "#e2e5e3",
+          "input_color": "#fffdf4",
           "input_color_text": "#4e5c50",
           "shadow": "#4e5c50"
         }

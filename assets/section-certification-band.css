@@ -1,0 +1,122 @@
+.certification-band {
+  --certification-size: 74px;
+  --certification-columns: 5;
+  --certification-columns-mobile: 2;
+  position: relative;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.2);
+}
+
+/* Optional header */
+.certification-band__header {
+  padding-bottom: 3.6rem;
+}
+
+.certification-band__eyebrow {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 1.2rem;
+}
+
+.certification-band__title {
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Grid */
+.certification-band__list {
+  display: grid;
+  grid-template-columns: repeat(var(--certification-columns-mobile), minmax(0, 1fr));
+  gap: 3.4rem 2rem;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* An odd item left over on the last row centers across the grid */
+.certification-band__item:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+@media screen and (min-width: 750px) {
+  .certification-band__list {
+     display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+    gap: 3.6rem  4.6rem;
+  }
+
+  .certification-band__item:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}
+
+/* Item */
+.certification-band__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 16rem;
+}
+
+.certification-band__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.certification-band__link:hover .certification-band__mark {
+  border-color: rgba(var(--color-foreground), 0.55);
+}
+
+.certification-band__link:hover .certification-band__label {
+  color: rgba(var(--color-foreground), 1);
+}
+
+/* Badge */
+.certification-band__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--certification-size);
+  height: var(--certification-size);
+  border: 1px solid rgba(var(--color-foreground));
+  border-radius: 50%;
+  color: rgb(var(--color-foreground));
+  transition: border-color 0.2s ease;
+}
+
+.certification-band__mark--plain {
+  border: 0;
+}
+
+.certification-band__mark svg {
+  width: calc(var(--certification-size) * 0.34);
+  height: calc(var(--certification-size) * 0.34);
+  display: block;
+}
+
+.certification-band__image {
+  width: calc(var(--certification-size) * 0.5);
+  height: auto;
+  display: block;
+}
+
+/* Label */
+.certification-band__label {
+  display: block;
+  margin-top: 1.2rem;
+  max-width: 12rem;
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  font-weight: var(--font-body-weight);
+  line-height: 1.45;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.75);
+  transition: color 0.2s ease;
+}
