@@ -151,17 +151,8 @@
 
 .footer-block__heading {
   margin-top: 0;
- /* Shop */
  
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 150%;
-/* identical to box height, or 27px */
-letter-spacing: 0.01em;
- 
-
-margin-bottom: 2.4rem;
+margin-bottom: 1.7rem;
 
 }
 
@@ -1391,7 +1382,7 @@ line-height: 150%;
 .footer--style-minimal .footer-block__details-text {
   max-width: 32rem;
   margin-bottom: 2.6rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1.5;
   color: rgba(var(--color-foreground), 0.72);
 }
@@ -1427,14 +1418,14 @@ line-height: 150%;
 
 /* Column headings */
 .footer--style-minimal .footer-block__heading {
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.7rem;
   font-family: var(--font-body-family);
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: var(--font-body-weight);
   line-height: 1.5;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(var(--color-foreground), 0.6);
+  color: rgba(var(--color-accent));
 }
 
 /* Column links */
@@ -1460,7 +1451,7 @@ line-height: 150%;
 
 /* Bottom bar */
 .footer--style-minimal .footer__content-bottom__space {
-  padding: 5.4rem 0 0;
+  padding:2.6rem 0 0;
   border-top: 1px solid rgba(var(--color-foreground), 0.15);
   flex-wrap: wrap;
   gap: 1.6rem;
@@ -1511,7 +1502,7 @@ line-height: 150%;
 
 @media screen and (max-width: 989px) {
   .footer--style-minimal .footer__content-bottom__space {
-    padding-top: 4.4rem;
+    padding-top:2.6rem;
   }
 }
 
@@ -1522,7 +1513,7 @@ line-height: 150%;
   }
 
   .footer--style-minimal .footer__content-bottom__space {
-    padding: 4rem 0 0;
+    padding: 2.6rem 0 0;
     border-top: 0;
     flex-direction: column;
     align-items: flex-start;
