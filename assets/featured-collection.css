@@ -61,18 +61,44 @@
   border-radius: 999px;
 }
 
-.featured-collection__footer-action {
-  display: flex;
-  justify-content: center;
-  padding-top: 4rem;
-}
+/* Below the products on mobile: the header collapses into the section column
+   so the arrows or the view all button move under the cards. */
+@media screen and (max-width: 749px) {
+  .featured-collection__body {
+    display: flex;
+    flex-direction: column;
+  }
 
-@media screen and (min-width: 750px) {
-  .featured-collection__header-action .featured-collection__view-all + * {
+  .featured-collection__header {
+    display: contents;
+  }
+
+  .featured-collection__header-text {
+    order: 1;
+    padding-bottom: 2.8rem;
+  }
+
+  .featured-collection__products {
+    order: 2;
+  }
+
+  .featured-collection__header-action {
+    order: 3;
+    display: flex;
+    justify-content: center;
+    padding-top: 3.2rem;
+  }
+
+  .featured-collection__header-action:empty {
     display: none;
   }
 
-  .featured-collection__footer-action {
+  .featured-collection__view-all {
+    width: 100%;
+  }
+
+
+  .featured-collection__body:has(.featured-collection__nav) .featured-collection__header-action {
     display: none;
   }
 }
@@ -81,13 +107,30 @@
 .featured-collection__nav {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 1rem;
 }
 
+.featured-collection__nav > .featured-collection__arrow {
+  position: static;
+  inset: auto;
+  margin: 0;
+  flex: 0 0 auto;
+  transform: none;
+}
+
 .featured-collection__arrow {
+  /* swiper.min.css absolutely positions .swiper-button-next/prev — undo that */
+  position: static;
+  top: auto;
+  left: auto;
+  right: auto;
+  margin: 0;
+  z-index: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   width: 4.4rem;
   height: 4.4rem;
   padding: 0;
@@ -105,6 +148,10 @@
   color: rgb(var(--color-primary-button-text));
 }
 
+.featured-collection__arrow::after {
+  content: none;
+}
+
 .featured-collection__arrow.swiper-button-disabled {
   opacity: 0.35;
   cursor: default;
@@ -116,9 +163,11 @@
   gap: 2rem;
 }
 
-.featured-collection__grid > .col {
+.featured-collection__grid > * {
   width: auto;
+  min-width: 0;
   max-width: none;
+  margin: 0;
   padding: 0;
 }
 
@@ -162,6 +211,17 @@
   }
 }
 
+/* Custom elements are inline by default, which breaks the slider measurements */
+mobile-carousel,
+slideshow-swiper {
+  display: block;
+  position: relative;
+}
+
+.mobile-carousel__swiper .swiper-slide {
+  height: auto;
+}
+
 /* Grid that turns into a carousel on mobile. Swiper is destroyed above the
    breakpoint, so the grid rules below take over cleanly. */
 @media screen and (min-width: 750px) {
@@ -188,6 +248,14 @@
   mobile-carousel .featured-collection__nav {
     justify-content: center;
     padding-top: 3.2rem;
+  }
+
+  /* One card per view. flex-basis has to be explicit: Swiper sizes the slides
+     itself and any flex-basis from a grid class would win over width. */
+  .mobile-carousel__swiper > .swiper-wrapper > .swiper-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
   }
 }
 

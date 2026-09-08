@@ -97,7 +97,7 @@
     {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
       <div
         id="Slide-{{ section.id }}-{{ forloop.index }}"
-        class="swiper-slide col"
+        class="swiper-slide"
         {% if settings.animations_reveal_on_scroll %}
           data-cascade
           style="--animation-order: {{ forloop.index }};"
@@ -121,7 +121,7 @@
       {%- assign ridx = forloop.index0 | modulo: 4 | plus: 1 -%}
       {%- assign placeholder_image = 'product-apparel-' | append: ridx -%}
       <div
-        class="swiper-slide col"
+        class="swiper-slide"
         {% if settings.animations_reveal_on_scroll %}
           data-cascade
           style="--animation-order: {{ forloop.index }};"
@@ -143,6 +143,7 @@
     data-id="{{ section.id }}"
   >
     <div class="{{ section.settings.page_width }}">
+      <div class="featured-collection__body">
       {%- if section.settings.subheading != blank or section.settings.heading != blank or show_view_all or show_arrows -%}
         <div class="featured-collection__header">
           <div class="featured-collection__header-text">
@@ -167,6 +168,7 @@
         </div>
       {%- endif -%}
 
+      <div class="featured-collection__products">
       {%- if is_carousel -%}
         <slideshow-swiper>
           <div
@@ -223,12 +225,8 @@
           {{ product_cards }}
         </div>
       {%- endif -%}
-
-      {%- if is_carousel == false and show_view_all -%}
-        <div class="featured-collection__footer-action">
-          {{ view_all_button }}
-        </div>
-      {%- endif -%}
+      </div>
+      </div>
     </div>
   </div>
 </div>
@@ -239,7 +237,10 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "settings": [
     {
@@ -344,10 +345,22 @@
       "type": "select",
       "id": "column",
       "options": [
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" },
-        { "value": "5", "label": "5" }
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        }
       ],
       "default": "4",
       "label": "Columns on desktop"
@@ -356,9 +369,18 @@
       "type": "select",
       "id": "column_medium",
       "options": [
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" },
-        { "value": "4", "label": "4" }
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
       ],
       "default": "3",
       "label": "Columns on tablet"
@@ -367,8 +389,14 @@
       "type": "select",
       "id": "column_mobile",
       "options": [
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" }
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
       ],
       "default": "1",
       "label": "Columns on mobile"
@@ -393,10 +421,22 @@
       "type": "select",
       "id": "button_style",
       "options": [
-        { "value": "primary", "label": "Primary" },
-        { "value": "primary-outline", "label": "Primary outline" },
-        { "value": "secondary", "label": "Secondary" },
-        { "value": "secondary-outline", "label": "Secondary outline" }
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "primary-outline",
+          "label": "Primary outline"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        },
+        {
+          "value": "secondary-outline",
+          "label": "Secondary outline"
+        }
       ],
       "default": "primary",
       "label": "Button style"
@@ -430,9 +470,18 @@
       "id": "meta_line",
       "label": "Line above the title",
       "options": [
-        { "value": "none", "label": "None" },
-        { "value": "vendor", "label": "Vendor" },
-        { "value": "type", "label": "Category" }
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "vendor",
+          "label": "Vendor"
+        },
+        {
+          "value": "type",
+          "label": "Category"
+        }
       ],
       "default": "vendor"
     },

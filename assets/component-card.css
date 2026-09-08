@@ -740,7 +740,7 @@ font-size: 14px;
     padding: 1rem 0rem;
 }
 .card--card .quick-add {
-    margin: 1rem 0 1rem;
+    margin: 1rem 0 0;
 }
 .product-category-name{
   font-size: 12px;
@@ -911,7 +911,7 @@ border-radius: var(--border-radius);
   line-height: 1.5;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(var(--color-foreground), 0.65);
+  color:  #7B6775;
 }
 
 .card__content .card__heading {
@@ -930,7 +930,7 @@ border-radius: var(--border-radius);
   font-style: italic;
   font-size: 1.5rem;
   line-height: 1.4;
-  color: rgba(var(--color-foreground), 0.8);
+  color: rgba(var(--color-sub-heading));
 }
 
 .card__botanical {
@@ -939,7 +939,7 @@ border-radius: var(--border-radius);
   font-style: italic;
   font-size: 1.4rem;
   line-height: 1.4;
-  color: rgb(var(--color-sub-heading));
+  color: rgba(var(--color-accent));
 }
 
 /* Rating */
@@ -1014,8 +1014,9 @@ border-radius: var(--border-radius);
   min-height: 3.6rem;
   height: 3.6rem;
   padding: 0 1.8rem;
-  border-radius: 999px;
-  font-size: 1.4rem;
+  border-radius:  40px;
+     font-size: 1.4rem;
+    font-weight: 400;
 }
 
 /* Badges: `__badge:Name` product tags render as `badge--<name>` */
@@ -1117,4 +1118,48 @@ border-radius: var(--border-radius);
 
 .card__price-block .save-price {
   display: none;
+}
+
+/* Narrow cards (2-up on mobile, tight grids) stack the price above the button */
+.card-wrapper {
+  container-type: inline-size;
+  container-name: productcard;
+}
+
+@container productcard (max-width: 240px) {
+  .card:not(.card--horizontal) > .card__content {
+    padding: 1.6rem;
+  }
+
+  .card__footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+  }
+
+  .card__footer .quick-add,
+  .card__footer .quick-add .button--add {
+    width: 100%;
+  }
+
+  .card__content .card__heading {
+    font-size: 1.7rem;
+  }
+
+  .card__benefit,
+  .card__price-block .price {
+    font-size: 1.4rem;
+  }
+
+  .card__price-block .price {
+    font-size: 2rem;
+  }
+
+  .card__rating {
+    gap: 0.6rem;
+  }
+
+  .card__rating-text {
+    font-size: 1.2rem;
+  }
 }

@@ -122,7 +122,7 @@
         "enable_mobile_carousel": true,
         "column": "4",
         "column_medium": "3",
-        "column_mobile": "1.2",
+        "column_mobile": "1",
         "show_view_all": true,
         "button_label": "View all teas",
         "button_style": "primary",
