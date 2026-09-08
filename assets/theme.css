@@ -30,7 +30,7 @@ img {
 .shopify-challenge__button,
 button.shopify-payment-button__button--unbranded {
     min-width: calc(11.4rem + var(--buttons-border-width) * 2);
-    min-height: calc(4.3rem + var(--buttons-border-width) * 2);
+    min-height: calc(5.6rem + var(--buttons-border-width) * 2);
 }
 
 .button.loading {
@@ -45,24 +45,20 @@ button.shopify-payment-button__button--unbranded {
 
 .button,
 .shopify-challenge__button {
-    font-family: var(--font-heading-family);
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     border: 0;
-    padding: 1.2rem 1.8rem;
-    height: 4.5rem;
+    padding: 1.4rem 2rem;
+    height: 5.6rem;
     cursor: pointer;
-    font-family: var(--font-heading-family);
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
     font-style: normal;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 150%;
-    /* identical to box height, or 21px */
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0;
     text-align: center;
     text-transform: none;
     text-decoration: none;
@@ -75,7 +71,6 @@ button.shopify-payment-button__button--unbranded {
     overflow: hidden;
     z-index: 1;
 }
-
 
 
 .button:hover,
@@ -119,36 +114,31 @@ button.shopify-payment-button__button--unbranded {
 
 
 .shopify-payment-button .shopify-payment-button__button {
-    font-family: var(--font-heading-family);
-    display: inline-flex;
+     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     border: 0;
-    padding: 1.2rem 1.8rem;
-    height: 4.5rem;
+    padding: 1.4rem 2rem;
+    height: 5.6rem;
     cursor: pointer;
-    font-family: var(--font-heading-family);
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
     font-style: normal;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 150%;
-    /* identical to box height, or 21px */
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0;
     text-align: center;
     text-transform: none;
     text-decoration: none;
-    color: rgb(var(--color-secondary-button-text));
-    background-color: rgba(var(--color-secondary-button));
+    color: rgb(var(--color-primary-button-text));
+    background-color: rgba(var(--color-primary-button));
     transition: color 0.3s ease-in-out, border 0.3s ease-in-out, background-color 0.3s ease-in-out;
     -webkit-appearance: none;
     appearance: none;
     position: relative;
     overflow: hidden;
     z-index: 1;
-    box-shadow: none;
 }
 
 .button:before,
@@ -203,6 +193,9 @@ button.shopify-payment-button__button--unbranded {
     border: 1px solid rgb(var(--color-primary-button));
 }
 
+.button--primary-outline:before {
+    background-color: rgb(var(--color-secondary-button-hover));
+}
 .button--primary-outline:hover {
     color: rgb(var(--color-primary-button-hover-text));
     border: 1px solid rgb(var(--color-primary-button-hover));
@@ -227,6 +220,10 @@ button.shopify-payment-button__button--unbranded {
     background: transparent;
     border: 1px solid rgb(var(--color-secondary-button));
     color: rgb(var(--color-secondary-button));
+}
+
+.button--secondary-outline:before {
+    background-color: rgb(var(--color-secondary-button-hover));
 }
 
 .button--secondary-outline:hover {
@@ -263,8 +260,6 @@ button.shopify-payment-button__button--unbranded {
     align-items: center;
     gap: 12px;
 }
-
-
 
 .button--full {
     width: 100%;

@@ -49,6 +49,12 @@
             "label": "heading",
             "default": "#1c1b18"
           },
+            {
+            "type": "color",
+            "id": "sub_heading",
+            "label": "Sub heading",
+            "default": "#A05E12"
+          },
           {
             "type": "color",
             "id": "text",
