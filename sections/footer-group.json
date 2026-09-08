@@ -2,6 +2,57 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "newsletter_NLmMpU": {
+      "type": "newsletter",
+      "blocks": {
+        "subheading_dqUW9m": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Join the meadow list"
+          }
+        },
+        "heading_Lm9NdK": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get <em>10% off<\/em> your first order.",
+            "heading_size": "hxl"
+          }
+        },
+        "paragraph_q7H7MG": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Wild-harvest updates, brewing notes, and early access to seasonal herbs.<br\/>We only write when there's something worth steeping over.<\/p>"
+          }
+        },
+        "email_form_iMRBUH": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "subheading_dqUW9m",
+        "heading_Lm9NdK",
+        "paragraph_q7H7MG",
+        "email_form_iMRBUH"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "page_width": "container-fluid",
+        "button_label": "Get my 10%",
+        "button_style": "primary",
+        "color_scheme": "scheme-2",
+        "color_scheme_secondary": "scheme-2",
+        "color_accent": "#ADBB8C",
+        "color_button_label": "#3c463e",
+        "form_width": 470,
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -91,6 +142,7 @@
     }
   },
   "order": [
+    "newsletter_NLmMpU",
     "footer"
   ]
 }

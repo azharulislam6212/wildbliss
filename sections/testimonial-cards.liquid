@@ -1,168 +1,114 @@
 {{ 'section-testimonial-cards.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-
 {%- style -%}
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top_mobile }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    }
-    @media screen and (min-width: 992px) {
-      .section-{{ section.id }}-padding {
-        padding-top: {{ section.settings.padding_top_tab }}px;
-        padding-bottom: {{ section.settings.padding_bottom_tab }}px;
-      }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
   }
 
-    @media screen and (min-width: 1024px) {
-      .section-{{ section.id }}-padding {
-        padding-top: {{ section.settings.padding_top }}px;
-        padding-bottom: {{ section.settings.padding_bottom }}px;
-      }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
     }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {%- if section.settings.color_accent != blank -%}
+    .testimonial-card-section-{{ section.id }} {
+      --testimonial-accent: {{ section.settings.color_accent }};
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
-{%- if section.settings.enable_divider -%}
-  <div class="{{ section.settings.page_width }}">
-    <div class="section-divider" style="--divider-color: {{ section.settings.divider_color }}"></div>
-  </div>
-{%- endif -%}
-
 <div
-  id="{{ section.settings.them_section_id |  default:"collage-section" }}"
-  class="testimonial-card-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  class="testimonial-card-section testimonial-card-section-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
   {% if settings.animations_reveal_on_scroll %}
     data-cascade
   {% endif %}
 >
   <div class="{{ section.settings.page_width }}">
-    {%- unless section.settings.heading == blank -%}
-      <div class="row">
-        <div class="section--header    text-center col-12 m-auto">
-          <div class="section--header__inner">
-            <h2 class="section--title inline-richtext {{ section.settings.heading_size }}">
-              {{ section.settings.heading }}
-            </h2>
-            {% if section.settings.pre_text != blank %}
-              <p class="section--pre-text">{{ section.settings.pre_text }}</p>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    {%- endunless -%}
-
-    <div class="testimonial-bar">
-      <div class="testimonial-bar__review">
-        {%- if section.settings.review_link != blank -%}
-          <a href="{{ section.settings.review_link }}">
+    {%- if section.settings.heading != blank or section.settings.pre_text != blank -%}
+      <div class="section--header text-center">
+        {%- if section.settings.pre_text != blank -%}
+          <p class="testimonial-eyebrow sub-heading">{{ section.settings.pre_text }}</p>
         {%- endif -%}
 
-        {%- if section.settings.review_bar_title != blank -%}
-          <span class="review_bar_title">{{ section.settings.review_bar_title }}</span>
-        {%- endif -%}
-
-        {% if section.settings.review_logo != blank %}
-          <span class="review-image">
-            {% render 'icon-img' with image: section.settings.review_logo %}
-          </span>
-        {% endif %}
-
-        {%- if section.settings.review_link != blank -%}
-          </a>
+        {%- if section.settings.heading != blank -%}
+          <h2 class="testimonial-title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
         {%- endif -%}
       </div>
-
-      <div class="testimonial-bar__review">
-        {%- if section.settings.review_link_2 != blank -%}
-          <a href="{{ section.settings.review_link_2 }}">
-        {%- endif -%}
-
-        
-
-        {% if section.settings.review_logo_2 != blank %}
-          <span class="review-image">
-            {% render 'icon-img' with image: section.settings.review_logo_2 %}
-          </span>
-        {% endif %}
-
-        {%- if section.settings.review_bar_title_2 != blank -%}
-          <span class="review_bar_title">{{ section.settings.review_bar_title_2 }}</span>
-        {%- endif -%}
-
-        {%- if section.settings.review_link_2 != blank -%}
-          </a>
-        {%- endif -%}
-      </div>
-    </div>
+    {%- endif -%}
 
     <div class="testimonial-grid">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'testimonial' -%}
             <div
-              class="testimonial-card color-{{ block.settings.color_scheme }} gradient {%if forloop.index > 6 %} hidden {% endif %}"
+              class="testimonial-card color-{{ section.settings.color_scheme_card }} gradient"
               {{ block.shopify_attributes }}
             >
-              <div class="testimonial-card__header">
+              {%- if block.settings.rating > 0 -%}
                 <div
-                  class="rating__stars"
+                  class="testimonial-card__rating"
                   role="img"
                   aria-label="{{ 'general.rating.info' | t: rating_value: block.settings.rating, rating_max: 5 }}"
                 >
-                  {%- for i in (1..5) -%}
-                    {%- if i <= block.settings.rating -%}
-                      <span>
-                        {%- render 'icon' with 'rating-star', class: 'rating__star rating__star--full' -%}
-                      </span>
-
-                    {%- else -%}
-                      <span>
-                        {%- render 'icon' with 'rating-star', class: 'rating__star rating__star--empty' -%}
-                      </span>
-                    {%- endif -%}
+                  {%- for i in (1..block.settings.rating) -%}
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M6 0L7.42 4.11L11.78 4.19L8.29 6.8L9.56 10.98L6 8.5L2.44 10.98L3.71 6.8L0.22 4.19L4.58 4.11L6 0Z" fill="currentColor"/>
+                    </svg>
                   {%- endfor -%}
                 </div>
-              </div>
-              <div class="testimonial-card__content">
-                {%- if block.settings.text != blank -%}
-                  {{ block.settings.text }}
+              {%- endif -%}
+
+              {%- if block.settings.text != blank -%}
+                <div class="testimonial-card__quote rte">{{ block.settings.text }}</div>
+              {%- endif -%}
+
+              <div class="testimonial-card__footer">
+                {%- if block.settings.author_name != blank -%}
+                  <p class="testimonial-card__author">{{ block.settings.author_name }}</p>
                 {%- endif -%}
 
-                {% if block.settings.logo != blank %}
-                  <div class="logo-image">
-                    {% render 'icon-img' with image: block.settings.logo %}
-                  </div>
-                {% endif %}
-              </div>
-              <div class="testimonial-card__footer">
-                {% if block.settings.author_image != blank %}
-                  <div class="author-image">
-                    {% render 'icon-img' with image: block.settings.author_image %}
-                  </div>
-                {% endif %}
-
-                <div class="author-content">
-                  {%- if block.settings.author_name != blank -%}
-                    <h3 class="author-name">{{ block.settings.author_name }}</h3>
-                  {%- endif -%}
-
-                  {%- if block.settings.varified_text != blank -%}
-                    <div class="vairifed-text">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10.5872 4.81969C10.4105 4.635 10.2277 4.44469 10.1588 4.27734C10.095 4.12406 10.0912 3.87 10.0875 3.62391C10.0805 3.16641 10.073 2.64797 9.7125 2.2875C9.35203 1.92703 8.83359 1.91953 8.37609 1.9125C8.13 1.90875 7.87594 1.905 7.72266 1.84125C7.55578 1.77234 7.365 1.58953 7.18031 1.41281C6.85687 1.10203 6.48937 0.75 6 0.75C5.51063 0.75 5.14359 1.10203 4.81969 1.41281C4.635 1.58953 4.44469 1.77234 4.27734 1.84125C4.125 1.905 3.87 1.90875 3.62391 1.9125C3.16641 1.91953 2.64797 1.92703 2.2875 2.2875C1.92703 2.64797 1.92187 3.16641 1.9125 3.62391C1.90875 3.87 1.905 4.12406 1.84125 4.27734C1.77234 4.44422 1.58953 4.635 1.41281 4.81969C1.10203 5.14312 0.75 5.51063 0.75 6C0.75 6.48937 1.10203 6.85641 1.41281 7.18031C1.58953 7.365 1.77234 7.55531 1.84125 7.72266C1.905 7.87594 1.90875 8.13 1.9125 8.37609C1.91953 8.83359 1.92703 9.35203 2.2875 9.7125C2.64797 10.073 3.16641 10.0805 3.62391 10.0875C3.87 10.0912 4.12406 10.095 4.27734 10.1588C4.44422 10.2277 4.635 10.4105 4.81969 10.5872C5.14312 10.898 5.51063 11.25 6 11.25C6.48937 11.25 6.85641 10.898 7.18031 10.5872C7.365 10.4105 7.55531 10.2277 7.72266 10.1588C7.87594 10.095 8.13 10.0912 8.37609 10.0875C8.83359 10.0805 9.35203 10.073 9.7125 9.7125C10.073 9.35203 10.0805 8.83359 10.0875 8.37609C10.0912 8.13 10.095 7.87594 10.1588 7.72266C10.2277 7.55578 10.4105 7.365 10.5872 7.18031C10.898 6.85687 11.25 6.48937 11.25 6C11.25 5.51063 10.898 5.14359 10.5872 4.81969ZM8.14031 5.14031L5.51531 7.76531C5.48049 7.80018 5.43913 7.82784 5.3936 7.84671C5.34808 7.86558 5.29928 7.87529 5.25 7.87529C5.20072 7.87529 5.15192 7.86558 5.1064 7.84671C5.06087 7.82784 5.01951 7.80018 4.98469 7.76531L3.85969 6.64031C3.78932 6.56995 3.74979 6.47451 3.74979 6.375C3.74979 6.27549 3.78932 6.18005 3.85969 6.10969C3.93005 6.03932 4.02549 5.99979 4.125 5.99979C4.22451 5.99979 4.31995 6.03932 4.39031 6.10969L5.25 6.96984L7.60969 4.60969C7.64453 4.57485 7.68589 4.54721 7.73141 4.52835C7.77694 4.5095 7.82573 4.49979 7.875 4.49979C7.92427 4.49979 7.97306 4.5095 8.01859 4.52835C8.06411 4.54721 8.10547 4.57485 8.14031 4.60969C8.17515 4.64453 8.20279 4.68589 8.22165 4.73141C8.2405 4.77694 8.25021 4.82573 8.25021 4.875C8.25021 4.92427 8.2405 4.97306 8.22165 5.01859C8.20279 5.06411 8.17515 5.10547 8.14031 5.14031Z" fill="#FF0000"/>
-                      </svg>
-                      {{ block.settings.varified_text }}
-                    </div>
-                  {%- endif -%}
-                </div>
+                {%- if block.settings.product != blank or block.settings.varified_text != blank -%}
+                  <p class="testimonial-card__meta">
+                    {%- if block.settings.product != blank -%}
+                      <span class="testimonial-card__product">{{ block.settings.product }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.varified_text != blank -%}
+                      <span class="testimonial-card__verified">{{ block.settings.varified_text }}</span>
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
               </div>
             </div>
         {%- endcase -%}
       {%- endfor -%}
 
-      <div class="button--action__testimonial">
-        <button type="button" class="button button--primary view-more-btn">View More</button>
-      </div>
+      {%- if section.blocks.size > 3 -%}
+        <div class="button--action__testimonial">
+          <button type="button" class="button button--primary view-more-btn">
+            {{- section.settings.view_more_label | default: 'View More' -}}
+          </button>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </div>
@@ -176,18 +122,6 @@
     "groups": ["header", "footer"]
   },
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "enable_divider",
-      "default": true,
-      "label": "Enable divider"
-    },
-    {
-      "type": "color",
-      "id": "divider_color",
-      "default": "#DDDCD5",
-      "label": "Divider color"
-    },
     {
       "type": "select",
       "id": "page_width",
@@ -207,13 +141,13 @@
     {
       "type": "text",
       "id": "pre_text",
-      "label": "Pre text",
-      "default": "Todays Deals"
+      "label": "Subheading",
+      "default": "Loved by the kettle-first crowd"
     },
     {
       "type": "inline_richtext",
       "id": "heading",
-      "default": "Section Heading",
+      "default": "4.9 stars across <em>300+ reviews.</em>",
       "label": "t:sections.multicolumn.settings.title.label"
     },
     {
@@ -241,60 +175,34 @@
           "label": "t:sections.all.heading_size.options__5.label"
         }
       ],
-      "default": "h1",
+      "default": "hxl",
       "label": "t:sections.all.heading_size.label"
     },
     {
-      "type": "header",
-      "content": "Review bar left"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "review_bar_title",
-      "default": "Review",
-      "label": "Review bar title"
-    },
-    {
-      "type": "image_picker",
-      "id": "review_logo",
-      "label": "Review Logo"
-    },
-    {
-      "type": "url",
-      "id": "review_link",
-      "label": "Review Link"
-    },
-    {
-      "type": "header",
-      "content": "Review bar right"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "review_bar_title_2",
-      "default": "Review",
-      "label": "Review bar title"
-    },
-    {
-      "type": "image_picker",
-      "id": "review_logo_2",
-      "label": "Review Logo"
-    },
-    {
-      "type": "url",
-      "id": "review_link_2",
-      "label": "Review Link"
+      "type": "text",
+      "id": "view_more_label",
+      "label": "View more button label",
+      "info": "The button only appears when there are more than six testimonials.",
+      "default": "View More"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
+      "label": "Section colors",
       "default": "scheme-1"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme_card",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-2"
+      "label": "Card colors",
+      "default": "scheme-4"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Highlight color",
+      "info": "Colors italic text in the heading and the verified label.",
+      "default": "#91a66a"
     },
     {
       "type": "header",
@@ -308,7 +216,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Top Desktop",
-      "default": 76
+      "default": 104
     },
     {
       "type": "range",
@@ -318,7 +226,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Bottom Desktop",
-      "default": 76
+      "default": 96
     },
     {
       "type": "range",
@@ -328,7 +236,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Top Tab",
-      "default": 68
+      "default": 80
     },
     {
       "type": "range",
@@ -338,7 +246,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Bottom Tab",
-      "default": 68
+      "default": 76
     },
     {
       "type": "range",
@@ -348,7 +256,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Top Mobile",
-      "default": 56
+      "default": 64
     },
     {
       "type": "range",
@@ -358,12 +266,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Bottom Mobile",
-      "default": 56
-    },
-    {
-      "type": "text",
-      "id": "them_section_id",
-      "label": "Section Id"
+      "default": 58
     }
   ],
   "blocks": [
@@ -383,41 +286,25 @@
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p> Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing, and I got exactly what I was looking  for. Absolutely recommend checking them out if you’re in the area!</p>"
-        },
-        {
-          "type": "image_picker",
-          "id": "logo",
-          "label": "Logo"
-        },
-        {
-          "type": "image_picker",
-          "id": "author_image",
-          "label": "Author Image"
+          "default": "<p>\"You can smell the difference the moment you open it. This tastes alive in a way grocery-store tea never has.\"</p>"
         },
         {
           "type": "inline_richtext",
           "id": "author_name",
           "label": "Author name",
-          "default": "Chaise"
+          "default": "Dana R."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "product",
+          "label": "Product or context",
+          "default": "Organic Wild Hawthorn"
         },
         {
           "type": "inline_richtext",
           "id": "varified_text",
-          "label": "Varified Text",
-          "default": "Verified Reviewer"
-        },
-        {
-          "type": "color",
-          "id": "color_accent",
-          "label": "Accent Color",
-          "default": "#FF0000"
-        },
-        {
-          "type": "color_scheme",
-          "id": "color_scheme",
-          "label": "t:sections.all.colors.label",
-          "default": "scheme-2"
+          "label": "Verified label",
+          "default": "Verified buyer"
         }
       ]
     }
@@ -426,27 +313,6 @@
     {
       "name": "Testimonial cards",
       "blocks": [
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        },
-        {
-          "type": "testimonial"
-        },
         {
           "type": "testimonial"
         },

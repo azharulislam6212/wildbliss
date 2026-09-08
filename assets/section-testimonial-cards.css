@@ -1,169 +1,153 @@
-.testimonial-card-section{
-    position: relative;
+.testimonial-card-section {
+  --testimonial-accent: rgb(var(--color-accent));
+  position: relative;
 }
 
-.testimonial-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    /* CardWrap */
-
-box-sizing: border-box;
-
-border: 1px dashed rgb(var(--color-border));
-border-radius: 14px;
-
- padding: 8px;
- position: relative;
+/* ---------------------------------------------------------------------------
+   Header
+   --------------------------------------------------------------------------- */
+.testimonial-card-section .section--header {
+  padding-bottom: 3.6rem;
 }
 
-.testimonial-card {
-    /* TestimonialCard */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 32px;
-border: 1px solid rgb(var(--color-background));
-border-radius: 12px;
-
-}
-
-.testimonial-card__content{
-
-font-family: var(--font-body-family);
-font-style: normal;
-font-weight: 500;
-font-size: 14px;
-line-height: 150%;
-/* or 21px */
-letter-spacing: 0.01em;
-
-/* Text/text-5 */
-color: rgb(var(--color-foreground));
-
-padding: 2rem 0 4.8rem;
- 
-
-}
-.logo-image{
-    max-width: 60px;
-    margin-top: 2.4rem;
-}
-
-
-.testimonial-card__footer{
+.testimonial-eyebrow {
   display: flex;
-    width: 100%;
-    gap: 0.8rem;
-    align-items: center;
-    padding-top: 25px;
-     border-top: 1px solid rgb(var(--color-border));
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1.2rem;
 }
 
-.author-image{
-    line-height: 0;
-    flex: 0 0 44px;
-    max-width: 44px;
-    border-radius: 12px;
-    overflow: hidden;
+.testimonial-eyebrow::before {
+  content: "";
+  display: block;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
 }
 
-.author-content{
-    flex:  1;
+.testimonial-card-section .testimonial-title {
+  margin: 0;
+  line-height: 1.2;
 }
 
-.author-name{
-    margin: 0 0 0.4rem;
- 
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 150%;
-/* identical to box height, or 24px */
-letter-spacing: 0.01em;
-
+.testimonial-title em {
+  font-style: italic;
+  color: var(--testimonial-accent);
 }
 
-.vairifed-text{
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-
-font-family: var(--font-body-family);
-font-style: normal;
-font-weight: 400;
-font-size: 12px;
-line-height: 150%;
-/* identical to box height, or 18px */
-letter-spacing: 0.01em;
-
-color: rgb(var(--color-foreground));
-
-
+@media screen and (min-width: 1024px) {
+  .testimonial-card-section .section--header {
+    padding-bottom: 4.8rem;
+  }
 }
 
-
-.button--action__testimonial{
-width: 100%;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 40px 10px;
-gap: 10px;
-
-position: absolute;
- 
-left: 0px;
-bottom: -0.33px;
-background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 50%, #FFFFFF 100%);
-}
-
-
-.testimonial-bar{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.6rem;
-    margin-bottom: 2.4rem;
-}
-
-.testimonial-bar__review{
-    padding: 2.4rem 4rem;
-
-    /* Frame 13 */
-
-    box-sizing: border-box;
-
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 40px;
-    gap: 32px;
-    
-
-    /* Border/border-6 */
-    border: 1px dashed rgb(var(--color-border));
-    border-radius: 18px;
-    
-
-}
-
-
-
- @media screen and (max-width: 768px) {
-.testimonial-bar {
-    grid-template-columns: 1fr;
-}
+/* ---------------------------------------------------------------------------
+   Grid
+   --------------------------------------------------------------------------- */
 .testimonial-grid {
-    grid-template-columns: 1fr;
- 
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.2rem;
+  position: relative;
 }
- }
+
+@media screen and (min-width: 750px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Card
+   --------------------------------------------------------------------------- */
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  padding: 3.2rem;
+  border: 1px solid rgba(var(--color-foreground), 0.18);
+  border-radius: 8px;
+}
+
+.testimonial-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1.8rem;
+  line-height: 0;
+  color: rgb(var(--color-secondary-button));
+}
+
+.testimonial-card__quote {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: 1.7rem;
+  line-height: 1.53;
+  letter-spacing: 0;
+  color: rgba(var(--color-foreground), 0.92);
+}
+
+.testimonial-card__quote > :first-child {
+  margin-top: 0;
+}
+
+.testimonial-card__quote > :last-child {
+  margin-bottom: 0;
+}
+
+.testimonial-card__footer {
+  margin-top: auto;
+  padding-top: 2.6rem;
+}
+
+.testimonial-card__author {
+  margin: 0;
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.testimonial-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin: 0.6rem 0 0;
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.testimonial-card__verified {
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--testimonial-accent);
+}
+
+/* ---------------------------------------------------------------------------
+   View more (only shown when there are more than six testimonials)
+   --------------------------------------------------------------------------- */
+.button--action__testimonial {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(var(--color-background), 0) 0%,
+    rgb(var(--color-background)) 50%,
+    rgb(var(--color-background)) 100%
+  );
+}
