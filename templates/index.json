@@ -6,26 +6,26 @@
         "heading_Cex7j6": {
           "type": "heading",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h1"
+            "heading": "What grows wild grows <em>strong.<\/em>",
+            "heading_size": "hxxl"
           }
         },
         "text_n9Vdtd": {
           "type": "text",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text": "Single-origin herbal teas — hand-pickedfrom untouched mountain meadows, air-dried at the source, and verified topharmacopoeia potency.",
             "text_style": "body"
           }
         },
         "buttons_YgKRRP": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Button label",
-            "button_link_1": "",
+            "button_label_1": "Shop wild teas",
+            "button_link_1": "shopify:\/\/collections",
             "button_style_secondary_1": false,
-            "button_label_2": "Button label",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_label_2": "The Wild Bliss difference",
+            "button_link_2": "shopify:\/\/products\/organic-wild-hawthorn-tea",
+            "button_style_secondary_2": true
           }
         }
       },
@@ -36,16 +36,17 @@
       ],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
+        "image": "shopify:\/\/shop_images\/HERO_1.png",
         "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "image_height": "large",
         "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
+        "color_scheme": "scheme-2",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "left",
+        "show_text_below": false
       }
     },
     "icon_with_text_scroll_dgHgxg": {
@@ -343,7 +344,7 @@
       "name": "Newsletter Custom",
       "settings": {
         "page_width": "container-fluid",
-        "color_accent": "#E7ECD6",
+        "color_accent": "#e7ecd6",
         "color_scheme": "scheme-1",
         "color_scheme_secondary": "scheme-7be41099-9367-4571-b7e7-876f6a7174a8",
         "padding_top": 64,

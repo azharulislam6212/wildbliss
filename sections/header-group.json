@@ -8,40 +8,59 @@
         "marquee_text_WLMmgn": {
           "type": "marquee_text",
           "settings": {
-            "text": "Free shipping over $149"
+            "text": "Free shipping over $50"
           }
         },
         "marquee_text_33tByV": {
           "type": "marquee_text",
           "settings": {
-            "text": "Call us: (916) 782-2705"
+            "text": "Pure Wild Herbs"
           }
         },
         "marquee_text_eHtgV7": {
           "type": "marquee_text",
           "settings": {
-            "text": "Hand-cut since 1946"
+            "text": "Single-Source"
+          }
+        },
+        "marquee_text_CUQXrj": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Freshly Dried"
+          }
+        },
+        "marquee_text_AaMKDd": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Additives-Free"
+          }
+        },
+        "marquee_text_PptwfB": {
+          "type": "marquee_text",
+          "settings": {
+            "text": "Caffeine-Free"
           }
         }
       },
       "block_order": [
         "marquee_text_WLMmgn",
         "marquee_text_33tByV",
-        "marquee_text_eHtgV7"
+        "marquee_text_eHtgV7",
+        "marquee_text_CUQXrj",
+        "marquee_text_AaMKDd",
+        "marquee_text_PptwfB"
       ],
       "settings": {
-        "full_width": true,
-        "button_label": "About Us",
-        "button_link": "shopify:\/\/pages\/about-us",
+        "page_width": "container",
         "speed": "50",
-        "moving_direction": "animation-reverse",
+        "moving_direction": "animation-direction",
         "pause_when_hover": false,
         "color_scheme": "scheme-5",
-        "padding_top": 12,
-        "padding_bottom": 12,
-        "padding_top_tab": 12,
-        "padding_bottom_tab": 12,
-        "padding_top_mobile": 12,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "padding_top_tab": 16,
+        "padding_bottom_tab": 16,
+        "padding_top_mobile": 16,
         "padding_bottom_moblie": 12,
         "them_section_id": ""
       }
@@ -51,7 +70,7 @@
       "settings": {
         "page_width": "container",
         "logo_position": "nav-middle-center",
-        "mobile_logo_position": "center",
+        "mobile_logo_position": "left",
         "logo": "shopify:\/\/shop_images\/Wild_Bliss_Organics.png",
         "logo_width": 145,
         "logo_width_mobile": 135,
@@ -71,10 +90,10 @@
         "enable_language_selector": false,
         "enable_customer_avatar": true,
         "margin_bottom": 0,
-        "padding_top": 18,
-        "padding_bottom": 18,
+        "padding_top": 28,
+        "padding_bottom": 28,
         "padding_top_mobile": 22,
-        "padding_bottom_moblie": 16
+        "padding_bottom_moblie": 22
       }
     }
   },

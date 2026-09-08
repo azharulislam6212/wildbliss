@@ -13,7 +13,7 @@
     "animations_hover_elements": "none",
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
-    "buttons_radius": 12,
+    "buttons_radius": 40,
     "buttons_shadow_opacity": 0,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
@@ -181,7 +181,7 @@
           "secondary_button_hover": "#a05e12",
           "secondary_button_label_hover": "#fffdf4",
           "border": "#e2e5e3",
-          "input_color": "#FFFDF4",
+          "input_color": "#fffdf4",
           "input_color_text": "#4e5c50",
           "shadow": "#4e5c50"
         }
@@ -199,10 +199,10 @@
           "primary_button_label_hover": "#fffdf4",
           "secondary_button": "#adbb8c",
           "secondary_button_label": "#fffdf4",
-          "secondary_button_hover": "#a05e12",
-          "secondary_button_label_hover": "#fffdf4",
+          "secondary_button_hover": "#E3B469",
+          "secondary_button_label_hover": "#3C463E",
           "border": "#e2e5e3",
-          "input_color": "#FFFDF4",
+          "input_color": "#fffdf4",
           "input_color_text": "#4e5c50",
           "shadow": "#e2e5e3"
         }
@@ -210,7 +210,7 @@
       "scheme-3": {
         "settings": {
           "accent": "#adbb8c",
-          "background": "#3C463E",
+          "background": "#3c463e",
           "background_gradient": "",
           "heading": "#fffdf4",
           "text": "#fffdf4",
@@ -223,7 +223,7 @@
           "secondary_button_hover": "#a05e12",
           "secondary_button_label_hover": "#fffdf4",
           "border": "#e2e5e3",
-          "input_color": "#FFFDF4",
+          "input_color": "#fffdf4",
           "input_color_text": "#4e5c50",
           "shadow": "#e2e5e3"
         }
@@ -231,7 +231,7 @@
       "scheme-4": {
         "settings": {
           "accent": "#a05e12",
-          "background": "#F6F1E3",
+          "background": "#f6f1e3",
           "background_gradient": "",
           "heading": "#4e5c50",
           "text": "#4e5c50",
@@ -252,10 +252,10 @@
       "scheme-5": {
         "settings": {
           "accent": "#a05e12",
-          "background": "#9A8694",
+          "background": "#9a8694",
           "background_gradient": "",
-          "heading": "#FFFDF4",
-          "text": "#FFFDF4",
+          "heading": "#fffdf4",
+          "text": "#fffdf4",
           "primary_button": "#4e5c50",
           "primary_button_label": "#fffdf4",
           "primary_button_hover": "#a05e12",
@@ -273,7 +273,7 @@
       "scheme-6": {
         "settings": {
           "accent": "#a05e12",
-          "background": "#E7ECD6",
+          "background": "#e7ecd6",
           "background_gradient": "linear-gradient(180deg, #EEF1E1 0%, #E7ECD6 100%)",
           "heading": "#4e5c50",
           "text": "#4e5c50",
@@ -297,132 +297,132 @@
     "Dawn": {
       "logo_width": 90,
       "color_schemes": {
-           "scheme-1": {
-        "settings": {
-          "accent": "#a05e12",
-          "background": "#fffdf4",
-          "background_gradient": "",
-          "heading": "#4e5c50",
-          "text": "#4e5c50",
-          "primary_button": "#4e5c50",
-          "primary_button_label": "#fffdf4",
-          "primary_button_hover": "#a05e12",
-          "primary_button_label_hover": "#fffdf4",
-          "secondary_button": "#d58c3f",
-          "secondary_button_label": "#fffdf4",
-          "secondary_button_hover": "#a05e12",
-          "secondary_button_label_hover": "#fffdf4",
-          "border": "#e2e5e3",
-          "input_color": "#FFFDF4",
-          "input_color_text": "#4e5c50",
-          "shadow": "#4e5c50"
+        "scheme-1": {
+          "settings": {
+            "accent": "#a05e12",
+            "background": "#fffdf4",
+            "background_gradient": "",
+            "heading": "#4e5c50",
+            "text": "#4e5c50",
+            "primary_button": "#4e5c50",
+            "primary_button_label": "#fffdf4",
+            "primary_button_hover": "#a05e12",
+            "primary_button_label_hover": "#fffdf4",
+            "secondary_button": "#d58c3f",
+            "secondary_button_label": "#fffdf4",
+            "secondary_button_hover": "#a05e12",
+            "secondary_button_label_hover": "#fffdf4",
+            "border": "#e2e5e3",
+            "input_color": "#FFFDF4",
+            "input_color_text": "#4e5c50",
+            "shadow": "#4e5c50"
+          }
+        },
+        "scheme-2": {
+          "settings": {
+            "accent": "#adbb8c",
+            "background": "#4e5c50",
+            "background_gradient": "",
+            "heading": "#fffdf4",
+            "text": "#fffdf4",
+            "primary_button": "#d58c3f",
+            "primary_button_label": "#fffdf4",
+            "primary_button_hover": "#a05e12",
+            "primary_button_label_hover": "#fffdf4",
+            "secondary_button": "#adbb8c",
+            "secondary_button_label": "#fffdf4",
+            "secondary_button_hover": "#a05e12",
+            "secondary_button_label_hover": "#fffdf4",
+            "border": "#e2e5e3",
+            "input_color": "#FFFDF4",
+            "input_color_text": "#4e5c50",
+            "shadow": "#e2e5e3"
+          }
+        },
+        "scheme-3": {
+          "settings": {
+            "accent": "#adbb8c",
+            "background": "#3C463E",
+            "background_gradient": "",
+            "heading": "#fffdf4",
+            "text": "#fffdf4",
+            "primary_button": "#d58c3f",
+            "primary_button_label": "#fffdf4",
+            "primary_button_hover": "#a05e12",
+            "primary_button_label_hover": "#fffdf4",
+            "secondary_button": "#adbb8c",
+            "secondary_button_label": "#fffdf4",
+            "secondary_button_hover": "#a05e12",
+            "secondary_button_label_hover": "#fffdf4",
+            "border": "#e2e5e3",
+            "input_color": "#FFFDF4",
+            "input_color_text": "#4e5c50",
+            "shadow": "#e2e5e3"
+          }
+        },
+        "scheme-4": {
+          "settings": {
+            "accent": "#a05e12",
+            "background": "#F6F1E3",
+            "background_gradient": "",
+            "heading": "#4e5c50",
+            "text": "#4e5c50",
+            "primary_button": "#4e5c50",
+            "primary_button_label": "#fffdf4",
+            "primary_button_hover": "#a05e12",
+            "primary_button_label_hover": "#fffdf4",
+            "secondary_button": "#d58c3f",
+            "secondary_button_label": "#fffdf4",
+            "secondary_button_hover": "#a05e12",
+            "secondary_button_label_hover": "#fffdf4",
+            "border": "#e2e5e3",
+            "input_color": "#ffffff",
+            "input_color_text": "#4e5c50",
+            "shadow": "#4e5c50"
+          }
+        },
+        "scheme-5": {
+          "settings": {
+            "accent": "#a05e12",
+            "background": "#9A8694",
+            "background_gradient": "",
+            "heading": "#FFFDF4",
+            "text": "#FFFDF4",
+            "primary_button": "#4e5c50",
+            "primary_button_label": "#fffdf4",
+            "primary_button_hover": "#a05e12",
+            "primary_button_label_hover": "#fffdf4",
+            "secondary_button": "#d58c3f",
+            "secondary_button_label": "#fffdf4",
+            "secondary_button_hover": "#a05e12",
+            "secondary_button_label_hover": "#fffdf4",
+            "border": "#e2e5e3",
+            "input_color": "#ffffff",
+            "input_color_text": "#4e5c50",
+            "shadow": "#4e5c50"
+          }
+        },
+        "scheme-6": {
+          "settings": {
+            "accent": "#a05e12",
+            "background": "#E7ECD6",
+            "background_gradient": "linear-gradient(180deg, #EEF1E1 0%, #E7ECD6 100%)",
+            "heading": "#4e5c50",
+            "text": "#4e5c50",
+            "primary_button": "#4e5c50",
+            "primary_button_label": "#fffdf4",
+            "primary_button_hover": "#a05e12",
+            "primary_button_label_hover": "#fffdf4",
+            "secondary_button": "#d58c3f",
+            "secondary_button_label": "#fffdf4",
+            "secondary_button_hover": "#a05e12",
+            "secondary_button_label_hover": "#fffdf4",
+            "border": "#e2e5e3",
+            "input_color": "#ffffff",
+            "input_color_text": "#4e5c50",
+            "shadow": "#4e5c50"
+          }
         }
-      },
-      "scheme-2": {
-        "settings": {
-          "accent": "#adbb8c",
-          "background": "#4e5c50",
-          "background_gradient": "",
-          "heading": "#fffdf4",
-          "text": "#fffdf4",
-          "primary_button": "#d58c3f",
-          "primary_button_label": "#fffdf4",
-          "primary_button_hover": "#a05e12",
-          "primary_button_label_hover": "#fffdf4",
-          "secondary_button": "#adbb8c",
-          "secondary_button_label": "#fffdf4",
-          "secondary_button_hover": "#a05e12",
-          "secondary_button_label_hover": "#fffdf4",
-          "border": "#e2e5e3",
-          "input_color": "#FFFDF4",
-          "input_color_text": "#4e5c50",
-          "shadow": "#e2e5e3"
-        }
-      },
-      "scheme-3": {
-        "settings": {
-          "accent": "#adbb8c",
-          "background": "#3C463E",
-          "background_gradient": "",
-          "heading": "#fffdf4",
-          "text": "#fffdf4",
-          "primary_button": "#d58c3f",
-          "primary_button_label": "#fffdf4",
-          "primary_button_hover": "#a05e12",
-          "primary_button_label_hover": "#fffdf4",
-          "secondary_button": "#adbb8c",
-          "secondary_button_label": "#fffdf4",
-          "secondary_button_hover": "#a05e12",
-          "secondary_button_label_hover": "#fffdf4",
-          "border": "#e2e5e3",
-          "input_color": "#FFFDF4",
-          "input_color_text": "#4e5c50",
-          "shadow": "#e2e5e3"
-        }
-      },
-      "scheme-4": {
-        "settings": {
-          "accent": "#a05e12",
-          "background": "#F6F1E3",
-          "background_gradient": "",
-          "heading": "#4e5c50",
-          "text": "#4e5c50",
-          "primary_button": "#4e5c50",
-          "primary_button_label": "#fffdf4",
-          "primary_button_hover": "#a05e12",
-          "primary_button_label_hover": "#fffdf4",
-          "secondary_button": "#d58c3f",
-          "secondary_button_label": "#fffdf4",
-          "secondary_button_hover": "#a05e12",
-          "secondary_button_label_hover": "#fffdf4",
-          "border": "#e2e5e3",
-          "input_color": "#ffffff",
-          "input_color_text": "#4e5c50",
-          "shadow": "#4e5c50"
-        }
-      },
-      "scheme-5": {
-        "settings": {
-          "accent": "#a05e12",
-          "background": "#9A8694",
-          "background_gradient": "",
-          "heading": "#FFFDF4",
-          "text": "#FFFDF4",
-          "primary_button": "#4e5c50",
-          "primary_button_label": "#fffdf4",
-          "primary_button_hover": "#a05e12",
-          "primary_button_label_hover": "#fffdf4",
-          "secondary_button": "#d58c3f",
-          "secondary_button_label": "#fffdf4",
-          "secondary_button_hover": "#a05e12",
-          "secondary_button_label_hover": "#fffdf4",
-          "border": "#e2e5e3",
-          "input_color": "#ffffff",
-          "input_color_text": "#4e5c50",
-          "shadow": "#4e5c50"
-        }
-      },
-      "scheme-6": {
-        "settings": {
-          "accent": "#a05e12",
-          "background": "#E7ECD6",
-          "background_gradient": "linear-gradient(180deg, #EEF1E1 0%, #E7ECD6 100%)",
-          "heading": "#4e5c50",
-          "text": "#4e5c50",
-          "primary_button": "#4e5c50",
-          "primary_button_label": "#fffdf4",
-          "primary_button_hover": "#a05e12",
-          "primary_button_label_hover": "#fffdf4",
-          "secondary_button": "#d58c3f",
-          "secondary_button_label": "#fffdf4",
-          "secondary_button_hover": "#a05e12",
-          "secondary_button_label_hover": "#fffdf4",
-          "border": "#e2e5e3",
-          "input_color": "#ffffff",
-          "input_color_text": "#4e5c50",
-          "shadow": "#4e5c50"
-        }
-      }
       },
       "type_header_font": "assistant_n4",
       "heading_scale": 100,
