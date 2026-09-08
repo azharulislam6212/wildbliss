@@ -19,9 +19,27 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+
+    .newsletter-{{ section.id }} {
+      --newsletter-form-width: {{ section.settings.form_width }}px;
+    }
+
+    {%- if section.settings.color_button_label != blank -%}
+      .newsletter-{{ section.id }} .newsletter-form-group .button {
+        --color-primary-button-text: {{ section.settings.color_button_label.red }},{{ section.settings.color_button_label.green }},{{ section.settings.color_button_label.blue }};
+      }
+    {%- endif -%}
+
+    {%- if section.settings.color_accent != blank -%}
+      .newsletter-{{ section.id }} .newsletter__eyebrow,
+      .newsletter-{{ section.id }} .newsletter__heading em {
+        color: {{ section.settings.color_accent }};
+      }
+    {%- endif -%}
 {%- endstyle -%}
 
-<div class="newsletter center section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+<div class="newsletter newsletter-{{ section.id }} center section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
  
 
 <div class="{{ section.settings.page_width }}">
@@ -33,9 +51,20 @@
       {%- case block.type -%}
         {%- when '@app' -%}
           {% render block %}
+        {%- when 'subheading' -%}
+          <p
+            class="newsletter__eyebrow sub-heading inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {{ block.shopify_attributes }}
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade
+              style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+          >
+            {{ block.settings.subheading }}
+          </p>
         {%- when 'heading' -%}
           <h2
-            class="inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            class="newsletter__heading inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {{ block.shopify_attributes }}
             {% if settings.animations_reveal_on_scroll %}
               data-cascade
@@ -96,13 +125,13 @@
 
                   <button
                     type="submit"
-                    class="button button--icon button--primary"
+                    class="button button--{{ section.settings.button_style }}"
                     name="commit"
                     id="Subscribe"
                     aria-label="{{ 'newsletter.button_label' | t }}"
                   >
                    
-                           <span class="button--text">{{ 'newsletter.button_label' | t }}</span>
+                           <span class="button--text"> {{ section.settings.button_label }} </span>
                   </button>
                 </div>
                 {%- if form.errors -%}
@@ -133,18 +162,7 @@
       {%- endcase -%}
     {%- endfor -%}
 
-      {% if section.settings.card__shape_left != blank %}
-                                <div class="newsletter_shape_left">
-                                {% render 'responsive-img' with image: section.settings.card__shape_left  %}
-                                     </div>
-                              {% endif %}
-             
 
-                                {% if section.settings.card__shape_right != blank %}
-                                <div class="newsletter_shape_right">
-                                {% render 'responsive-img' with image: section.settings.card__shape_right  %}
-                                     </div>
-                              {% endif %}
              
   </div>
   </div>
@@ -175,15 +193,27 @@
       "default": "container-fluid",
       "label": "Layout Width"
     },
-     {
-      "type": "image_picker",
-      "id": "card__shape_left",
-      "label": "Card Shape Left"
+ {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Subscribe"
     },
-     {
-      "type": "image_picker",
-      "id": "card__shape_right",
-      "label": "Card Shape right"
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "default": "primary",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ]
     },
     {
       "type": "paragraph",
@@ -193,13 +223,37 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+      "default": "scheme-2"
     },
     {
       "type": "color_scheme",
       "id": "color_scheme_secondary",
-      "label": "t:sections.all.colors.label",
+      "label": "Inner card colors",
+      "info": "Leave unset for a flat, full-width band.",
       "default": "scheme-2"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Subheading and highlight color",
+      "info": "Also colors italic text inside the heading. Leave empty to use the color scheme."
+    },
+    {
+      "type": "color",
+      "id": "color_button_label",
+      "label": "Button label color",
+      "info": "Leave empty to use the color scheme.",
+      "default": "#3c463e"
+    },
+    {
+      "type": "range",
+      "id": "form_width",
+      "min": 300,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Form width",
+      "default": 470
     },
  
     {
@@ -214,7 +268,7 @@
       "step": 2,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 120
+      "default": 100
     },
     {
       "type": "range",
@@ -224,7 +278,7 @@
       "step": 2,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 120
+      "default": 128
     },
     {
       "type": "range",
@@ -244,7 +298,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Bottom Tab",
-      "default": 80
+      "default": 96
     },
     {
       "type": "range",
@@ -254,7 +308,7 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Top Mobile",
-      "default": 48
+      "default": 64
     },
     {
       "type": "range",
@@ -264,10 +318,23 @@
       "step": 2,
       "unit": "px",
       "label": "Padding Bottom Mobile",
-      "default": 48
+      "default": 92
     }
   ],
   "blocks": [
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "default": "Join the meadow list",
+          "label": "Subheading"
+        }
+      ]
+    },
     {
       "type": "heading",
       "name": "t:sections.newsletter.blocks.heading.name",
@@ -304,7 +371,7 @@
               "label": "t:sections.all.heading_size.options__5.label"
             }
           ],
-          "default": "h1",
+          "default": "hxl",
           "label": "t:sections.all.heading_size.label"
         }
       ]
@@ -335,6 +402,9 @@
     {
       "name": "t:sections.newsletter.presets.name",
       "blocks": [
+        {
+          "type": "subheading"
+        },
         {
           "type": "heading"
         },

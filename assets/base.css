@@ -3,9 +3,9 @@
   --alpha-button-border: 1;
   --alpha-link: 0.85;
   --alpha-badge-border: 0.1;
-  --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
-  --focused-base-outline-offset: 0.3rem;
-  --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
+  --focused-base-outline: 0.1rem solid rgba(var(--color-foreground), 0.5);
+  --focused-base-outline-offset: 0.1rem;
+  --focused-base-box-shadow: 0 0 0 0.1rem rgb(var(--color-background)),
     0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
