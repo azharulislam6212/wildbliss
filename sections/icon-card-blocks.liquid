@@ -21,12 +21,7 @@
     --icon-cards-columns: {{ section.settings.columns }};
   }
 
-  {%- if section.settings.color_accent != blank -%}
-    .icon-cards-{{ section.id }} .icon-cards__title em,
-    .icon-cards-{{ section.id }} .icon-card__text {
-      color: {{ section.settings.color_accent }};
-    }
-  {%- endif -%}
+
 {%- endstyle -%}
 
 
@@ -73,6 +68,10 @@
               style="--animation-order: {{ forloop.index }};"
             {% endif %}
           >
+
+          <div class="icon-card-bg" aria-hidden="true"><span class="cap">{{ block.settings.caption }}</span></div>
+
+
             <div class="icon-card__icon">
               {% if block.settings.image != blank %}
                 {% render 'icon-img' with image: block.settings.image %}
@@ -295,6 +294,12 @@
           "type": "liquid",
           "id": "svg_icon",
           "label": "Svg Icon"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "caption",
+          "default": "Photo: lifestyle scene + the ritual\\'s teas",
+          "label": "Caption"
         },
         {
           "type": "inline_richtext",
