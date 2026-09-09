@@ -83,7 +83,7 @@
 {%- endcapture -%}
 
 {%- capture view_all_button -%}
-  <a href="{{ section.settings.collection.url }}" class="button button--{{ section.settings.button_style }} featured-collection__view-all">
+  <a href="{{ section.settings.button_link }}" class="button button--{{ section.settings.button_style }} featured-collection__view-all">
     <span class="button--text">{{ section.settings.button_label | escape }}
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <path d="M3.3335 8H12.6668M8.66683 12L12.6668 8L8.66683 4" stroke="currentColor" stroke-width="1.33333"/>
@@ -156,6 +156,10 @@
               <h2 class="featured-collection__title inline-richtext {{ section.settings.heading_size }}">
                 {{ section.settings.heading }}
               </h2>
+            {%- endif -%}
+
+            {%- if section.settings.section_text != blank -%}
+              <p class="featured-collection__text">{{ section.settings.section_text }}</p>
             {%- endif -%}
           </div>
 
@@ -300,6 +304,12 @@
       "default": "hxl",
       "label": "t:sections.all.heading_size.label"
     },
+       {
+      "type": "inline_richtext",
+      "id": "section_text",
+      "label": "Text",
+      "default": "Tea Bags • Loose Leaf • Value Packs"
+    },
     {
       "type": "collection",
       "id": "collection",
@@ -417,6 +427,12 @@
       "id": "button_label",
       "default": "View all teas",
       "label": "Button label"
+    },
+       {
+      "type": "url",
+      "id": "button_link",
+      "default": "/collections/all",
+      "label": "Button link"
     },
     {
       "type": "select",

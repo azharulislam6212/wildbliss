@@ -113,7 +113,7 @@ color: #FFFFFF;
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top,rgba(255,253,244,.98) 0%,rgba(255,253,244,.94) 50%,rgba(255,253,244,.45) 100%)
+    background: var(--overlay-bg);
 }
 
 .icon-card-bg .cap {
@@ -346,4 +346,26 @@ a.icon-card:hover .icon-card__link svg {
   font-size: 1.4rem;
   line-height: 1.5;
   color: rgb(var(--color-sub-heading));
+}
+
+/* ---------------------------------------------------------------------------
+   Optional per-card background image (no image = card looks exactly as before)
+   --------------------------------------------------------------------------- */
+.icon-card--has-bg .icon-card-bg {
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.icon-card-bg__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0;
+  border: 0;
+  box-shadow: none;
+  max-width: none;
 }

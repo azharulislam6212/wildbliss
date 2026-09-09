@@ -272,3 +272,12 @@ slideshow-swiper {
 .featured-collection .card {
   height: 100%;
 }
+
+
+.featured-collection__text{
+      margin-top: 8px;
+    font-size: 16.5px;
+    color:  rgb(var(--color-foreground));
+    max-width: 56ch;
+    margin-bottom: 0;
+}
