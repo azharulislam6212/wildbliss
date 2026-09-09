@@ -42,7 +42,7 @@
         "button_style": "primary",
         "color_scheme": "scheme-2",
         "color_scheme_secondary": "scheme-2",
-        "color_accent": "#ADBB8C",
+        "color_accent": "#adbb8c",
         "color_button_label": "#3c463e",
         "form_width": 470,
         "padding_top": 120,
@@ -74,7 +74,7 @@
         "link_list_aMLWNk": {
           "type": "link_list",
           "settings": {
-            "heading": "Shop by Benefit",
+            "heading": "Quick Link",
             "menu": "shop-by-benefit"
           }
         },

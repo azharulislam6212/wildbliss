@@ -26,8 +26,8 @@
         "buttons_YgKRRP": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop wild teas",
-            "button_link_1": "shopify:\/\/collections",
+            "button_label_1": "Shop Our Teas",
+            "button_link_1": "shopify:\/\/collections\/all",
             "button_style_1": "primary",
             "button_label_2": "The Wild Bliss difference",
             "button_link_2": "shopify:\/\/products\/organic-wild-hawthorn-tea",
@@ -303,7 +303,8 @@
         "item_kT7p7t": {
           "type": "item",
           "settings": {
-            "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 3.75L6.25 7.5V13.75C6.25 19.375 10 23.125 15 25C20 23.125 23.75 19.375 23.75 13.75V7.5L15 3.75Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M11.25 15L13.75 17.5L18.75 12.5\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
+            "image": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg.svg",
+            "svg_icon": "",
             "label": "USDA Organic",
             "link": ""
           }
@@ -373,7 +374,7 @@
       "settings": {
         "page_width": "container",
         "subheading": "The collection",
-        "heading": "Eleven wild herbs.",
+        "heading": "Twelve Pure Herbs Tea Bags • Loose Leaf • Value Packs",
         "heading_size": "hxl",
         "collection": "feartured-collection",
         "products_to_show": 4,

@@ -5,7 +5,7 @@
     "heading_scale": 100,
     "type_body_font": "inter_n4",
     "body_scale": 100,
-    "page_width": 1400,
+    "page_width": 1200,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 24,
     "spacing_grid_vertical": 24,
@@ -306,11 +306,11 @@
       },
       "scheme-f8827df6-c877-42ce-9d47-bcd11a096c56": {
         "settings": {
-          "accent": "#66794A",
+          "accent": "#66794a",
           "background": "#fffdf4",
           "background_gradient": "",
           "heading": "#4e5c50",
-          "sub_heading": "#5C6A5E",
+          "sub_heading": "#5c6a5e",
           "text": "#4e5c50",
           "primary_button": "#4e5c50",
           "primary_button_label": "#fffdf4",
