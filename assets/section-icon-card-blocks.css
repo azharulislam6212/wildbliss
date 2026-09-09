@@ -208,7 +208,7 @@ letter-spacing: 0.01em;
 
 .icon-cards__title {
   margin: 0;
-  line-height: 1.25;
+  line-height: 1.06;
 }
 
 .icon-cards__title em {
@@ -301,8 +301,7 @@ a.icon-card:hover {
   margin: 0;
   font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight);
-  font-size: 2.2rem;
-  line-height: 1.3;
+  font-size: 2.3rem;
   color: rgb(var(--color-heading));
       letter-spacing: -.01em;
 }

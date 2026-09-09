@@ -181,6 +181,7 @@ max-width: 80px;
   height: 5.1rem;
   padding: 0 2.4rem;
   border-radius: 999px;
+  font-weight: 700;
 }
 
 @media screen and (max-width: 749px) {

@@ -116,16 +116,15 @@
 .icon-text-scroller__title {
   font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight);
-  font-size: 1.8rem;
-  line-height: 1.35;
+    font-size: 16.5px;
   letter-spacing: 0;
   color: rgb(var(--color-heading));
 }
 
 .icon-text-scroller__subtitle {
   font-family: var(--font-body-family);
-  font-size: 1.4rem;
-  line-height: 1.5;
+  font-size: 1.3rem;
+    line-height: 1.45;
   color: rgba(var(--color-foreground));
 }
 

@@ -818,6 +818,9 @@
         "header": {
           "content": "Product card"
         },
+        "header__2": {
+          "content": "Product card"
+        },
         "image_ratio": {
           "label": "Image ratio",
           "options__1": {
@@ -839,6 +842,15 @@
         "show_rating": {
           "label": "Product rating",
           "info": "An app is required for ratings. [Learn more](https:\/\/help.shopify.com\/manual\/online-store\/themes\/theme-structure\/theme-features#featured-collection-show-product-rating)"
+        },
+        "quick_add": {
+          "label": "Quick add",
+          "options__1": {
+            "label": "None"
+          },
+          "options__2": {
+            "label": "Standard"
+          }
         },
         "enable_quick_buy": {
           "label": "Quick add"

@@ -30,7 +30,7 @@
             "button_link_1": "shopify:\/\/collections\/all",
             "button_style_1": "primary",
             "button_label_2": "The Wild Bliss difference",
-            "button_link_2": "shopify:\/\/products\/organic-wild-hawthorn-tea",
+            "button_link_2": "#image_with_card",
             "button_style_2": "secondary-outline"
           }
         }
@@ -120,6 +120,8 @@
           "type": "icon_card",
           "settings": {
             "svg_icon": "<svg width=\"26\" height=\"27\" viewBox=\"0 0 26 27\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M16.8225 1.29745C14.5388 0.608655 12.1053 0.589936 9.81133 1.24352C7.5173 1.8971 5.45913 3.1955 3.88136 4.98446C2.30359 6.77341 1.27255 8.9777 0.910751 11.3354C0.548953 13.6931 0.871606 16.1051 1.84037 18.2849C2.80914 20.4646 4.38329 22.3204 6.37579 23.6317C8.36829 24.9431 10.6954 25.6549 13.0805 25.6826C15.4657 25.7102 17.8086 25.0526 19.831 23.7877C21.8533 22.5229 23.4701 20.7041 24.4891 18.5474C22.5296 18.4624 20.6326 17.8324 19.0115 16.7282C17.3904 15.624 16.1095 14.0894 15.3129 12.2971C14.5163 10.5047 14.2356 8.52562 14.5022 6.58242C14.7689 4.63921 15.5725 2.80895 16.8225 1.29745Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M9.15576 20.4641C11.0724 17.5891 14.9058 16.6308 17.7808 17.5891\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "bg_image": "shopify:\/\/shop_images\/div.story-visual.png",
+            "caption": "Photo: lifestyle scene + the ritual\\'s teas",
             "title": "Calm & Mood",
             "text": "St John's Wort · Linden · Lemon Balm",
             "collection": "calm-mood",
@@ -132,6 +134,7 @@
           "type": "icon_card",
           "settings": {
             "svg_icon": "<svg width=\"21\" height=\"30\" viewBox=\"0 0 21 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.3499 1.13977C10.3499 1.13977 19.9333 11.6814 19.9333 19.3481C19.9333 21.8898 18.9236 24.3273 17.1264 26.1245C15.3292 27.9218 12.8916 28.9314 10.3499 28.9314C7.80828 28.9314 5.37072 27.9218 3.57349 26.1245C1.77627 24.3273 0.766602 21.8898 0.766602 19.3481C0.766602 11.6814 10.3499 1.13977 10.3499 1.13977Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "caption": "Photo: lifestyle scene + the ritual\\'s teas",
             "title": "Daily Detox",
             "text": "Dandelion Root · Burdock · Nettle",
             "collection": "daily-detox",
@@ -144,6 +147,7 @@
           "type": "icon_card",
           "settings": {
             "svg_icon": "<svg width=\"25\" height=\"23\" viewBox=\"0 0 25 23\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.2666 21.9976C5.55827 17.2059 0.766602 13.3726 0.766602 6.66426C0.920034 5.4041 1.42788 4.21335 2.23113 3.23034C3.03439 2.24733 4.10008 1.51241 5.30439 1.11097C6.50871 0.709535 7.80221 0.658053 9.03462 0.96251C10.267 1.26697 11.3878 1.91486 12.2666 2.83093C13.1454 1.91486 14.2662 1.26697 15.4986 0.96251C16.731 0.658053 18.0245 0.709535 19.2288 1.11097C20.4331 1.51241 21.4988 2.24733 22.3021 3.23034C23.1053 4.21335 23.6132 5.4041 23.7666 6.66426C23.7666 13.3726 18.9749 17.2059 12.2666 21.9976Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M3.5166 11.3617H10.2249L12.1416 7.52832L15.0166 15.195L16.9333 11.3617H22.6833\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "caption": "Photo: lifestyle scene + the ritual\\'s teas",
             "title": "Heart & Circulation",
             "text": "Hawthorn Leaf & Flower",
             "collection": "heart-circulation",
@@ -156,6 +160,7 @@
           "type": "icon_card",
           "settings": {
             "svg_icon": "<svg width=\"25\" height=\"20\" viewBox=\"0 0 25 20\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.0427 0V19.1667M12.0427 7.66667C9.16774 3.83333 3.41774 3.83333 1.50107 7.66667C-0.415592 12.4583 1.50107 18.2083 6.29274 18.2083C10.1261 18.2083 12.0427 14.375 12.0427 10.5417C12.0427 14.375 13.9594 18.2083 17.7927 18.2083C22.5844 18.2083 24.5011 12.4583 22.5844 7.66667C20.6677 3.83333 14.9177 3.83333 12.0427 7.66667Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "caption": "Photo: lifestyle scene + the ritual\\'s teas",
             "title": "Breathe Easy",
             "text": "Elderflower · Thyme · Linden",
             "collection": "breathe-easy",
@@ -168,6 +173,7 @@
           "type": "icon_card",
           "settings": {
             "svg_icon": "<svg width=\"23\" height=\"23\" viewBox=\"0 0 23 23\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M11.3083 21.8501C17.1303 21.8501 21.8499 17.1304 21.8499 11.3084C21.8499 5.48639 17.1303 0.766724 11.3083 0.766724C5.48627 0.766724 0.766602 5.48639 0.766602 11.3084C0.766602 17.1304 5.48627 21.8501 11.3083 21.8501Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "caption": "Photo: lifestyle scene + the ritual\\'s teas",
             "title": "Women's Cycle",
             "text": "Raspberry Leaf · Yarrow",
             "collection": "womens-cycle",
@@ -180,6 +186,7 @@
           "type": "icon_card",
           "settings": {
             "svg_icon": "<svg width=\"21\" height=\"28\" viewBox=\"0 0 21 28\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.3499 1.08423C16.0999 6.83423 19.9333 11.6259 19.9333 17.3759C19.9333 19.9176 18.9236 22.3551 17.1264 24.1523C15.3292 25.9496 12.8916 26.9592 10.3499 26.9592C7.80828 26.9592 5.37072 25.9496 3.57349 24.1523C1.77627 22.3551 0.766602 19.9176 0.766602 17.3759C0.766602 11.6259 4.59993 6.83423 10.3499 1.08423Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M10.0166 6.90588V22.2392\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
+            "caption": "Photo: lifestyle scene + the ritual\\'s teas",
             "title": "Bladder & Urinary",
             "text": "Nettle Leaf · Yarrow Flower",
             "collection": "bladder-urinary",
@@ -207,7 +214,8 @@
         "columns": 3,
         "color_accent": "#7a8f55",
         "color_scheme": "",
-        "color_scheme_card": "",
+        "color_scheme_card": "scheme-877af017-ed23-475a-945f-3ed37b1df4d4",
+        "overlauy_color": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)",
         "padding_top": 120,
         "padding_bottom": 120,
         "padding_top_tab": 80,
@@ -305,15 +313,25 @@
         "item_kT7p7t": {
           "type": "item",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg.svg",
+            "image": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg-cropped.png",
             "svg_icon": "",
             "label": "USDA Organic",
+            "link": ""
+          }
+        },
+        "item_pmzANQ": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo-1.png",
+            "svg_icon": "",
+            "label": "Pharmacopoeia",
             "link": ""
           }
         },
         "item_VD3F8p": {
           "type": "item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/logo-2.png",
             "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M13.75 7.5C13.75 12.5 10 16.25 5 16.25C5 21.25 8.75 25 13.75 25C18.75 25 22.5 21.25 22.5 16.25C22.5 11.25 18.75 7.5 13.75 7.5Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M5 16.25C5 13.9294 5.92187 11.7038 7.56282 10.0628C9.20376 8.42187 11.4294 7.5 13.75 7.5\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
             "label": "Caffeine Free",
             "link": ""
@@ -322,6 +340,7 @@
         "item_4YE8yE": {
           "type": "item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/logo-4.png",
             "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 3.75C15 10 11.25 13.75 11.25 18.75C11.25 19.7446 11.6451 20.6984 12.3483 21.4017C13.0516 22.1049 14.0054 22.5 15 22.5C15.9946 22.5 16.9484 22.1049 17.6517 21.4017C18.3549 20.6984 18.75 19.7446 18.75 18.75C18.75 13.75 15 10 15 3.75Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M6.25 23.75L23.75 6.25\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
             "label": "Gluten Free",
             "link": ""
@@ -330,14 +349,25 @@
         "item_WH3UPC": {
           "type": "item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/cert_VEGAN.png",
             "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 26.25C8.75 21.25 5 16.25 5 11.25C5 9.93823 5.41273 8.65972 6.17974 7.59556C6.94674 6.5314 8.02913 5.73555 9.27358 5.32073C10.518 4.90591 11.8614 4.89316 13.1135 5.28429C14.3656 5.67542 15.4629 6.45059 16.25 7.5C17.0609 7.09738 17.9496 6.87574 18.8546 6.85041C19.7596 6.82508 20.6593 6.99667 21.4914 7.35331C22.3236 7.70994 23.0683 8.24311 23.6741 8.91592C24.2799 9.58873 24.7323 10.3851 25 11.25C25 12.25 24.75 13.25 24.375 14.25\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M17.5 21.25C20 21.25 23.75 18.75 25 15\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
-            "label": "CertifiedVegan",
+            "label": "Certified Vegan",
+            "link": ""
+          }
+        },
+        "item_rBBDXt": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo-3.png",
+            "svg_icon": "",
+            "label": "carpathian wild",
             "link": ""
           }
         },
         "item_DpPmHj": {
           "type": "item",
           "settings": {
+            "image": "shopify:\/\/shop_images\/ecocert.png",
             "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 26.25C21.2132 26.25 26.25 21.2132 26.25 15C26.25 8.7868 21.2132 3.75 15 3.75C8.7868 3.75 3.75 8.7868 3.75 15C3.75 21.2132 8.7868 26.25 15 26.25Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M15 8.75C11.25 11.25 11.25 18.75 15 21.25C18.75 18.75 18.75 11.25 15 8.75Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
             "label": "Ecocert",
             "link": ""
@@ -346,9 +376,11 @@
       },
       "block_order": [
         "item_kT7p7t",
+        "item_pmzANQ",
         "item_VD3F8p",
         "item_4YE8yE",
         "item_WH3UPC",
+        "item_rBBDXt",
         "item_DpPmHj"
       ],
       "name": "Certification band",
@@ -376,8 +408,9 @@
       "settings": {
         "page_width": "container",
         "subheading": "The collection",
-        "heading": "Twelve Pure Herbs Tea Bags • Loose Leaf • Value Packs",
+        "heading": "Twelve Pure Herbs",
         "heading_size": "hxl",
+        "section_text": "Tea Bags • Loose Leaf • Value Packs",
         "collection": "feartured-collection",
         "products_to_show": 4,
         "layout_type": "grid",
@@ -387,6 +420,7 @@
         "column_mobile": "1",
         "show_view_all": true,
         "button_label": "View all teas",
+        "button_link": "shopify:\/\/collections\/all",
         "button_style": "primary",
         "image_ratio": "adapt",
         "meta_line": "vendor",
@@ -517,7 +551,7 @@
         "view_more_label": "View More",
         "color_scheme": "scheme-1",
         "color_scheme_card": "",
-        "color_accent": "#91a66a",
+        "color_accent": "#7a8f55",
         "padding_top": 96,
         "padding_bottom": 96,
         "padding_top_tab": 68,

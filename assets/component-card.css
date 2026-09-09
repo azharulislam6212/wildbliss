@@ -983,7 +983,7 @@ border-radius: var(--border-radius);
 
 .card__price-block .price {
   font-family: var(--font-heading-family);
-  font-size: 2.2rem;
+  font-size: 2rem;
   line-height: 1.2;
   color: rgb(var(--color-heading));
 }
@@ -1098,10 +1098,13 @@ border-radius: var(--border-radius);
   gap: 0 0.6rem;
 }
 
-.card__price-block .price--on-sale .price__sale .price-item--sale {
-  margin: 0;
-  color: rgb(var(--color-heading));
+.card__price-block .sub-text {
+    display: inline;
+    font-size: 12px;
+    margin-right: 4px;
+        font-family: var(--font-body-family);
 }
+
 
 .card__price-block .price--on-sale .price__sale s.price-item--regular,
 .card__price-block .price__regular s.price-item--regular {
