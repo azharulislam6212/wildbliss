@@ -60,7 +60,7 @@
           {%- endfor -%}
         {%- endcapture -%}
 
-        <div class="marquee-container js-marquee-items {{ section.settings.pause_when_hover | default: '' | replace: 'true', 'marquee--animation-pause' }} marquee--{{ section.settings.moving_direction }}">
+        <div class="marquee-container js-marquee-items {{ section.settings.pause_when_hover | default: '' | replace: 'true', 'marquee--animation-pause' }} marquee--{{ section.settings.moving_direction }}{% if section.settings.disable_marquee_desktop %} marquee--static-desktop{% endif %}">
           <div class="marquee-track marquee__items--animate" data-marquee-track>
             <div class="marquee-group" data-marquee-group>
              {{ marquee_item }}
@@ -164,6 +164,13 @@
       "type": "checkbox",
       "id": "pause_when_hover",
       "label": "Pause On Hover",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_marquee_desktop",
+      "label": "Disable marquee on desktop",
+      "info": "Text stays static and centered on desktop (1025px and up). The marquee keeps scrolling on mobile and tablet.",
       "default": false
     },
     {

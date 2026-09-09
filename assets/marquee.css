@@ -133,3 +133,31 @@ marquee-content:not([data-marquee-ready]) .marquee__items--animate {
     margin: 0;
     border: 0;
   }
+
+/* Disable marquee animation on desktop only (mobile & tablet keep scrolling) */
+@media screen and (min-width: 1025px) {
+  .marquee-container.marquee--static-desktop {
+    overflow: hidden;
+    white-space: normal;
+    justify-content: center;
+  }
+
+  .marquee--static-desktop .marquee-track,
+  .marquee--static-desktop .marquee-track.marquee__items--animate {
+    -webkit-animation: none !important;
+    animation: none !important;
+    transform: none !important;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .marquee--static-desktop .marquee-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .marquee--static-desktop [data-marquee-clone] {
+    display: none !important;
+  }
+}

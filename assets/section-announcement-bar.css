@@ -61,3 +61,13 @@ text-transform: uppercase;
     margin: 0;
     border: 0;
   }
+
+.announcement-section .running-content-item {
+    gap: 0;
+}
+   @media screen and (min-width: 1025px) {
+.announcement-section .running-content-item:last-child::before {
+  display: none;
+}
+
+   }

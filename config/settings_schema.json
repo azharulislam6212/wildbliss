@@ -29,7 +29,7 @@
             "type": "color",
             "id": "accent",
             "label": "Accent",
-            "default": "#730000"
+            "default": "#A05E12"
           },
           {
             "type": "color",
@@ -47,7 +47,7 @@
             "type": "color",
             "id": "heading",
             "label": "heading",
-            "default": "#1c1b18"
+            "default": "#4E5C50"
           },
           {
             "type": "color",
@@ -59,7 +59,7 @@
             "type": "color",
             "id": "text",
             "label": "t:settings_schema.colors.settings.text.label",
-            "default": "#454442"
+            "default": "#4E5C50"
           },
           {
             "type": "header",
@@ -75,19 +75,19 @@
             "type": "color",
             "id": "primary_button_label",
             "label": "Primary Button",
-            "default": "#ffffff"
+            "default": "#FFFDF4"
           },
           {
             "type": "color",
             "id": "primary_button_hover",
             "label": "Primary Button:hover",
-            "default": "#ff0000"
+            "default": "#A05E12"
           },
           {
             "type": "color",
             "id": "primary_button_label_hover",
             "label": "Primary Button Label:Hover",
-            "default": "#ffffff"
+            "default": "#FFFDF4"
           },
           {
             "type": "header",
@@ -97,25 +97,25 @@
             "type": "color",
             "id": "secondary_button",
             "label": "Secondary Button background",
-            "default": "#1c1b18"
+            "default": "#D58C3F"
           },
           {
             "type": "color",
             "id": "secondary_button_label",
             "label": "Secondary Button",
-            "default": "#ffffff"
+            "default": "#FFFDF4"
           },
           {
             "type": "color",
             "id": "secondary_button_hover",
             "label": "Secondary Button:hover",
-            "default": "#910000"
+            "default": "#A05E12"
           },
           {
             "type": "color",
             "id": "secondary_button_label_hover",
             "label": "Secondary Button Label:Hover",
-            "default": "#ffffff"
+            "default": "#FFFDF4"
           },
           {
             "type": "header",
@@ -125,25 +125,25 @@
             "type": "color",
             "id": "border",
             "label": "Border",
-            "default": "#0A0A0A"
+            "default": "#E2E5E3"
           },
           {
             "type": "color",
             "id": "input_color",
             "label": "Input Background Color",
-            "default": "#F7F4ED"
+            "default": "#FFFDF4"
           },
           {
             "type": "color",
             "id": "input_color_text",
             "label": "Input Text Color",
-            "default": "#0A0A0A"
+            "default": "#4E5C50"
           },
           {
             "type": "color",
             "id": "shadow",
             "label": "t:settings_schema.colors.settings.shadow.label",
-            "default": "#1A1A1A"
+            "default": "#4E5C50"
           }
         ],
         "role": {
