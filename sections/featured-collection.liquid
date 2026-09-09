@@ -137,7 +137,7 @@
   {%- endif -%}
 {%- endcapture -%}
 
-<div class="color-{{ section.settings.color_scheme }} isolate gradient">
+<div class="color-{{ section.settings.color_scheme }} isolate gradient"  id="{{ section.settings.them_section_id |  default:"featured_collection" }}">
   <div
     class="featured-collection section-{{ section.id }}-padding"
     id="collection-{{ section.id }}"
@@ -620,6 +620,11 @@
       "unit": "px",
       "label": "Padding Bottom Mobile",
       "default": 58
+    },
+   {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
     }
   ],
   "presets": [

@@ -125,12 +125,12 @@
 
       :root {
       {%if settings.enable_custom_font %}
-          --font-body-family: "Poppins", sans-serif;
+          --font-body-family:  'Söhne','Inter',system-ui,-apple-system,sans-serif;
           --font-body-style: normal;
-          --font-body-weight: normal;
-          --font-heading-family: "Poppins", sans-serif;
+          --font-body-weight: 500;
+          --font-heading-family: 'Tiempos Headline','Tiempos','Newsreader',Georgia,serif;
           --font-heading-style: normal;
-          --font-heading-weight: 600;
+          --font-heading-weight: 500;
 
           {% else %}
           --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};

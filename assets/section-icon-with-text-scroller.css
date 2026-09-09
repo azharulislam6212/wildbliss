@@ -126,7 +126,7 @@
   font-family: var(--font-body-family);
   font-size: 1.4rem;
   line-height: 1.5;
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgba(var(--color-foreground));
 }
 
 @media screen and (max-width: 749px) {

@@ -37,7 +37,7 @@
   .banner--content-align-left.banner--desktop-transparent .banner__box,
   .banner--content-align-right.banner--desktop-transparent .banner__box,
   .banner--medium.banner--desktop-transparent .banner__box {
-    max-width: 52rem;
+    max-width: 62rem;
   }
 }
 
@@ -189,7 +189,7 @@
 
 @media screen and (min-width: 750px) {
   .banner__content {
-    padding: 3rem;
+    padding: 3rem 0;
   }
 
   .banner__content--top-left {

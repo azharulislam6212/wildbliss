@@ -281,6 +281,7 @@ header-drawer {
     color: rgba(var(--color-background));
     height: 20px;
     width: 20px;
+    flex: 0 0 20px;
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -299,24 +300,22 @@ header-drawer {
 
 .header__icon--cart {
     box-sizing: border-box;
-    /* a.cart-pill */
-
-/* Auto layout */
 display: flex;
 flex-direction: row;
 align-items: center;
-padding: 9px 17px;
 gap: 8px;
-
 width: 87.2px;
-height: 39px;
-
-/* Nandor */
+height: 38px;
+padding: 9px 17px !important;
 background: rgba(var(--color-primary-button));
 color: rgba(var(--color-primary-button-text));
 border-radius: 40px;
-
  
+}
+
+.header__icon--cart:hover{
+    color: rgba(var(--color-primary-button-text));
+    background-color: #3c463e;
 }
 
 .header__heading-link {
@@ -1381,6 +1380,7 @@ body.drawer-open {
     background-repeat: no-repeat !important;
     background-position: right bottom !important;
     transition: background-size .5s cubic-bezier(.3, 1, .3, 1) !important;
+    padding: 4px 0;
 }
 
 .header__inline-menu>ul>li .menu-link-item:hover .link-text {
@@ -1389,14 +1389,14 @@ body.drawer-open {
 }
 
 .header__inline-menu>ul>li .arrow-down {
-    margin-left: 4px;
+    margin-left: 6px;
     display: inline-flex;
 }
 
 .header__inline-menu>ul>li .arrow-down svg {
     transition: 0.3s;
-    width: 16px;
-    height: 16px;
+    width: 10px;
+    height: 10px;
 }
 
 .header__inline-menu>ul>li:hover .arrow-down svg {
@@ -1449,13 +1449,13 @@ body.drawer-open {
 }
 
 .header__inline-menu .header__inline-submenu {
-    min-width: 267px;
+    min-width: 210px;
     background: rgb(var(--color-background));
-    padding: 2.4rem;
+    padding:0.8rem;
     box-sizing: border-box;
     border: 1px solid rgb(var(--color-border));
-    box-shadow: 0px 21px 10px rgba(0, 0, 0, 0.05);
     border-radius: 12px;
+    box-shadow: 0 24px 44px -26px rgba(60, 70, 62, .45);
     list-style: none;
 }
 
@@ -1549,18 +1549,22 @@ body.drawer-open {
     font-size: 1.4rem;
     font-style: normal;
     font-weight: var(--font-body-weight);
-    line-height: 30px;
+    padding: 10px 14px;
+    border-radius: 8px;
     position: relative;
     display: inline-flex;
     justify-content: space-between;
     text-decoration: none;
     transition: 0.3s ease;
+    width: 100%;
 }
 
 .header__inline-menu>ul>li .header__inline-submenu>li>a:hover,
 .header__inline-nested-menu>li>a:hover {
+     --creme-2: #F6F1E3;
     opacity: 1;
     color: rgb(var(--color-accent));
+    background: var(--creme-2);
     transition: 0.3s ease;
 }
 

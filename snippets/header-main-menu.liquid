@@ -51,20 +51,20 @@
                                     {%- for childlink in link.links -%}
                                     {%- if childlink.links != blank -%}
                                        <li class="menu-item-has-children">
-                                          <a href="{{ childlink.url }}" class="link-animation">{{ childlink.title | escape }} 
+                                          <a href="{{ childlink.url }}" class="sub-menu-link">{{ childlink.title | escape }} 
                                              <span class="sub-arrow-down"> 
                                                 {{- 'icon-caret.svg' | inline_asset_content -}}
                                              </span></a>
                                                 <div class="header__inline-nested--wrapper">  
                                           <ul class="header__inline-nested-menu" role="list">
                                              {%- for grandchild in childlink.links -%}
-                                             <li><a href="{{ grandchild.url }}" class="link-animation">{{ grandchild.title | escape }}</a></li>
+                                             <li><a href="{{ grandchild.url }}" class="sub-menu-link">{{ grandchild.title | escape }}</a></li>
                                           {%- endfor -%}
                                           </ul>
                                           </div>
                                        </li>
                                        {%- else -%}
-                                       <li><a href="{{ childlink.url }}" class="link-animation">{{ childlink.title | escape }}</a></li>
+                                       <li><a href="{{ childlink.url }}" class="sub-menu-link">{{ childlink.title | escape }}</a></li>
                                     {%- endif -%}
                                  {%- endfor -%}
                                  </ul>

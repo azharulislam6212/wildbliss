@@ -30,7 +30,7 @@
 {%- endstyle -%}
 
 
-<div
+<div  id="{{ section.settings.them_section_id |  default:"icon_card_section" }}"
   class="icon-cards-seciton icon-cards-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient  isolate {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
   {% if settings.animations_reveal_on_scroll %}
     data-cascade
@@ -274,6 +274,11 @@
       "unit": "px",
       "label": "Padding Bottom Mobile",
       "default": 48
+    },
+       {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
     }
   ],
   "blocks": [

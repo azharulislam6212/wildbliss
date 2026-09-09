@@ -26,17 +26,17 @@
 
 @media (min-width: 1080px) {
  .container {
-      --bs-gutter-x:  6rem;
+      --bs-gutter-x:  2.8rem;
     max-width: 1060px;
   }
   .container-fluid{
-    --bs-gutter-x:  6rem;
+    --bs-gutter-x:  2.8rem;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
-    max-width: calc(var(--page-width) + var(--bs-gutter-x)); 
+    max-width: calc(var(--page-width) + var(--bs-gutter-x) * 2); 
  }
 }
 

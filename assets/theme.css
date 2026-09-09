@@ -95,7 +95,6 @@ button.shopify-payment-button__button--unbranded {
 .customer button span {
     position: relative;
     z-index: 1;
-    line-height: 0;
 }
 
 .button:after,
