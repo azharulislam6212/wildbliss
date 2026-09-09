@@ -72,7 +72,7 @@
           "settings": {
             "svg_icon": "<svg width=\"22\" height=\"22\" viewbox=\"0 0 22 22\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.5625 20.3125C15.9473 20.3125 20.3125 15.9473 20.3125 10.5625C20.3125 5.17772 15.9473 0.8125 10.5625 0.8125C5.17772 0.8125 0.8125 5.17772 0.8125 10.5625C0.8125 15.9473 5.17772 20.3125 10.5625 20.3125Z\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<path d=\"M6.229 11.1042L9.479 14.3542L14.8957 7.3125\" stroke=\"#4E5C50\" stroke-width=\"1.625\"><\/path>\n<\/svg>",
             "title": "Ecocert Verified",
-            "subtitle": "Independent third-party facilityinspection."
+            "subtitle": "Independent third-party facility inspection."
           }
         },
         "item_p8dwtE": {
@@ -213,7 +213,8 @@
         "padding_top_tab": 80,
         "padding_bottom_tab": 80,
         "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48
+        "padding_bottom_mobile": 48,
+        "them_section_id": ""
       }
     },
     "image_with_card_TwtPxJ": {
@@ -294,7 +295,8 @@
         "padding_top_tab": 66,
         "padding_bottom_tab": 66,
         "padding_top_mobile": 66,
-        "padding_bottom_mobile": 66
+        "padding_bottom_mobile": 66,
+        "them_section_id": ""
       }
     },
     "certification_band_dpNyeD": {
@@ -401,7 +403,8 @@
         "padding_top_tab": 80,
         "padding_bottom_tab": 76,
         "padding_top_mobile": 64,
-        "padding_bottom_mobile": 58
+        "padding_bottom_mobile": 58,
+        "them_section_id": ""
       }
     },
     "subscribe_and_save_nbh33t": {
