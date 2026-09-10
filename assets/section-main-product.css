@@ -3785,13 +3785,13 @@ letter-spacing: 0.01em;
 .review-slider .swiper-pagination-bullet {
   width: 8px;
   height: 8px;
-  background: #FFC2C2;
+ background: rgba(var(--color-accent), 0.6);
   opacity: 1;
   margin: 0 4px !important;
 }
 
 .review-slider .swiper-pagination-bullet-active {
-  background: #FF0000;
+ background: rgba(var(--color-accent));
 }
 
 

@@ -100,6 +100,7 @@ color: #FFFFFF;
     border-radius: 8px;
     height: 100%;
     background: transparent;
+        transition: opacity .7s ease, transform .7s ease;
 
 }
 .icon-card-bg {
@@ -108,12 +109,14 @@ color: #FFFFFF;
    background: rgb(var(--color-background));
     background: var(--gradient-background);
         z-index: -1;
+          border-radius: 8px;
 }
 .icon-card-bg::after{
     content: "";
     position: absolute;
     inset: 0;
     background: var(--overlay-bg);
+      border-radius: 8px;
 }
 
 .icon-card-bg .cap {
@@ -159,7 +162,9 @@ letter-spacing: 0.01em;
 .icon-card__item .button {
     border-radius: 100px;
 }
-
+.icon-cards-wrapper .icon-card:hover{
+      box-shadow: 0 26px 50px -30px rgba(60, 70, 62, .4);
+}
 
 @media (max-width: 768px) {
 

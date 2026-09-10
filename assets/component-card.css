@@ -53,7 +53,8 @@
 
 .card--card:hover, 
 .card--standard:hover {
-    border: var(--border-width) solid rgba(var(--color-accent), var(--border-opacity));
+    /* border: var(--border-width) solid rgba(var(--color-accent), var(--border-opacity)); */
+    box-shadow: 0 24px 48px -32px rgba(60, 70, 62, .45);
 }
 .card--card .card__inner:after,
 .card--standard .card__inner:after {

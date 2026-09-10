@@ -277,6 +277,7 @@ min-width: 0;
 }
 .cart-flex__inner{
     flex: 1;
+    min-width: 0;
 }
 
 

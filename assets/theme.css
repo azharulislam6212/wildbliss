@@ -490,7 +490,7 @@ button.shopify-payment-button__button--unbranded {
 }
 
 .swiper-pagination-bullet-active {
-   background: #FF0000;
+   background: rgba(var(--color-accent));
     transition: 0.3s ease;
     border-radius: 10px;
 }
