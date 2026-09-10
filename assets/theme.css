@@ -188,8 +188,8 @@ button.shopify-payment-button__button--unbranded {
 
 .button--primary-outline {
     background: transparent;
-    color: rgb(var(--color-primary-button));
-    border: 1px solid rgb(var(--color-primary-button));
+    color: rgb(var(--color-primary-button-text));
+    border: 1px solid rgb(var(--color-primary-button-text));
 }
 
 .button--primary-outline:before {
@@ -217,8 +217,8 @@ button.shopify-payment-button__button--unbranded {
 
 .button--secondary-outline {
     background: transparent;
-    border: 1px solid rgb(var(--color-secondary-button));
-    color: rgb(var(--color-secondary-button));
+    border: 1px solid rgb(var(--color-secondary-button-text));
+    color: rgb(var(--color-secondary-button-text));
 }
 
 .button--secondary-outline:before {

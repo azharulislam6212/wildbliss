@@ -25,7 +25,7 @@
 }
 
 .announcement-section .running-content-item {
-    margin: 0 9.6px;
+    margin: 0 9.58px;
     position: relative;
  
 font-family: var(--font-body-family);
@@ -51,7 +51,7 @@ text-transform: uppercase;
     border-radius: 50%;
     position: absolute;
     right: -9.6px;
-     opacity: .97;
+     opacity: .55;
 }
 
 
