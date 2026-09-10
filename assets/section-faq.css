@@ -65,7 +65,7 @@
 .disclosure__flex .disclosure__title {
 
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 16px;
 line-height: 150%;
 /* identical to box height, or 24px */
@@ -104,7 +104,6 @@ letter-spacing: 0.01em;
 
 .faq-subheading{
 font-style: normal;
-font-weight: 700;
 font-size: 25px;
 line-height: 150%;
 margin: 0 0 20px;
@@ -166,7 +165,7 @@ border-radius: 16px;
 .faq-tab__title{
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 32px;
 line-height: 130%;
 /* identical to box height, or 42px */

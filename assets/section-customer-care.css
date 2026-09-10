@@ -36,7 +36,7 @@
 .customer-care-heading {
 
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 26px;
 line-height: 130%;
 /* identical to box height, or 52px */
@@ -56,7 +56,7 @@ margin: 0 0 1.3rem;
 
 font-family: var(--font-body-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 12px;
 line-height: 130%;
 /* identical to box height, or 16px */
@@ -76,7 +76,7 @@ opacity: 0.6;
   margin: 0;
 
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */

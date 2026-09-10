@@ -88,21 +88,16 @@ cart-items .title-wrapper-with-link {
 .cart-item__name {
   text-decoration: none;
   display: block;
-  font-family: var(--font-body-family);
+  font-family: var(--font-heading-family);
  /* Filet, Wagyu */
  
 font-style: normal;
-font-weight: 600;
+  font-family: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
-/* identical to box height, or 21px */
 letter-spacing: 0.01em;
-
-/* Text/text-6 */
 color: rgb(var(--color-heading));
 
-
- 
 
 }
 
@@ -267,7 +262,7 @@ cart-remove-button .icon-remove {
  
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */

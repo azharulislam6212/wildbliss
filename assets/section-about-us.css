@@ -26,7 +26,7 @@
 
 .about-us-heading {
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 26px;
 line-height: 130%;
 letter-spacing: -0.04em;
@@ -52,10 +52,9 @@ margin: 0 0 3.2rem;
   position: absolute;
   top: 0;
   right: 0;
-  background: #e30613;
-  color: #fff;
+  background: rgba(var(--color-accent));
+  color: rgba(var(--color-heading));
   font-size: 1.3rem;
-  font-weight: 700;
   padding: 1rem 1.8rem;
   border-radius: 0 2rem 0 1.6rem;
 }
@@ -92,7 +91,7 @@ margin-bottom: 16px;
   margin: 0;
 
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */
@@ -113,7 +112,7 @@ letter-spacing: 0.01em;
   border: 1px solid #d9d9d9;
   border-radius: 1rem;
   margin: 3rem 0;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
 }
 
 .about-us-schedule {
@@ -127,7 +126,6 @@ letter-spacing: 0.01em;
 
 .about-us-link {
   color: inherit;
-  font-weight: 700;
   text-decoration: underline;
   margin-top: 1rem;
 }

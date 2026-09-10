@@ -90,13 +90,9 @@ cart-drawer-items{
 
 
 .drawer__heading {
-
 font-style: normal;
-font-weight: 700;
 font-size: 20px;
 line-height: 150%;
-/* identical to box height, or 30px */
-
 
   margin: 0 0;
 }
@@ -326,7 +322,6 @@ cart-drawer-items {
   border-bottom: 0.1rem solid rgba(var(--color-accent), 0.2);
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 700;
 font-size: 20px;
 line-height: 150%;
 text-transform: none;
@@ -408,7 +403,7 @@ font-family: var(--font-body-family);
  /* $99.99 */
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */
@@ -963,7 +958,7 @@ margin-bottom: 1.6rem;
   flex: 100%;
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 18px;
 line-height: 130%;
 /* or 23px */
@@ -983,7 +978,7 @@ margin: 0;
 
 .cart-collection-title{
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 18px;
 line-height: 130%;
 text-align: center;

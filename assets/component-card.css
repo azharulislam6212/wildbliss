@@ -318,7 +318,7 @@
 font-family: var(--font-heading-family);
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 16px;
 line-height: 150%;
 /* identical to box height, or 24px */
@@ -628,7 +628,7 @@ letter-spacing: 0.01em;
 
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */
@@ -688,7 +688,7 @@ z-index: 1;
 .card-information>.price{
     font-family: var(--font-body-family);
     font-style: normal;
-    font-weight: 600;
+    font-family: var(--font-heading-weight);
     font-size: 18px;
     line-height: 130%;
     letter-spacing: -0.04em;
@@ -790,7 +790,7 @@ margin: 1rem 1.3rem 1rem;
   padding: 0;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
 }
 
 .product--spacific__toggle span {
@@ -805,7 +805,7 @@ margin: 1rem 1.3rem 1rem;
 
 .product--spacific__title{
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */

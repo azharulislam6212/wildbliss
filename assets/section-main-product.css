@@ -1125,7 +1125,7 @@ a.product__text {
 }
 
 .product__description-title {
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
 }
 
 .product--no-media .product__title,
@@ -1687,7 +1687,7 @@ a.product__text {
 .icon--title {
   font-family: var(--font-heading-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: 12px;
   line-height: 150%;
   /* identical to box height, or 18px */
@@ -1982,7 +1982,6 @@ a.product__text {
 .product__title>h1 {
 
   font-style: normal;
-  font-weight: 500;
   font-size: 32px;
   line-height: 130%;
   /* identical to box height, or 42px */
@@ -2036,7 +2035,7 @@ a.product__text {
   /* 700/XS */
   font-family: var(--font-body-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: 12px;
   line-height: 150%;
   /* identical to box height, or 18px */
@@ -2130,7 +2129,7 @@ a.product__text {
 
   font-family: var(--font-body-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: 12px;
   line-height: 150%;
   /* identical to box height, or 18px */
@@ -2635,7 +2634,7 @@ a.product__text {
   /* 700/XS */
   font-family: var(--font-heading-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: 12px;
   line-height: 150%;
   /* identical to box height, or 18px */
@@ -2864,7 +2863,7 @@ a.product__text {
 .product-form__input .form__label {
   font-family: var(--font-heading-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: calc(14px * var(--font-body-scale));
   line-height: 150%;
   letter-spacing: 0.01em;
@@ -2930,7 +2929,7 @@ a.product__text {
 /* 700/H6 */
 font-family:  var(--font-heading-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 18px;
 line-height: 130%;
 /* or 23px */
@@ -3137,7 +3136,7 @@ border-radius: 0px 0px 7px 0px;
 /* 700/XXS */
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 10px;
 line-height: 150%;
 /* identical to box height, or 15px */
@@ -3192,7 +3191,7 @@ border-radius: 12px;
 /* 700/XS */
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 12px;
 line-height: 150%;
 /* identical to box height, or 18px */
@@ -3215,7 +3214,7 @@ color: #FFFFFF;
 .title-row h4{
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 16px;
 line-height: 150%;
 /* identical to box height, or 24px */
@@ -3237,7 +3236,7 @@ letter-spacing: 0.01em;
 /* $80.99 */
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 18px;
 line-height: 130%;
 /* or 23px */
@@ -3321,7 +3320,7 @@ color: #454442;
 /* 700/SM */
 font-family: var(--font-body-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */
@@ -3703,7 +3702,7 @@ letter-spacing: 0.01em;
 /* 700/H6 */
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 18px;
 line-height: 130%;
 /* or 23px */

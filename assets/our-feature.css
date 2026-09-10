@@ -62,7 +62,6 @@
 }
 
 .info-card-title {
-  font-weight: 700;
   color: var(--title-color);
   margin-bottom: 10px;
   line-height: 1.3;

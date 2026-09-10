@@ -31,7 +31,7 @@ text-transform: capitalize;
 
 font-family: var(--font-body-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 20px;
 line-height: 120%;
 /* identical to box height, or 24px */

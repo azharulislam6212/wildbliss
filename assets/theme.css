@@ -627,7 +627,7 @@ button.shopify-payment-button__button--unbranded {
 
     font-family: var(--font-heading-family);
     font-style: normal;
-    font-weight: 600;
+    font-family: var(--font-heading-weight);
     font-size: 12px;
     line-height: 130%;
     /* identical to box height, or 16px */
@@ -656,7 +656,6 @@ button.shopify-payment-button__button--unbranded {
 
 .section--title {
     font-style: normal;
-    font-weight: 700;
     line-height: 120%;
     margin: 0;
 }
@@ -879,7 +878,7 @@ variant-weight-select {
     font-family: var(--font-body-family);
 
     font-style: normal;
-    font-weight: 600;
+    font-family: var(--font-heading-weight);
     font-size: 14px;
     line-height: 150%;
     /* identical to box height, or 21px */
@@ -992,7 +991,6 @@ variant-weight-select {
     white-space: nowrap;
     text-decoration: none;
     font-style: normal;
-    font-weight: 700;
     font-size: 16px;
     line-height: 20px;
     text-align: center;
@@ -1090,7 +1088,7 @@ variant-weight-select {
 font-family: var(--font-heading-family);
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 16px;
 line-height: 150%;
 /* identical to box height, or 24px */
@@ -1125,7 +1123,6 @@ color: rgb(var(--color-foreground));
 
 .timer-separator {
   font-size: 24px;
-  font-weight: 700;
   line-height: 32px;
 }
 
@@ -1263,9 +1260,9 @@ color: rgb(var(--color-foreground));
  
 
 /* 500/SM */
-font-family: var(--color-heading);
+font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 500;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */
@@ -1293,7 +1290,7 @@ letter-spacing: 0.01em;
 
  padding: 32px;
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 48px;
 line-height: 130%;
 /* or 62px */

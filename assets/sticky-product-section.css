@@ -36,7 +36,6 @@
 }
 .sticky-product__content .product__title>h1{
     font-style: normal;
-    font-weight: 700;
     font-size: 20px;
     line-height: 150%;
     color: rgb(var(--color-heading), 1);

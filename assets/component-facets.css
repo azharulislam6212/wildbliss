@@ -59,7 +59,7 @@
   /* 700/SM */
   font-family: var(--font-heading-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: 14px;
   line-height: 150%;
   /* identical to box height, or 21px */
@@ -242,7 +242,7 @@
 .facets__summary {
   font-family: var(--font-heading-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: 14px;
   line-height: 150%;
   /* identical to box height, or 21px */
@@ -1455,7 +1455,7 @@ input.mobile-facets__checkbox {
 .product-count__text {
   font-family: var(--font-heading-family);
   font-style: normal;
-  font-weight: 600;
+  font-family: var(--font-heading-weight);
   font-size: 18px;
   line-height: 130%;
   /* or 23px */
@@ -1513,7 +1513,7 @@ input.mobile-facets__checkbox {
     margin: 0 0 1.5rem 0;
     font-family: var(--font-heading-family);
     font-style: normal;
-    font-weight: 600;
+    font-family: var(--font-heading-weight);
     font-size: 14px;
     line-height: 150%;
     /* identical to box height, or 21px */

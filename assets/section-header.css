@@ -773,7 +773,6 @@ body.drawer-open {
 .menu-lebel {
     font-family: var(--font-heading-family);
     font-style: normal;
-    font-weight: 700;
     font-size: 1rem;
     line-height: 12px;
     /* identical to box height */
@@ -1569,7 +1568,7 @@ body.drawer-open {
 .mega-menu-title {
     font-family: var(--font-heading-family);
     font-style: normal;
-    font-weight: 600;
+    font-family: var(--font-heading-weight);
     font-size: 18px;
     line-height: 130%;
     /* or 23px */
@@ -1724,7 +1723,7 @@ body.drawer-open {
     margin: 0;
     /* Best Sellers */
     font-style: normal;
-    font-weight: 600;
+    font-family: var(--font-heading-weight);
     font-size: 16px;
     line-height: 150%;
     /* identical to box height, or 24px */

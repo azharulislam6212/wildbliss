@@ -54,12 +54,9 @@ border-radius: 20px;
 }
 
 .image-card-block__title{
-  
 
-/* Heading/H5 */
-font-family: 'Lora';
 font-style: normal;
-font-weight: 700;
+
 font-size: 25px;
 line-height: 150%;
 margin: 0;

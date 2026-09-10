@@ -87,10 +87,7 @@
 .price--on-sale .price-item--regular {
   text-decoration: line-through;
   color: rgba(var(--color-foreground), 0.75);
-/* Heading/H6 */
-font-family: 'Lora';
 font-style: normal;
-font-weight: 700;
 font-size: 20px;
 line-height: 150%;
 /* identical to box height, or 30px */

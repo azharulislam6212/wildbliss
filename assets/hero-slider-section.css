@@ -130,21 +130,10 @@ isolation: isolate;
 max-width: 97px;
 height: 22px;
  
-/* Secondary */
-background: #FFC400;
-/* GET 50% OFF */
- 
-
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 700;
 font-size: 12px;
 line-height: 120%;
-/* or 14px */
-
-/* Dark */
-color: #1A1A1A;
-
 
  
 

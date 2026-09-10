@@ -80,7 +80,7 @@ border-radius: 12px;
 .team-name{
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 16px;
 line-height: 150%;
 /* identical to box height, or 24px */

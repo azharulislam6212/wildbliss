@@ -57,7 +57,7 @@ border: 1px solid #FFC2C2;
 
 .banner-grid__title{
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 40px;
 line-height: 130%;
 /* or 52px */

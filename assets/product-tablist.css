@@ -176,7 +176,7 @@ letter-spacing: -0.04em;
     margin: 0;
  
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */

@@ -28,7 +28,6 @@ min-width: 234px;
 .button-card__title{
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 700;
 font-size: 20px;
 line-height: 150%;
 margin: 0;

@@ -85,7 +85,7 @@ border-radius: 16px;
 /* 700/SM */
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 14px;
 line-height: 150%;
 /* identical to box height, or 21px */

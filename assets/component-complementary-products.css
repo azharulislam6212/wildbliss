@@ -183,7 +183,7 @@ product-recommendations.is-accordion + .accordion {
 /* 700/H6 */
 font-family: var(--font-heading-family);
 font-style: normal;
-font-weight: 600;
+font-weight: var(--font-heading-weight);
 font-size: 18px;
 line-height: 130%;
 /* or 23px */

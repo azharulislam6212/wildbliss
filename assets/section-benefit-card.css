@@ -74,7 +74,6 @@ overflow: hidden;
 .benefit-card__title{
 font-family: rgba(var(--font-heading-family));
 font-style: normal;
-font-weight: 700;
 font-size: 20px;
 line-height: 150%;
 margin: 0 0 2px;
