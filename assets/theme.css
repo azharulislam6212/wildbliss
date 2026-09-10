@@ -50,11 +50,11 @@ button.shopify-payment-button__button--unbranded {
     align-items: center;
     gap: 9px;
     border: 0;
-    padding: 1.4rem 2rem;
+    padding: 1.4rem 2.8rem;
     height: 5.6rem;
     cursor: pointer;
     font-family: var(--font-body-family);
-    font-weight: 600;
+    font-weight: var(--font-body-weight);
     font-style: normal;
     font-size: 15px;
     line-height: 24px;
@@ -85,7 +85,6 @@ button.shopify-payment-button__button--unbranded {
     position: relative;
     overflow: hidden;
     border: none;
-    padding: 1.2rem 1.8rem;
     cursor: pointer;
     transition: color 0.3s ease-in-out, border 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }

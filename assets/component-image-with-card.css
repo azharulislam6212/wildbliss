@@ -237,17 +237,7 @@
 }
 
 /* Eyebrow with the theme's rule mark */
-.image-with-card .image-with-text__text--caption {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin: 0 0 1.6rem;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgb(var(--color-accent));
-}
+
 
 .image-with-card .image-with-text__text--caption::before {
   content: "";
@@ -260,15 +250,29 @@
 
 .image-with-card .image-with-text__heading {
   margin: 0 0 2rem;
-  font-style: italic;
-  line-height: 1.28;
+font-style: italic;
+font-size: 33.9px;
+line-height: 42px;
+
 }
 
-.image-with-card .image-with-text__inner > .image-with-text__text {
-  max-width: 60rem;
-  margin: 0 0 3.2rem;
+.image-with-card  .image-with-text__text {
+  max-width: 479px;
+  margin: 0 0 1.3rem;
   font-size: 1.6rem;
   line-height: 1.6;
+}
+
+.image-with-card .image-with-text__text--caption {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 0 1.6rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(var(--color-accent));
 }
 
 .image-with-card .image-with-text__inner > .image-with-text__text > :first-child {
@@ -288,13 +292,22 @@
   display: grid;
   grid-template-columns: 4.2rem minmax(0, 1fr);
   gap: 0 0.8rem;
-  padding-top: 2.8rem;
+  padding-top: 2.2rem;
+  padding-bottom: 2.2rem;
+  border-bottom: 1px solid rgba(var(--color-accent), 0.2);
 }
+
+.image-with-card__item:last-child{
+  border: none;
+} 
 
 .image-with-card__item-number {
   font-family: var(--font-heading-family);
-  font-size: 1.8rem;
-  line-height: 1.5;
+ 
+font-style: normal;
+font-weight: var(--font-heading-weight);
+font-size: 22px;
+line-height: 22px;
   color: rgb(var(--color-accent));
 }
 
@@ -303,14 +316,23 @@
   margin: 0 0 0.6rem;
   font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight);
-  font-size: 1.8rem;
-  line-height: 1.5;
+font-size: 19px;
+line-height: 20px;
+ 
+letter-spacing: -0.19px;
   color: rgb(var(--color-heading));
 }
 
 .image-with-card__item-text {
-  font-size: 1.4rem;
-  line-height: 1.6;
+font-style: normal;
+ font-family: var(--font-body-family);
+font-weight: var(--font-body-weight);
+ 
+font-style: normal;
+font-size: 14.5px;
+line-height: 23px;
+
+
   color: rgba(var(--color-foreground), 0.78);
 }
 

@@ -125,12 +125,12 @@
 
       :root {
       {%if settings.enable_custom_font %}
-          --font-body-family:  'Söhne','Inter',system-ui,-apple-system,sans-serif;
+          --font-body-family: 'Inter';
           --font-body-style: normal;
-          --font-body-weight: 500;
-          --font-heading-family: 'Tiempos Headline','Tiempos','Newsreader',Georgia,serif;
+          --font-body-weight: 400;
+          --font-heading-family: 'Newsreader';
           --font-heading-style: normal;
-          --font-heading-weight: 500;
+          --font-heading-weight: 400;
 
           {% else %}
           --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};

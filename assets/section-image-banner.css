@@ -314,6 +314,7 @@
    --------------------------------------------------------------------------- */
 .banner__box > * + .banner__text {
   margin-top: 1.5rem;
+  max-width: 345px;
 }
 
 @media screen and (min-width: 750px) {
@@ -358,7 +359,7 @@
 .banner__buttons {
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.4rem;
   max-width: 60rem;
   word-break: break-word;
 }
@@ -375,7 +376,11 @@
 
   .banner__buttons .button{
     max-width: 168px;
+    padding: 1.4rem 1.8rem;
   }
+  .banner__buttons {
+  gap: 0.8rem;
+}
 
 }
 

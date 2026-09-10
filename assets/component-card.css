@@ -903,39 +903,54 @@ border-radius: var(--border-radius);
 .card__meta-line {
   margin: 0 0 0.4rem;
   font-family: var(--font-body-family);
-  font-size: 1.1rem;
   font-weight: var(--font-body-weight);
-  line-height: 1.5;
-  letter-spacing: 0.2em;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1.6px;
   text-transform: uppercase;
-  color:  #7B6775;
+  /* Old Lavender */
+color: #7B6775;
+
 }
 
 .card__content .card__heading {
   margin: 0 0 0.6rem;
   font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight);
-  font-size: 1.9rem;
-  line-height: 1.25;
-  letter-spacing: 0;
+/* Organic Wild Hawthorn */
+font-style: normal;
+font-size: 19px;
+line-height: 21px;
+/* identical to box height, or 110% */
+display: flex;
+align-items: center;
+letter-spacing: -0.19px;
+
   color: rgb(var(--color-heading));
 }
 
 .card__benefit {
   margin: 0 0 1.2rem;
-  font-family: var(--font-heading-family);
   font-style: italic;
-  font-size: 1.5rem;
-  line-height: 1.4;
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 13.5px;
+  line-height: 22px;
+
   color: rgba(var(--color-sub-heading));
 }
 
 .card__botanical {
   margin: 0 0 1.6rem;
   font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
   font-style: italic;
-  font-size: 1.4rem;
-  line-height: 1.4;
+  font-size: 11.5px;
+  line-height: 18px;
+  
   color: rgba(var(--color-accent));
 }
 
@@ -945,7 +960,7 @@ border-radius: var(--border-radius);
   align-items: center;
   flex-wrap: wrap;
   gap: 0.8rem;
-  margin: 0 0 1.6rem;
+  margin: 0 0 1.2rem;
 }
 
 .card__rating-stars {
@@ -1010,7 +1025,7 @@ border-radius: var(--border-radius);
   min-width: 0;
   min-height: 3.6rem;
   height: 3.6rem;
-  padding: 0 1.8rem;
+  padding: 0 1.3rem;
   border-radius:  40px;
      font-size: 1.4rem;
     font-weight: 400;
@@ -1040,7 +1055,7 @@ border-radius: var(--border-radius);
 .card:not(.card--horizontal) > .card__content {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1.8rem;
 }
 
 .card:not(.card--horizontal) > .card__content > .card__information {

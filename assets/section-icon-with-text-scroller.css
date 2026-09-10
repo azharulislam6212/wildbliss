@@ -66,7 +66,7 @@
   .icon-text-scroller--split .icon-text-scroller__item::before {
     top: calc(var(--icon-text-pad-top) * -1);
     bottom: calc(var(--icon-text-pad-bottom) * -1);
-    left: calc((var(--icon-text-gap) / 2 + 0.5px) * -1);
+    left: calc((var(--icon-text-gap) / 1 + 0.5px) * -1);
     width: 1px;
   }
 
@@ -111,6 +111,7 @@
   flex-direction: column;
   gap: 0.4rem;
   min-width: 0;
+  max-width: 203px;
 }
 
 .icon-text-scroller__title {
