@@ -61,7 +61,7 @@
               <div class="image-card__image"> 
             {% if block.settings.image != blank %}
         
-             {% render 'responsive-img' with image: block.settings.image %}
+             {% render 'responsive-img' with image, image: block.settings.image %}
 
        
             {% else %}
@@ -330,3 +330,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 2913..2982
+{% endcomment %}

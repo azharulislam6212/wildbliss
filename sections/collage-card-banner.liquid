@@ -129,7 +129,7 @@
             <div class="banner-card" {{ block.shopify_attributes }}>
               <div class="banner-card__image"  style="--overlay-color: {{ block.settings.overlay_color }}; --shape-color: {{ block.settings.shape_color }} ">
                 {% if block.settings.image != blank %}
-                  {% render 'responsive-img' with image: block.settings.image %}
+                  {% render 'responsive-img' with image, image: block.settings.image %}
                 {% else %}
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
@@ -540,3 +540,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 4041..4110
+{% endcomment %}

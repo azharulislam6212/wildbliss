@@ -132,7 +132,7 @@
                         </div>
                         <div class="product-tab__image">
                           {% if block.settings.image != blank %}
-                            {% render 'responsive-img' with image:  block.settings.image %}
+                            {% render 'responsive-img' with image, image: block.settings.image %}
                           {% else %}
                             {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                           {% endif %}
@@ -174,7 +174,7 @@
                         </div>
                         <div class="product-tab__image">
                           {% if block.settings.image != blank %}
-                            {% render 'responsive-img' with image:  block.settings.image %}
+                            {% render 'responsive-img' with image, image: block.settings.image %}
                           {% else %}
                             {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                           {% endif %}
@@ -519,3 +519,16 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image:  block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 5808..5877
+- from: "{% render 'responsive-img' with image:  block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 7720..7789
+{% endcomment %}

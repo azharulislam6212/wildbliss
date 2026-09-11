@@ -10,7 +10,7 @@
   >
 
  {% comment %} {% render 'responsive-img' with image: media.preview_image %} {% endcomment %}
- {% render 'icon-img' with image: media.preview_image %}
+ {% render 'icon-img' with image, image: media.preview_image %}
 
   </div><!-- /.media -->
 
@@ -37,3 +37,13 @@
   
   {%- endif -%}
 </div><!-- /.product__thumbnail -->
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: media.preview_image %}"
+  to: "{% render 'icon-img' with image, image: media.preview_image %}"
+  position: 455..517
+{% endcomment %}

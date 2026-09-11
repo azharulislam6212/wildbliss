@@ -129,7 +129,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "page_width": "container-fluid",
+        "page_width": "container",
         "pre_text": "Others Products",
         "heading": "You May Also Like",
         "heading_size": "h1",
@@ -209,9 +209,9 @@
   },
   "order": [
     "main",
+    "178886061598a8c2da",
     "related-products",
     "1754717456e979fd41",
-    "sticky_product_bar",
-    "178886061598a8c2da"
+    "sticky_product_bar"
   ]
 }

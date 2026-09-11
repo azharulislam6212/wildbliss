@@ -27,7 +27,7 @@
 
     {% if section.settings.bg_image != blank %}
     <div class="image-card-bg">
-      {% render 'responsive-img' with image: section.settings.bg_image %}
+      {% render 'responsive-img' with image, image: section.settings.bg_image %}
     </div>
   {% endif %}
 
@@ -63,7 +63,7 @@
               >
               {% if block.settings.image != blank %}
                   <div class="image-card-block__icon">
-                    {% render 'icon-img' with image: block.settings.image %}
+                    {% render 'icon-img' with image, image: block.settings.image %}
                   </div>
                 {% endif %}
 
@@ -315,4 +315,16 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: section.settings.bg_image %}"
+  to: "{% render 'responsive-img' with image, image: section.settings.bg_image %}"
+  position: 1084..1158
+- from: "{% render 'icon-img' with image: block.settings.image %}"
+  to: "{% render 'icon-img' with image, image: block.settings.image %}"
+  position: 2567..2630
+{%- endcomment -%}

@@ -33,11 +33,11 @@
 <footer class="footer footer--style-{{ section.settings.footer_style }} color-{{ section.settings.color_scheme }} gradient">
   {% if section.settings.bg_image != blank %}
     <div class="footer__bg">
-      {% render 'responsive-img' with image: section.settings.bg_image , class:"desktop__image" %}
+      {% render 'responsive-img' with image, image: section.settings.bg_image, class: "desktop__image" %}
       {% if section.settings.bg_image_mobile != blank %}
-        {% render 'responsive-img' with image: section.settings.bg_image_mobile class:"mobile__image" %}
+        {% render 'responsive-img' with image, image: section.settings.bg_image_mobile, class: "mobile__image" %}
       {% else %}
-        {% render 'responsive-img' with image: section.settings.bg_image  class:"mobile__image" %}
+        {% render 'responsive-img' with image, image: section.settings.bg_image, class: "mobile__image" %}
       {% endif %}
     </div>
   {% endif %}
@@ -91,7 +91,7 @@
               {% if block.settings.image != blank %}
 
                 <div class="running-img-footer" style="--image-width: {{ block.settings.image_width |  append: 'px'}}">
-                  {% render 'responsive-img' with image: block.settings.image %}
+                  {% render 'responsive-img' with image, image: block.settings.image %}
                 </div>
         
               {% endif %}
@@ -2153,3 +2153,28 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''responsive-img'' with image: section.settings.bg_image , class:"desktop__image"
+    %}'
+  to: '{% render ''responsive-img'' with image, image: section.settings.bg_image,
+    class: "desktop__image" %}'
+  position: 1275..1374
+- from: '{% render ''responsive-img'' with image: section.settings.bg_image_mobile
+    class:"mobile__image" %}'
+  to: '{% render ''responsive-img'' with image, image: section.settings.bg_image_mobile,
+    class: "mobile__image" %}'
+  position: 1440..1545
+- from: '{% render ''responsive-img'' with image: section.settings.bg_image  class:"mobile__image"
+    %}'
+  to: '{% render ''responsive-img'' with image, image: section.settings.bg_image,
+    class: "mobile__image" %}'
+  position: 1571..1669
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 4155..4224
+{% endcomment %}

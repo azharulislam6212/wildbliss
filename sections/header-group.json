@@ -77,7 +77,7 @@
         "logo_width_mobile": 135,
         "menu": "main-menu",
         "menu_type_desktop": "menu",
-        "sticky_header_type": "none",
+        "sticky_header_type": "always",
         "show_line_separator": true,
         "show_icons": true,
         "transparent_on_home": false,

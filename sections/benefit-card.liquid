@@ -30,7 +30,7 @@
 
     {% if section.settings.bg_image != blank %}
     <div class="benefit-bg">
-      {% render 'responsive-img' with image: section.settings.bg_image %}
+      {% render 'responsive-img' with image, image: section.settings.bg_image %}
     </div>
   {% endif %}
 
@@ -89,7 +89,7 @@
                 {% endif %}
               >
                   {% if block.settings.image != blank %}
-                    {% render 'responsive-img' with image: block.settings.image %}
+                    {% render 'responsive-img' with image, image: block.settings.image %}
                   {% else %}
                     {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                   {% endif %}
@@ -482,4 +482,16 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: section.settings.bg_image %}"
+  to: "{% render 'responsive-img' with image, image: section.settings.bg_image %}"
+  position: 1297..1371
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 3742..3811
+{%- endcomment -%}

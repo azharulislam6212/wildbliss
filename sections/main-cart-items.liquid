@@ -105,7 +105,7 @@
 
                                 {% if image != blank %}
                                     <div class="media media--square">
-                                      {% render 'responsive-img' with image: image %}
+                                      {% render 'responsive-img' with image, image: image %}
                                     </div>
                                 {% endif %}
 
@@ -746,7 +746,7 @@
 
                                         {% if icon != blank %}
                                           <div class="text-icon">
-                                            {% render 'icon-img' with image: icon %}
+                                            {% render 'icon-img' with image, image: icon %}
                                           </div>
                                         {% endif %}
 
@@ -792,7 +792,7 @@
 
                                         {% if icon != blank %}
                                           <div class="scroll__icon">
-                                            {% render 'icon-img' with image: icon %}
+                                            {% render 'icon-img' with image, image: icon %}
                                           </div>
                                         {% endif %}
 
@@ -1158,3 +1158,19 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: image %}"
+  to: "{% render 'responsive-img' with image, image: image %}"
+  position: 9596..9650
+- from: "{% render 'icon-img' with image: icon %}"
+  to: "{% render 'icon-img' with image, image: icon %}"
+  position: 43867..43914
+- from: "{% render 'icon-img' with image: icon %}"
+  to: "{% render 'icon-img' with image, image: icon %}"
+  position: 45875..45922
+{% endcomment %}

@@ -38,7 +38,7 @@
   <div class="page-banner banner--height-{{ section.settings.banner_height }}">
     <div class="page-banner__image" style="--overlay-color: {{ section.settings.overlay_color }};">
       {% if section.settings.image != blank %}
-        {% render 'responsive-img' with image: section.settings.image %}
+        {% render 'responsive-img' with image, image: section.settings.image %}
       {% else %}
         {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
@@ -424,4 +424,13 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: section.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: section.settings.image %}"
+  position: 1456..1527
+{%- endcomment -%}

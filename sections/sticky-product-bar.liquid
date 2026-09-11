@@ -17,7 +17,7 @@
                 <div class="sticky-product__img-wrap media">
                   {% if product.featured_media.image != blank %}
               
-                  {% render 'responsive-img' with image: product.featured_media.image %}
+                  {% render 'responsive-img' with image, image: product.featured_media.image %}
                         
                 {% endif %}
                 </div>
@@ -284,3 +284,14 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: product.featured_media.image %}"
+  to: "{% render 'responsive-img' with image, image: product.featured_media.image
+    %}"
+  position: 731..808
+{% endcomment %}

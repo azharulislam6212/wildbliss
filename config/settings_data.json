@@ -213,7 +213,7 @@
       "scheme-3": {
         "settings": {
           "accent": "#adbb8c",
-          "background": "#3c463e",
+          "background": "#4E5C50",
           "background_gradient": "",
           "heading": "#fffdf4",
           "sub_heading": "#a05e12",
@@ -238,8 +238,8 @@
           "background": "#f6f1e3",
           "background_gradient": "",
           "heading": "#4e5c50",
-          "sub_heading": "#91A66A",
-          "text": "#3A443C",
+          "sub_heading": "#91a66a",
+          "text": "#3a443c",
           "primary_button": "#4e5c50",
           "primary_button_label": "#fffdf4",
           "primary_button_hover": "#a05e12",

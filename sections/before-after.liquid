@@ -55,7 +55,7 @@
               
             >
               {% if section.settings.before_image != blank %}
-                {% render 'responsive-img' with image: section.settings.before_image %}
+                {% render 'responsive-img' with image, image: section.settings.before_image %}
               {% else %}
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {% endif %}
@@ -79,7 +79,7 @@
               {% endif %}
             >
               {% if section.settings.after_image != blank %}
-                {% render 'responsive-img' with image: section.settings.after_image %}
+                {% render 'responsive-img' with image, image: section.settings.after_image %}
               {% else %}
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
               {% endif %}
@@ -336,3 +336,18 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: section.settings.before_image %}"
+  to: "{% render 'responsive-img' with image, image: section.settings.before_image
+    %}"
+  position: 2376..2454
+- from: "{% render 'responsive-img' with image: section.settings.after_image %}"
+  to: "{% render 'responsive-img' with image, image: section.settings.after_image
+    %}"
+  position: 3466..3543
+{% endcomment %}

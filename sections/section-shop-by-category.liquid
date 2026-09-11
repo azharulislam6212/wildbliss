@@ -101,7 +101,7 @@
           >
             <div class="shop-by-category__card-image">
               {% if block.settings.image != blank %}
-                 {% render 'icon-img' with image: block.settings.image %}
+                 {% render 'icon-img' with image, image: block.settings.image %}
               {% else %}
                  {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {% endif %}
@@ -352,4 +352,13 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: block.settings.image %}"
+  to: "{% render 'icon-img' with image, image: block.settings.image %}"
+  position: 4630..4693
+{%- endcomment -%}

@@ -65,7 +65,7 @@
               {%- if block.settings.icon != blank or block.settings.svg_icon != blank -%}
                 <div class="icon-text-scroller__icon">
                   {%- if block.settings.icon != blank -%}
-                    {% render 'icon-img' with image: block.settings.icon %}
+                    {% render 'icon-img' with image, image: block.settings.icon %}
                   {%- else -%}
                     {{ block.settings.svg_icon }}
                   {%- endif -%}
@@ -259,3 +259,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: block.settings.icon %}"
+  to: "{% render 'icon-img' with image, image: block.settings.icon %}"
+  position: 2700..2762
+{% endcomment %}

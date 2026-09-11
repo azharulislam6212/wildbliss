@@ -46,7 +46,7 @@
 
                   {% if block.settings.svg_icon != blank %}
                     <div class="running-content__img">
-                          {% render "icon-img" with image: block.settings.svg_icon  %}
+                          {% render "icon-img" with image, image: block.settings.svg_icon %}
                     </div>
                   {% endif %}
 
@@ -297,3 +297,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render "icon-img" with image: block.settings.svg_icon  %}'
+  to: '{% render "icon-img" with image, image: block.settings.svg_icon %}'
+  position: 1706..1772
+{% endcomment %}

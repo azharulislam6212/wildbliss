@@ -53,7 +53,7 @@
               >
                 {% if block.settings.image != blank %}
                   <div class="button-card__icon">
-                    {% render 'icon-img' with image: block.settings.image %}
+                    {% render 'icon-img' with image, image: block.settings.image %}
                   </div>
                 {% endif %}
 
@@ -255,4 +255,13 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: block.settings.image %}"
+  to: "{% render 'icon-img' with image, image: block.settings.image %}"
+  position: 2213..2276
+{%- endcomment -%}

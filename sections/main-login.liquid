@@ -37,7 +37,7 @@
           {% endif %}
         >
           {% if section.settings.image != blank %}
-            {% render 'responsive-img' with image: section.settings.image %}
+            {% render 'responsive-img' with image, image: section.settings.image %}
           {% else %}
             {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
           {% endif %}
@@ -411,4 +411,13 @@
   ]
 }
 {% endschema %}
- 
+ {%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: section.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: section.settings.image %}"
+  position: 1734..1805
+{%- endcomment -%}

@@ -59,7 +59,7 @@
             <div class="banner-grid banner-grid__product" {{ block.shopify_attributes }}>
               <div class="banner-grid__image">
                 {% if block.settings.image != blank %}
-                  {% render 'responsive-img' with image: block.settings.image %}
+                  {% render 'responsive-img' with image, image: block.settings.image %}
                 {% else %}
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
@@ -115,7 +115,7 @@
             <div class="banner-grid banner-grid__product" {{ block.shopify_attributes }}>
               <div class="banner-grid__image">
                 {% if block.settings.image != blank %}
-                  {% render 'responsive-img' with image: block.settings.image %}
+                  {% render 'responsive-img' with image, image: block.settings.image %}
                 {% else %}
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
@@ -169,7 +169,7 @@
             <div class="banner-grid" {{ block.shopify_attributes }}>
               <div class="banner-grid__image">
                 {% if block.settings.image != blank %}
-                  {% render 'responsive-img' with image: block.settings.image %}
+                  {% render 'responsive-img' with image, image: block.settings.image %}
                 {% else %}
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 {% endif %}
@@ -521,3 +521,19 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 2366..2435
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 20856..20925
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 25803..25872
+{% endcomment %}

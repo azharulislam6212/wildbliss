@@ -103,7 +103,7 @@
 
                                 {% if image != blank %}
                                     <div class="media media--square">
-                                      {% render 'responsive-img' with image: image %}
+                                      {% render 'responsive-img' with image, image: image %}
                                     </div>
                                 {% endif %}
 
@@ -703,3 +703,13 @@
     </div>
   </div>
 </cart-drawer>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: image %}"
+  to: "{% render 'responsive-img' with image, image: image %}"
+  position: 10589..10643
+{% endcomment %}

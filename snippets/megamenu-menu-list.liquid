@@ -37,7 +37,7 @@
                       <div class="promotion-image__card color-{{ block.settings.promotion_color_scheme }} gradient">
                         <div class="promotion-image__img">
                           {%- if block.settings.image != blank -%}
-                            {% render 'responsive-img' with image: block.settings.image %}
+                            {% render 'responsive-img' with image, image: block.settings.image %}
                           {%- else -%}
                             {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                           {%- endif -%}
@@ -80,7 +80,7 @@
                       <div class="promotion-image__card color-{{ block.settings.promotion_color_scheme }} gradient">
                         <div class="promotion-image__img">
                           {%- if block.settings.image_2 != blank -%}
-                            {% render 'responsive-img' with image: block.settings.image_2 %}
+                            {% render 'responsive-img' with image, image: block.settings.image_2 %}
                           {%- else -%}
                             {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                           {%- endif -%}
@@ -147,7 +147,7 @@
                     <div class="mega-image__card color-{{ block.settings.promotion_color_scheme }} gradient">
                       <div class="mega-image__img" style="--overlay: {{ block.settings.overlay_color }}">
                         {%- if block.settings.image != blank -%}
-                          {% render 'responsive-img' with image: block.settings.image %}
+                          {% render 'responsive-img' with image, image: block.settings.image %}
                         {%- else -%}
                           {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                         {%- endif -%}
@@ -190,3 +190,19 @@
     </div>
   </div>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 1943..2012
+- from: "{% render 'responsive-img' with image: block.settings.image_2 %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image_2 %}"
+  position: 4980..5051
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 8958..9027
+{% endcomment %}

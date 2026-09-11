@@ -73,7 +73,7 @@
 
                   {% if block.settings.image != blank %}
                     <div class="about-image__first media">
-                      {% render 'responsive-img' with image: block.settings.image %}
+                      {% render 'responsive-img' with image, image: block.settings.image %}
                     </div>
 
                   {% else %}
@@ -84,7 +84,7 @@
 
                   {% if block.settings.image_2 != blank %}
                     <div class="about-image__second media">
-                      {% render 'responsive-img' with image: block.settings.image_2 %}
+                      {% render 'responsive-img' with image, image: block.settings.image_2 %}
                     </div>
 
                   {% endif %}
@@ -462,4 +462,16 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 3024..3093
+- from: "{% render 'responsive-img' with image: block.settings.image_2 %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image_2 %}"
+  position: 3499..3570
+{%- endcomment -%}

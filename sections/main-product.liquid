@@ -309,7 +309,7 @@
             <div class="free-trial-flex free-trial-desktop" {{ block.shopify_attributes }}>
               {% if block.settings.trial_icon != blank %}
                 <span class="trial__icon">
-                  {% render 'icon-img' with image: block.settings.trial_icon %}
+                  {% render 'icon-img' with image, image: block.settings.trial_icon %}
                 </span>
               {% endif %}
               <div>
@@ -382,7 +382,7 @@
                   <div class="free-trial-flex free-trial-mobile" {{ block.shopify_attributes }}>
                     {% if block.settings.trial_icon != blank %}
                       <span class="trial__icon">
-                        {% render 'icon-img' with image: block.settings.trial_icon %}
+                        {% render 'icon-img' with image, image: block.settings.trial_icon %}
                       </span>
                     {% endif %}
                     <div>
@@ -397,7 +397,7 @@
                   <div class="author__box" {{ block.shopify_attributes }}>
                     {% if block.settings.author_img != blank %}
                       <span class="author__box__image">
-                        {% render 'responsive-img' with image: block.settings.author_img %}
+                        {% render 'responsive-img' with image, image: block.settings.author_img %}
                       </span>
                     {% endif %}
                     <div>
@@ -421,7 +421,7 @@
                   <div class="trustpilot-review" {{ block.shopify_attributes }}>
                     {% if block.settings.review_icon != blank %}
                       <span class="trustpilot__icon">
-                        {% render 'icon-img' with image: block.settings.review_icon %}
+                        {% render 'icon-img' with image, image: block.settings.review_icon %}
                       </span>
                     {% endif %}
                     <span>
@@ -820,7 +820,7 @@
                           <h2 class="h4 disclosure__title inline-richtext">
                             {% if block.settings.icon_image != blank %}
                               <span class="accordion__icon">
-                                {% render 'icon-img' with image: block.settings.icon_image %}
+                                {% render 'icon-img' with image, image: block.settings.icon_image %}
                               </span>
                             {% else %}
                               {% render 'icon-accordion', icon: block.settings.icon %}
@@ -1257,7 +1257,7 @@
 
                                         {% if icon != blank %}
                                           <div class="scroll__icon">
-                                            {% render 'icon-img' with image: icon %}
+                                            {% render 'icon-img' with image, image: icon %}
                                           </div>
                                         {% endif %}
 
@@ -1624,7 +1624,7 @@
 
               <div class="size-chart-wrapper">
                 {% if size_chart != blank %}
-                  {% render 'responsive-img' with image: size_chart %}
+                  {% render 'responsive-img' with image, image: size_chart %}
                 {% endif %}
               </div>
             </div>
@@ -4158,3 +4158,31 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: block.settings.trial_icon %}"
+  to: "{% render 'icon-img' with image, image: block.settings.trial_icon %}"
+  position: 14749..14817
+- from: "{% render 'icon-img' with image: block.settings.trial_icon %}"
+  to: "{% render 'icon-img' with image, image: block.settings.trial_icon %}"
+  position: 20398..20466
+- from: "{% render 'responsive-img' with image: block.settings.author_img %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.author_img %}"
+  position: 21106..21180
+- from: "{% render 'icon-img' with image: block.settings.review_icon %}"
+  to: "{% render 'icon-img' with image, image: block.settings.review_icon %}"
+  position: 22347..22416
+- from: "{% render 'icon-img' with image: block.settings.icon_image %}"
+  to: "{% render 'icon-img' with image, image: block.settings.icon_image %}"
+  position: 43667..43735
+- from: "{% render 'icon-img' with image: icon %}"
+  to: "{% render 'icon-img' with image, image: icon %}"
+  position: 70848..70895
+- from: "{% render 'responsive-img' with image: size_chart %}"
+  to: "{% render 'responsive-img' with image, image: size_chart %}"
+  position: 89009..89068
+{% endcomment %}

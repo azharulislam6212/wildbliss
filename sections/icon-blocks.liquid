@@ -51,7 +51,7 @@
           >
             <div class="icon-block__icon">
               {% if block.settings.image != blank %}
-                {% render 'icon-img' with image: block.settings.image %}
+                {% render 'icon-img' with image, image: block.settings.image %}
 
               {% elsif block.settings.svg_icon != blank %}
                 {{ block.settings.svg_icon }}
@@ -314,3 +314,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: block.settings.image %}"
+  to: "{% render 'icon-img' with image, image: block.settings.image %}"
+  position: 2070..2133
+{% endcomment %}

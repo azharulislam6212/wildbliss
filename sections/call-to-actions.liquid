@@ -77,7 +77,7 @@
                 <div class="call-icon-item  color-{{ section.settings.color_scheme_card }} gradient   {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"  style=" --color-accent: {{ section.settings.color_accent.red }}, {{ section.settings.color_accent.green }},  {{ section.settings.color_accent.blue }};">
                   {% if block.settings.icon != blank %}
                     <div class="call-icon">
-                      {% render 'icon-img' with image: block.settings.icon %}
+                      {% render 'icon-img' with image, image: block.settings.icon %}
                     </div>
                   {% endif %}
 
@@ -407,4 +407,13 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: block.settings.icon %}"
+  to: "{% render 'icon-img' with image, image: block.settings.icon %}"
+  position: 3920..3982
+{%- endcomment -%}

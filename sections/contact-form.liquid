@@ -259,7 +259,7 @@
                 <div class="contact-icon-item  color-{{ section.settings.color_scheme_card }} gradient   {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
                   {% if block.settings.icon != blank %}
                     <div class="contact-icon">
-                      {% render 'icon-img' with image: block.settings.icon %}
+                      {% render 'icon-img' with image, image: block.settings.icon %}
                     </div>
                   {% endif %}
 
@@ -303,7 +303,7 @@
                   {% if block.settings.image %}
 
                     <div class="widget-card__img">
-                      {% render 'responsive-img' with image: block.settings.image %}
+                      {% render 'responsive-img' with image, image: block.settings.image %}
                     </div>
 
 
@@ -340,7 +340,7 @@
 
                   {% if block.settings.icon %}
                     <div class="widget-card__icon">
-                      {% render 'icon-img' with image: block.settings.icon %}
+                      {% render 'icon-img' with image, image: block.settings.icon %}
                     </div>
                   {% endif %}
 
@@ -781,4 +781,19 @@
         }
       ]
     }
-  {% endschema %}
+  {% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-img' with image: block.settings.icon %}"
+  to: "{% render 'icon-img' with image, image: block.settings.icon %}"
+  position: 11621..11683
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 12980..13049
+- from: "{% render 'icon-img' with image: block.settings.icon %}"
+  to: "{% render 'icon-img' with image, image: block.settings.icon %}"
+  position: 15007..15069
+{%- endcomment -%}

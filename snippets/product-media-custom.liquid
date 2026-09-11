@@ -12,7 +12,7 @@
 
 <div class="product__image">
   {%- capture media_image -%}
-     {% render 'responsive-img' with image: media.preview_image %}
+     {% render 'responsive-img' with image, image: media.preview_image %}
 
   {%- endcapture -%}
 
@@ -281,3 +281,13 @@
   {%- endif -%}
 </div>
 <!-- /.product__image -->
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: media.preview_image %}"
+  to: "{% render 'responsive-img' with image, image: media.preview_image %}"
+  position: 490..558
+{% endcomment %}

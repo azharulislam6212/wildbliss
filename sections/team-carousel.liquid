@@ -85,7 +85,7 @@
                   <div class="team-card">
                     <div class="team-image">
                       {% if block.settings.image != blank %}
-                        {% render 'responsive-img' with image: block.settings.image %}
+                        {% render 'responsive-img' with image, image: block.settings.image %}
                       {% else %}
                         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                       {% endif %}
@@ -481,3 +481,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: block.settings.image %}"
+  to: "{% render 'responsive-img' with image, image: block.settings.image %}"
+  position: 3287..3356
+{% endcomment %}

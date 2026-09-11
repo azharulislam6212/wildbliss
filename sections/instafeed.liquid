@@ -156,7 +156,7 @@
                       {% endif %}
                     >
                       {% if image != blank %}
-                        {% render 'responsive-img' with image: image %}
+                        {% render 'responsive-img' with image, image: image %}
                       {% else %}
                         {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                       {% endif %}
@@ -613,3 +613,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: image %}"
+  to: "{% render 'responsive-img' with image, image: image %}"
+  position: 6814..6868
+{% endcomment %}

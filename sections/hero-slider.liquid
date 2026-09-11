@@ -71,12 +71,12 @@
 
                   <div class="hero__behind-image">
                              {% if block.settings.image != blank %}
-                                {% render 'responsive-img' with image: block.settings.image , class:"mobile-hidden" %}
+                                {% render 'responsive-img' with image, image: block.settings.image, class: "mobile-hidden" %}
 
                                 {% if block.settings.image_mobile != blank %}
-                                  {% render 'responsive-img' with image: block.settings.image_mobile class:"desktop-hidden" %}
+                                  {% render 'responsive-img' with image, image: block.settings.image_mobile, class: "desktop-hidden" %}
                                 {% else %}
-                                  {% render 'responsive-img' with image: block.settings.image  class:"desktop-hidden" %}
+                                  {% render 'responsive-img' with image, image: block.settings.image, class: "desktop-hidden" %}
                                 {% endif %}
 
                                 {%- else -%}
@@ -512,3 +512,25 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''responsive-img'' with image: block.settings.image , class:"mobile-hidden"
+    %}'
+  to: '{% render ''responsive-img'' with image, image: block.settings.image, class:
+    "mobile-hidden" %}'
+  position: 2661..2754
+- from: '{% render ''responsive-img'' with image: block.settings.image_mobile class:"desktop-hidden"
+    %}'
+  to: '{% render ''responsive-img'' with image, image: block.settings.image_mobile,
+    class: "desktop-hidden" %}'
+  position: 2868..2969
+- from: '{% render ''responsive-img'' with image: block.settings.image  class:"desktop-hidden"
+    %}'
+  to: '{% render ''responsive-img'' with image, image: block.settings.image, class:
+    "desktop-hidden" %}'
+  position: 3047..3141
+{% endcomment %}

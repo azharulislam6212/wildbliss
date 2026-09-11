@@ -223,7 +223,7 @@
             {%- if section.settings.logo != blank -%}
               <div  >
 
-          {% render 'responsive-img' with image: section.settings.logo  %}
+          {% render 'responsive-img' with image, image: section.settings.logo %}
 
               </div>
             {%- else -%}
@@ -1112,4 +1112,13 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'responsive-img' with image: section.settings.logo  %}"
+  to: "{% render 'responsive-img' with image, image: section.settings.logo %}"
+  position: 7853..7923
+{%- endcomment -%}
