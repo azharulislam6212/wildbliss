@@ -929,13 +929,13 @@ summary::-webkit-details-marker {
 .sub-heading{
 font-family: var(--font-body-family);
 font-style: normal;
-font-weight:var(--font-body-weight);;
+font-weight: 600;
 font-size: 11px;
 line-height: 18px;
 display: flex;
 align-items: center;
 gap:10px;
-letter-spacing: 2.2px;
+letter-spacing: .2em;
 text-transform: uppercase;
 color: rgb(var(--color-sub-heading));
 }

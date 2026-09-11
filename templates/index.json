@@ -122,7 +122,7 @@
             "svg_icon": "<svg width=\"26\" height=\"27\" viewBox=\"0 0 26 27\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M16.8225 1.29745C14.5388 0.608655 12.1053 0.589936 9.81133 1.24352C7.5173 1.8971 5.45913 3.1955 3.88136 4.98446C2.30359 6.77341 1.27255 8.9777 0.910751 11.3354C0.548953 13.6931 0.871606 16.1051 1.84037 18.2849C2.80914 20.4646 4.38329 22.3204 6.37579 23.6317C8.36829 24.9431 10.6954 25.6549 13.0805 25.6826C15.4657 25.7102 17.8086 25.0526 19.831 23.7877C21.8533 22.5229 23.4701 20.7041 24.4891 18.5474C22.5296 18.4624 20.6326 17.8324 19.0115 16.7282C17.3904 15.624 16.1095 14.0894 15.3129 12.2971C14.5163 10.5047 14.2356 8.52562 14.5022 6.58242C14.7689 4.63921 15.5725 2.80895 16.8225 1.29745Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M9.15576 20.4641C11.0724 17.5891 14.9058 16.6308 17.7808 17.5891\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
             "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
             "caption": "",
-            "title": "<strong>Calm & Mood<\/strong>",
+            "title": "Calm & Mood",
             "text": "St John's Wort · Linden · Lemon Balm",
             "collection": "calm-mood",
             "button_text": "Explore",
@@ -135,7 +135,7 @@
           "settings": {
             "svg_icon": "<svg width=\"21\" height=\"30\" viewBox=\"0 0 21 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.3499 1.13977C10.3499 1.13977 19.9333 11.6814 19.9333 19.3481C19.9333 21.8898 18.9236 24.3273 17.1264 26.1245C15.3292 27.9218 12.8916 28.9314 10.3499 28.9314C7.80828 28.9314 5.37072 27.9218 3.57349 26.1245C1.77627 24.3273 0.766602 21.8898 0.766602 19.3481C0.766602 11.6814 10.3499 1.13977 10.3499 1.13977Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
             "caption": "",
-            "title": "<strong>Daily Detox<\/strong>",
+            "title": "Daily Detox",
             "text": "Dandelion Root · Burdock · Nettle",
             "collection": "daily-detox",
             "button_text": "Explore",
@@ -148,7 +148,7 @@
           "settings": {
             "svg_icon": "<svg width=\"25\" height=\"23\" viewBox=\"0 0 25 23\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.2666 21.9976C5.55827 17.2059 0.766602 13.3726 0.766602 6.66426C0.920034 5.4041 1.42788 4.21335 2.23113 3.23034C3.03439 2.24733 4.10008 1.51241 5.30439 1.11097C6.50871 0.709535 7.80221 0.658053 9.03462 0.96251C10.267 1.26697 11.3878 1.91486 12.2666 2.83093C13.1454 1.91486 14.2662 1.26697 15.4986 0.96251C16.731 0.658053 18.0245 0.709535 19.2288 1.11097C20.4331 1.51241 21.4988 2.24733 22.3021 3.23034C23.1053 4.21335 23.6132 5.4041 23.7666 6.66426C23.7666 13.3726 18.9749 17.2059 12.2666 21.9976Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M3.5166 11.3617H10.2249L12.1416 7.52832L15.0166 15.195L16.9333 11.3617H22.6833\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
             "caption": "",
-            "title": "<strong>Heart & Circulation<\/strong>",
+            "title": "Heart & Circulation",
             "text": "Hawthorn Leaf & Flower",
             "collection": "heart-circulation",
             "button_text": "Explore",
@@ -161,7 +161,7 @@
           "settings": {
             "svg_icon": "<svg width=\"25\" height=\"20\" viewBox=\"0 0 25 20\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M12.0427 0V19.1667M12.0427 7.66667C9.16774 3.83333 3.41774 3.83333 1.50107 7.66667C-0.415592 12.4583 1.50107 18.2083 6.29274 18.2083C10.1261 18.2083 12.0427 14.375 12.0427 10.5417C12.0427 14.375 13.9594 18.2083 17.7927 18.2083C22.5844 18.2083 24.5011 12.4583 22.5844 7.66667C20.6677 3.83333 14.9177 3.83333 12.0427 7.66667Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
             "caption": "",
-            "title": "<strong>Breathe Easy<\/strong>",
+            "title": "Breathe Easy",
             "text": "Elderflower · Thyme · Linden",
             "collection": "breathe-easy",
             "button_text": "Explore",
@@ -174,7 +174,7 @@
           "settings": {
             "svg_icon": "<svg width=\"23\" height=\"23\" viewBox=\"0 0 23 23\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M11.3083 21.8501C17.1303 21.8501 21.8499 17.1304 21.8499 11.3084C21.8499 5.48639 17.1303 0.766724 11.3083 0.766724C5.48627 0.766724 0.766602 5.48639 0.766602 11.3084C0.766602 17.1304 5.48627 21.8501 11.3083 21.8501Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
             "caption": "",
-            "title": "<strong>Women's Cycle<\/strong>",
+            "title": "Women's Cycle",
             "text": "Raspberry Leaf · Yarrow",
             "collection": "womens-cycle",
             "button_text": "Explore",
@@ -187,7 +187,7 @@
           "settings": {
             "svg_icon": "<svg width=\"21\" height=\"28\" viewBox=\"0 0 21 28\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M10.3499 1.08423C16.0999 6.83423 19.9333 11.6259 19.9333 17.3759C19.9333 19.9176 18.9236 22.3551 17.1264 24.1523C15.3292 25.9496 12.8916 26.9592 10.3499 26.9592C7.80828 26.9592 5.37072 25.9496 3.57349 24.1523C1.77627 22.3551 0.766602 19.9176 0.766602 17.3759C0.766602 11.6259 4.59993 6.83423 10.3499 1.08423Z\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<path d=\"M10.0166 6.90588V22.2392\" stroke=\"#4E5C50\" stroke-width=\"1.53333\"\/>\n<\/svg>",
             "caption": "",
-            "title": "<strong>Bladder & Urinary<\/strong>",
+            "title": "Bladder & Urinary",
             "text": "Nettle Leaf · Yarrow Flower",
             "collection": "bladder-urinary",
             "button_text": "Explore",
@@ -208,7 +208,7 @@
       "settings": {
         "page_width": "container",
         "subheading": "Find your tea",
-        "heading": "Don't shop by herb. Shop by <em>how you want to feel.<\/em>",
+        "heading": "<p>Don't shop by herb. <\/p><p>Shop by <em>how you want to feel.<\/em><\/p>",
         "heading_size": "hxl",
         "text": "<p>You don't need to know your linden from your lemon balm. Tell us what your body's asking for, and we'll point you to the wild herbs traditionally trusted for it.<\/p>",
         "columns": 3,

@@ -39,9 +39,9 @@
         {%- endif -%}
 
         {%- if section.settings.heading != blank -%}
-          <h2 class="icon-cards__title inline-richtext {{ section.settings.heading_size }}">
+          <div class="icon-cards__title inline-richtext {{ section.settings.heading_size }}">
             {{ section.settings.heading }}
-          </h2>
+          </div>
         {%- endif -%}
 
         {%- if section.settings.text != blank -%}
@@ -157,9 +157,9 @@
       "default": "Find your tea"
     },
     {
-      "type": "inline_richtext",
+      "type": "richtext",
       "id": "heading",
-      "default": "Don't shop by herb. Shop by <em>how you want to feel.</em>",
+      "default": "<p>Don't shop by herb. Shop by <em>how you want to feel.</em></p>",
       "label": "t:sections.multicolumn.settings.title.label"
     },
     {

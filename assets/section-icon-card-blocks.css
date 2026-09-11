@@ -212,8 +212,19 @@ letter-spacing: 0.01em;
 }
 
 .icon-cards__title {
+      font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+    letter-spacing: -.01em;
+    color: rgb(var(--color-heading));
+    line-height: calc(1 + .6 / max(1, var(--font-heading-scale)));
+    word-break: break-word;
   margin: 0;
   line-height: 1.06;
+}
+
+.icon-cards__title>*{
+  margin: 0;
 }
 
 .icon-cards__title em {
@@ -240,7 +251,7 @@ letter-spacing: 0.01em;
 @media screen and (min-width: 1024px) {
   .icon-cards__header {
     padding-bottom: 5.6rem;
-    max-width: 56rem;
+    max-width: 60rem;
   }
 }
 
@@ -325,7 +336,7 @@ a.icon-card:hover {
   gap: 0.6rem;
   font-family: var(--font-body-family);
   font-style: normal;
-  font-weight: var(--font-body-weight);
+  font-weight: var(--font-heading-weight);
   font-size: 13px;
   line-height: 21px;
   letter-spacing: 0.52px;
