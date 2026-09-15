@@ -894,7 +894,7 @@ product-info {
   .product__gallery-sticky {
     display: block;
     position: sticky;
-    top: 3rem;
+    top: 10rem;
     z-index: 2;
     height: 100%;
   }

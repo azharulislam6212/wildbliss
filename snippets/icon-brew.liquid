@@ -1,0 +1,62 @@
+{% comment %}
+  Renders a line icon for the brew guide cards.
+
+  Geometry is lifted straight from the design file, so each icon keeps its own
+  viewBox rather than being re-drawn on a 24px grid.
+
+  Accepts:
+  - icon: {String} 'cup', 'temperature', 'time' or 'none'.
+
+  Usage:
+  {% render 'icon-brew', icon: block.settings.icon %}
+{% endcomment %}
+
+{%- case icon -%}
+  {%- when 'cup' -%}
+    <svg
+      class="icon icon-brew icon-brew--cup"
+      viewBox="511.595 95.25 25.5 25.5"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.125"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M531.428 110.833C532.555 110.833 533.636 110.386 534.433 109.589C535.23 108.792 535.678 107.711 535.678 106.583C535.678 105.456 535.23 104.375 534.433 103.578C533.636 102.781 532.555 102.333 531.428 102.333H513.012M513.012 102.333V110.833C513.012 112.712 513.758 114.514 515.086 115.842C516.415 117.17 518.216 117.917 520.095 117.917H524.345C526.223 117.917 528.025 117.17 529.353 115.842C530.682 114.514 531.428 112.712 531.428 110.833V102.333H513.012Z"/>
+    </svg>
+
+  {%- when 'temperature' -%}
+    <svg
+      class="icon icon-brew icon-brew--temperature"
+      viewBox="830.255 95.25 25.5 25.5"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.125"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M843.005 95.25V99.5M833.088 100.917L835.922 103.75M852.922 100.917L850.088 103.75"/>
+      <path d="M843.005 120.75C848.482 120.75 852.922 116.31 852.922 110.833C852.922 105.357 848.482 100.917 843.005 100.917C837.528 100.917 833.088 105.357 833.088 110.833C833.088 116.31 837.528 120.75 843.005 120.75Z"/>
+      <path d="M843.005 106.583V110.833L845.838 113.667"/>
+    </svg>
+
+  {%- when 'time' -%}
+    <svg
+      class="icon icon-brew icon-brew--time"
+      viewBox="1148.92 95.25 25.5 25.5"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.125"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M1161.67 120.75C1168.71 120.75 1174.42 115.042 1174.42 108C1174.42 100.958 1168.71 95.25 1161.67 95.25C1154.63 95.25 1148.92 100.958 1148.92 108C1148.92 115.042 1154.63 120.75 1161.67 120.75Z"/>
+      <path d="M1161.67 100.917V108L1165.92 112.25"/>
+    </svg>
+{%- endcase -%}

@@ -564,7 +564,9 @@ button.shopify-payment-button__button--unbranded {
 
 
 }
-
+.swiper-navigation-flex:has(.swiper-button-lock){
+  display: none;
+}
 .swiper-navigation{
     margin-top: 3.2rem;
     display: flex;

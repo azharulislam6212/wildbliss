@@ -14,23 +14,62 @@
           "type": "title",
           "settings": {}
         },
-        "price_FGjn8D": {
-          "type": "price",
+        "subtitle_pdp": {
+          "type": "subtitle",
           "settings": {
-            "price_note": "Including tax, plus climate-neutral shipping · free shipping on orders over $50",
-            "show_currency_code": false
+            "text": "{{ product.metafields.custom.benefit.value }}"
+          }
+        },
+        "tags_pdp": {
+          "type": "tags",
+          "settings": {
+            "tag_1": "25 Servings",
+            "tag_2": "Pyramidal Tea Bags",
+            "tag_3": ""
           }
         },
         "judge_me_reviews_preview_badge_wLwmr7": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
+        },
+        "price_FGjn8D": {
+          "type": "price",
+          "settings": {
+            "show_currency_code": false,
+            "price_note": "Including tax, plus climate-neutral shipping · free shipping on orders over $50"
+          }
         },
         "inventory_37E8WQ": {
           "type": "inventory",
           "settings": {
             "text_style": "body",
             "inventory_threshold": 10,
-            "show_inventory_quantity": false
+            "show_inventory_quantity": false,
+            "available_text": "Available immediately, delivery in 1–3 days",
+            "secondary_text": ""
+          }
+        },
+        "quote_card_pdp": {
+          "type": "quote_card",
+          "settings": {
+            "show_icon": true,
+            "text": "<p>As the kettle quiets, so do you — linden, lemon balm and St John's wort easing the day loose, cup by cup.<\/p>"
+          }
+        },
+        "certifications_pdp": {
+          "type": "certifications",
+          "settings": {
+            "image_1": "shopify:\/\/shop_images\/Frame_987e0b30-2c4a-4c66-b8ef-9ebdf38410c1.svg",
+            "label_1": "USDA Organic",
+            "image_2": "shopify:\/\/shop_images\/Frame_1.svg",
+            "label_2": "Caffeine free",
+            "image_3": "shopify:\/\/shop_images\/Frame_2.svg",
+            "label_3": "Gluten free",
+            "image_4": "shopify:\/\/shop_images\/Frame_3.svg",
+            "label_4": "Certified vegan",
+            "image_5": "shopify:\/\/shop_images\/Frame_4.svg",
+            "label_5": "Ecocert",
+            "label_6": ""
           }
         },
         "variant_picker_wN9KQ6": {
@@ -43,22 +82,50 @@
         "subscription_UwFPQQ": {
           "type": "subscription",
           "settings": {
+            "heading": "",
             "plan_display": "all",
-            "show_one_time": false,
-            "tier_1_enabled": false,
-            "tier_2_enabled": false,
             "show_plan_badge": true,
             "plan_badge_text": "Save [percent]%",
             "show_plan_compare": false,
             "plan_1_label": "1 pack",
             "plan_1_sublabel": "Standard price",
             "plan_1_note": "per pack",
+            "plan_1_badge": "",
             "plan_2_label": "2 packs",
             "plan_2_sublabel": "Per-pack price",
             "plan_2_note": "",
+            "plan_2_badge": "",
             "plan_3_label": "Subscribe & save",
             "plan_3_sublabel": "Free shipping · skip, swap or cancel anytime",
-            "plan_3_note": "per delivery"
+            "plan_3_note": "per delivery",
+            "plan_3_badge": "",
+            "plan_4_label": "",
+            "plan_4_sublabel": "",
+            "plan_4_note": "",
+            "plan_4_badge": "",
+            "show_one_time": false,
+            "base_label": "One time purchase",
+            "base_sublabel": "Standard price",
+            "base_note": "per pack",
+            "tier_1_enabled": false,
+            "tier_1_quantity": 2,
+            "tier_1_label": "2 packs",
+            "tier_1_sublabel": "Per-pack price",
+            "tier_1_badge": "Save [percent]%",
+            "tier_1_discount": 10,
+            "tier_1_note": "",
+            "tier_2_enabled": false,
+            "tier_2_quantity": 3,
+            "tier_2_label": "3 packs",
+            "tier_2_sublabel": "Per-pack price",
+            "tier_2_badge": "Save [percent]%",
+            "tier_2_discount": 15,
+            "tier_2_note": "",
+            "show_most_chosen": false,
+            "most_chosen_text": "MOST CHOSEN",
+            "show_benefits": false,
+            "benefits": "Skip or cancel anytime\nAccess to VIP support\nFree shipping",
+            "plan_footnote": ""
           }
         },
         "buy_buttons_cmNQyQ": {
@@ -66,6 +133,14 @@
           "settings": {
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": false
+          }
+        },
+        "guarantee_row_pdp": {
+          "type": "guarantee_row",
+          "settings": {
+            "text_1": "Free shipping over $50",
+            "text_2": "30-day happiness guarantee",
+            "text_3": "Ships in 1–2 days"
           }
         },
         "collapsible_tab_APdL9m": {
@@ -83,17 +158,29 @@
           "settings": {
             "heading": "What's inside",
             "icon": "none",
-            "content": "",
-            "page": ""
+            "content": "<p>100% organic wild hawthorn (<em>Crataegus monogyna<\/em>) leaf & flower. Nothing else — no flavourings, no fillers, no caffeine. Plant-based pyramid bags, plastic-free.<\/p>",
+            "page": "",
+            "open_by_default": false
           }
         },
         "collapsible_tab_6kiDNp": {
           "type": "collapsible_tab",
           "settings": {
+            "heading": "Brewing guide",
+            "icon": "none",
+            "content": "<p>Pour 95–100°C water over one pyramid bag (or 1 tbsp loose). Steep 10–15 minutes, covered. Enjoy 1–3 cups daily.<\/p>",
+            "page": "",
+            "open_by_default": false
+          }
+        },
+        "collapsible_tab_LGMFgD": {
+          "type": "collapsible_tab",
+          "settings": {
             "heading": "Sourcing & testing",
             "icon": "none",
-            "content": "",
-            "page": ""
+            "content": "<p>Wildcrafted in certified-organic collection zones in the Romanian Carpathians. Ecocert inspects our wild collection areas and processing facility to verify compliance with USDA Organic standards, and every lot is tested for identity, purity, heavy metals and microbiology.<\/p>",
+            "page": "",
+            "open_by_default": false
           }
         },
         "collapsible_tab_DkbbQL": {
@@ -101,48 +188,9 @@
           "settings": {
             "heading": "Shipping & returns",
             "icon": "none",
-            "content": "",
-            "page": ""
-          }
-        },
-        "subtitle_pdp": {
-          "type": "subtitle",
-          "settings": {
-            "text": "Supports a Healthy Heart and Circulation*"
-          }
-        },
-        "tags_pdp": {
-          "type": "tags",
-          "settings": {
-            "tag_1": "25 Servings",
-            "tag_2": "Pyramidal Tea Bags",
-            "tag_3": ""
-          }
-        },
-        "quote_card_pdp": {
-          "type": "quote_card",
-          "settings": {
-            "text": "<p>As you sip, hawthorn’s quiet strength steadies — gently supporting rhythm, resilience, and a heart at ease.</p>",
-            "show_icon": true
-          }
-        },
-        "certifications_pdp": {
-          "type": "certifications",
-          "settings": {
-            "label_1": "USDA Organic",
-            "label_2": "Caffeine free",
-            "label_3": "Gluten free",
-            "label_4": "Certified vegan",
-            "label_5": "Ecocert",
-            "label_6": ""
-          }
-        },
-        "guarantee_row_pdp": {
-          "type": "guarantee_row",
-          "settings": {
-            "text_1": "Free shipping over $50",
-            "text_2": "30-day happiness guarantee",
-            "text_3": "Ships in 1–2 days"
+            "content": "<p>Free U.S. shipping on orders over $50. Ships within 1–2 business days. Not happy? Full refund within 30 days — no need to return the tea.<\/p>",
+            "page": "",
+            "open_by_default": false
           }
         }
       },
@@ -163,32 +211,62 @@
         "collapsible_tab_APdL9m",
         "collapsible_tab_gHHGJj",
         "collapsible_tab_6kiDNp",
+        "collapsible_tab_LGMFgD",
         "collapsible_tab_DkbbQL"
       ],
       "settings": {
+        "accordion_style": "flat",
         "page_width": "container",
         "layout": "image_first",
-        "gallery_type": "grid-collage",
+        "gallery_type": "thumbs-bottom",
+        "thumbs_per_view": 4,
+        "thumbs_per_view_mobile": 3,
         "gallery_size": "6",
         "gallery_image_size": "1-1",
         "enable_zoom": true,
         "disable_zoom_icon": false,
         "slides_per_view": "1",
         "partial_slide": false,
-        "enable_navigation": true,
+        "enable_navigation": false,
         "enable_mobile_thumbs": true,
         "enable_sticky_info": false,
         "enable_sticky_gallery": true,
-        "color_accent": "#ff0000",
+        "color_accent": "#7b6775",
+        "color_badge": "#d58c3f",
+        "color_tag_highlight": "#efeddd",
+        "color_tag_text": "#5c6a5e",
+        "color_highlight": "#EFF3E2",
+        "color_soft_surface": "#f6f1e3",
         "color_scheme": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
-        "padding_top": 32,
-        "padding_bottom": 32,
+        "padding_top": 34,
+        "padding_bottom": 34,
         "padding_top_mobile": 24,
         "padding_bottom_mobile": 24
       }
     },
+    "178886061598a8c2da": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_4EmdeM": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_4EmdeM"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "related-products": {
       "type": "related-products",
+      "disabled": true,
       "settings": {
         "page_width": "container",
         "pre_text": "Others Products",
@@ -220,13 +298,6 @@
         "padding_bottom_mobile": 40
       }
     },
-    "1754717456e979fd41": {
-      "type": "apps",
-      "disabled": true,
-      "settings": {
-        "include_margins": true
-      }
-    },
     "sticky_product_bar": {
       "type": "sticky-product-bar",
       "blocks": {
@@ -246,33 +317,12 @@
         "enable_stikcy_product": true,
         "color_scheme": "scheme-9ab283a1-7cb4-429e-b553-ebe8284dbb7f"
       }
-    },
-    "178886061598a8c2da": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_4EmdeM": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "sample_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_4EmdeM"
-      ],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
     "main",
     "178886061598a8c2da",
     "related-products",
-    "1754717456e979fd41",
     "sticky_product_bar"
   ]
 }
