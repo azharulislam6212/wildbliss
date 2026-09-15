@@ -22,6 +22,8 @@
          --color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
          --color-link: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
          --pdp-badge: {{ section.settings.color_badge }};
+         --pdp-tag-highlight: {{ section.settings.color_tag_highlight }};
+         --pdp-tag-color: {{ section.settings.color_tag_text }};
          --pdp-highlight: {{ section.settings.color_highlight }};
          --pdp-soft-surface: {{ section.settings.color_soft_surface }};
        }
@@ -641,7 +643,7 @@
                                 aria-hidden="true"
                                 focusable="false"
                               >
-                                <path d="M8 1.5v13M1.5 8h13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                                <path d="M8 1.5v13M1.5 8h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                               </svg>
                             </span>
                           </div>
@@ -4588,6 +4590,18 @@
       "id": "color_badge",
       "label": "Savings badge and stars",
       "default": "#D58C3F"
+    },
+    {
+      "type": "color",
+      "id": "color_tag_highlight",
+      "label":"Tag background",
+      "default": "#EFEDDD"
+    },
+    {
+      "type": "color",
+      "id": "color_tag_text",
+      "label": "Tag text",
+      "default": "#5C6A5E"
     },
     {
       "type": "color",

@@ -61,7 +61,7 @@ if (!customElements.get('product-media')) {
           },
           thumbs: {
             initialSlide: this.selectedMediaIndex,
-            spaceBetween: 8,
+            spaceBetween: 14,
             slidesPerView: this.getThumbsPerView(),
             watchOverflow: true,
             watchSlidesProgress: true,

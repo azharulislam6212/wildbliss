@@ -238,38 +238,38 @@ color: rgb(var(--color-foreground));
 }
 
 .disclosure--flat .disclosure-header {
-  padding: 2.4rem 0;
+  padding: 1.7rem 2px;
   gap: 1.6rem;
 }
 
 .disclosure--flat .disclosure__title {
   font-family: var(--font-body-family);
-  font-weight: var(--font-body-weight);
-  font-size: 1.9rem;
+  font-weight: 600;
+  font-size: 1.4rem;
   line-height: 1.4;
   letter-spacing: 0;
   color: rgb(var(--color-heading));
 }
 
 .disclosure--flat .disclosure__toggle {
-  width: 1.8rem;
-  height: 1.8rem;
-  flex: 0 0 1.8rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex: 0 0 1.6rem;
   color: rgb(var(--color-heading));
 }
 
 .disclosure--flat .disclosure__toggle > .icon {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 .disclosure--flat .disclosure__content {
-  padding: 0 0 2.4rem;
+  padding: 0 0 1.4rem;
   font-family: var(--font-body-family);
   font-weight: var(--font-body-weight);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1.6;
-  color: rgba(var(--color-foreground), 0.95);
+  color: rgba(var(--color-foreground));
 }
 
 .disclosure--flat .disclosure__content > *:first-child {
@@ -282,20 +282,15 @@ color: rgb(var(--color-foreground));
 
 @media screen and (max-width: 749px) {
   .disclosure--flat .disclosure-header {
-    padding: 1.8rem 0;
+    padding: 1.7rem 0;
   }
 
-  .disclosure--flat .disclosure__title {
-    font-size: 1.7rem;
-    line-height: 1.4;
-  }
-
+ 
   .disclosure--flat .disclosure__title > span {
     display: inline-flex;
   }
 
   .disclosure--flat .disclosure__content {
     padding: 0 0 1.8rem;
-    font-size: 1.5rem;
   }
 }
