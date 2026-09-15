@@ -1132,33 +1132,42 @@ color: rgb(var(--color-foreground));
 
 /* breadcrumb */
 
-.breadcrumb{
-    padding: 12px 0;
-    display: flex;
-    align-items: center;
-    gap: 9px;
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  padding: 1.2rem 0;
 }
 
-
-.breadcrumb a, .breadcrumb span{
-    font-family: var(--font-body-family);
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    /* identical to box height, or 21px */
-    letter-spacing: 0.01em;
-    color: rgb(var(--color-foreground));
+.breadcrumb a,
+.breadcrumb span {
+  font-family: var(--font-body-family);
+  font-style: normal;
+  font-weight: var(--font-body-weight);
+  font-size: 1.3rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: rgb(var(--color-foreground));
 }
 
-.breadcrumb a{
-    text-decoration: none;
-    color: rgb(var(--color-heading));
-    transition: 0.3s ease;
+.breadcrumb a {
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  transition: color 0.2s ease;
 }
 
-.breadcrumb a:hover{
-    color: rgb(var(--color-accent));
+.breadcrumb a:hover {
+  color: rgb(var(--color-heading));
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+/* The » sits at half strength between crumbs. */
+.breadcrumb .breadcrumb__delimiter {
+  color: rgba(var(--color-foreground), 0.5);
+  line-height: 1;
+  user-select: none;
 }
 .sealsubs-target-element.sealsubs-full[data-seal-ac], .sealsubs-target-element.sealsubs-full[data-seal-in] {
     display: none !important;

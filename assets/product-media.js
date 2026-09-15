@@ -87,23 +87,28 @@ if (!customElements.get('product-media')) {
       };
     }
 
-    getThumbsPerView(breakpoint) {
+    // How many thumbs the bottom strip shows at once, from the section
+    // settings. The side layouts keep their own fixed count.
+    getThumbsSetting(attribute, fallback) {
+      const value = parseFloat(this.getAttribute(attribute));
+      return Number.isFinite(value) && value > 0 ? value : fallback;
+    }
+
+    getThumbsPerView() {
       const useAspectRatio = this.hasAttribute('data-slider-autoheight');
       const useLayoutBottom = !this.hasAttribute('data-thumbs-layout');
 
-      if (useLayoutBottom) return breakpoint ? 9.15 : 9.26;
+      if (useLayoutBottom) return this.getThumbsSetting('data-thumbs-per-view', 4);
       if (useAspectRatio) return 'auto';
-      if (!breakpoint) return 5;
       return 5;
     }
 
-    getThumbsPerViewMobile(breakpoint) {
+    getThumbsPerViewMobile() {
       const useAspectRatio = this.hasAttribute('data-slider-autoheight');
       const useLayoutBottom = !this.hasAttribute('data-thumbs-layout');
 
-      if (useLayoutBottom) return breakpoint ? 5 : 4.9;
+      if (useLayoutBottom) return this.getThumbsSetting('data-thumbs-per-view-mobile', 3);
       if (useAspectRatio) return 'auto';
-      if (!breakpoint) return 5;
       return 5;
     }
 
@@ -123,6 +128,7 @@ if (!customElements.get('product-media')) {
         }, 300)
       );
     }
+
 
     init() {
       if (typeof PhotoSwipeLightbox !== 'undefined') {
@@ -252,6 +258,8 @@ if (!customElements.get('product-media')) {
       );
 
       if (!mediaFound) return;
+
+
       if (!this.settings.instances.slider || this.settings.instances.slider?.destroyed) {
         const headerHeight = document.querySelector(this.selectors.header)?.offsetHeight || 0;
         window.scroll({
@@ -261,7 +269,9 @@ if (!customElements.get('product-media')) {
         return;
       }
 
-      this.settings.instances.slider.slideTo(Number(mediaFound.dataset.index));
+      // 0ms: a variant change should swap the image outright, with no slide
+      // animation to sit through.
+      this.settings.instances.slider.slideTo(Number(mediaFound.dataset.index), 0);
     }
 
     setThumbsHeight() {

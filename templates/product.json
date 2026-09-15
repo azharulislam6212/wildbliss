@@ -17,8 +17,8 @@
         "price_FGjn8D": {
           "type": "price",
           "settings": {
-            "hide_currency_code": true,
-            "price_note": "Including tax, plus climate-neutral shipping · free shipping on orders over $50"
+            "price_note": "Including tax, plus climate-neutral shipping · free shipping on orders over $50",
+            "show_currency_code": false
           }
         },
         "judge_me_reviews_preview_badge_wLwmr7": {

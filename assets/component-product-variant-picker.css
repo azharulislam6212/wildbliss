@@ -219,10 +219,13 @@ variant-selects {
   border-color: rgba(var(--color-heading), 0.45);
 }
 
+/* Selected reads as a tinted card with a stronger border, not an inverted
+   fill — the same highlight the selected purchase-option row uses. */
 .product-form__input--card input[type='radio']:checked + .variant-card {
+  border-width: 1.5px;
   border-color: rgb(var(--color-heading));
-  background: rgb(var(--color-heading));
-  color: rgb(var(--color-background));
+  background: var(--pdp-highlight, #eff3e2);
+  color: rgb(var(--color-heading));
 }
 
 .product-form__input--card input[type='radio']:focus-visible + .variant-card {
@@ -245,8 +248,9 @@ variant-selects {
 
 .product-form__input--card input[type='radio'].disabled:checked + .variant-card,
 .product-form__input--card input[type='radio']:disabled:checked + .variant-card {
-  background: rgba(var(--color-heading), 0.55);
-  color: rgb(var(--color-background));
+  border-color: rgba(var(--color-heading), 0.55);
+  background: var(--pdp-highlight, #eff3e2);
+  color: rgba(var(--color-foreground), 0.55);
 }
 
 @media screen and (max-width: 749px) {

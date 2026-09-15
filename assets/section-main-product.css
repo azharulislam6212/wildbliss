@@ -833,7 +833,7 @@ product-model .product__xr-button {
   color: rgba(var(--color-foreground), 1);
   background-color: rgb(var(--color-background));
   position: absolute;
-  bottom: 2rem;
+  bottom: 3rem;
   z-index: 2;
   right: 2rem;
   border-radius: 8px;
@@ -3756,4 +3756,164 @@ letter-spacing: 0.01em;
   .product__guarantees {
     gap: 0.8rem 1.6rem;
   }
+}
+
+
+/* ==========================================================================
+   Product page — gallery
+   ========================================================================== */
+
+.product-gallery__wrapper {
+  /* Taken from div.pdp-gallery.svg */
+  --gallery-radius: 1.2rem;
+  --gallery-thumb-radius: 1rem;
+  --gallery-border: rgba(var(--color-heading), 0.18);
+  --gallery-caption-bg: rgba(60, 70, 62, 0.55);
+}
+
+/* Cards ------------------------------------------------------------------- */
+
+.product__image .media,
+.product__thumbnail .media {
+  border: 1px solid var(--gallery-border, rgba(var(--color-heading), 0.18));
+  border-radius: var(--gallery-radius, 1.2rem);
+  background: linear-gradient(160deg, #f3f1e0, #e7ecd6);
+  overflow: hidden;
+}
+
+.product__thumbnail .media {
+  border-radius: var(--gallery-thumb-radius, 1rem);
+}
+
+/* The active thumbnail takes the same border at full strength. */
+.swiper-slide-thumb-active > .product__thumbnail .media,
+.product__thumbnail.is-active .media {
+  border-color: rgb(var(--color-heading));
+}
+
+/* Thumbnail caption ------------------------------------------------------- */
+
+/* Specific enough to beat base.css's `.media > *` rule, which otherwise
+   stretches the caption over the whole thumbnail. */
+.product__thumbnail .media > .product__thumbnail-label {
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.2rem 0rem;
+  background: var(--gallery-caption-bg, rgba(60, 70, 62, 0.55));
+  color: #fffdf4;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-weight: var(--font-body-weight);
+  font-size: 1.3rem;
+  line-height: 1.4;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Arrows ------------------------------------------------------------------ */
+
+.product__media-slider .swiper-navigation {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.product .product__media-slider .button-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  inset: auto;
+  transform: none;
+  width: 3.6rem;
+  height: 3.6rem;
+  padding: 0;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 999px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.product .product__media-slider .button-arrow:hover {
+  background-color: rgb(var(--color-primary-button));
+  border-color: rgb(var(--color-primary-button));
+  color: rgb(var(--color-primary-button-text));
+}
+
+.product .product__media-slider .button-arrow.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* The grid layouts are static on desktop — arrows belong to the mobile
+   slider only. */
+@media screen and (min-width: 990px) {
+  .product--gallery-type-grid .product__media-nav,
+  .product--gallery-type-grid-single .product__media-nav,
+  .product--gallery-type-grid-collage .product__media-nav {
+    display: none;
+  }
+}
+
+/* No fade when the image swaps, either from the carousel or a variant change.
+   The slide movement itself is left alone so dragging still feels normal. */
+
+.product-gallery__wrapper .media > img,
+.product-gallery__wrapper .media > svg {
+  transition: none;
+}
+
+/* Thumbnail strip arrows — same circular treatment as the main gallery and the
+   home carousel, one size down. */
+.product .product__media-thumbs-arrow {
+  /* Flex centring: without it the inline-block button sits the icon on the
+     text baseline and it reads as off-centre. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 999px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  pointer-events: all;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.product .product__media-thumbs-arrow:hover {
+  background-color: rgb(var(--color-primary-button));
+  border-color: rgb(var(--color-primary-button));
+  color: rgb(var(--color-primary-button-text));
+}
+
+.product .product__media-thumbs-arrow svg {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
 }

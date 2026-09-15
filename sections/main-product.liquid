@@ -134,37 +134,26 @@
           {%- endfor -%}
         </div>
         <div class="product__media-thumbs-arrows">
+          {%- comment -%}
+            Same arrow glyph as the main gallery and the home carousel. The
+            vertical thumb layouts rotate it in CSS, so one icon covers both.
+          {%- endcomment -%}
           <button class="button-arrow button-arrow--small product__media-thumbs-arrow product__media-thumbs-arrow--prev" data-thumbs-prev aria-label="previous">
-            {%- if section.settings.gallery_type != 'thumbs-bottom' -%}
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 14L12 8L18 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M12.6668 8H3.3335M7.3335 12L3.3335 8L7.3335 4" stroke="currentColor" stroke-width="1.33333"/>
             </svg>
-
-            {%- else -%}
-         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14 6L8 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-
-            {%- endif -%}
           </button>
-  
+
           <button class="button-arrow button-arrow--small product__media-thumbs-arrow product__media-thumbs-arrow--next" data-thumbs-next aria-label="next">
-            {%- if section.settings.gallery_type != 'thumbs-bottom' -%}
-               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 10L12 16L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-
-            {%- else -%}
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6L16 12L10 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-
-            {%- endif -%}
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M3.3335 8H12.6668M8.66683 12L12.6668 8L8.66683 4" stroke="currentColor" stroke-width="1.33333"/>
+            </svg>
           </button>
         </div><!-- /.product__media-thumbs-arrows -->
       </div>
     </div><!-- /.product__media-thumbs -->
   {%- endcapture -%}
+
 
   {%- style -%}
     #MainProduct-{{- section.id }} {
@@ -199,6 +188,8 @@
                 {%- elsif section.settings.gallery_type != 'thumbs-bottom' -%}
                   data-thumbs-layout="{{- section.settings.gallery_type | remove: 'thumbs-' -}}"
                 {% endif %}
+                data-thumbs-per-view="{{ section.settings.thumbs_per_view }}"
+                data-thumbs-per-view-mobile="{{ section.settings.thumbs_per_view_mobile }}"
               >
                 {%- if product.media.size > 1 -%}
                   {%- if section.settings.gallery_type == 'thumbs-left' -%}
@@ -230,20 +221,14 @@
                       <!-- /.product__media-track -->
 
                       {%- if section.settings.enable_navigation -%}
-                        <div class="swiper-navigation">
+                        <div class="swiper-navigation product__media-nav">
                           <button
                             class="product__media-arrow button-arrow motion-reduce"
                             data-arrow-prev
                             aria-label="previous"
                           >
-                            <svg
-                              width="12"
-                              height="9"
-                              viewBox="0 0 12 9"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M11.1667 4C11.4428 4 11.6667 4.22387 11.6667 4.5C11.6667 4.77613 11.4428 5 11.1667 5H5V8.5C5 8.70226 4.8782 8.88453 4.69133 8.96193C4.50453 9.03933 4.28945 8.9966 4.14645 8.8536L0.146447 4.8536C0.05268 4.7598 0 4.6326 0 4.5C0 4.3674 0.05268 4.2402 0.146447 4.14646L4.14645 0.14646C4.28945 0.00345997 4.50453 -0.0393134 4.69133 0.0380733C4.8782 0.115467 5 0.297787 5 0.500013V4H11.1667Z" fill="currentColor"></path>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                              <path d="M12.6668 8H3.3335M7.3335 12L3.3335 8L7.3335 4" stroke="currentColor" stroke-width="1.33333"/>
                             </svg>
                           </button>
 
@@ -252,14 +237,8 @@
                             data-arrow-next
                             aria-label="next"
                           >
-                            <svg
-                              width="12"
-                              height="9"
-                              viewBox="0 0 12 9"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M0.500082 4C0.223948 4 8.2016e-05 4.22387 8.2016e-05 4.5C8.2016e-05 4.77613 0.223948 5 0.500082 5H6.66675V8.5C6.66675 8.70226 6.78855 8.88453 6.97542 8.96193C7.16222 9.03933 7.3773 8.9966 7.5203 8.8536L11.5203 4.8536C11.6141 4.7598 11.6667 4.6326 11.6667 4.5C11.6667 4.3674 11.6141 4.2402 11.5203 4.14646L7.5203 0.14646C7.3773 0.00345997 7.16222 -0.0393134 6.97542 0.0380733C6.78855 0.115467 6.66675 0.297787 6.66675 0.500013V4H0.500082Z" fill="currentColor"></path>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                              <path d="M3.3335 8H12.6668M8.66683 12L12.6668 8L8.66683 4" stroke="currentColor" stroke-width="1.33333"/>
                             </svg>
                           </button>
                         </div>
@@ -270,6 +249,7 @@
                     </div>
                   </div>
                   <!-- /.product__media-slider -->
+
 
                   {%- if section.settings.gallery_type == 'thumbs-bottom'
                     or section.settings.gallery_type == 'thumbs-right'
@@ -475,6 +455,16 @@
 
                   </div>
                 {%- when 'price' -%}
+                  {%- liquid
+                    comment
+                      Default to hiding the code: only an explicit tick shows it,
+                      so a missing or stale block setting can never bring it back.
+                    endcomment
+                    assign hide_price_currency_code = true
+                    if block.settings.show_currency_code
+                      assign hide_price_currency_code = false
+                    endif
+                  -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -482,7 +472,7 @@
                       show_badges: false,
                       show_save: true,
                       price_class: 'price--large',
-                      hide_currency_code: block.settings.hide_currency_code
+                      hide_currency_code: hide_price_currency_code
                     -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
@@ -2094,10 +2084,10 @@
       "settings": [
         {
           "type": "checkbox",
-          "id": "hide_currency_code",
-          "default": true,
-          "label": "Hide currency code",
-          "info": "Shows $13.90 instead of US$13.90, without changing the theme-wide currency setting."
+          "id": "show_currency_code",
+          "default": false,
+          "label": "Show currency code",
+          "info": "Off shows $37.99, on shows US$37.99. Independent of the theme-wide currency setting."
         },
         {
           "type": "inline_richtext",
@@ -4448,6 +4438,25 @@
         }
       ],
       "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "thumbs_per_view",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "Thumbnails visible (desktop)",
+      "info": "Thumbs bottom layout. The rest scroll with the arrows."
+    },
+    {
+      "type": "range",
+      "id": "thumbs_per_view_mobile",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Thumbnails visible (mobile)"
     },
     {
       "type": "select",
