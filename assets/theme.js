@@ -2037,216 +2037,158 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 class PurchaseOptions extends HTMLElement {
-  constructor() {
-    super();
+  get rows() {
+    return Array.from(this.querySelectorAll("[data-purchase-row]"));
   }
 
   get radios() {
-    return this.querySelectorAll(".purchase-option");
+    return Array.from(this.querySelectorAll(".purchase-option"));
   }
 
-  get select() {
-    return this.querySelector("#selling-plan-select");
-  }
-
-  get cards() {
-    return this.querySelectorAll(".purchase-card");
+  get productForm() {
+    return (
+      this.closest("form") ||
+      this.closest(".shopify-section")?.querySelector("product-form form") ||
+      document.querySelector("product-form form")
+    );
   }
 
   connectedCallback() {
-    this.planData = JSON.parse(
-      document.getElementById("selling-plans-data").textContent,
-    );
-
-    this.addEventListener("change", (event) => {
-      if (event.target.matches(".purchase-option")) {
-        this.updatePurchaseOption();
-      }
-
-      if (event.target.matches("#selling-plan-select")) {
-        this.updateSellingPlan();
-      }
-    });
-
-    // Start observer
-    this.observeSellingPlanInput();
+    this.addEventListener("change", this.onChange);
 
     this.variantChangeUnsubscriber = subscribe(
       PUB_SUB_EVENTS.variantChange,
-      this.handleVariantChange.bind(this),
+      this.onVariantChange.bind(this),
     );
 
-    // Initial UI
-    // this.updateSellingPlan();
-    this.updatePurchaseOption();
-  }
+    this.sync();
 
-  handleVariantChange({ data }) {
-    const productInfo = this.closest("product-info");
-
-    if (!productInfo || productInfo.dataset.section !== data.sectionId) {
-      return;
-    }
-
-    // নতুন plan data
-    const script = this.querySelector("#selling-plans-data");
-
-    if (script) {
-      this.planData = JSON.parse(script.textContent);
-    }
-
-    // UI sync
-    this.updatePurchaseOption();
+    // Subscription apps inject their own selling_plan input after the page
+    // loads, so re-apply the current selection once it shows up.
+    this.watchForInjectedInputs();
   }
 
   disconnectedCallback() {
     this.variantChangeUnsubscriber?.();
+    this.inputObserver?.disconnect();
   }
 
-  observeSellingPlanInput() {
-    if (this.observer) return;
+  onChange = (event) => {
+    if (event.target.matches(".purchase-option")) this.sync();
+  };
 
-    this.observer = new MutationObserver(() => {
-      const hiddenInput = this.getSellingPlanInput();
+  onVariantChange({ data }) {
+    const productInfo = this.closest("product-info");
 
-      if (!hiddenInput) return;
+    if (!productInfo || productInfo.dataset.section !== data.sectionId) return;
 
-      this.updateHiddenInput();
+    // The markup is re-rendered server side, so put the customer back on the
+    // row they had picked before the variant changed.
+    this.restoreSelection();
+    this.sync();
+  }
+
+  restoreSelection() {
+    const index = this.selectedIndex;
+    const radios = this.radios;
+
+    if (index == null || index < 0 || index >= radios.length) return;
+
+    radios.forEach((radio, i) => {
+      radio.checked = i === index;
+    });
+  }
+
+  watchForInjectedInputs() {
+    const form = this.productForm;
+
+    if (!form || this.inputObserver) return;
+
+    this.inputObserver = new MutationObserver(() => {
+      this.updateSellingPlanInputs(this.currentPlanId || "");
     });
 
-    this.observer.observe(document.body, {
-      childList: true,
-      subtree: true,
+    this.inputObserver.observe(form, { childList: true, subtree: true });
+  }
+
+  get selectedRadio() {
+    return this.radios.find((radio) => radio.checked) || this.radios[0] || null;
+  }
+
+  sync() {
+    const selected = this.selectedRadio;
+
+    if (selected && !selected.checked) selected.checked = true;
+
+    this.selectedIndex = selected ? this.radios.indexOf(selected) : null;
+
+    this.rows.forEach((row) => {
+      row.classList.toggle("is-selected", row.contains(selected));
     });
 
-    // Initial attempt
-    this.updateHiddenInput();
+    this.currentPlanId = selected ? selected.value : "";
+
+    this.updateSellingPlanInputs(this.currentPlanId);
+    this.updateQuantity(selected);
   }
 
-  updateHiddenInput() {
-    const hiddenInput = this.getSellingPlanInput();
+  updateSellingPlanInputs(planId) {
+    const form = this.productForm;
 
-    if (!hiddenInput) return;
+    if (!form) return;
 
-    const checked = this.querySelector(".purchase-option:checked");
+    let inputs = Array.from(form.querySelectorAll('input[name="selling_plan"]'));
 
-    hiddenInput.value =
-      checked && checked.value !== ""
-        ? this.select?.value || checked.value
-        : "";
-
-    hiddenInput.dispatchEvent(
-      new Event("change", {
-        bubbles: true,
-      }),
-    );
-  }
-
-  getSellingPlanInput() {
-    // 1. যদি component form-এর ভিতরে থাকে
-    let form = this.closest("form");
-
-    if (form) {
-      return form.querySelector('input[name="selling_plan"]');
+    if (inputs.length === 0) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "selling_plan";
+      input.className = "product-selling-plan-id";
+      form.appendChild(input);
+      inputs = [input];
     }
 
-    // 2. একই product section-এর product-form খুঁজুন
-    const section = this.closest(".shopify-section");
+    // A subscription app injects its own selling_plan input. Drop the theme's
+    // once that happens, so the form never submits the field twice.
+    if (inputs.length > 1) {
+      const appInputs = inputs.filter(
+        (input) => !input.classList.contains("product-selling-plan-id"),
+      );
 
-    if (section) {
-      form = section.querySelector("product-form form");
+      if (appInputs.length > 0) {
+        inputs
+          .filter((input) => input.classList.contains("product-selling-plan-id"))
+          .forEach((input) => input.remove());
 
-      if (form) {
-        return form.querySelector('input[name="selling_plan"]');
+        inputs = appInputs;
       }
     }
 
-    // 3. Fallback (শেষ চেষ্টা)
-    form = document.querySelector("product-form form");
+    inputs.forEach((input) => {
+      // An empty selling_plan is rejected at checkout, so keep it out of the
+      // form until a subscription row is picked.
+      if (input.value === planId && input.disabled === !planId) return;
 
-    return form?.querySelector('input[name="selling_plan"]');
+      input.value = planId;
+      input.disabled = !planId;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    });
   }
 
-  updateSellingPlan() {
-    const hiddenInput = this.getSellingPlanInput();
+  updateQuantity(selected) {
+    const quantity = parseInt(selected?.dataset.quantity || "", 10);
 
-    if (!this.select) return;
+    if (!quantity || quantity < 1) return;
 
-    // Auto select subscription
-    const subscriptionRadio = this.querySelector(
-      ".purchase-card.subscribe .purchase-option",
-    );
+    const input =
+      document.getElementById(`Quantity-${this.dataset.section}`) ||
+      this.productForm?.querySelector('input[name="quantity"]');
 
-    if (subscriptionRadio) {
-      subscriptionRadio.checked = true;
-    }
+    if (!input || parseInt(input.value, 10) === quantity) return;
 
-    this.cards.forEach((card) => card.classList.remove("active"));
-    this.querySelector(".purchase-card.subscribe")?.classList.add("active");
-
-    const option = this.select.options[this.select.selectedIndex];
-
-    const planId = this.select.value;
-    const plan = this.planData[planId];
-
-    if (!plan) return;
-
-    const salePrice = Number(plan.price);
-    const comparePrice = Number(plan.compare_price);
-
-    const save = comparePrice - salePrice;
-    const savePercent = Math.round((save / comparePrice) * 100);
-
-    this.querySelector(".sale-price").textContent = Shopify.formatMoney(
-      salePrice,
-      "${{amount}}",
-    );
-
-    this.querySelector(".compare-price").textContent = Shopify.formatMoney(
-      comparePrice,
-      "${{amount}}",
-    );
-
-    this.querySelector(".save-badge").textContent = `SAVE ${savePercent}%`;
-
-    this.querySelector(".subscription-save-text").textContent =
-      `Save ${Shopify.formatMoney(save, "${{amount}}")} today and on every shipment`;
-
-    // Update hidden input
-    this.updateHiddenInput();
-  }
-
-  updatePurchaseOption() {
-    const checked = this.querySelector(".purchase-option:checked");
-
-    // Active class
-    this.cards.forEach((card) => card.classList.remove("active"));
-
-    if (checked) {
-      checked.closest(".purchase-card").classList.add("active");
-    }
-
-    // Subscription হলে price/updateHiddenInput update হবে
-    if (checked && checked.value !== "") {
-      if (this.select) {
-        this.updateSellingPlan();
-      } else {
-        this.updateHiddenInput();
-      }
-    } else {
-      // One Time Purchase
-      const hiddenInput = this.getSellingPlanInput();
-
-      if (hiddenInput) {
-        hiddenInput.value = "";
-
-        hiddenInput.dispatchEvent(
-          new Event("change", {
-            bubbles: true,
-          }),
-        );
-      }
-    }
+    input.value = quantity;
+    input.dispatchEvent(new Event("change", { bubbles: true }));
   }
 }
 
@@ -2256,6 +2198,8 @@ const customSelects = document.querySelectorAll(".custom-select");
 
 customSelects.forEach((wrapper) => {
   const select = wrapper.querySelector("select");
+
+  if (!select) return;
 
   select.addEventListener("mousedown", () => {
     wrapper.classList.toggle("open");

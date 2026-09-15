@@ -19,7 +19,7 @@
         assign swatch_count = option.values | map: 'swatch' | compact | size
         assign picker_type = block.settings.picker_type
 
-        if swatch_count > 0 and block.settings.swatch_shape != 'none'
+        if swatch_count > 0 and block.settings.swatch_shape != 'none' and block.settings.picker_type != 'card'
           if block.settings.picker_type == 'dropdown'
             assign picker_type = 'swatch_dropdown'
           else
@@ -42,9 +42,34 @@
             picker_type: picker_type
           %}
         </fieldset>
+      {%- elsif picker_type == 'card' -%}
+        <fieldset class="js product-form__input product-form__input--card">
+          <legend class="form__label">
+            {{ option.name }}:
+            <span data-selected-value>
+              {{- option.selected_value -}}
+            </span>
+          </legend>
+          <div
+            class="variant-cards"
+            style="--variant-card-columns: {{ option.values.size | at_most: 4 }};"
+          >
+            {% render 'product-variant-options',
+              product: product,
+              option: option,
+              block: block,
+              picker_type: picker_type
+            %}
+          </div>
+        </fieldset>
       {%- elsif picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
+          <legend class="form__label">
+            {{ option.name }}:
+            <span data-selected-value>
+              {{- option.selected_value -}}
+            </span>
+          </legend>
           {% render 'product-variant-options',
             product: product,
             option: option,

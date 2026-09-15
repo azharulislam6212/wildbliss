@@ -8,6 +8,7 @@
   - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
   - price_class: {String} Adds a price class to the price element (optional)
   - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
+  - hide_currency_code: {Boolean} Forces the currency code off, whatever the theme setting is (optional)
 
   Usage:
   {% render 'price', product: product %}
@@ -21,6 +22,14 @@
     assign target = product
   endif
 
+  comment
+    The PDP hides the currency code; everywhere else follows the theme setting.
+  endcomment
+  assign show_currency_code = settings.currency_code_enabled
+  if hide_currency_code
+    assign show_currency_code = false
+  endif
+
   assign compare_at_price = target.compare_at_price
   assign price = target.price | default: 1999
   assign price_min = product.price_min
@@ -29,7 +38,7 @@
   assign money_price = price | money
   assign money_price_min = price_min | money
   assign money_price_max = price_max | money
-  if settings.currency_code_enabled
+  if show_currency_code
     assign money_price = price | money_with_currency
     assign money_price_min = price_min | money_with_currency
     assign money_price_max = price_max | money_with_currency
@@ -67,7 +76,7 @@
               </span>
               <span>
                 <s class="price-item price-item--regular variant-item__old-price">
-                  {% if settings.currency_code_enabled %}
+                  {% if show_currency_code %}
                     {{ compare_at_price | money_with_currency }}
                   {% else %}
                     {{ compare_at_price | money }}
@@ -100,7 +109,7 @@
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
             <s class="price-item price-item--regular">
-              {% if settings.currency_code_enabled %}
+              {% if show_currency_code %}
                 {{ compare_at_price | money_with_currency }}
               {% else %}
                 {{ compare_at_price | money }}

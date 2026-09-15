@@ -1,4 +1,5 @@
 {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-purchase-options.css' | asset_url | stylesheet_tag }}
 {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -20,6 +21,9 @@
   .section-{{ section.id }}-padding {
          --color-accent: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
          --color-link: {{ section.settings.color_accent.red }},{{ section.settings.color_accent.green }},{{ section.settings.color_accent.blue }};
+         --pdp-badge: {{ section.settings.color_badge }};
+         --pdp-highlight: {{ section.settings.color_highlight }};
+         --pdp-soft-surface: {{ section.settings.color_soft_surface }};
        }
 
      .section-{{ section.id }}-padding {
@@ -334,31 +338,26 @@
                 {%- when '@app' -%}
                   {% render block %}
                 {%- when 'tags' -%}
-                  <div class="tag-list">
-                    <li>
-                      <span class="product-tag">{{ block.settings.tag_1 }}</span>
-                    </li>
-                    <li>
-                      <span class="product-tag product-tag--shipping">
-                        {%- if block.settings.tag_2 contains 'shipping'
-                          or block.settings.tag_2 contains 'SHIPPING'
-                          or block.settings.tag_2 contains 'Shipping'
-                        -%}
-                          <svg
-                            width="12"
-                            height="12"
-                            viewBox="0 0 12 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path d="M11.9597 5.41594L11.3034 3.77531C11.2342 3.60129 11.1142 3.45214 10.959 3.3473C10.8039 3.24245 10.6207 3.18677 10.4334 3.1875H9.1875V3C9.1875 2.85082 9.12824 2.70774 9.02275 2.60225C8.91726 2.49676 8.77418 2.4375 8.625 2.4375H1.5C1.25136 2.4375 1.0129 2.53627 0.837087 2.71209C0.661272 2.8879 0.5625 3.12636 0.5625 3.375V8.625C0.5625 8.87364 0.661272 9.1121 0.837087 9.28791C1.0129 9.46373 1.25136 9.5625 1.5 9.5625H2.15906C2.27541 9.89147 2.49087 10.1763 2.77579 10.3777C3.0607 10.5792 3.40106 10.6874 3.75 10.6874C4.09894 10.6874 4.4393 10.5792 4.72421 10.3777C5.00913 10.1763 5.22459 9.89147 5.34094 9.5625H7.40906C7.52541 9.89147 7.74087 10.1763 8.02579 10.3777C8.3107 10.5792 8.65106 10.6874 9 10.6874C9.34894 10.6874 9.6893 10.5792 9.97421 10.3777C10.2591 10.1763 10.4746 9.89147 10.5909 9.5625H11.0625C11.3111 9.5625 11.5496 9.46373 11.7254 9.28791C11.9012 9.1121 12 8.87364 12 8.625V5.625C11.9939 5.55409 11.9804 5.48402 11.9597 5.41594ZM9.1875 4.3125H10.3069L10.6069 5.0625H9.1875V4.3125ZM3.75 9.5625C3.63875 9.5625 3.52999 9.52951 3.43749 9.4677C3.34499 9.40589 3.27289 9.31804 3.23032 9.21526C3.18774 9.11248 3.1766 8.99938 3.19831 8.89026C3.22001 8.78115 3.27359 8.68092 3.35225 8.60225C3.43092 8.52359 3.53115 8.47001 3.64026 8.44831C3.74938 8.4266 3.86248 8.43774 3.96526 8.48032C4.06804 8.52289 4.15589 8.59499 4.2177 8.68749C4.27951 8.77999 4.3125 8.88875 4.3125 9C4.3125 9.14918 4.25324 9.29226 4.14775 9.39775C4.04226 9.50324 3.89918 9.5625 3.75 9.5625ZM8.0625 7.5975C7.76052 7.80048 7.53152 8.09487 7.40906 8.4375H5.34094C5.22459 8.10853 5.00913 7.82371 4.72421 7.62227C4.4393 7.42082 4.09894 7.31265 3.75 7.31265C3.40106 7.31265 3.0607 7.42082 2.77579 7.62227C2.49087 7.82371 2.27541 8.10853 2.15906 8.4375H1.6875V6.5625H8.0625V7.5975ZM8.0625 5.4375H1.6875V3.5625H8.0625V5.4375ZM9 9.5625C8.88875 9.5625 8.77999 9.52951 8.68749 9.4677C8.59499 9.40589 8.52289 9.31804 8.48032 9.21526C8.43774 9.11248 8.4266 8.99938 8.44831 8.89026C8.47001 8.78115 8.52359 8.68092 8.60225 8.60225C8.68092 8.52359 8.78115 8.47001 8.89026 8.44831C8.99938 8.4266 9.11248 8.43774 9.21526 8.48032C9.31804 8.52289 9.40589 8.59499 9.4677 8.68749C9.52951 8.77999 9.5625 8.88875 9.5625 9C9.5625 9.14918 9.50324 9.29226 9.39775 9.39775C9.29226 9.50324 9.14918 9.5625 9 9.5625ZM10.875 8.4375H10.5909C10.4848 8.139 10.297 7.8763 10.0489 7.67931C9.80074 7.48232 9.50229 7.35896 9.1875 7.32328V6.1875H10.875V8.4375Z" fill="currentColor"/>
-                          </svg>
-                        {%- endif -%}
-
-                        {{ block.settings.tag_2 }}
-                      </span>
-                    </li>
-                  </div>
+                  {%- liquid
+                    assign product_tags = ''
+                    if block.settings.tag_1 != blank
+                      assign product_tags = product_tags | append: block.settings.tag_1 | append: '~~'
+                    endif
+                    if block.settings.tag_2 != blank
+                      assign product_tags = product_tags | append: block.settings.tag_2 | append: '~~'
+                    endif
+                    if block.settings.tag_3 != blank
+                      assign product_tags = product_tags | append: block.settings.tag_3 | append: '~~'
+                    endif
+                    assign product_tags = product_tags | split: '~~'
+                  -%}
+                  {%- if product_tags.size > 0 -%}
+                    <ul class="tag-list list-unstyled" role="list" {{ block.shopify_attributes }}>
+                      {%- for product_tag in product_tags -%}
+                        <li><span class="product-tag">{{ product_tag }}</span></li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
 
                 {%- when 'vendor' -%}
                   <p
@@ -430,221 +429,18 @@
                   </div>
 
                 {%- when 'subscription' -%}
+                  {%- render 'product-purchase-options',
+                    product: product,
+                    block: block,
+                    section_id: section.id
+                  -%}
 
-           
-   
-                  <purchase-options  id="purchase-options-{{ section.id }}" >
-
-                     {% assign current_variant = product.selected_or_first_available_variant %}
-
-                      <!-- Subscription -->
-                    {% if current_variant.selling_plan_allocations.size > 0 %}
- 
-                  <div class="purchase-wrapper">
-
-                    <!-- One Time Purchase -->
-                    {% unless product.requires_selling_plan %}
-                    <label class="purchase-card one-time active">
-                      <div class="purchase-header">
-                        <div class="left radio-label">
-                          <input
-                            type="radio"
-                            name="purchase_option"
-                            value=""
-                            checked
-                            class="purchase-option"
-                          >
-                          <span>One Time Purchase</span>
-                        </div>
-
-                        <div class="right">
-                          <strong>{{ current_variant.price | money }}</strong>
-                        </div>
-                      </div>
-                    </label>
-                    {% endunless %}
-
-                   
-                      {% assign allocation = current_variant.selling_plan_allocations.first %}
-                      {% assign plan_group = product.selling_plan_groups.first %}
-
-                      {% assign save = current_variant.price | minus: allocation.price %}
-                      {% assign save_percent = save | times: 100 | divided_by: current_variant.price %}
-
-                      <div class="subscription-box">
-
-                      
-
-                        <label class="purchase-card subscribe">
-
-                          <span class="most-chosen">
-                          MOST CHOSEN
-                        </span>
-
-                          <div class="purchase-header">
-
-                            <div class="left radio-label">
-
-                              <input
-                                type="radio"
-                                name="purchase_option"
-                                value="{{ allocation.selling_plan.id }}"
-                                class="purchase-option"
-                              >
-
-                              <div>
-
-                                <div class="title-row">
-
-                                  <h4>{{ plan_group.name }}</h4>
-
-                                  <span class="save-badge">
-                                    SAVE {{ save_percent }}%
-                                  </span>
-
-                                </div>
-
-                                <p class="subscription-save-text">
-                                  Save {{ save | money }} today and on every shipment
-                                </p>
-
-                              </div>
-
-                            </div>
-
-                            <div class="price">
-
-                              <div class="sale-price">
-                                {{ allocation.price | money }}
-                              </div>
-
-                              <div class="compare-price">
-                                {{ current_variant.price | money }}
-                              </div>
-
-                            </div>
-
-                          </div>
-
-                          <!-- Delivery -->
-
-                          <div class="delivery-row">
- 
-
-
-                             <label for="selling-plan-select">Deliver Every</label>
-                                        
-
-                             <div class="custom-select">
-
-                            
-                            <select id="selling-plan-select">
-
-                              {% for allocation in current_variant.selling_plan_allocations %}
-
-                                {% assign save = current_variant.price | minus: allocation.price %}
-                                {% assign save_percent = save | times: 100 | divided_by: current_variant.price %}
-
-                                <option
-                                  value="{{ allocation.selling_plan.id }}"
-                                  data-price="{{ allocation.price | money }}"
-                                  data-price-raw="{{ allocation.price }}"
-                                  data-compare="{{ current_variant.price | money }}"
-                                  data-compare-raw="{{ current_variant.price }}"
-                                  data-save="{{ save | money }}"
-                                  data-save-percent="{{ save_percent }}"
-                                >
-                                  {{ allocation.selling_plan.name }}
-                                </option>
-
-                              {% endfor %}
-
-                            </select>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M13.354 6.35378L8.35403 11.3538C8.30759 11.4003 8.25245 11.4372 8.19175 11.4623C8.13105 11.4875 8.06599 11.5004 8.00028 11.5004C7.93457 11.5004 7.86951 11.4875 7.80881 11.4623C7.74811 11.4372 7.69296 11.4003 7.64653 11.3538L2.64653 6.35378C2.55271 6.25996 2.5 6.13272 2.5 6.00003C2.5 5.86735 2.55271 5.7401 2.64653 5.64628C2.74035 5.55246 2.8676 5.49976 3.00028 5.49976C3.13296 5.49976 3.26021 5.55246 3.35403 5.64628L8.00028 10.2932L12.6465 5.64628C12.693 5.59983 12.7481 5.56298 12.8088 5.53784C12.8695 5.5127 12.9346 5.49976 13.0003 5.49976C13.066 5.49976 13.131 5.5127 13.1917 5.53784C13.2524 5.56298 13.3076 5.59983 13.354 5.64628C13.4005 5.69274 13.4373 5.74789 13.4625 5.80859C13.4876 5.86928 13.5006 5.93434 13.5006 6.00003C13.5006 6.06573 13.4876 6.13079 13.4625 6.19148C13.4373 6.25218 13.4005 6.30733 13.354 6.35378Z" fill="#1C1B18"/>
-                              </svg>
-
-                              </div>
-
-                          </div>
-
-                          <!-- Benefits -->
-
-                          <div class="benefits">
-
-                            <ul>
-                              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="16" height="16" rx="8" fill="#928469"/>
-                            <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
-                            </svg>
-                            Skip or cancel anytime
-                            </li>
-
-                            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <rect width="16" height="16" rx="8" fill="#928469"/>
-                              <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
-                              </svg>
-                              Access to VIP support
-                              </li>
-
-                            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <rect width="16" height="16" rx="8" fill="#928469"/>
-                              <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
-                              </svg>
-                              15% off every order
-                              </li>
-
-                            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect width="16" height="16" rx="8" fill="#928469"/>
-                          <path d="M11.9713 6.03365L6.97127 11.0336C6.94224 11.0627 6.90778 11.0858 6.86984 11.1015C6.83191 11.1172 6.79124 11.1253 6.75017 11.1253C6.70911 11.1253 6.66844 11.1172 6.6305 11.1015C6.59257 11.0858 6.5581 11.0627 6.52908 11.0336L4.34158 8.84615C4.28294 8.78751 4.25 8.70798 4.25 8.62505C4.25 8.54213 4.28294 8.4626 4.34158 8.40396C4.40022 8.34532 4.47975 8.31238 4.56267 8.31238C4.6456 8.31238 4.72513 8.34532 4.78377 8.40396L6.75017 10.3708L11.5291 5.59146C11.5877 5.53282 11.6672 5.49988 11.7502 5.49988C11.8331 5.49988 11.9126 5.53282 11.9713 5.59146C12.0299 5.6501 12.0628 5.72963 12.0628 5.81255C12.0628 5.89548 12.0299 5.97501 11.9713 6.03365Z" fill="white"/>
-                          </svg>
-                          Free U.S. shipping
-                          </li>
-
-                            </ul>
-                          </div>
-
-                          <!-- Description -->
-
-                          <p class="seling-plan-description">
-                            Easily cancel or skip your future subscription orders through your account four days prior to shipment.
-                            <a href="#">View Details</a>
-                          </p>
-
-                        </label>
-
-                      </div>
-
-                 
-
-                  </div>
-
-          <script type="application/json" id="selling-plans-data">
-          {
-          {% assign current_variant = product.selected_or_first_available_variant %}
-
-          {% for allocation in current_variant.selling_plan_allocations %}
-            "{{ allocation.selling_plan.id }}": {
-              "price": {{ allocation.price }},
-              "compare_price": {{ current_variant.price }}
-            }{% unless forloop.last %},{% endunless %}
-          {% endfor %}
-          }
-          </script>
-
-             {% endif %}
-
-          </purchase-options>
-
-
-
-      {%- style -%}
-        .sealsubs-target-element.sealsubs-full[data-seal-ac], .sealsubs-target-element.sealsubs-full[data-seal-in] {
-          display: none !important;
-      }
-      {%- endstyle -%}
-      
-
+                  {%- style -%}
+                    .sealsubs-target-element.sealsubs-full[data-seal-ac],
+                    .sealsubs-target-element.sealsubs-full[data-seal-in] {
+                      display: none !important;
+                    }
+                  {%- endstyle -%}
 
                 {%- when 'payement_secure' -%}
                   <div class="payement_secure_wrapp">
@@ -685,13 +481,17 @@
                       use_variant: true,
                       show_badges: false,
                       show_save: true,
-                      price_class: 'price--large'
+                      price_class: 'price--large',
+                      hide_currency_code: block.settings.hide_currency_code
                     -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>
                     </div>
+                  {%- endif -%}
+                  {%- if block.settings.price_note != blank -%}
+                    <p class="product__price-note">{{ block.settings.price_note }}</p>
                   {%- endif -%}
 
                   {% comment %} <div class="installment-form" {{ block.shopify_attributes }}>
@@ -703,78 +503,80 @@
                   </div> {% endcomment %}
 
                 {%- when 'inventory' -%}
+                  {%- liquid
+                    assign inventory_variant = product.selected_or_first_available_variant
+                    assign inventory_tracked = false
+                    if inventory_variant.inventory_management == 'shopify'
+                      assign inventory_tracked = true
+                    endif
+                    assign stock = inventory_variant.inventory_quantity
+
+                    assign inventory_state = 'unavailable'
+                    if inventory_tracked
+                      if stock > 0
+                        if stock <= block.settings.inventory_threshold
+                          assign inventory_state = 'low'
+                        else
+                          assign inventory_state = 'available'
+                        endif
+                      elsif inventory_variant.inventory_policy == 'continue'
+                        assign inventory_state = 'available'
+                      else
+                        assign inventory_state = 'unavailable'
+                      endif
+                    endif
+                  -%}
                   <div
-                    class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+                    class="product__inventory product__inventory--{{ inventory_state }}{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% unless inventory_tracked %} visibility-hidden{% endunless %}"
                     {{ block.shopify_attributes }}
                     id="Inventory-{{ section.id }}"
                     role="status"
                   >
-                    {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
-                      {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
-                        {%- if product.selected_or_first_available_variant.inventory_quantity
-                            <= block.settings.inventory_threshold
-                        -%}
-                          <span class="orange_pulse">
-                            {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                          </span>
-                          {%- if block.settings.show_inventory_quantity -%}
-                            {{-
-                              'products.product.inventory_low_stock_show_count'
-                              | t: quantity: product.selected_or_first_available_variant.inventory_quantity
-                            -}}
+                    {%- if inventory_tracked -%}
+                      <span class="product__inventory-status">
+                        <span class="product__inventory-icon">
+                          {%- if inventory_state == 'unavailable' -%}
+                            {%- render 'icon-check-circle', style: 'outline', size: 20 -%}
                           {%- else -%}
-                            {{- 'products.product.inventory_low_stock' | t -}}
+                            {%- render 'icon-check-circle', style: 'filled', size: 20 -%}
                           {%- endif -%}
-                        {%- else -%}
-
-                          
-                          <span class="green-dot">
-                            {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                          </span>
-
-
-                          {%- if block.settings.show_inventory_quantity -%}
-                            {{-
-                              'products.product.inventory_in_stock_show_count'
-                              | t: quantity: product.selected_or_first_available_variant.inventory_quantity
-                            -}}
+                        </span>
+                        <span class="product__inventory-text">
+                          {%- if inventory_state == 'low' -%}
+                            {%- if block.settings.show_inventory_quantity -%}
+                              {{- 'products.product.inventory_low_stock_show_count' | t: quantity: stock -}}
+                            {%- else -%}
+                              {{- 'products.product.inventory_low_stock' | t -}}
+                            {%- endif -%}
+                          {%- elsif inventory_state == 'available' -%}
+                            {%- if block.settings.available_text != blank -%}
+                              {{- block.settings.available_text -}}
+                            {%- elsif block.settings.show_inventory_quantity and stock > 0 -%}
+                              {{- 'products.product.inventory_in_stock_show_count' | t: quantity: stock -}}
+                            {%- elsif stock > 0 -%}
+                              {{- 'products.product.inventory_in_stock' | t -}}
+                            {%- else -%}
+                              {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
+                            {%- endif -%}
                           {%- else -%}
-                            {{- 'products.product.inventory_in_stock' | t -}}
+                            {{- 'products.product.inventory_out_of_stock' | t -}}
                           {%- endif -%}
-                         
+                        </span>
+                      </span>
 
-
-                          {% assign stock = product.selected_or_first_available_variant.inventory_quantity %}
-
-                                <div class="inventory-text">
-                                  <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="3" cy="3" r="3" fill="#DDDCD5"/>
-                                  </svg>
-
-                                  {% if stock > 0 %}
-                                    <span>Cut to order daily, limited to {{ stock }} portions</span>
-                                  {% else %}
-                                    <span>Sold Out Today</span>
-                                  {% endif %}
-                                </div>
-
-
-                        {%- endif -%}
-                      {%- else -%}
-                        {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
-                          <span class="green-dot">
-                            {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                          </span>
-                          {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
-                        {%- else -%}
-                          <span class="sold_out_pulse">
-                            {{- 'icon-inventory-status.svg' | inline_asset_content -}}
-                          </span>
-                          {{- 'products.product.inventory_out_of_stock' | t -}}
-                        {%- endif -%}
+                      {%- if block.settings.secondary_text != blank and inventory_state != 'unavailable' -%}
+                        {%- assign secondary_text = block.settings.secondary_text | replace: '[quantity]', stock -%}
+                        <span class="product__inventory-note">
+                          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" aria-hidden="true" focusable="false">
+                            <circle cx="3" cy="3" r="3" fill="currentColor"/>
+                          </svg>
+                          <span>{{ secondary_text }}</span>
+                        </span>
                       {%- endif -%}
                     {%- endif -%}
                   </div>
+
+
                 {%- when 'description' -%}
                   {%- if product.description != blank -%}
                     <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
@@ -811,48 +613,62 @@
                 {%- when 'custom_liquid' -%}
                   {{ block.settings.custom_liquid }}
                 {%- when 'collapsible_tab' -%}
-                  {% if block.settings.content != blank or block.settings.page.content != blank %}
-                  {% endif %}
-                  <collapsible-content class="product__accordion quick-add-hidden" {{ block.shopify_attributes }}>
-                    <details class="disclosure disclosure--row" id="Details-{{ block.id }}-{{ section.id }}">
-                      <summary>
-                        <div class="disclosure-header">
-                          <h2 class="h4 disclosure__title inline-richtext">
-                            {% if block.settings.icon_image != blank %}
-                              <span class="accordion__icon">
-                                {% render 'icon-img' with image, image: block.settings.icon_image %}
-                              </span>
-                            {% else %}
-                              {% render 'icon-accordion', icon: block.settings.icon %}
-                            {% endif %}
+                  {%- liquid
+                    assign tab_heading = block.settings.heading | default: block.settings.page.title
+                    assign tab_content = block.settings.content | default: block.settings.page.content
+                  -%}
+                  {%- if tab_heading != blank or tab_content != blank -%}
+                    <collapsible-content
+                      class="product__accordion quick-add-hidden"
+                      {{ block.shopify_attributes }}
+                    >
+                      <details
+                        class="disclosure disclosure--{{ section.settings.accordion_style }}"
+                        id="Details-{{ block.id }}-{{ section.id }}"
+                        {% if block.settings.open_by_default %}
+                          open
+                        {% endif %}
+                      >
+                        <summary>
+                          <div class="disclosure-header">
+                            <h2 class="disclosure__title inline-richtext">
+                              {%- if block.settings.icon_image != blank -%}
+                                <span class="accordion__icon">
+                                  {% render 'icon-img' with image, image: block.settings.icon_image %}
+                                </span>
+                              {%- elsif block.settings.icon != 'none' -%}
+                                {% render 'icon-accordion', icon: block.settings.icon %}
+                              {%- endif -%}
+                              {{ tab_heading }}
+                            </h2>
+                            <span class="disclosure__toggle">
+                              <svg
+                                class="icon icon-plus"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                aria-hidden="true"
+                                focusable="false"
+                              >
+                                <path d="M8 1.5v13M1.5 8h13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+                              </svg>
+                            </span>
+                          </div>
+                        </summary>
+                        <div class="disclosure__panel has-motion">
+                          <div
+                            class="accordion__content disclosure__content rte"
+                            id="ProductAccordion-{{ block.id }}-{{ section.id }}"
+                          >
+                            {{ block.settings.content }}
+                            {{ block.settings.page.content }}
+                          </div>
+                        </div>
+                      </details>
+                    </collapsible-content>
+                  {%- endif -%}
 
-                            {{ block.settings.heading | default: block.settings.page.title | escape }}
-                          </h2>
-                          <span class="disclosure__toggle">
-                            <svg
-                              class="icon icon-caret"
-                              width="12"
-                              height="8"
-                              viewBox="0 0 12 8"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M1 1L6 6L11 1" stroke="#0A0A0A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </span>
-                        </div>
-                      </summary>
-                      <div class="disclosure__panel has-motion">
-                        <div
-                          class="accordion__content disclosure__content rte"
-                          id="ProductAccordion-{{ block.id }}-{{ section.id }}"
-                        >
-                          {{ block.settings.content }}
-                          {{ block.settings.page.content }}
-                        </div>
-                      </div>
-                    </details>
-                  </collapsible-content>
 
                 {%- when 'quantity_selector' -%}
                   <div
@@ -1306,16 +1122,22 @@
                   -%}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
-                    <div class="rating-wrapper">
-                      {% liquid
-                        assign rating_decimal = 0
-                        assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
-                        if decimal >= 0.3 and decimal <= 0.7
-                          assign rating_decimal = 0.5
-                        elsif decimal > 0.7
-                          assign rating_decimal = 1
-                        endif
-                      %}
+                    {%- liquid
+                      assign rating_decimal = 0
+                      assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+                      if decimal >= 0.3 and decimal <= 0.7
+                        assign rating_decimal = 0.5
+                      elsif decimal > 0.7
+                        assign rating_decimal = 1
+                      endif
+
+                      assign review_count = product.metafields.reviews.rating_count
+                      assign review_label = block.settings.reviews_label | default: 'Reviews'
+                      if review_count == 1 and block.settings.reviews_label_one != blank
+                        assign review_label = block.settings.reviews_label_one
+                      endif
+                    -%}
+                    <div class="rating-wrapper" {{ block.shopify_attributes }}>
                       <div
                         class="rating"
                         role="img"
@@ -1333,13 +1155,21 @@
                           {{ product.metafields.reviews.rating.value.scale_max -}}
                         </span>
                       </p>
-                      <p class="rating-count caption">
-                        <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
-                        <span class="visually-hidden">
-                          {{- product.metafields.reviews.rating_count }}
-                          {{ 'accessibility.total_reviews' | t -}}
-                        </span>
-                      </p>
+                      {%- if block.settings.show_review_count -%}
+                        <p class="rating-count">
+                          {%- if block.settings.reviews_link != blank -%}
+                            <a href="{{ block.settings.reviews_link }}">
+                              {{- review_count }} {{ review_label -}}
+                            </a>
+                          {%- else -%}
+                            <span aria-hidden="true">{{ review_count }} {{ review_label }}</span>
+                          {%- endif -%}
+                          <span class="visually-hidden">
+                            {{- review_count }}
+                            {{ 'accessibility.total_reviews' | t -}}
+                          </span>
+                        </p>
+                      {%- endif -%}
                     </div>
                   {%- endif -%}
 
@@ -1562,6 +1392,105 @@
                       <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
                     {%- endif -%}
                   </product-recommendations>
+                {%- when 'subtitle' -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="product__subtitle" {{ block.shopify_attributes }}>
+                      {{ block.settings.text }}
+                    </div>
+                  {%- endif -%}
+
+                {%- when 'quote_card' -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="product__quote" {{ block.shopify_attributes }}>
+                      {%- if block.settings.show_icon -%}
+                        <span class="product__quote-figure">
+                          {%- if block.settings.image != blank -%}
+                            <img
+                              src="{{ block.settings.image | image_url: width: 240 }}"
+                              alt="{{ block.settings.image.alt | escape }}"
+                              width="{{ block.settings.image.width }}"
+                              height="{{ block.settings.image.height }}"
+                              loading="lazy"
+                            >
+                          {%- else -%}
+                            {{- 'icon-quote-sprig.svg' | inline_asset_content -}}
+                          {%- endif -%}
+                        </span>
+                      {%- endif -%}
+                      <div class="product__quote-text">{{ block.settings.text }}</div>
+                    </div>
+                  {%- endif -%}
+
+                {%- when 'certifications' -%}
+                  {%- liquid
+                    assign certification_indexes = '1,2,3,4,5,6' | split: ','
+                    assign certification_count = 0
+                    for i in certification_indexes
+                      assign label_key = 'label_' | append: i
+                      if block.settings[label_key] != blank
+                        assign certification_count = certification_count | plus: 1
+                      endif
+                    endfor
+                  -%}
+                  {%- if certification_count > 0 -%}
+                    <ul
+                      class="product__certifications list-unstyled"
+                      role="list"
+                      style="--certification-columns: {{ certification_count | at_most: 5 }};"
+                      {{ block.shopify_attributes }}
+                    >
+                      {%- for i in certification_indexes -%}
+                        {%- liquid
+                          assign label_key = 'label_' | append: i
+                          assign image_key = 'image_' | append: i
+                          assign certification_label = block.settings[label_key]
+                          assign certification_image = block.settings[image_key]
+                        -%}
+                        {%- if certification_label != blank -%}
+                          <li class="product__certification">
+                            <span class="product__certification-icon">
+                              {%- if certification_image != blank -%}
+                                <img
+                                  src="{{ certification_image | image_url: width: 120 }}"
+                                  alt="{{ certification_image.alt | default: certification_label | escape }}"
+                                  width="{{ certification_image.width }}"
+                                  height="{{ certification_image.height }}"
+                                  loading="lazy"
+                                >
+                              {%- else -%}
+                                {%- render 'icon-check-circle', style: 'outline', size: 28 -%}
+                              {%- endif -%}
+                            </span>
+                            <span class="product__certification-label">{{ certification_label }}</span>
+                          </li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+                {%- when 'guarantee_row' -%}
+                  {%- liquid
+                    assign guarantees = ''
+                    for i in (1..3)
+                      assign guarantee_key = 'text_' | append: i
+                      if block.settings[guarantee_key] != blank
+                        assign guarantees = guarantees | append: block.settings[guarantee_key] | append: '~~'
+                      endif
+                    endfor
+                    assign guarantees = guarantees | split: '~~'
+                  -%}
+                  {%- if guarantees.size > 0 -%}
+                    <ul class="product__guarantees list-unstyled" role="list" {{ block.shopify_attributes }}>
+                      {%- for guarantee in guarantees -%}
+                        <li class="product__guarantee">
+                          {%- render 'icon-check-circle', style: 'outline', size: 18 -%}
+                          <span>{{ guarantee }}</span>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+
+
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
               {%- endcase -%}
@@ -1844,6 +1773,12 @@
           "id": "tag_2",
           "default": "BEEF STEAKS",
           "label": "Tag 2"
+        },
+        {
+          "type": "text",
+          "id": "tag_3",
+          "label": "Third pill",
+          "info": "Leave blank to hide."
         }
       ]
     },
@@ -1851,178 +1786,174 @@
       "type": "review",
       "name": "Customer review",
       "settings": [
-    {
-      "type": "header",
-      "content": "Review 1"
-    },
-    {
-      "type": "text",
-      "id": "review_name_1",
-      "label": "Name",
-      "default": "Chaise"
-    },
-    {
-      "type": "text",
-      "id": "review_date_1",
-      "label": "Date",
-      "default": "Jan 2026"
-    },
-    {
-      "type": "range",
-      "id": "review_rating_1",
-      "label": "Rating",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "textarea",
-      "id": "review_text_1",
-      "label": "Review",
-      "default": "Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing."
-    },
-
-    {
-      "type": "header",
-      "content": "Review 2"
-    },
-    {
-      "type": "text",
-      "id": "review_name_2",
-      "label": "Name",
-      "default": "Michael"
-    },
-    {
-      "type": "text",
-      "id": "review_date_2",
-      "label": "Date",
-      "default": "Dec 2025"
-    },
-    {
-      "type": "range",
-      "id": "review_rating_2",
-      "label": "Rating",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "textarea",
-      "id": "review_text_2",
-      "label": "Review",
-      "default": "Amazing quality and fast shipping. Everything arrived exactly as expected."
-    },
-
-    {
-      "type": "header",
-      "content": "Review 3"
-    },
-    {
-      "type": "text",
-      "id": "review_name_3",
-      "label": "Name",
-      "default": "Sarah"
-    },
-    {
-      "type": "text",
-      "id": "review_date_3",
-      "label": "Date",
-      "default": "Nov 2025"
-    },
-    {
-      "type": "range",
-      "id": "review_rating_3",
-      "label": "Rating",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "textarea",
-      "id": "review_text_3",
-      "label": "Review",
-      "default": "Excellent customer service. Highly recommend this company to anyone."
-    },
-
-    {
-      "type": "header",
-      "content": "Review 4"
-    },
-    {
-      "type": "text",
-      "id": "review_name_4",
-      "label": "Name",
-      "default": "James"
-    },
-    {
-      "type": "text",
-      "id": "review_date_4",
-      "label": "Date",
-      "default": "Oct 2025"
-    },
-    {
-      "type": "range",
-      "id": "review_rating_4",
-      "label": "Rating",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "textarea",
-      "id": "review_text_4",
-      "label": "Review",
-      "default": "Super fresh products and fantastic communication from start to finish."
-    },
-
-    {
-      "type": "header",
-      "content": "Review 5"
-    },
-    {
-      "type": "text",
-      "id": "review_name_5",
-      "label": "Name",
-      "default": "Emma"
-    },
-    {
-      "type": "text",
-      "id": "review_date_5",
-      "label": "Date",
-      "default": "Sep 2025"
-    },
-    {
-      "type": "range",
-      "id": "review_rating_5",
-      "label": "Rating",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "textarea",
-      "id": "review_text_5",
-      "label": "Review",
-      "default": "Couldn't be happier with my purchase. Will definitely order again!"
-    },
-      {
-      "type": "color_scheme",
-      "id": "color_scheme_swiper",
-      "label": "Swiper Navigation",
-      "default": "scheme-2"
-    }
+        {
+          "type": "header",
+          "content": "Review 1"
+        },
+        {
+          "type": "text",
+          "id": "review_name_1",
+          "label": "Name",
+          "default": "Chaise"
+        },
+        {
+          "type": "text",
+          "id": "review_date_1",
+          "label": "Date",
+          "default": "Jan 2026"
+        },
+        {
+          "type": "range",
+          "id": "review_rating_1",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_1",
+          "label": "Review",
+          "default": "Did a custom order for some shaved steak with these guys and they nailed it! Great service, great pricing."
+        },
+        {
+          "type": "header",
+          "content": "Review 2"
+        },
+        {
+          "type": "text",
+          "id": "review_name_2",
+          "label": "Name",
+          "default": "Michael"
+        },
+        {
+          "type": "text",
+          "id": "review_date_2",
+          "label": "Date",
+          "default": "Dec 2025"
+        },
+        {
+          "type": "range",
+          "id": "review_rating_2",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_2",
+          "label": "Review",
+          "default": "Amazing quality and fast shipping. Everything arrived exactly as expected."
+        },
+        {
+          "type": "header",
+          "content": "Review 3"
+        },
+        {
+          "type": "text",
+          "id": "review_name_3",
+          "label": "Name",
+          "default": "Sarah"
+        },
+        {
+          "type": "text",
+          "id": "review_date_3",
+          "label": "Date",
+          "default": "Nov 2025"
+        },
+        {
+          "type": "range",
+          "id": "review_rating_3",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_3",
+          "label": "Review",
+          "default": "Excellent customer service. Highly recommend this company to anyone."
+        },
+        {
+          "type": "header",
+          "content": "Review 4"
+        },
+        {
+          "type": "text",
+          "id": "review_name_4",
+          "label": "Name",
+          "default": "James"
+        },
+        {
+          "type": "text",
+          "id": "review_date_4",
+          "label": "Date",
+          "default": "Oct 2025"
+        },
+        {
+          "type": "range",
+          "id": "review_rating_4",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_4",
+          "label": "Review",
+          "default": "Super fresh products and fantastic communication from start to finish."
+        },
+        {
+          "type": "header",
+          "content": "Review 5"
+        },
+        {
+          "type": "text",
+          "id": "review_name_5",
+          "label": "Name",
+          "default": "Emma"
+        },
+        {
+          "type": "text",
+          "id": "review_date_5",
+          "label": "Date",
+          "default": "Sep 2025"
+        },
+        {
+          "type": "range",
+          "id": "review_rating_5",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text_5",
+          "label": "Review",
+          "default": "Couldn't be happier with my purchase. Will definitely order again!"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme_swiper",
+          "label": "Swiper Navigation",
+          "default": "scheme-2"
+        }
       ]
     },
     {
       "type": "pickup_details",
       "name": "Pickup Details",
       "settings": [
-          {
+        {
           "type": "text",
           "id": "title_1",
           "default": "Store Pickup available",
@@ -2034,7 +1965,7 @@
           "default": "Usually ready in 24 hours",
           "label": "t:sections.main-product.blocks.text.settings.text.label"
         },
-             {
+        {
           "type": "text",
           "id": "title_2",
           "default": "Order By Phone",
@@ -2159,7 +2090,22 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "hide_currency_code",
+          "default": true,
+          "label": "Hide currency code",
+          "info": "Shows $13.90 instead of US$13.90, without changing the theme-wide currency setting."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "price_note",
+          "label": "Note under price",
+          "default": "Including tax, plus climate-neutral shipping · free shipping on orders over $50"
+        }
+      ]
     },
     {
       "type": "sku",
@@ -2220,8 +2166,7 @@
         }
       ]
     },
-
-      {
+    {
       "type": "feaured_list_text",
       "name": "Featured List Text",
       "settings": [
@@ -2248,7 +2193,7 @@
           "label": "Title",
           "default": "Free Shippping"
         },
-          {
+        {
           "type": "image_picker",
           "id": "icon_2",
           "label": "Icon image"
@@ -2259,7 +2204,7 @@
           "label": "Title",
           "default": "Free Shippping"
         },
-                 {
+        {
           "type": "image_picker",
           "id": "icon_3",
           "label": "Icon image"
@@ -2281,7 +2226,7 @@
           "label": "Title",
           "default": "Free Shippping"
         },
-                {
+        {
           "type": "image_picker",
           "id": "icon_5",
           "label": "Icon image"
@@ -2298,52 +2243,52 @@
           "label": "t:sections.all.colors.label",
           "default": "scheme-1"
         },
+        {
+          "type": "select",
+          "id": "speed",
+          "label": "Speed",
+          "default": "50",
+          "options": [
             {
-      "type": "select",
-      "id": "speed",
-      "label": "Speed",
-      "default": "50",
-      "options": [
-        {
-          "value": "50",
-          "label": "50"
+              "value": "50",
+              "label": "50"
+            },
+            {
+              "value": "100",
+              "label": "100"
+            },
+            {
+              "value": "150",
+              "label": "150"
+            },
+            {
+              "value": "200",
+              "label": "200"
+            }
+          ]
         },
         {
-          "value": "100",
-          "label": "100"
+          "type": "select",
+          "label": "Movine Direction",
+          "id": "moving_direction",
+          "options": [
+            {
+              "value": "animation-direction",
+              "label": "animation-direction"
+            },
+            {
+              "value": "animation-reverse",
+              "label": "animation-reverse"
+            }
+          ],
+          "default": "animation-direction"
         },
         {
-          "value": "150",
-          "label": "150"
-        },
-        {
-          "value": "200",
-          "label": "200"
+          "type": "checkbox",
+          "id": "pause_when_hover",
+          "label": "Pause On Hover",
+          "default": false
         }
-      ]
-    },
-    {
-      "type": "select",
-      "label": "Movine Direction",
-      "id": "moving_direction",
-      "options": [
-        {
-          "value": "animation-direction",
-          "label": "animation-direction"
-        },
-        {
-          "value": "animation-reverse",
-          "label": "animation-reverse"
-        }
-      ],
-      "default": "animation-direction"
-    },
-    {
-      "type": "checkbox",
-      "id": "pause_when_hover",
-      "label": "Pause On Hover",
-      "default": false
-    }
       ]
     },
     {
@@ -2385,6 +2330,19 @@
           "id": "show_inventory_quantity",
           "label": "t:sections.main-product.blocks.inventory.settings.show_inventory_quantity.label",
           "default": true
+        },
+        {
+          "type": "text",
+          "id": "available_text",
+          "label": "In stock message",
+          "info": "Overrides the default in-stock text. Leave blank to use the theme translation.",
+          "default": "Available immediately, delivery in 1–3 days"
+        },
+        {
+          "type": "text",
+          "id": "secondary_text",
+          "label": "Secondary line",
+          "info": "Use [quantity] to insert the remaining stock. Leave blank to hide."
         }
       ]
     },
@@ -2395,8 +2353,333 @@
     },
     {
       "type": "subscription",
-      "name": "Subscription",
-      "limit": 1
+      "name": "Purchase options",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "One row per selling plan on the product, each carrying its own selling plan id. Add a one-time row or multi-pack rows below for products with no selling plans."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "info": "Optional heading above the options."
+        },
+        {
+          "type": "header",
+          "content": "Selling plan rows"
+        },
+        {
+          "type": "select",
+          "id": "plan_display",
+          "default": "all",
+          "label": "Rows to show",
+          "options": [
+            {
+              "value": "all",
+              "label": "One row per selling plan"
+            },
+            {
+              "value": "first",
+              "label": "First selling plan only"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_plan_badge",
+          "default": true,
+          "label": "Show savings badge"
+        },
+        {
+          "type": "text",
+          "id": "plan_badge_text",
+          "default": "Save [percent]%",
+          "label": "Savings badge text",
+          "info": "Use [percent] to insert the saving. The saving comes from the plan’s price adjustment in Shopify."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_plan_compare",
+          "default": false,
+          "label": "Show crossed-out one-time price"
+        },
+        {
+          "type": "header",
+          "content": "Plan row 1"
+        },
+        {
+          "type": "text",
+          "id": "plan_1_label",
+          "label": "Label",
+          "info": "Blank uses the selling plan name from Shopify."
+        },
+        {
+          "type": "text",
+          "id": "plan_1_sublabel",
+          "label": "Sub-label",
+          "default": "Standard price"
+        },
+        {
+          "type": "text",
+          "id": "plan_1_note",
+          "label": "Price note",
+          "default": "per pack",
+          "info": "Leave blank for no note on this row."
+        },
+        {
+          "type": "text",
+          "id": "plan_1_badge",
+          "label": "Badge",
+          "info": "Use [percent] for the saving. Blank uses the shared badge text below."
+        },
+        {
+          "type": "header",
+          "content": "Plan row 2"
+        },
+        {
+          "type": "text",
+          "id": "plan_2_label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "plan_2_sublabel",
+          "label": "Sub-label",
+          "default": "Per-pack price"
+        },
+        {
+          "type": "text",
+          "id": "plan_2_note",
+          "label": "Price note"
+        },
+        {
+          "type": "text",
+          "id": "plan_2_badge",
+          "label": "Badge"
+        },
+        {
+          "type": "header",
+          "content": "Plan row 3"
+        },
+        {
+          "type": "text",
+          "id": "plan_3_label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "plan_3_sublabel",
+          "label": "Sub-label",
+          "default": "Free shipping · skip, swap or cancel anytime"
+        },
+        {
+          "type": "text",
+          "id": "plan_3_note",
+          "label": "Price note",
+          "default": "per delivery"
+        },
+        {
+          "type": "text",
+          "id": "plan_3_badge",
+          "label": "Badge"
+        },
+        {
+          "type": "header",
+          "content": "Plan row 4"
+        },
+        {
+          "type": "text",
+          "id": "plan_4_label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "plan_4_sublabel",
+          "label": "Sub-label"
+        },
+        {
+          "type": "text",
+          "id": "plan_4_note",
+          "label": "Price note"
+        },
+        {
+          "type": "text",
+          "id": "plan_4_badge",
+          "label": "Badge"
+        },
+        {
+          "type": "header",
+          "content": "One-time purchase row",
+          "info": "Hidden automatically when the product requires a selling plan."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_one_time",
+          "default": true,
+          "label": "Show a one-time purchase row"
+        },
+        {
+          "type": "text",
+          "id": "base_label",
+          "default": "One time purchase",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "base_sublabel",
+          "default": "Standard price",
+          "label": "Sub-label"
+        },
+        {
+          "type": "text",
+          "id": "base_note",
+          "default": "per pack",
+          "label": "Price note"
+        },
+        {
+          "type": "header",
+          "content": "Multi-pack row 1",
+          "info": "For products with no selling plans. Selecting the row sets the quantity. The price shown is calculated from the discount — create a matching automatic discount in Shopify so the cart charges the same amount."
+        },
+        {
+          "type": "checkbox",
+          "id": "tier_1_enabled",
+          "default": false,
+          "label": "Show this row"
+        },
+        {
+          "type": "range",
+          "id": "tier_1_quantity",
+          "min": 2,
+          "max": 12,
+          "step": 1,
+          "default": 2,
+          "label": "Quantity"
+        },
+        {
+          "type": "text",
+          "id": "tier_1_label",
+          "default": "2 packs",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "tier_1_sublabel",
+          "default": "Per-pack price",
+          "label": "Sub-label"
+        },
+        {
+          "type": "text",
+          "id": "tier_1_badge",
+          "default": "Save [percent]%",
+          "label": "Badge",
+          "info": "Use [percent] to insert the discount. Leave blank to hide."
+        },
+        {
+          "type": "range",
+          "id": "tier_1_discount",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "%",
+          "default": 10,
+          "label": "Discount"
+        },
+        {
+          "type": "text",
+          "id": "tier_1_note",
+          "label": "Price note"
+        },
+        {
+          "type": "header",
+          "content": "Multi-pack row 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "tier_2_enabled",
+          "default": false,
+          "label": "Show this row"
+        },
+        {
+          "type": "range",
+          "id": "tier_2_quantity",
+          "min": 2,
+          "max": 12,
+          "step": 1,
+          "default": 3,
+          "label": "Quantity"
+        },
+        {
+          "type": "text",
+          "id": "tier_2_label",
+          "default": "3 packs",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "tier_2_sublabel",
+          "default": "Per-pack price",
+          "label": "Sub-label"
+        },
+        {
+          "type": "text",
+          "id": "tier_2_badge",
+          "default": "Save [percent]%",
+          "label": "Badge",
+          "info": "Use [percent] to insert the discount. Leave blank to hide."
+        },
+        {
+          "type": "range",
+          "id": "tier_2_discount",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "unit": "%",
+          "default": 15,
+          "label": "Discount"
+        },
+        {
+          "type": "text",
+          "id": "tier_2_note",
+          "label": "Price note"
+        },
+        {
+          "type": "header",
+          "content": "Extras"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_most_chosen",
+          "default": false,
+          "label": "Show flag on the subscription row"
+        },
+        {
+          "type": "text",
+          "id": "most_chosen_text",
+          "default": "MOST CHOSEN",
+          "label": "Flag text"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_benefits",
+          "default": false,
+          "label": "Show benefits list"
+        },
+        {
+          "type": "textarea",
+          "id": "benefits",
+          "default": "Skip or cancel anytime\nAccess to VIP support\nFree shipping",
+          "label": "Benefits",
+          "info": "One per line."
+        },
+        {
+          "type": "richtext",
+          "id": "plan_footnote",
+          "label": "Footnote"
+        }
+      ]
     },
     {
       "type": "variant_picker",
@@ -2414,10 +2697,15 @@
             {
               "value": "button",
               "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
+            },
+            {
+              "value": "card",
+              "label": "Cards"
             }
           ],
-          "default": "button",
-          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+          "default": "card",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label",
+          "info": "Cards split a value like \"25 Servings Loose Leaf\" into a large amount and a label."
         },
         {
           "id": "swatch_shape",
@@ -2701,6 +2989,12 @@
           "type": "page",
           "id": "page",
           "label": "t:sections.main-product.blocks.collapsible_tab.settings.page.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "default": false,
+          "label": "Open by default"
         }
       ]
     },
@@ -2729,6 +3023,30 @@
         {
           "type": "paragraph",
           "content": "t:sections.main-product.blocks.rating.settings.paragraph.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_review_count",
+          "default": true,
+          "label": "Show review count"
+        },
+        {
+          "type": "text",
+          "id": "reviews_label",
+          "default": "Reviews",
+          "label": "Review count label"
+        },
+        {
+          "type": "text",
+          "id": "reviews_label_one",
+          "default": "Review",
+          "label": "Review count label (singular)"
+        },
+        {
+          "type": "url",
+          "id": "reviews_link",
+          "label": "Review count link",
+          "info": "Optional. Links the count to your reviews section."
         }
       ]
     },
@@ -3039,7 +3357,7 @@
       "name": "Bundles Products",
       "limit": 1,
       "settings": [
-          {
+        {
           "type": "paragraph",
           "content": "Products comers from meta field option [bundles_products]. Please add meta field to your product with namespace and key as bundles_products and value as product handles separated by comma."
         },
@@ -3478,7 +3796,7 @@
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_2.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
         },
-       {
+        {
           "type": "inline_richtext",
           "id": "text_2",
           "default": "Every cut, every time",
@@ -3690,7 +4008,7 @@
           "default": "Every cut, every time",
           "label": "Text"
         },
-               {
+        {
           "type": "header",
           "content": "Pairing 4"
         },
@@ -3897,9 +4215,168 @@
           "label": "Text"
         }
       ]
+    },
+    {
+      "type": "subtitle",
+      "name": "Subtitle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Supports a Healthy Heart and Circulation*",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "quote_card",
+      "name": "Quote card",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "default": true,
+          "label": "Show icon"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon",
+          "info": "Optional. Leave empty to use the built-in sprig icon."
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>As you sip, hawthorn’s quiet strength steadies — gently supporting rhythm, resilience, and a heart at ease.</p>",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "certifications",
+      "name": "Certifications",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Up to six icon and label pairs. Leave a label blank to hide that item."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Icon 1"
+        },
+        {
+          "type": "text",
+          "id": "label_1",
+          "default": "USDA Organic",
+          "label": "Label 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Icon 2"
+        },
+        {
+          "type": "text",
+          "id": "label_2",
+          "default": "Caffeine free",
+          "label": "Label 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Icon 3"
+        },
+        {
+          "type": "text",
+          "id": "label_3",
+          "default": "Gluten free",
+          "label": "Label 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "Icon 4"
+        },
+        {
+          "type": "text",
+          "id": "label_4",
+          "default": "Certified vegan",
+          "label": "Label 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "Icon 5"
+        },
+        {
+          "type": "text",
+          "id": "label_5",
+          "default": "Ecocert",
+          "label": "Label 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "Icon 6"
+        },
+        {
+          "type": "text",
+          "id": "label_6",
+          "label": "Label 6"
+        }
+      ]
+    },
+    {
+      "type": "guarantee_row",
+      "name": "Guarantee row",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "A row of short reassurances, usually placed directly under the add to cart button."
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "default": "Free shipping over $50",
+          "label": "Item 1"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "default": "30-day happiness guarantee",
+          "label": "Item 2"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "default": "Ships in 1–2 days",
+          "label": "Item 3"
+        }
+      ]
     }
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "accordion_style",
+      "default": "flat",
+      "label": "Accordion style",
+      "options": [
+        {
+          "value": "flat",
+          "label": "Divider lines"
+        },
+        {
+          "value": "row",
+          "label": "Boxed"
+        }
+      ]
+    },
     {
       "type": "header",
       "content": "Layout Wdith"
@@ -4096,6 +4573,24 @@
       "id": "color_accent",
       "label": "Accent Color",
       "default": "#FFCD2E"
+    },
+    {
+      "type": "color",
+      "id": "color_badge",
+      "label": "Savings badge and stars",
+      "default": "#D58C3F"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "Selected option background",
+      "default": "#EFF3E2"
+    },
+    {
+      "type": "color",
+      "id": "color_soft_surface",
+      "label": "Quote card background",
+      "default": "#F6F1E3"
     },
     {
       "type": "color_scheme",

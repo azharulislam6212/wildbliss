@@ -14,16 +14,15 @@
           "type": "title",
           "settings": {}
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "price_FGjn8D": {
           "type": "price",
-          "settings": {}
+          "settings": {
+            "hide_currency_code": true,
+            "price_note": "Including tax, plus climate-neutral shipping · free shipping on orders over $50"
+          }
         },
         "judge_me_reviews_preview_badge_wLwmr7": {
-          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
         },
         "inventory_37E8WQ": {
@@ -37,13 +36,30 @@
         "variant_picker_wN9KQ6": {
           "type": "variant_picker",
           "settings": {
-            "picker_type": "button",
+            "picker_type": "card",
             "swatch_shape": "square"
           }
         },
         "subscription_UwFPQQ": {
           "type": "subscription",
-          "settings": {}
+          "settings": {
+            "plan_display": "all",
+            "show_one_time": false,
+            "tier_1_enabled": false,
+            "tier_2_enabled": false,
+            "show_plan_badge": true,
+            "plan_badge_text": "Save [percent]%",
+            "show_plan_compare": false,
+            "plan_1_label": "1 pack",
+            "plan_1_sublabel": "Standard price",
+            "plan_1_note": "per pack",
+            "plan_2_label": "2 packs",
+            "plan_2_sublabel": "Per-pack price",
+            "plan_2_note": "",
+            "plan_3_label": "Subscribe & save",
+            "plan_3_sublabel": "Free shipping · skip, swap or cancel anytime",
+            "plan_3_note": "per delivery"
+          }
         },
         "buy_buttons_cmNQyQ": {
           "type": "buy_buttons",
@@ -58,7 +74,8 @@
             "heading": "Description",
             "icon": "none",
             "content": "{{ product.description }}",
-            "page": ""
+            "page": "",
+            "open_by_default": true
           }
         },
         "collapsible_tab_gHHGJj": {
@@ -87,18 +104,62 @@
             "content": "",
             "page": ""
           }
+        },
+        "subtitle_pdp": {
+          "type": "subtitle",
+          "settings": {
+            "text": "Supports a Healthy Heart and Circulation*"
+          }
+        },
+        "tags_pdp": {
+          "type": "tags",
+          "settings": {
+            "tag_1": "25 Servings",
+            "tag_2": "Pyramidal Tea Bags",
+            "tag_3": ""
+          }
+        },
+        "quote_card_pdp": {
+          "type": "quote_card",
+          "settings": {
+            "text": "<p>As you sip, hawthorn’s quiet strength steadies — gently supporting rhythm, resilience, and a heart at ease.</p>",
+            "show_icon": true
+          }
+        },
+        "certifications_pdp": {
+          "type": "certifications",
+          "settings": {
+            "label_1": "USDA Organic",
+            "label_2": "Caffeine free",
+            "label_3": "Gluten free",
+            "label_4": "Certified vegan",
+            "label_5": "Ecocert",
+            "label_6": ""
+          }
+        },
+        "guarantee_row_pdp": {
+          "type": "guarantee_row",
+          "settings": {
+            "text_1": "Free shipping over $50",
+            "text_2": "30-day happiness guarantee",
+            "text_3": "Ships in 1–2 days"
+          }
         }
       },
       "block_order": [
         "vendor_BFntgf",
         "title_E7BRtY",
-        "description",
-        "price_FGjn8D",
+        "subtitle_pdp",
+        "tags_pdp",
         "judge_me_reviews_preview_badge_wLwmr7",
+        "price_FGjn8D",
         "inventory_37E8WQ",
+        "quote_card_pdp",
+        "certifications_pdp",
         "variant_picker_wN9KQ6",
         "subscription_UwFPQQ",
         "buy_buttons_cmNQyQ",
+        "guarantee_row_pdp",
         "collapsible_tab_APdL9m",
         "collapsible_tab_gHHGJj",
         "collapsible_tab_6kiDNp",
@@ -190,7 +251,7 @@
       "type": "apps",
       "blocks": {
         "judge_me_reviews_review_widget_4EmdeM": {
-          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
             "max_width": 1200,

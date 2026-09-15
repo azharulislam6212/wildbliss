@@ -64,6 +64,48 @@
       {{ label_unavailable }}
     {%- endcapture -%}
     {% render 'swatch-input', id: input_id, name: input_name, value: value, swatch: value.swatch, product_form_id: product_form_id, checked: value.selected, visually_disabled: option_disabled, shape: block.settings.swatch_shape, help_text: help_text, additional_props: input_dataset %}
+  {%- elsif picker_type == 'card' -%}
+    {%- liquid
+      comment
+        A value like "25 Servings Loose Leaf" is split into a large leading
+        amount and a wrapping label. Values that do not start with a number are
+        rendered as a single label.
+      endcomment
+      assign card_value = value | escape
+      assign card_amount = card_value | split: ' ' | first
+      assign card_label = card_value
+      assign amount_is_number = false
+      if card_amount != blank
+        assign amount_probe = card_amount | plus: 0
+        if amount_probe > 0
+          assign amount_is_number = true
+          assign card_label = card_value | remove_first: card_amount | strip
+        endif
+      endif
+    -%}
+    <input
+      type="radio"
+      id="{{ input_id }}"
+      name="{{ input_name | escape }}"
+      value="{{ value | escape }}"
+      form="{{ product_form_id }}"
+      {% if value.selected %}
+        checked
+      {% endif %}
+      {% if option_disabled %}
+        class="disabled"
+      {% endif %}
+      {{ input_dataset }}
+    >
+    <label class="variant-card" for="{{ input_id }}">
+      {%- if amount_is_number -%}
+        <span class="variant-card__amount">{{ card_amount }}</span>
+      {%- endif -%}
+      {%- if card_label != blank -%}
+        <span class="variant-card__label">{{ card_label }}</span>
+      {%- endif -%}
+      {{ label_unavailable }}
+    </label>
   {%- elsif picker_type == 'button' -%}
     <input
       type="radio"

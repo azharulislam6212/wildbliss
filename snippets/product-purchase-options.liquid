@@ -1,0 +1,286 @@
+{% comment %}
+  Renders the product purchase options group.
+
+  Rows come from the product's selling plan allocations — one per plan, each
+  carrying its own selling plan id. An optional one-time row and optional
+  quantity tiers can be shown for products that have no selling plans.
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} the `subscription` block.
+  - section_id: {String} id of the section this snippet belongs to.
+
+  Usage:
+  {% render 'product-purchase-options', product: product, block: block, section_id: section.id %}
+{% endcomment %}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign allocations = variant.selling_plan_allocations
+
+  assign radio_name = 'purchase_option_' | append: section_id
+
+  assign show_one_time = block.settings.show_one_time
+  if product.requires_selling_plan
+    assign show_one_time = false
+  endif
+
+  comment
+    Quantity tiers are price breaks shown on the page. Selecting one sets the
+    quantity input; the discount itself has to exist as an automatic discount in
+    Shopify so the cart charges the same amount.
+  endcomment
+  assign tiers = ''
+  if block.settings.tier_1_enabled and block.settings.tier_1_quantity > 1
+    assign tiers = tiers | append: '1,'
+  endif
+  if block.settings.tier_2_enabled and block.settings.tier_2_quantity > 1
+    assign tiers = tiers | append: '2,'
+  endif
+  assign tiers = tiers | split: ','
+
+  assign plan_limit = allocations.size
+  if block.settings.plan_display == 'first'
+    assign plan_limit = 1
+  endif
+
+  assign rows_above_plans = tiers.size
+  if show_one_time
+    assign rows_above_plans = rows_above_plans | plus: 1
+  endif
+-%}
+
+{%- if show_one_time or tiers.size > 0 or allocations.size > 0 -%}
+  <purchase-options
+    id="purchase-options-{{ section_id }}"
+    class="purchase-options"
+    data-section="{{ section_id }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.heading != blank -%}
+      <p class="purchase-options__heading">{{ block.settings.heading }}</p>
+    {%- endif -%}
+
+    <div class="purchase-options__list">
+      {%- if show_one_time -%}
+        <div class="purchase-row is-selected" data-purchase-row>
+          <label class="purchase-row__main">
+            <input
+              type="radio"
+              class="purchase-option"
+              name="{{ radio_name }}"
+              value=""
+              data-quantity="1"
+              checked
+            >
+            <span class="purchase-row__radio" aria-hidden="true"></span>
+            <span class="purchase-row__body">
+              <span class="purchase-row__head">
+                <span class="purchase-row__label">
+                  {{- block.settings.base_label | default: 'One time purchase' -}}
+                </span>
+              </span>
+              {%- if block.settings.base_sublabel != blank -%}
+                <span class="purchase-row__sublabel">{{ block.settings.base_sublabel }}</span>
+              {%- endif -%}
+            </span>
+            <span class="purchase-row__price">
+              <span class="purchase-row__amount">{{ variant.price | money }}</span>
+              {%- if block.settings.base_note != blank -%}
+                <span class="purchase-row__note">{{ block.settings.base_note }}</span>
+              {%- endif -%}
+            </span>
+          </label>
+        </div>
+      {%- endif -%}
+
+      {%- for tier in tiers -%}
+        {%- liquid
+          assign qty_key = 'tier_' | append: tier | append: '_quantity'
+          assign label_key = 'tier_' | append: tier | append: '_label'
+          assign sublabel_key = 'tier_' | append: tier | append: '_sublabel'
+          assign badge_key = 'tier_' | append: tier | append: '_badge'
+          assign discount_key = 'tier_' | append: tier | append: '_discount'
+          assign note_key = 'tier_' | append: tier | append: '_note'
+
+          assign tier_qty = block.settings[qty_key]
+          assign tier_discount = block.settings[discount_key] | default: 0
+          assign tier_multiplier = 100 | minus: tier_discount
+          assign tier_unit_price = variant.price | times: tier_multiplier | divided_by: 100
+          assign tier_label = block.settings[label_key] | default: tier_qty
+          assign tier_badge = block.settings[badge_key] | replace: '[percent]', tier_discount
+
+          assign tier_selected = false
+          if show_one_time == false and forloop.first
+            assign tier_selected = true
+          endif
+        -%}
+        <div class="purchase-row{% if tier_selected %} is-selected{% endif %}" data-purchase-row>
+          <label class="purchase-row__main">
+            <input
+              type="radio"
+              class="purchase-option"
+              name="{{ radio_name }}"
+              value=""
+              data-quantity="{{ tier_qty }}"
+              {% if tier_selected %}
+                checked
+              {% endif %}
+            >
+            <span class="purchase-row__radio" aria-hidden="true"></span>
+            <span class="purchase-row__body">
+              <span class="purchase-row__head">
+                <span class="purchase-row__label">{{ tier_label }}</span>
+                {%- if tier_badge != blank -%}
+                  <span class="purchase-row__badge">{{ tier_badge }}</span>
+                {%- endif -%}
+              </span>
+              {%- if block.settings[sublabel_key] != blank -%}
+                <span class="purchase-row__sublabel">{{ block.settings[sublabel_key] }}</span>
+              {%- endif -%}
+            </span>
+            <span class="purchase-row__price">
+              <span class="purchase-row__amount">{{ tier_unit_price | money }}</span>
+              {%- if tier_discount > 0 -%}
+                <s class="purchase-row__compare">{{ variant.price | money }}</s>
+              {%- endif -%}
+              {%- if block.settings[note_key] != blank -%}
+                <span class="purchase-row__note">{{ block.settings[note_key] }}</span>
+              {%- endif -%}
+            </span>
+          </label>
+        </div>
+      {%- endfor -%}
+
+      {%- for allocation in allocations limit: plan_limit -%}
+        {%- liquid
+          assign plan = allocation.selling_plan
+          assign row_index = forloop.index
+
+          comment
+            A plan that only discounts later deliveries leaves allocation.price
+            at full price, so fall back to the plan's own price adjustment
+            rather than dropping the savings badge.
+          endcomment
+          assign saving = variant.price | minus: allocation.price
+          assign saving_percent = 0
+          if variant.price > 0 and saving > 0
+            assign saving_percent = saving | times: 100.0 | divided_by: variant.price | round
+          elsif variant.price > 0
+            assign adjustment = plan.price_adjustments.first
+            if adjustment.value_type == 'percentage'
+              assign saving_percent = adjustment.value | round
+            elsif adjustment.value_type == 'fixed_amount'
+              assign saving_percent = adjustment.value | times: 100.0 | divided_by: variant.price | round
+            elsif adjustment.value_type == 'price'
+              assign adjusted_saving = variant.price | minus: adjustment.value
+              if adjusted_saving > 0
+                assign saving_percent = adjusted_saving | times: 100.0 | divided_by: variant.price | round
+              endif
+            endif
+          endif
+
+          comment
+            Per-row overrides, so each plan can carry its own wording. Blank
+            falls back to what the selling plan itself provides.
+          endcomment
+          assign plan_label_key = 'plan_' | append: row_index | append: '_label'
+          assign plan_sublabel_key = 'plan_' | append: row_index | append: '_sublabel'
+          assign plan_note_key = 'plan_' | append: row_index | append: '_note'
+          assign plan_badge_key = 'plan_' | append: row_index | append: '_badge'
+
+          assign plan_label = block.settings[plan_label_key] | default: plan.name
+          assign plan_sublabel = block.settings[plan_sublabel_key] | default: plan.description
+
+          comment
+            No shared fallback for the note: a row is meant to be able to have
+            none, and a blank setting is indistinguishable from an unset one.
+          endcomment
+          assign plan_note = block.settings[plan_note_key]
+
+          assign badge_template = block.settings[plan_badge_key] | default: block.settings.plan_badge_text | default: 'Save [percent]%'
+          assign plan_badge = badge_template | replace: '[percent]', saving_percent
+
+          comment
+            Nothing above the plan rows means the first plan is the default.
+          endcomment
+          assign is_first_row = false
+          if rows_above_plans == 0 and forloop.first
+            assign is_first_row = true
+          endif
+
+          assign show_extras = false
+          if block.settings.show_benefits or block.settings.plan_footnote != blank
+            assign show_extras = true
+          endif
+        -%}
+        <div class="purchase-row purchase-row--plan{% if is_first_row %} is-selected{% endif %}" data-purchase-row>
+          {%- if block.settings.show_most_chosen and block.settings.most_chosen_text != blank -%}
+            <span class="purchase-row__flag">{{ block.settings.most_chosen_text }}</span>
+          {%- endif -%}
+
+          <label class="purchase-row__main">
+            <input
+              type="radio"
+              class="purchase-option"
+              name="{{ radio_name }}"
+              value="{{ plan.id }}"
+              data-quantity="1"
+              {% if is_first_row %}
+                checked
+              {% endif %}
+            >
+            <span class="purchase-row__radio" aria-hidden="true"></span>
+            <span class="purchase-row__body">
+              <span class="purchase-row__head">
+                <span class="purchase-row__label">{{ plan_label }}</span>
+                {%- comment -%}
+                  `!= false` rather than a truthy test so a block saved before
+                  this setting existed still shows the badge.
+                {%- endcomment -%}
+                {%- if saving_percent > 0 and block.settings.show_plan_badge != false -%}
+                  <span class="purchase-row__badge">{{ plan_badge }}</span>
+                {%- endif -%}
+              </span>
+              {%- if plan_sublabel != blank -%}
+                <span class="purchase-row__sublabel">{{ plan_sublabel }}</span>
+              {%- endif -%}
+            </span>
+            <span class="purchase-row__price">
+              <span class="purchase-row__amount">{{ allocation.price | money }}</span>
+              {%- if block.settings.show_plan_compare and saving > 0 -%}
+                <s class="purchase-row__compare">{{ variant.price | money }}</s>
+              {%- endif -%}
+              {%- if plan_note != blank -%}
+                <span class="purchase-row__note">{{ plan_note }}</span>
+              {%- endif -%}
+            </span>
+          </label>
+
+          {%- if show_extras -%}
+            <div class="purchase-row__extras">
+              {%- if block.settings.show_benefits and block.settings.benefits != blank -%}
+                {%- assign benefits = block.settings.benefits | newline_to_br | split: '<br />' -%}
+                <ul class="purchase-row__benefits list-unstyled" role="list">
+                  {%- for benefit in benefits -%}
+                    {%- assign benefit_text = benefit | strip_newlines | strip -%}
+                    {%- if benefit_text != blank -%}
+                      <li class="purchase-row__benefit">
+                        {%- render 'icon-check-circle', style: 'outline', size: 16 -%}
+                        <span>{{ benefit_text }}</span>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+
+              {%- if block.settings.plan_footnote != blank -%}
+                <div class="purchase-row__footnote">{{ block.settings.plan_footnote }}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </purchase-options>
+{%- endif -%}
