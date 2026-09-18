@@ -1,86 +1,139 @@
+/* Rich text — a centred page intro: eyebrow, heading with an italic accent,
+   a short line of copy and optional buttons. */
+
 .rich-text {
-  z-index: 1;
+  position: relative;
 }
 
-.rich-text__wrapper {
-  display: flex;
-  justify-content: center;
-  width: calc(100% - 4rem / var(--font-body-scale));
-}
-
-.rich-text:not(.rich-text--full-width) .rich-text__wrapper {
-  margin: auto;
-  width: calc(100% - 8rem / var(--font-body-scale));
+/* custom-grid.css gives .container width:100% plus padding with no
+   box-sizing, so it runs 2 x gutter past its parent. */
+.rich-text .container,
+.rich-text .container-fluid {
+  box-sizing: border-box;
 }
 
 .rich-text__blocks {
-  width: 100%;
+  max-width: var(--rt-max-width, 114rem);
+  margin: 0 auto;
+  text-align: center;
 }
 
-@media screen and (min-width: 750px) {
-  .rich-text__wrapper {
-    width: 100%;
-  }
-
-  .rich-text__wrapper--left {
-    justify-content: flex-start;
-  }
-
-  .rich-text__wrapper--right {
-    justify-content: flex-end;
-  }
-
-  .rich-text__blocks {
-    max-width: 50rem;
-  }
+.rich-text--left .rich-text__blocks {
+  text-align: left;
 }
 
-@media screen and (min-width: 990px) {
-  .rich-text__blocks {
-    max-width: 78rem;
-  }
-}
-
-.rich-text__blocks * {
-  overflow-wrap: break-word;
-}
-
-.rich-text__blocks > * {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.rich-text__blocks > * + * {
-  margin-top: 2rem;
-}
-
-.rich-text__blocks > * + a {
-  margin-top: 3rem;
-}
-
-.rich-text__buttons {
-  display: inline-flex;
+/* Eyebrow: .sub-heading supplies the 11px / .2em uppercase type; the design
+   sets it in the heading colour rather than the scheme's sub-heading colour. */
+.rich-text__caption {
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  width: 100%;
-  max-width: 45rem;
-  word-break: break-word;
+  margin: 0 0 1.4rem;
+  color: rgb(var(--color-heading));
 }
 
-.rich-text__buttons--multiple > * {
-  flex-grow: 1;
-  min-width: 22rem;
-}
-
-.rich-text__buttons + .rich-text__buttons {
-  margin-top: 1rem;
-}
-
-.rich-text__blocks.left .rich-text__buttons {
+.rich-text--left .rich-text__caption {
   justify-content: flex-start;
 }
 
-.rich-text__blocks.right .rich-text__buttons {
-  justify-content: flex-end;
+.rich-text__heading {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: var(--rt-heading-size-mobile, 3.2rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-heading));
+}
+
+.rich-text__heading > * {
+  margin: 0;
+}
+
+/* The accent half of the heading: italic, in the accent colour. */
+.rich-text__heading em,
+.rich-text__heading i {
+  font-style: italic;
+  color: var(--rt-accent, #7a8f55);
+}
+
+.rich-text__text {
+  max-width: var(--rt-text-width, 34rem);
+  margin: 2.8rem auto 0;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.45;
+  color: rgb(var(--color-foreground));
+}
+
+.rich-text--left .rich-text__text {
+  margin-inline: 0;
+}
+
+.rich-text__text > :first-child {
+  margin-top: 0;
+}
+
+.rich-text__text > :last-child {
+  margin-bottom: 0;
+}
+
+.rich-text__text p {
+  margin: 0;
+}
+
+.rich-text__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3.2rem;
+}
+
+.rich-text--left .rich-text__buttons {
+  justify-content: flex-start;
+}
+
+/* theme.css sets the buttons height: 5.6rem plus 1.4rem padding with no
+   box-sizing, so they render 8.4rem tall. Scoped here to keep the intended
+   5.6rem; the same line on .button would bring the whole theme into line. */
+.rich-text__buttons .button {
+  box-sizing: border-box;
+  border-radius: 10rem;
+}
+
+/* The outline button is drawn in the filled button's own colour, which neither
+   stock outline variant does on a light scheme. */
+.rich-text__buttons .button--outline {
+  background-color: transparent;
+  border: 1px solid rgb(var(--color-primary-button));
+  color: rgb(var(--color-primary-button));
+}
+
+.rich-text__buttons .button--outline:hover {
+  color: rgb(var(--color-primary-button-hover-text));
+  border-color: rgb(var(--color-primary-button-hover));
+}
+
+@media screen and (min-width: 750px) {
+  .rich-text__caption {
+    margin-bottom: 1.6rem;
+  }
+
+  .rich-text__heading {
+    font-size: var(--rt-heading-size, 6rem);
+    line-height: 1.08;
+  }
+
+  .rich-text__text {
+    max-width: var(--rt-text-width-desktop, 42rem);
+    margin-top: 3.1rem;
+    font-size: 2rem;
+    line-height: 1.55;
+  }
+
+  .rich-text__buttons {
+    gap: 1.2rem;
+    margin-top: 3.6rem;
+  }
 }

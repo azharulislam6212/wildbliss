@@ -1,0 +1,410 @@
+{{ 'section-contact-panel.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+
+  .section-{{ section.id }}-padding {
+    --color-accent: {{ section.settings.color_accent.red }}, {{ section.settings.color_accent.green }},  {{ section.settings.color_accent.blue }};
+    --color-link: {{ section.settings.color_accent.red }},
+    {{ section.settings.color_accent.green }},
+    {{ section.settings.color_accent.blue }};
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .contact-panel-{{ section.id }} {
+    --contact-accent: {{ section.settings.accent_color }};
+    --contact-reach-width: {{ section.settings.reach_width }}fr;
+    --contact-office-width: {{ 100 | minus: section.settings.reach_width }}fr;
+    --contact-panel-radius: {{ section.settings.panel_radius }}px;
+    --contact-icon-size: {{ section.settings.icon_size }}px;
+    --contact-photo-ratio: {{ section.settings.photo_ratio }};
+    --contact-photo-fallback: {{ section.settings.photo_fallback }};
+    --contact-motif-height: {{ section.settings.motif_height }}px;
+  }
+{%- endstyle -%}
+
+<div
+  class="contact-panel-section contact-panel-{{ section.id }} color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding gradient  isolate {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+  data-cascade
+  {% endif %}>
+  <div class="{{ section.settings.page_width }}">
+    <div class="row  align-items-start">
+      <div class="col-12">
+        <div class="contact-panel__inner">
+          <div class="contact-panel__reach">
+            {%- if section.settings.reach_heading != blank -%}
+              <p class="contact-panel__eyebrow sub-heading">{{ section.settings.reach_heading | escape }}</p>
+            {%- endif -%}
+
+            <div class="contact-panel__rows">
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when 'icon_block' %}
+                    <div class="contact-row" {{ block.shopify_attributes }}>
+                      <span class="contact-row__icon">
+                        {% if block.settings.icon != blank %}
+                          {% render 'icon-img' with image, image: block.settings.icon %}
+                        {% else %}
+                          {% render 'icon-check-circle', style: 'outline', size: 24 %}
+                        {% endif %}
+                      </span>
+
+                      <div class="contact-row__text">
+                        {% if block.settings.title != blank %}
+                          <h3 class="contact-row__title">{{ block.settings.title }}</h3>
+                        {% endif %}
+                        <div class="contact-row__value rte">{{ block.settings.text }}</div>
+                      </div>
+                    </div>
+                {% endcase %}
+              {% endfor %}
+            </div>
+          </div>
+
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'office' %}
+                <div
+                  class="contact-panel__office  color-{{ section.settings.color_scheme_card }} gradient"
+                  {{ block.shopify_attributes }}>
+                  {%- if block.settings.heading != blank -%}
+                    <p class="contact-panel__eyebrow sub-heading">{{ block.settings.heading | escape }}</p>
+                  {%- endif -%}
+
+                  {%- if block.settings.address != blank -%}
+                    <div class="contact-panel__address">
+                      <span class="contact-panel__address-icon">
+                        {% if block.settings.address_icon != blank %}
+                          {% render 'icon-img' with image, image: block.settings.address_icon %}
+                        {% else %}
+                          {{- 'icon-pin.svg' | inline_asset_content -}}
+                        {% endif %}
+                      </span>
+
+                      <div class="contact-panel__address-text rte">{{ block.settings.address }}</div>
+                    </div>
+                  {%- endif -%}
+
+                  <div
+                    class="contact-panel__figure"
+                    {% if block.settings.image != blank %}
+                      style="--contact-photo-focal: {{ block.settings.image.presentation.focal_point }};"
+                    {% endif %}>
+                    {%- if block.settings.image != blank -%}
+                      {% render 'responsive-img',
+                        image: block.settings.image,
+                        sizes: '(min-width: 990px) 40vw, 100vw'
+                      %}
+                    {%- else -%}
+                      {%- comment -%}
+                        No photo yet: the card keeps its shape and shows the
+                        botanical mark over the placeholder gradient, as drawn.
+                      {%- endcomment -%}
+                      <span class="contact-panel__motif" aria-hidden="true">
+                        {{- 'motif-founder.svg' | inline_asset_content -}}
+                      </span>
+                    {%- endif -%}
+
+                    {%- if block.settings.image_caption != blank -%}
+                      <span class="contact-panel__pill">{{ block.settings.image_caption }}</span>
+                    {%- endif -%}
+                  </div>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Contact panel",
+    "class": "section",
+    "tag": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "container",
+            "label": "Container"
+          }, {
+            "value": "container-fluid",
+            "label": "Full Width"
+          }
+        ],
+        "default": "container",
+        "label": "Layout Width"
+      },
+      {
+        "type": "text",
+        "id": "reach_heading",
+        "label": "Left column heading",
+        "default": "Reach us"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#A05E12"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Placeholder mark colour",
+        "default": "#7A8F55"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme_card",
+        "label": "Card Color scheme",
+        "default": "scheme-4"
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "range",
+        "id": "reach_width",
+        "min": 35,
+        "max": 70,
+        "step": 1,
+        "unit": "%",
+        "label": "Left column width",
+        "default": 55
+      },
+      {
+        "type": "range",
+        "id": "panel_radius",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Panel corner radius",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "icon_size",
+        "min": 32,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "label": "Icon size",
+        "default": 48
+      },
+      {
+        "type": "select",
+        "id": "photo_ratio",
+        "options": [
+          {
+            "value": "3 / 2",
+            "label": "Classic (3:2)"
+          },
+          {
+            "value": "4 / 3",
+            "label": "Standard (4:3)"
+          },
+          {
+            "value": "1 / 1",
+            "label": "Square"
+          },
+          {
+            "value": "16 / 9",
+            "label": "Widescreen (16:9)"
+          }
+        ],
+        "default": "3 / 2",
+        "label": "Photo shape"
+      },
+      {
+        "type": "color_background",
+        "id": "photo_fallback",
+        "label": "Photo placeholder",
+        "info": "Shown behind the botanical mark when no photo is set.",
+        "default": "linear-gradient(160deg, #eef1e1 0%, #e2e8d2 55%, #d5ddc3 100%)"
+      },
+      {
+        "type": "range",
+        "id": "motif_height",
+        "min": 60,
+        "max": 300,
+        "step": 2,
+        "unit": "px",
+        "label": "Mark height",
+        "default": 142
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 120
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 120
+      }, {
+        "type": "range",
+        "id": "padding_top_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Tab",
+        "default": 80
+      }, {
+        "type": "range",
+        "id": "padding_bottom_tab",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Tab",
+        "default": 80
+      }, {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Top Mobile",
+        "default": 48
+      }, {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding Bottom Mobile",
+        "default": 48
+      }
+    ],
+    "blocks": [
+      {
+        "type": "icon_block",
+        "name": "Contact row",
+        "limit": 5,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "icon/image"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Phone"
+          }, {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>312 910 0031</p>"
+          }
+        ]
+      },
+      {
+        "type": "office",
+        "name": "Office",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Office"
+          }, {
+            "type": "image_picker",
+            "id": "address_icon",
+            "label": "Address icon"
+          }, {
+            "type": "richtext",
+            "id": "address",
+            "label": "Address",
+            "default": "<p>843 N Ashland Ave. Chicago, IL 60622</p>"
+          }, {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Photo",
+            "info": "Leave empty to use the placeholder gradient."
+          }, {
+            "type": "text",
+            "id": "image_caption",
+            "label": "Caption pill",
+            "info": "Optional. Sits in the bottom-left corner of the photo."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Contact panel",
+        "blocks": [
+          {
+            "type": "icon_block",
+            "settings": {
+              "title": "Phone",
+              "text": "<p>312 910 0031</p>"
+            }
+          }, {
+            "type": "icon_block",
+            "settings": {
+              "title": "Customer support",
+              "text": "<p>CS@wildblissorganics.com</p>"
+            }
+          }, {
+            "type": "icon_block",
+            "settings": {
+              "title": "Wholesale",
+              "text": "<p>sales@wildblissorganics.com</p>"
+            }
+          }, {
+            "type": "office"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

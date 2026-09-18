@@ -374,7 +374,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     {% sections 'header-group' %}
 
-    {%- unless template.name == 'index' or  template.suffix == "about" -%}
+    {%- unless template.name == 'index' or  template.suffix == "about"  or  template.suffix == "contact" -%}
       {% render 'breadcrumbs' %}
     {%- endunless -%}
 

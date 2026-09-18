@@ -1,5 +1,111 @@
 {
   "sections": {
+    "rich_text_contact": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_contact": {
+          "type": "caption",
+          "settings": {
+            "caption": "Contact"
+          }
+        },
+        "heading_contact": {
+          "type": "heading",
+          "settings": {
+            "heading": "We're Here <em>to Help<\/em>"
+          }
+        },
+        "text_contact": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Questions about our teas? We'd love to hear from <\/p><p>you.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "caption_contact",
+        "heading_contact",
+        "text_contact"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "page_width": "container",
+        "content_alignment": "center",
+        "accent_color": "#7a8f55",
+        "content_width": 1140,
+        "heading_size": 60,
+        "heading_size_mobile": 32,
+        "text_width": 420,
+        "text_width_mobile": 340,
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 40,
+        "padding_top_tab": 72,
+        "padding_bottom_tab": 40,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 32
+      }
+    },
+    "contact_panel_contact": {
+      "type": "contact-panel",
+      "blocks": {
+        "row_phone": {
+          "type": "icon_block",
+          "settings": {
+            "title": "Phone",
+            "text": "<p>312 910 0031</p>"
+          }
+        },
+        "row_support": {
+          "type": "icon_block",
+          "settings": {
+            "title": "Customer support",
+            "text": "<p>CS@wildblissorganics.com</p>"
+          }
+        },
+        "row_wholesale": {
+          "type": "icon_block",
+          "settings": {
+            "title": "Wholesale",
+            "text": "<p>sales@wildblissorganics.com</p>"
+          }
+        },
+        "office_block": {
+          "type": "office",
+          "settings": {
+            "heading": "Office",
+            "address": "<p>843 N Ashland Ave.<br/>Chicago, IL 60622</p>",
+            "image_caption": "Photo: Chicago office – exterior or a warm interior detail"
+          }
+        }
+      },
+      "block_order": [
+        "row_phone",
+        "row_support",
+        "row_wholesale",
+        "office_block"
+      ],
+      "name": "Contact panel",
+      "settings": {
+        "page_width": "container",
+        "reach_heading": "Reach us",
+        "color_accent": "#a05e12",
+        "accent_color": "#7a8f55",
+        "color_scheme": "scheme-1",
+        "color_scheme_card": "scheme-4",
+        "reach_width": 55,
+        "panel_radius": 16,
+        "icon_size": 48,
+        "photo_ratio": "3 / 2",
+        "motif_height": 142,
+        "padding_top": 0,
+        "padding_bottom": 120,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 48
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -55,7 +161,6 @@
         "icon_block_WA8tDG": {
           "type": "icon_block",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/Icon_7.svg",
             "title": "Address",
             "text": "<p>700 Atlantic St  Roseville, CA 95678<\/p>"
           }
@@ -63,7 +168,6 @@
         "icon_block_8MCyNX": {
           "type": "icon_block",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/Icon_6.svg",
             "title": "Contact",
             "text": "<p><a href=\"tel:(916) 782 - 2705\" title=\"tel:(916) 782 - 2705\">(916) 782 - 2705<\/a><br\/><a href=\"mailto:hello@example.com\" title=\"mailto:hello@example.com\">hello@example.com<\/a><\/p>"
           }
@@ -71,7 +175,6 @@
         "icon_block_EQY3Ej": {
           "type": "icon_block",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/text-icon.svg",
             "title": "Opening Hours",
             "text": "<p>Mon-Sat: 8am-6pm<br\/>Sun: 10am-5pm<\/p>"
           }
@@ -91,7 +194,6 @@
         "image_widget_P6gy3t": {
           "type": "image_widget",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Rectangle_44.png",
             "heading": "Meats Make Every Meal Special!",
             "button_label": "SHOP NOW",
             "button_link": "shopify:\/\/collections\/beef"
@@ -100,7 +202,6 @@
         "image_widget_pBz7DL": {
           "type": "image_widget",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Rectangle_44_2.png",
             "heading": "Ask About Our Exceptional Pet Foods",
             "button_label": "SHOP NOW",
             "button_link": "shopify:\/\/collections\/exotic-meats"
@@ -109,7 +210,6 @@
         "icon_widget_AmAt3r": {
           "type": "icon_widget",
           "settings": {
-            "icon": "shopify:\/\/shop_images\/Icon_6.svg",
             "heading": "Selections & Special Orders",
             "text": "<p>Please call for availability of products as not all items are available at all times.<\/p>",
             "button_label": "CALL US",
@@ -119,7 +219,6 @@
         "image_widget_WAyFzn": {
           "type": "image_widget",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Rectangle_44_2.png",
             "heading": "Delicious Prime Rib: Video Tutorial",
             "button_label": "SHOP NOW",
             "button_link": "shopify:\/\/collections\/exotic-meats"
@@ -167,6 +266,8 @@
     }
   },
   "order": [
+    "rich_text_contact",
+    "contact_panel_contact",
     "main",
     "form"
   ]
