@@ -1,3 +1,67 @@
+/* -----------------------------------------------------------------------------
+   Custom option pairing (static, product specific)
+
+   Some option values exist as variants but never belong together: a "Loose Leaf"
+   format has no "Tea Bags" sizes, and a "Tea Bags" format has no "Servings"
+   sizes. Each rule greys out the values that do not apply to the value currently
+   selected elsewhere in the picker.
+
+   Rules match on VALUES, never on option names, so it does not matter whether
+   the options are called Format/Size, Type/Pack or anything else:
+
+     key   = the exact value that has to be selected for the rule to fire
+     value = the text a value in ANOTHER option must contain to stay enabled
+
+   All matching is case-insensitive; the keyword match is a substring, so one
+   "tea bags" entry covers both "25 Tea Bags" and "75 Tea Bags". An option that
+   offers none of the keywords (a flavour, a colour) is left alone, as is every
+   product that has no value matching a key.
+   ----------------------------------------------------------------------------- */
+const CUSTOM_OPTION_PAIRING_RULES = [
+  {
+    'loose leaf': ['servings'],
+    'tea bags': ['tea bags'],
+  },
+];
+
+// Set to true, reload the product page, and the console reports what each rule
+// matched — the quickest way to check a value's exact spelling.
+const CUSTOM_OPTION_PAIRING_DEBUG = false;
+
+const normalizeOptionText = (value) =>
+  String(value ?? '')
+    .replace(/\s+/g, ' ') // collapse newlines and non-breaking spaces
+    .trim()
+    .toLowerCase();
+
+const isOptionInputSelected = (input) => (input.tagName === 'OPTION' ? input.selected : input.checked);
+
+// Only the `disabled` property is touched. The picker CSS already styles
+// :disabled exactly like a sold-out value, and the `.disabled` class Liquid
+// puts on sold-out values is left alone.
+const setCustomPairingDisabled = (input, disabled) => {
+  input.disabled = disabled;
+
+  if (disabled) input.dataset.customPairingDisabled = 'true';
+  else delete input.dataset.customPairingDisabled;
+};
+
+// Selecting through a real change event keeps the stock variant flow in charge
+// of everything that follows.
+const selectCustomPairingInput = (input) => {
+  if (input.tagName === 'OPTION') {
+    const select = input.closest('select');
+    if (!select) return;
+
+    select.value = input.value;
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    return;
+  }
+
+  input.checked = true;
+  input.dispatchEvent(new Event('change', { bubbles: true }));
+};
+
 if (!customElements.get('product-info')) {
   customElements.define(
     'product-info',
@@ -26,6 +90,7 @@ if (!customElements.get('product-info')) {
         );
 
         this.initQuantityHandlers();
+        this.applyCustomOptionPairing();
         this.dispatchEvent(new CustomEvent('product-info:loaded', { bubbles: true }));
       }
 
@@ -62,6 +127,11 @@ if (!customElements.get('product-info')) {
 
       handleOptionValueChange({ data: { event, target, selectedOptionValues } }) {
         if (!this.contains(event.target)) return;
+
+        // Grey out straight away rather than waiting on the section request.
+        // No auto-select here: this call sits in front of the fetch below, which
+        // has already captured the option values it is about to ask for.
+        this.applyCustomOptionPairing({ autoSelect: false });
 
         this.resetProductFormState();
 
@@ -159,6 +229,110 @@ if (!customElements.get('product-info')) {
         if (variantSelects) {
           HTMLUpdateUtility.viewTransition(this.variantSelectors, variantSelects, this.preProcessHtmlCallbacks);
         }
+
+        // The markup above came straight from the server and knows nothing
+        // about the pairing rules, so they have to be re-applied.
+        this.applyCustomOptionPairing();
+      }
+
+      // ---- Custom option pairing ------------------------------------------
+      // Layered on top of the stock picker: it only flips `disabled` on option
+      // inputs, so the default variant lookup is untouched.
+
+      // Every option in the picker, as one array of inputs per option: radios
+      // grouped by their shared name, a dropdown by its <option> list.
+      customPairingGroups() {
+        // Normally the picker sits inside <variant-selects>; fall back to the
+        // whole product-info so a picker rendered outside it still pairs up.
+        const variantSelects = this.variantSelectors?.querySelector('input[type="radio"], select')
+          ? this.variantSelectors
+          : this;
+        if (!variantSelects) return [];
+
+        const groups = new Map();
+
+        variantSelects.querySelectorAll('input[type="radio"][name]').forEach((input) => {
+          const key = `radio:${input.name}`;
+          if (!groups.has(key)) groups.set(key, []);
+          groups.get(key).push(input);
+        });
+
+        variantSelects.querySelectorAll('select').forEach((select, index) => {
+          if (select.options.length) groups.set(`select:${index}`, Array.from(select.options));
+        });
+
+        return Array.from(groups.values());
+      }
+
+      applyCustomOptionPairing({ autoSelect = true } = {}) {
+        const groups = this.customPairingGroups();
+
+        // Fewer than two options means there is nothing to pair.
+        if (groups.length < 2) {
+          if (CUSTOM_OPTION_PAIRING_DEBUG) console.log('[option pairing] no option groups found', groups);
+          return;
+        }
+
+        CUSTOM_OPTION_PAIRING_RULES.forEach((rule, ruleIndex) => {
+          const keys = Object.keys(rule).map(normalizeOptionText);
+
+          // The controlling option is whichever one currently has a value the
+          // rule names — no assumption about what that option is called.
+          const controllingIndex = groups.findIndex((inputs) => {
+            const selected = inputs.find(isOptionInputSelected);
+            return !!selected && keys.includes(normalizeOptionText(selected.value));
+          });
+
+          if (CUSTOM_OPTION_PAIRING_DEBUG) {
+            console.log(`[option pairing] rule ${ruleIndex}`, {
+              keys,
+              options: groups.map((inputs) => ({
+                values: inputs.map(({ value }) => value),
+                selected: inputs.find(isOptionInputSelected)?.value ?? null,
+              })),
+              controllingIndex,
+            });
+          }
+
+          if (controllingIndex === -1) return;
+
+          const selectedControl = groups[controllingIndex].find(isOptionInputSelected);
+          const keywords = rule[Object.keys(rule).find((key) => normalizeOptionText(key) === normalizeOptionText(selectedControl.value))];
+          if (!keywords?.length) return;
+
+          const matchesKeyword = (input) =>
+            keywords.some((keyword) => normalizeOptionText(input.value).includes(normalizeOptionText(keyword)));
+
+          groups.forEach((inputs, index) => {
+            if (index === controllingIndex) return;
+
+            // An option that offers none of the keywords is none of this rule's
+            // business — a flavour or a colour must never be greyed out.
+            if (!inputs.some(matchesKeyword)) return;
+
+            let firstAllowed = null;
+
+            inputs.forEach((input) => {
+              const isAllowed = matchesKeyword(input);
+              setCustomPairingDisabled(input, !isAllowed);
+              if (isAllowed && !firstAllowed) firstAllowed = input;
+            });
+
+            if (!autoSelect || !firstAllowed) return;
+
+            // The value selected a moment ago may have just been greyed out —
+            // switching to Tea Bags while "25 Servings" was selected, say. Move
+            // the selection to the first value that still applies, once the
+            // render in progress has finished.
+            const selectedAffected = inputs.find(isOptionInputSelected);
+            if (selectedAffected?.dataset.customPairingDisabled !== 'true') return;
+
+            requestAnimationFrame(() => {
+              if (!firstAllowed.isConnected || firstAllowed.disabled) return;
+              selectCustomPairingInput(firstAllowed);
+            });
+          });
+        });
       }
 
       handleUpdateProductInfo(productUrl) {
