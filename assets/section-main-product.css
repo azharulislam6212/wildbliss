@@ -3588,12 +3588,15 @@ line-height: 28px;
 }
 
 /* Certifications ----------------------------------------------------------- */
+/* Matches the home page certification band (section-certification-band.css):
+   full-bleed marks with no outline ring, and the same label type. */
 
 .product__certifications {
+  --certification-size: 6.4rem;
   display: grid;
-  /* No column gap: the longest label needs the full column to stay on one line. */
   grid-template-columns: repeat(var(--certification-columns, 5), minmax(0, 1fr));
-  gap: 1.6rem 0;
+  gap: 3rem 0.6rem;
+  justify-items: center;
   padding: 0.8rem 0;
   margin: 0;
 }
@@ -3602,37 +3605,40 @@ line-height: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
   text-align: center;
+  max-width: 12rem;
 }
 
 .product__certification-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5.5rem;
-  height: 5.5rem;
-  border: 1.4px solid rgb(var(--color-heading));
+  flex: 0 0 auto;
+  width: var(--certification-size);
+  height: var(--certification-size);
   border-radius: 50%;
   color: rgb(var(--color-heading));
   line-height: 0;
 }
 
-.product__certification-icon img {
-  width: 2.6rem;
-  height: 2.6rem;
+.product__certification-icon svg,
+.product__certification-image {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
 .product__certification-label {
+  display: block;
+  margin-top: 1rem;
+  max-width: 12rem;
   font-family: var(--font-body-family);
-  font-weight: var(--font-body-weight);
-font-size: 11px;
-line-height: 14px;
-    font-weight: 600;
-    letter-spacing: .08em;
-text-transform: uppercase;
-  white-space: nowrap;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.88px;
+  text-transform: uppercase;
   color: rgb(var(--color-foreground));
 }
 

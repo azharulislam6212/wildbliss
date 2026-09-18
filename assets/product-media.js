@@ -252,26 +252,41 @@ if (!customElements.get('product-media')) {
         window.innerWidth <= this.breakpoints.desktop ? 'mobile' : 'desktop';
     }
 
+    // Accepts a raw media id, or the "<section id>-<media id>" form the Dawn
+    // media gallery uses, so either caller can drive the slider.
     setActiveMedia(id) {
-      const mediaFound = Array.from(this.querySelectorAll(this.selectors.mediaItem)).find(
-        media => Number(media.dataset.mediaId) === id
+      const mediaId = Number(String(id).split('-').pop());
+      if (!mediaId) return;
+
+      const mediaItems = Array.from(this.querySelectorAll(this.selectors.mediaItem));
+      const mediaFound = mediaItems.find(
+        media => Number(media.dataset.mediaId) === mediaId
       );
 
       if (!mediaFound) return;
 
+      const index = mediaFound.dataset.index
+        ? Number(mediaFound.dataset.index)
+        : mediaItems.indexOf(mediaFound);
 
       if (!this.settings.instances.slider || this.settings.instances.slider?.destroyed) {
+        // Grid layout: every image is already on the page, so only pull the
+        // media into view when it is actually off screen.
+        const { top, bottom } = mediaFound.getBoundingClientRect();
+        if (top >= 0 && bottom <= window.innerHeight) return;
+
         const headerHeight = document.querySelector(this.selectors.header)?.offsetHeight || 0;
         window.scroll({
-          top: mediaFound.getBoundingClientRect().top + window.scrollY - headerHeight,
+          top: top + window.scrollY - headerHeight,
           behavior: 'smooth'
         });
         return;
       }
 
-      // 0ms: a variant change should swap the image outright, with no slide
-      // animation to sit through.
-      this.settings.instances.slider.slideTo(Number(mediaFound.dataset.index), 0);
+      // Slide across at the gallery's normal speed, so a variant change reads
+      // the same as swiping or using the arrows.
+      this.settings.instances.slider.slideTo(index);
+      this.settings.instances.thumbs?.slideTo(index);
     }
 
     setThumbsHeight() {

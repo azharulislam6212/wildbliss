@@ -244,6 +244,13 @@ if (!customElements.get('product-info')) {
       updateMedia(html, variantFeaturedMediaId) {
         if (!variantFeaturedMediaId) return;
 
+        // The product template renders its gallery as a <product-media> slider,
+        // which has none of the <media-gallery> markup the block below expects.
+        if (this.updateProductMediaGallery(html, variantFeaturedMediaId)) {
+          this.updateMediaModal(html);
+          return;
+        }
+
         const mediaGallerySource = this.querySelector('media-gallery ul');
         const mediaGalleryDestination = html.querySelector(`media-gallery ul`);
 
@@ -306,10 +313,46 @@ if (!customElements.get('product-info')) {
           true
         );
 
-        // update media modal
+        this.updateMediaModal(html);
+      }
+
+      updateMediaModal(html) {
         const modalContent = this.productModal?.querySelector(`.product-media-modal__content`);
         const newModalContent = html.querySelector(`product-modal .product-media-modal__content`);
         if (modalContent && newModalContent) modalContent.innerHTML = newModalContent.innerHTML;
+      }
+
+      // Moves the <product-media> slider (and its thumbs) to the variant's
+      // featured image. Returns false when the section uses <media-gallery>
+      // instead, so the caller falls back to that markup.
+      updateProductMediaGallery(html, variantFeaturedMediaId) {
+        const gallery = this.querySelector('product-media');
+        if (!gallery) return false;
+
+        const mediaIds = (root) =>
+          Array.from(root.querySelectorAll('[data-media-item]'))
+            .map(({ dataset }) => dataset.mediaId)
+            .join(',');
+
+        const newGallery = html.querySelector('product-media');
+
+        // A different media set (product swap, or variant-filtered media) needs
+        // fresh markup; re-inserting the element re-runs its swiper setup.
+        if (newGallery && mediaIds(newGallery) !== mediaIds(gallery)) {
+          gallery.replaceWith(newGallery);
+
+          // connectedCallback defers swiper init by a frame, so select after it.
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() =>
+              this.querySelector('product-media')?.setActiveMedia?.(variantFeaturedMediaId)
+            )
+          );
+
+          return true;
+        }
+
+        gallery.setActiveMedia?.(variantFeaturedMediaId);
+        return true;
       }
 
       setQuantityBoundries() {

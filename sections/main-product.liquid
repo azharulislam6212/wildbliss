@@ -207,6 +207,9 @@
                             data-media-item
                             data-media-id="{{- media.id -}}"
                             data-index="{{- forloop.index0 -}}"
+                            {%- if product.selected_or_first_available_variant.featured_media.id == media.id %}
+                              data-selected
+                            {%- endif %}
                           >
                             {%- render 'product-media-custom',
                               media: media,
@@ -1442,13 +1445,15 @@
                           <li class="product__certification">
                             <span class="product__certification-icon">
                               {%- if certification_image != blank -%}
-                                <img
-                                  src="{{ certification_image | image_url: width: 120 }}"
-                                  alt="{{ certification_image.alt | default: certification_label | escape }}"
-                                  width="{{ certification_image.width }}"
-                                  height="{{ certification_image.height }}"
-                                  loading="lazy"
-                                >
+                                {{
+                                  certification_image
+                                  | image_url: width: 200
+                                  | image_tag:
+                                    loading: 'lazy',
+                                    widths: '50, 100, 150, 200',
+                                    class: 'product__certification-image',
+                                    alt: certification_label
+                                }}
                               {%- else -%}
                                 {%- render 'icon-check-circle', style: 'outline', size: 28 -%}
                               {%- endif -%}

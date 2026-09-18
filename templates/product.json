@@ -59,7 +59,7 @@
         "certifications_pdp": {
           "type": "certifications",
           "settings": {
-            "image_1": "shopify:\/\/shop_images\/Frame_987e0b30-2c4a-4c66-b8ef-9ebdf38410c1.svg",
+            "image_1": "shopify:\/\/shop_images\/logo-1.png",
             "label_1": "USDA Organic",
             "image_2": "shopify:\/\/shop_images\/Frame_1.svg",
             "label_2": "Caffeine free",
@@ -235,13 +235,123 @@
         "color_badge": "#d58c3f",
         "color_tag_highlight": "#efeddd",
         "color_tag_text": "#5c6a5e",
-        "color_highlight": "#EFF3E2",
+        "color_highlight": "#eff3e2",
         "color_soft_surface": "#f6f1e3",
         "color_scheme": "scheme-6c4c5649-9682-4ab5-b708-5f29b60862da",
         "padding_top": 34,
-        "padding_bottom": 34,
+        "padding_bottom": 70,
         "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24
+        "padding_bottom_mobile": 50
+      }
+    },
+    "brew_guide_gzR6gp": {
+      "type": "brew-guide",
+      "blocks": {
+        "spec_NtFtyf": {
+          "type": "spec",
+          "settings": {
+            "icon": "cup",
+            "image": "shopify:\/\/shop_images\/Frame_7.svg",
+            "value": "1 bag",
+            "label": "Per cup"
+          }
+        },
+        "spec_fW9d7E": {
+          "type": "spec",
+          "settings": {
+            "icon": "temperature",
+            "image": "shopify:\/\/shop_images\/Frame_6.svg",
+            "value": "95°C",
+            "label": "Water"
+          }
+        },
+        "spec_czKGHf": {
+          "type": "spec",
+          "settings": {
+            "icon": "time",
+            "image": "shopify:\/\/shop_images\/Frame_5.svg",
+            "value": "5–7 min",
+            "label": "Covered steep"
+          }
+        }
+      },
+      "block_order": [
+        "spec_NtFtyf",
+        "spec_fW9d7E",
+        "spec_czKGHf"
+      ],
+      "name": "Brew Guide",
+      "settings": {
+        "heading": "The perfect",
+        "heading_accent": "cup.",
+        "accent_color": "#7a8f55",
+        "page_width": "container",
+        "columns_mobile": "1",
+        "color_scheme": "scheme-6",
+        "color_scheme_card": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 64,
+        "padding_bottom_tab": 64,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
+      }
+    },
+    "testimonial_cards_P6yHnq": {
+      "type": "testimonial-cards",
+      "blocks": {
+        "testimonial_68mdXd": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p>\"You can smell the difference the moment<br\/>you open it. This tastes alive in a way<br\/>grocery-store tea never has.\"<\/p>",
+            "author_name": "Dana R.",
+            "product": "Organic Wild Hawthorn",
+            "varified_text": "Verified buyer"
+          }
+        },
+        "testimonial_iaUb9P": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p>\"I switched my whole evening routine to<br\/>the Calm Trio. Knowing it's wildcrafted<br\/>and actually tested makes it worth it.\"<\/p>",
+            "author_name": "Marcus T.",
+            "product": "The Calm Trio",
+            "varified_text": "Verified buyer"
+          }
+        },
+        "testimonial_tYCQ8c": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "<p>\"Subscribed after the first order. It arrives<br\/>right when I'm running low, and the nettle<br\/>is the best I've found anywhere.\"<\/p>",
+            "author_name": "Priya S.",
+            "product": "Stinging Nettle · Subscriber",
+            "varified_text": "Verified buyer"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_68mdXd",
+        "testimonial_iaUb9P",
+        "testimonial_tYCQ8c"
+      ],
+      "name": "Testimonial cards",
+      "settings": {
+        "page_width": "container",
+        "pre_text": "Loved by the kettle-first crowd",
+        "heading": "4.9 stars across <em>300+ reviews.<\/em>",
+        "heading_size": "h1",
+        "view_more_label": "View More",
+        "color_scheme": "scheme-1",
+        "color_scheme_card": "",
+        "color_accent": "#7a8f55",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 68,
+        "padding_bottom_tab": 68,
+        "padding_top_mobile": 66,
+        "padding_bottom_mobile": 66
       }
     },
     "178886061598a8c2da": {
@@ -260,6 +370,7 @@
       "block_order": [
         "judge_me_reviews_review_widget_4EmdeM"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
@@ -321,6 +432,8 @@
   },
   "order": [
     "main",
+    "brew_guide_gzR6gp",
+    "testimonial_cards_P6yHnq",
     "178886061598a8c2da",
     "related-products",
     "sticky_product_bar"
