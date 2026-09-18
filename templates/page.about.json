@@ -49,7 +49,7 @@
         "image": "shopify:\/\/shop_images\/section.phero-bleed.svg",
         "image_mobile": "shopify:\/\/shop_images\/section.phero-bleed_d1421734-c3a6-4e2e-976a-e6f650091e92.svg",
         "text_align": "vertical-center horizontal-left",
-        "color_accent": "#E3B469",
+        "color_accent": "#e3b469",
         "color_scheme": "scheme-2",
         "overlay_color": "",
         "padding_top": 64,
@@ -66,45 +66,38 @@
         "caption_EzGaeE": {
           "type": "caption",
           "settings": {
-            "caption": "About Us",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "small"
+            "caption": "Founder story"
           }
         },
         "heading_U9cCAa": {
           "type": "heading",
           "settings": {
-            "heading": "A Modern Day, Old Fashioned Meat Market",
-            "heading_size": "h1"
+            "heading": "Why Wild Bliss <em>exists.<\/em>"
           }
         },
         "image_cynGEf": {
           "type": "image",
           "settings": {
-            "badge__text": "<h2>70+ <\/h2><p>Years of Trust<\/p>"
+            "image": "shopify:\/\/shop_images\/div.r45.svg",
+            "image_caption": ""
           }
         },
         "text_WkppgW": {
           "type": "text",
           "settings": {
-            "text": "<h4>Skill handed down from Generation to Generation.<\/h4><p> Roseville Meat Company has been a cornerstone of the Roseville community for over seven decades. What started as a small, neighborhood butcher shop has grown into the  region's premier destination for premium meats — but our values have  never changed.<br\/><br\/>As a local, family-owned business, we've built our  reputation on one thing: offering the very best in fresh meats with the  personal service that only a family business can provide. We know our  customers by name, and we take pride in helping you find exactly what  you need.<\/p>",
-            "text_style": "body",
-            "text_size": "medium"
+            "text": "<p>I was born in Romania and raised in a remote village near the Carpathians, where nature was part of everyday life. As a child, I spent my days fly fishing, gathering wild herbs and berries, and learning the quiet traditions that connected our family<br\/>to the land.<br\/><br\/>Herbal teas were a daily ritual in our home — simple, fragrant infusions made from plants collected with care and enjoyed across generations. Years later, after moving to the United States, I searched for the same herbs I remembered from childhood, but the teas I found often lacked the vivid aroma, flavor, and botanical character I grew up with. It became clear to me that true quality depends not only on the plant itself, but on the care taken after harvest.<\/p>"
           }
         },
         "block_quote_PDLNnn": {
           "type": "block_quote",
           "settings": {
-            "text": "<p> \"From our family to yours, we offer the very best in fresh meats. That's not just a slogan — it's how we live every single day.\"<br\/><br\/><strong>— The Roseville Meat Company Family<\/strong><\/p>",
-            "color_scheme": "scheme-2"
+            "text": "<p>Wild Bliss was born from that belief: pure Romanian botanicals,<br\/>carefully sourced and thoughtfully crafted with respect for origin,<br\/>freshness, and tradition.<\/p>"
           }
         },
-        "text_XndxUF": {
-          "type": "text",
+        "attribution_HkW4xE": {
+          "type": "attribution",
           "settings": {
-            "text": "<p>From USDA Prime beef and fresh poultry to exotic  selections like buffalo and elk, we carry what others simply can't. And  with our custom processing services, we'll cut, wrap, and prepare your  order exactly the way you want it.<\/p>",
-            "text_style": "body",
-            "text_size": "medium"
+            "text": "— S.I. Farcas, Founder"
           }
         }
       },
@@ -114,19 +107,27 @@
         "image_cynGEf",
         "text_WkppgW",
         "block_quote_PDLNnn",
-        "text_XndxUF"
+        "attribution_HkW4xE"
       ],
       "name": "About image with text",
       "settings": {
-        "page_width": "container-fluid",
-        "color_accent": "#a5a5a5",
+        "page_width": "container",
+        "accent_color": "#7a8f55",
+        "media_width": 42,
+        "column_gap": 64,
+        "card_ratio": "476 \/ 595",
+        "card_radius": 12,
+        "card_fallback": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "heading_size": 47,
+        "heading_size_mobile": 32,
+        "quote_indent": 23,
         "color_scheme": "",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "padding_top_tab": 80,
-        "padding_bottom_tab": 80,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 76,
+        "padding_bottom_tab": 76,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
       }
     },
     "customer_care_U6h8Y4": {
