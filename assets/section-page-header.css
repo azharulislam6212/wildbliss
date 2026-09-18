@@ -45,7 +45,8 @@ background: var(--overlay-color);
 }
 
 .page-banner__inner{
-    max-width: 565px;
+max-width: 938px;
+    margin: 0 auto;
 }
 
 
@@ -79,7 +80,7 @@ background: var(--overlay-color);
     }
 
     .banner--height-exlarge {
-        height: 68rem;
+        height: 63rem;
     }
 
 }
@@ -91,14 +92,25 @@ background: var(--overlay-color);
     gap: 2px;
     margin: 0 0 24px;
 }
+.page-banner__text {
+    max-width: 426px;
+font-weight: 400;
+font-size: 21.3px;
+line-height: 35px;
+ 
 
+}
 .page-banner__text  em{
     display: block;
-    font-style: normal;
+   font-family: var(--font-heading-family);
 }
 
 .page-banner__title{
         margin: 0 0 16px;
+}
+
+.page-banner__title  em{
+    color: rgba(var(--color-accent));
 }
 
 .page-banner__text p{

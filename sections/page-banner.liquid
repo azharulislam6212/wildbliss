@@ -1,0 +1,393 @@
+{{ 'section-page-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .page-banner-bleed-{{ section.id }} {
+    --pbanner-height: {{ section.settings.height }}px;
+    --pbanner-height-tab: {{ section.settings.height_tab }}px;
+    --pbanner-height-mobile: {{ section.settings.height_mobile }}px;
+    --pbanner-content-width: {{ section.settings.content_width }}px;
+    --pbanner-title-size: {{ section.settings.title_size }}px;
+    --pbanner-title-size-mobile: {{ section.settings.title_size_mobile }}px;
+    --pbanner-motif-height: {{ section.settings.motif_height }}px;
+    --pbanner-motif-height-mobile: {{ section.settings.motif_height_mobile }}px;
+    --pbanner-fallback: {{ section.settings.fallback_gradient }};
+    {%- if section.settings.image != blank -%}
+      --pbanner-focal: {{ section.settings.image.presentation.focal_point }};
+    {%- endif -%}
+  }
+{%- endstyle -%}
+
+<section
+  class="page-banner-bleed page-banner-bleed-{{ section.id }} color-{{ section.settings.color_scheme }} page-banner-bleed--{{ section.settings.text_align }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  {% if section.settings.allow_transparent_header %}
+    allow-transparent-header
+  {% endif %}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div
+    class="page-banner-bleed__media"
+    style="--overlay-color: {{ section.settings.overlay_color }};"
+  >
+    {%- liquid
+      assign banner_image = section.settings.image
+      assign banner_image_mobile = section.settings.image_mobile
+
+      comment
+        Either picker on its own is enough: with only a mobile image set it
+        stands in for the desktop one too.
+      endcomment
+      if banner_image == blank
+        assign banner_image = banner_image_mobile
+        assign banner_image_mobile = blank
+      endif
+
+      assign has_separate_mobile = false
+      if banner_image_mobile != blank and banner_image_mobile != banner_image
+        assign has_separate_mobile = true
+      endif
+    -%}
+
+    {%- if banner_image != blank -%}
+      {%- comment -%}
+        A <picture>, as in image-banner.liquid: the phone downloads only the
+        mobile crop, never both.
+      {%- endcomment -%}
+      <picture>
+        {%- if has_separate_mobile -%}
+          <source
+            media="(max-width: 749px)"
+            sizes="100vw"
+            srcset="
+              {{- banner_image_mobile | image_url: width: 375 }} 375w,
+              {{ banner_image_mobile | image_url: width: 550 }} 550w,
+              {{ banner_image_mobile | image_url: width: 750 }} 750w,
+              {{ banner_image_mobile | image_url: width: 1100 }} 1100w,
+              {{ banner_image_mobile | image_url: width: 1500 }} 1500w
+            "
+            width="{{ banner_image_mobile.width }}"
+            height="{{ banner_image_mobile.height }}"
+          >
+        {%- endif -%}
+
+        {% render 'responsive-img', image: banner_image, sizes: '100vw' %}
+      </picture>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_motif -%}
+    <div class="page-banner-bleed__motif" aria-hidden="true">
+      {{- 'motif-botanical.svg' | inline_asset_content -}}
+    </div>
+  {%- endif -%}
+
+  <div class="page-banner-bleed__content section-{{ section.id }}-padding">
+    <div class="{{ section.settings.page_width }}">
+      <div class="page-banner-bleed__inner">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="page-banner-bleed__eyebrow sub-heading">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          {%- comment -%}
+            Wrap the accent half of the heading in <em> — it picks up the
+            scheme's accent colour in italics, as drawn.
+          {%- endcomment -%}
+          <h1 class="page-banner-bleed__title inline-richtext">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="page-banner-bleed__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page Banner",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Leave empty to use the fallback gradient below."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Background image on mobile",
+      "info": "Optional. Falls back to the desktop image."
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Overlay",
+      "default": "linear-gradient(to top, rgba(26, 32, 24, 0.78) 0%, rgba(26, 32, 24, 0.25) 55%, rgba(26, 32, 24, 0) 100%)"
+    },
+    {
+      "type": "color_background",
+      "id": "fallback_gradient",
+      "label": "Fallback gradient",
+      "info": "Shown when no background image is set.",
+      "default": "linear-gradient(160deg, #5a6a5c 0%, #4e5c50 55%, #3c463e 100%)"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "default": true,
+      "label": "Let the header sit over the banner"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "default": "About us",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "From Our Family <em>to Yours</em>",
+      "label": "Heading",
+      "info": "Text inside <em> is italic and takes the accent colour."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>A small company with deep roots in the mountains of Romania.</p>",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ],
+      "default": "left",
+      "label": "Text alignment"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_motif",
+      "default": true,
+      "label": "Show botanical motif"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 400,
+      "max": 1200,
+      "step": 2,
+      "unit": "px",
+      "label": "Content width",
+      "default": 882
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size on desktop",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 22,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading size on mobile",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "motif_height",
+      "min": 120,
+      "max": 400,
+      "step": 2,
+      "unit": "px",
+      "label": "Motif height on desktop",
+      "default": 246
+    },
+    {
+      "type": "range",
+      "id": "motif_height_mobile",
+      "min": 80,
+      "max": 320,
+      "step": 2,
+      "unit": "px",
+      "label": "Motif height on mobile",
+      "default": 178
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 320,
+      "max": 900,
+      "step": 5,
+      "unit": "px",
+      "label": "Minimum height on desktop",
+      "default": 630
+    },
+    {
+      "type": "range",
+      "id": "height_tab",
+      "min": 320,
+      "max": 900,
+      "step": 5,
+      "unit": "px",
+      "label": "Minimum height on tablet",
+      "default": 560
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 260,
+      "max": 800,
+      "step": 5,
+      "unit": "px",
+      "label": "Minimum height on mobile",
+      "default": 515
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Banner"
+    }
+  ]
+}
+{% endschema %}

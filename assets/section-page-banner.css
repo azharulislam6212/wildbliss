@@ -1,0 +1,186 @@
+/* Page banner — full-bleed page hero: background image, scrim, centred
+   botanical motif and a left-aligned eyebrow / heading / intro stack. */
+
+.page-banner-bleed {
+  position: relative;
+  display: grid;
+  /* minmax(0, 1fr), not 1fr: a 1fr track takes an auto minimum, so a long
+     heading would widen the section past the viewport instead of wrapping. */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+  isolation: isolate;
+  box-sizing: border-box;
+}
+
+/* Background ---------------------------------------------------------------
+   With no image the fallback gradient stands in for the photo, on the same
+   diagonal as the design. */
+.page-banner-bleed__media {
+  grid-area: 1 / 1 / 2 / 2;
+  position: relative;
+  line-height: 0;
+  background-color: rgb(var(--color-background));
+  background-image: var(--pbanner-fallback);
+}
+
+.page-banner-bleed__media img,
+.page-banner-bleed__media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--pbanner-focal, center);
+}
+
+/* Scrim: darkest at the bottom, clear at the top, so the copy keeps its
+   contrast wherever the photo is light. */
+.page-banner-bleed__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-color);
+}
+
+/* Motif ------------------------------------------------------------------- */
+.page-banner-bleed__motif {
+  grid-area: 1 / 1 / 2 / 2;
+  place-self: center;
+  width: auto;
+  height: var(--pbanner-motif-height-mobile, 17.7rem);
+  opacity: 0.55;
+  color: rgb(var(--color-sub-heading));
+  pointer-events: none;
+}
+
+.page-banner-bleed__motif svg {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+/* Content ----------------------------------------------------------------- */
+.page-banner-bleed__content {
+  grid-area: 1 / 1 / 2 / 2;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--pbanner-height-mobile, 51.5rem);
+}
+
+/* With the header sitting over the banner, the copy centres in the space below
+   it rather than in the whole section — the offset the design is drawn with. */
+.page-banner-bleed[allow-transparent-header] .page-banner-bleed__content {
+  padding-top: var(--header-height, 0px);
+}
+
+.page-banner-bleed__content > .container,
+.page-banner-bleed__content > .container-fluid {
+  width: 100%;
+  min-width: 0;
+}
+
+.page-banner-bleed__inner {
+  max-width: var(--pbanner-content-width, 88.2rem);
+  margin: 0 auto;
+}
+
+.page-banner-bleed--center .page-banner-bleed__inner {
+  text-align: center;
+}
+
+.page-banner-bleed__eyebrow {
+  margin: 0 0 1.6rem;
+}
+
+/* The rule that leads into the eyebrow, 26px wide as drawn. */
+.page-banner-bleed__eyebrow::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.page-banner-bleed--center .page-banner-bleed__eyebrow {
+  justify-content: center;
+}
+
+.page-banner-bleed__title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: var(--pbanner-title-size-mobile, 3.6rem);
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-heading));
+}
+
+.page-banner-bleed__title > * {
+  margin: 0;
+}
+
+/* The accent half of the heading: italic, in the scheme's accent colour. */
+.page-banner-bleed__title em,
+.page-banner-bleed__title i {
+  font-style: italic;
+  color: rgb(var(--color-accent));
+}
+
+.page-banner-bleed__text {
+  max-width: 44rem;
+  margin: 1.6rem 0 0;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: rgba(var(--color-foreground), 0.92);
+}
+
+.page-banner-bleed--center .page-banner-bleed__text {
+  margin-inline: auto;
+}
+
+.page-banner-bleed__text > :first-child {
+  margin-top: 0;
+}
+
+.page-banner-bleed__text > :last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .page-banner-bleed__content {
+    min-height: var(--pbanner-height-tab, 56rem);
+  }
+
+  .page-banner-bleed__motif {
+    height: var(--pbanner-motif-height, 24.6rem);
+  }
+
+  .page-banner-bleed__title {
+    font-size: var(--pbanner-title-size, 7.2rem);
+    line-height: 1.08;
+  }
+
+  .page-banner-bleed__text {
+    max-width: 43rem;
+    margin-top: 2.4rem;
+    font-size: 1.8rem;
+    line-height: 1.85;
+  }
+
+  .page-banner-bleed__eyebrow {
+    margin-bottom: 2rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .page-banner-bleed__content {
+    min-height: var(--pbanner-height, 63rem);
+  }
+}

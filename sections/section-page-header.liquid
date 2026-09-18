@@ -36,9 +36,50 @@
 
 
   <div class="page-banner banner--height-{{ section.settings.banner_height }}">
+    {%- liquid
+      comment
+        Either picker on its own is enough: with only a mobile image set it
+        stands in for the desktop one, so an existing header is untouched.
+      endcomment
+      assign banner_image = section.settings.image
+      assign banner_image_mobile = section.settings.image_mobile
+
+      if banner_image == blank
+        assign banner_image = banner_image_mobile
+        assign banner_image_mobile = blank
+      endif
+
+      assign has_separate_mobile = false
+      if banner_image_mobile != blank and banner_image_mobile != banner_image
+        assign has_separate_mobile = true
+      endif
+    -%}
+
     <div class="page-banner__image" style="--overlay-color: {{ section.settings.overlay_color }};">
-      {% if section.settings.image != blank %}
-        {% render 'responsive-img' with image, image: section.settings.image %}
+      {% if banner_image != blank %}
+        {%- comment -%}
+          A <picture>, as in image-banner.liquid: the phone downloads only the
+          mobile crop, never both.
+        {%- endcomment -%}
+        <picture>
+          {%- if has_separate_mobile -%}
+            <source
+              media="(max-width: 749px)"
+              sizes="100vw"
+              srcset="
+                {{- banner_image_mobile | image_url: width: 375 }} 375w,
+                {{ banner_image_mobile | image_url: width: 550 }} 550w,
+                {{ banner_image_mobile | image_url: width: 750 }} 750w,
+                {{ banner_image_mobile | image_url: width: 1100 }} 1100w,
+                {{ banner_image_mobile | image_url: width: 1500 }} 1500w
+              "
+              width="{{ banner_image_mobile.width }}"
+              height="{{ banner_image_mobile.height }}"
+            >
+          {%- endif -%}
+
+          {% render 'responsive-img' with image, image: banner_image %}
+        </picture>
       {% else %}
         {{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
@@ -57,7 +98,7 @@
 
 
           {%- if block.settings.pre_heading != blank -%}
-            <p class="page-banner-pre_heading">
+            <p class="page-banner-pre_heading sub-heading">
               <svg
                 width="24"
                 height="1"
@@ -291,6 +332,12 @@
         "type": "image_picker",
         "id": "image",
         "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image on mobile",
+        "info": "Optional. Falls back to the image above."
       },  {
         "type": "select",
         "id": "text_align",
