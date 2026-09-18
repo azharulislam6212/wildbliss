@@ -1,5 +1,14 @@
  {{ 'section-icon-card-blocks.css' | asset_url | stylesheet_tag }}
 {%- style -%}
+  .section-{{ section.id }}-padding {
+    --color-accent: {{ section.settings.color_accent.red }}, {{ section.settings.color_accent.green }},  {{ section.settings.color_accent.blue }};
+    --color-sub-heading: {{ section.settings.color_sub_heading.red }}, {{ section.settings.color_sub_heading.green }},  {{ section.settings.color_sub_heading.blue }};
+    --color-link: {{ section.settings.color_accent.red }}, 
+    {{ section.settings.color_accent.green }}, 
+    {{ section.settings.color_accent.blue }};
+  }
+
+
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top_mobile }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
@@ -19,6 +28,10 @@
     }
   .icon-cards-wrapper {
     --icon-cards-columns: {{ section.settings.columns }};
+  }
+
+  .icon-cards-{{ section.id }} {
+    --icon-card-icon-size: {{ section.settings.icon_size }}px;
   }
 
 
@@ -113,6 +126,10 @@
                 </span>
               {%- endif -%}
 
+              {% if block.settings.rich_text != blank %}
+                <p class="icon-card__rich_text">{{ block.settings.rich_text }}</p>
+              {% endif %}
+              
               {% if block.settings.text != blank %}
                 <p class="icon-card__text">{{ block.settings.text }}</p>
               {% endif %}
@@ -206,6 +223,23 @@
       "default": 3
     },
     {
+      "type": "range",
+      "id": "icon_size",
+      "min": 12,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "color_sub_heading",
+      "label": "Sub heading color",
+
+      "default": "#91A66A"
+    },
+      {
       "type": "color",
       "id": "color_accent",
       "label": "Highlight color",
@@ -332,6 +366,11 @@
           "id": "title",
           "default": "t:sections.multicolumn.blocks.column.settings.title.default",
           "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+         {
+          "type": "inline_richtext",
+          "id": "rich_text",
+          "label": "Inline richtext"
         },
         {
           "type": "inline_richtext",

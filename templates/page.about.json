@@ -130,6 +130,100 @@
         "padding_bottom_mobile": 56
       }
     },
+    "icon_card_blocks_PKXHeH": {
+      "type": "icon-card-blocks",
+      "blocks": {
+        "icon_card_EQyNhq": {
+          "type": "icon_card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame_58def85f-e8b8-4d20-9670-7837c4a7dd72.svg",
+            "svg_icon": "",
+            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
+            "caption": "",
+            "title": "Integrity",
+            "rich_text": "We make only claims we canstand behind — and verifywhat matters.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_rJqXLc": {
+          "type": "icon_card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame-1.svg",
+            "svg_icon": "",
+            "caption": "",
+            "title": "Authentic Origin",
+            "rich_text": "From biodiverse Carpathianlandscapes, where herbsdevelop natural aroma, color,and character.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_zcmn4g": {
+          "type": "icon_card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame-2.svg",
+            "svg_icon": "",
+            "caption": "",
+            "title": "Craftsmanship",
+            "rich_text": "Harvested with care, gentlydried, and packed close tosource.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_Yzwnpp": {
+          "type": "icon_card",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Frame-3.svg",
+            "svg_icon": "",
+            "caption": "",
+            "title": "Transparency",
+            "rich_text": "Clear origin, simpleingredients, and testing youcan trust.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "icon_card_EQyNhq",
+        "icon_card_rJqXLc",
+        "icon_card_zcmn4g",
+        "icon_card_Yzwnpp"
+      ],
+      "name": "Icon Card Blocks",
+      "settings": {
+        "page_width": "container",
+        "subheading": "What we hold to",
+        "heading": "<p>Four standards we <em>never<br\/>compromise.<\/em><\/p>",
+        "heading_size": "hxl",
+        "text": "",
+        "columns": 4,
+        "icon_size": 34,
+        "color_sub_heading": "#a05e12",
+        "color_accent": "#7a8f55",
+        "color_scheme": "",
+        "color_scheme_card": "scheme-877af017-ed23-475a-945f-3ed37b1df4d4",
+        "overlauy_color": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)",
+        "padding_top": 120,
+        "padding_bottom": 120,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "them_section_id": ""
+      }
+    },
     "customer_care_U6h8Y4": {
       "type": "customer-care",
       "blocks": {
@@ -186,6 +280,7 @@
     "main",
     "section_page_header_BaDknx",
     "about_image_with_text_kz4fLw",
+    "icon_card_blocks_PKXHeH",
     "customer_care_U6h8Y4"
   ]
 }
