@@ -22,9 +22,10 @@
         },
         "tags_pdp": {
           "type": "tags",
+          "name": "Featured Tags",
           "settings": {
-            "tag_1": "25 Servings",
-            "tag_2": "Pyramidal Tea Bags",
+            "tag_1": "{{ product.metafields.custom.featured_tag_first.value }}",
+            "tag_2": "{{ product.metafields.custom.featured_tag_second.value }}",
             "tag_3": ""
           }
         },
@@ -53,23 +54,24 @@
           "type": "quote_card",
           "settings": {
             "show_icon": true,
-            "text": "<p>As the kettle quiets, so do you — linden, lemon balm and St John's wort easing the day loose, cup by cup.<\/p>"
+            "image": "{{ product.metafields.custom.quote_card_image.value }}",
+            "text": "<p>{{ product.metafields.custom.quote_card_text.value }}<\/p>"
           }
         },
         "certifications_pdp": {
           "type": "certifications",
           "settings": {
-            "image_1": "shopify:\/\/shop_images\/logo-1.png",
+            "image_1": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg-cropped.png",
             "label_1": "USDA Organic",
-            "image_2": "shopify:\/\/shop_images\/Frame_1.svg",
-            "label_2": "Caffeine free",
-            "image_3": "shopify:\/\/shop_images\/Frame_2.svg",
-            "label_3": "Gluten free",
-            "image_4": "shopify:\/\/shop_images\/Frame_3.svg",
-            "label_4": "Certified vegan",
-            "image_5": "shopify:\/\/shop_images\/Frame_4.svg",
-            "label_5": "Ecocert",
-            "label_6": ""
+            "label_2": "",
+            "image_3": "shopify:\/\/shop_images\/logo-2.png",
+            "label_3": "Caffeine Free",
+            "image_4": "shopify:\/\/shop_images\/logo-4.png",
+            "label_4": "Gluten Free",
+            "image_5": "shopify:\/\/shop_images\/cert_VEGAN.png",
+            "label_5": "Certified Vegan",
+            "image_6": "shopify:\/\/shop_images\/ecocert.png",
+            "label_6": "Ecocert"
           }
         },
         "variant_picker_wN9KQ6": {
@@ -158,7 +160,7 @@
           "settings": {
             "heading": "What's inside",
             "icon": "none",
-            "content": "<p>100% organic wild hawthorn (<em>Crataegus monogyna<\/em>) leaf & flower. Nothing else — no flavourings, no fillers, no caffeine. Plant-based pyramid bags, plastic-free.<\/p>",
+            "content": "{{ product.metafields.custom.what_s_inside | metafield_tag }}",
             "page": "",
             "open_by_default": false
           }
@@ -168,7 +170,7 @@
           "settings": {
             "heading": "Brewing guide",
             "icon": "none",
-            "content": "<p>Pour 95–100°C water over one pyramid bag (or 1 tbsp loose). Steep 10–15 minutes, covered. Enjoy 1–3 cups daily.<\/p>",
+            "content": "{{ product.metafields.custom.brewing_guide | metafield_tag }}",
             "page": "",
             "open_by_default": false
           }
@@ -178,7 +180,7 @@
           "settings": {
             "heading": "Sourcing & testing",
             "icon": "none",
-            "content": "<p>Wildcrafted in certified-organic collection zones in the Romanian Carpathians. Ecocert inspects our wild collection areas and processing facility to verify compliance with USDA Organic standards, and every lot is tested for identity, purity, heavy metals and microbiology.<\/p>",
+            "content": "{{ product.metafields.custom.sourcing_testing | metafield_tag }}",
             "page": "",
             "open_by_default": false
           }
@@ -252,6 +254,7 @@
           "settings": {
             "icon": "cup",
             "image": "shopify:\/\/shop_images\/Frame_7.svg",
+            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
             "value": "1 bag",
             "label": "Per cup"
           }
@@ -261,6 +264,7 @@
           "settings": {
             "icon": "temperature",
             "image": "shopify:\/\/shop_images\/Frame_6.svg",
+            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
             "value": "95°C",
             "label": "Water"
           }
@@ -270,6 +274,7 @@
           "settings": {
             "icon": "time",
             "image": "shopify:\/\/shop_images\/Frame_5.svg",
+            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
             "value": "5–7 min",
             "label": "Covered steep"
           }
@@ -289,6 +294,7 @@
         "columns_mobile": "1",
         "color_scheme": "scheme-6",
         "color_scheme_card": "",
+        "overlay_color": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)",
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_tab": 64,
