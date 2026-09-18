@@ -1,0 +1,102 @@
+/* Image band — a full-width image with an optional caption pill in its
+   bottom-left corner and a centred note underneath. */
+
+.image-band {
+  position: relative;
+}
+
+/* custom-grid.css gives .container width:100% plus padding with no
+   box-sizing, so it runs 2 x gutter past its parent. */
+.image-band .container,
+.image-band .container-fluid {
+  box-sizing: border-box;
+}
+
+.image-band__inner {
+  max-width: var(--band-max-width, none);
+  margin: 0 auto;
+}
+
+/* Figure ------------------------------------------------------------------- */
+.image-band__figure {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--band-ratio-mobile, 4 / 3);
+  border-radius: var(--band-radius, 1.6rem);
+  background-color: rgb(var(--color-background));
+  background-image: var(--band-fallback);
+}
+
+.image-band__figure img,
+.image-band__figure svg.placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--band-focal, center);
+}
+
+ 
+ 
+
+/* Caption pill, 18px in from the bottom-left corner of the image. */
+.image-band__pill {
+  position: absolute;
+  left: 1.8rem;
+  bottom: 1.4rem;
+  max-width: calc(100% - 3.6rem);
+  padding: 0.7rem 1rem;
+  border-radius: 1.2rem;
+  background: rgb(var(--color-background));
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--band-accent, #7a8f55);
+}
+
+/* Note below the image ------------------------------------------------------ */
+.image-band__note {
+  max-width: var(--band-note-width, 60rem);
+  margin: 2.7rem auto 0;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.45;
+  text-align: center;
+  color: rgb(var(--color-foreground));
+}
+
+.image-band__note > :first-child {
+  margin-top: 0;
+}
+
+.image-band__note > :last-child {
+  margin-bottom: 0;
+}
+
+.image-band__note p {
+  margin: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .image-band__figure {
+    aspect-ratio: var(--band-ratio, 7 / 3);
+  }
+
+  .image-band__motif {
+    height: var(--band-motif-height, 22.9rem);
+  }
+
+  .image-band__pill {
+    border-radius: 10rem;
+    line-height: 1.2;
+  }
+
+  .image-band__note {
+    margin-top: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 1.5;
+  }
+}

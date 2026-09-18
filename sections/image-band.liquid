@@ -1,0 +1,354 @@
+{{ 'section-image-band.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .image-band-{{ section.id }} {
+    --band-accent: {{ section.settings.accent_color }};
+    --band-ratio: {{ section.settings.ratio }};
+    --band-ratio-mobile: {{ section.settings.ratio_mobile }};
+    --band-radius: {{ section.settings.radius }}px;
+    --band-fallback: {{ section.settings.fallback_gradient }};
+    --band-motif-height: {{ section.settings.motif_height }}px;
+    --band-motif-height-mobile: {{ section.settings.motif_height_mobile }}px;
+    --band-note-width: {{ section.settings.note_width }}px;
+    {%- if section.settings.max_width > 0 -%}
+      --band-max-width: {{ section.settings.max_width }}px;
+    {%- endif -%}
+  }
+{%- endstyle -%}
+
+<div
+  class="image-band image-band-{{ section.id }} color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding gradient isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    <div class="image-band__inner">
+      {%- liquid
+        comment
+          Either picker on its own is enough: with only a mobile image set it
+          stands in for the desktop one too.
+        endcomment
+        assign band_image = section.settings.image
+        assign band_image_mobile = section.settings.image_mobile
+
+        if band_image == blank
+          assign band_image = band_image_mobile
+          assign band_image_mobile = blank
+        endif
+
+        assign has_separate_mobile = false
+        if band_image_mobile != blank and band_image_mobile != band_image
+          assign has_separate_mobile = true
+        endif
+      -%}
+
+      <figure
+        class="image-band__figure"
+        {% if band_image != blank %}
+          style="--band-focal: {{ band_image.presentation.focal_point }};"
+        {% endif %}
+      >
+        {%- if band_image != blank -%}
+          {%- comment -%}
+            A <picture>, as in image-banner.liquid: the phone downloads only the
+            mobile crop, never both.
+          {%- endcomment -%}
+          <picture>
+            {%- if has_separate_mobile -%}
+              <source
+                media="(max-width: 749px)"
+                sizes="100vw"
+                srcset="
+                  {{- band_image_mobile | image_url: width: 375 }} 375w,
+                  {{ band_image_mobile | image_url: width: 550 }} 550w,
+                  {{ band_image_mobile | image_url: width: 750 }} 750w,
+                  {{ band_image_mobile | image_url: width: 1100 }} 1100w,
+                  {{ band_image_mobile | image_url: width: 1500 }} 1500w
+                "
+                width="{{ band_image_mobile.width }}"
+                height="{{ band_image_mobile.height }}"
+              >
+            {%- endif -%}
+
+            {% render 'responsive-img', image: band_image, sizes: '100vw' %}
+          </picture>
+        {%- else -%}
+        
+          <span class="image-band__motif" aria-hidden="true">
+         {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </span>
+        {%- endif -%}
+
+        {%- if section.settings.pill_text != blank -%}
+          <figcaption class="image-band__pill">{{ section.settings.pill_text }}</figcaption>
+        {%- endif -%}
+      </figure>
+
+      {%- if section.settings.note != blank -%}
+        <div class="image-band__note rte">{{ section.settings.note }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Image band",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Leave empty to use the placeholder gradient below."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image on mobile",
+      "info": "Optional. Falls back to the image above."
+    },
+    {
+      "type": "text",
+      "id": "pill_text",
+      "label": "Caption pill",
+      "info": "Optional. Sits in the bottom-left corner of the image."
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "default": "<p>Every lot is tested for identity, purity, heavy metals and microbiology before it is packed.</p>",
+      "label": "Note below the image"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+        "min": 960,
+        "max": 1600,
+        "step": 16,
+      "unit": "px",
+      "label": "Maximum width",
+      "info": "0 fills the layout width.",
+       "default": 1200
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "options": [
+        {
+          "value": "7 / 3",
+          "label": "Wide (7:3)"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Widescreen (16:9)"
+        },
+        {
+          "value": "3 / 2",
+          "label": "Classic (3:2)"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        },
+        {
+          "value": "auto",
+          "label": "Natural image height"
+        }
+      ],
+      "default": "7 / 3",
+      "label": "Image shape on desktop"
+    },
+    {
+      "type": "select",
+      "id": "ratio_mobile",
+      "options": [
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        },
+        {
+          "value": "3 / 2",
+          "label": "Classic (3:2)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "auto",
+          "label": "Natural image height"
+        }
+      ],
+      "default": "4 / 3",
+      "label": "Image shape on mobile"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "note_width",
+      "min": 320,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Note width",
+      "default": 680
+    },
+    {
+      "type": "header",
+      "content": "Placeholder"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "default": "#7A8F55",
+      "label": "Accent colour",
+      "info": "Used for the botanical mark and the caption pill."
+    },
+    {
+      "type": "color_background",
+      "id": "fallback_gradient",
+      "label": "Placeholder gradient",
+      "info": "Shown behind the botanical mark when no image is set.",
+      "default": "linear-gradient(160deg, #eef1e1 0%, #e2e8d2 55%, #d5ddc3 100%)"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Desktop",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Desktop",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image band"
+    }
+  ]
+}
+{% endschema %}

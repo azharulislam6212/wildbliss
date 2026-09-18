@@ -47,7 +47,6 @@
         "page_width": "container",
         "banner_height": "exlarge",
         "image": "shopify:\/\/shop_images\/section.phero-bleed.svg",
-        "image_mobile": "shopify:\/\/shop_images\/section.phero-bleed_d1421734-c3a6-4e2e-976a-e6f650091e92.svg",
         "text_align": "vertical-center horizontal-left",
         "color_accent": "#e3b469",
         "color_scheme": "scheme-2",
@@ -224,55 +223,84 @@
         "them_section_id": ""
       }
     },
-    "customer_care_U6h8Y4": {
-      "type": "customer-care",
+    "image_band_AAFE3e": {
+      "type": "image-band",
+      "name": "Image band",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/div.r219.svg",
+        "pill_text": "",
+        "note": "<p>Every lot is tested for identity, purity, heavy metals and microbiology before it is packed.<\/p>",
+        "page_width": "container",
+        "max_width": 1216,
+        "ratio": "7 \/ 3",
+        "ratio_mobile": "4 \/ 3",
+        "radius": 16,
+        "note_width": 600,
+        "accent_color": "#7a8f55",
+        "fallback_gradient": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "color_scheme": "",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 76,
+        "padding_bottom_tab": 76,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "call_to_action_about": {
+      "type": "call-to-action",
       "blocks": {
-        "image_3D4ke4": {
-          "type": "image",
+        "heading_cta": {
+          "type": "heading",
           "settings": {
-            "image_link": ""
+            "heading": "Thank you for bringing <em>our mountains home.<\/em>"
           }
         },
-        "text_block_UJnEck": {
-          "type": "text_block",
+        "text_cta": {
+          "type": "text",
           "settings": {
-            "pre_text": "We're here for you",
-            "heading": "Reach Out To Our Customer Care",
-            "text": "<p>Our team helps you find the perfect steak, learn how to prepare  for your next dinner party, or handle personalized <\/p>",
-            "email_text": "<p><strong>Email<\/strong><\/p><p><a href=\"mailto:hello@example.com\" title=\"mailto:hello@example.com\">hello@example.com<\/a><\/p>",
-            "phone_text": "<p><strong>Phone<\/strong><\/p><p><a href=\"tel:(916) 782 - 2705\" title=\"tel:(916) 782 - 2705\">(916) 782 - 2705<\/a><\/p>",
-            "button_text": "Contact Us",
-            "button_url": "shopify:\/\/pages\/contact-1",
+            "text": "<p>Every canister carries a little of the village we grew up in. We hope it finds a place in your kitchen, and your rituals.<\/p>"
+          }
+        },
+        "button_shop": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop our Teas",
+            "button_link": "shopify:\/\/collections\/all",
             "button_style": "primary"
           }
         },
-        "images_6J8YUj": {
-          "type": "images",
+        "button_hello": {
+          "type": "button",
           "settings": {
-            "image_link": "",
-            "image_link_2": ""
+            "button_label": "Share Feedback",
+            "button_link": "shopify:\/\/pages\/contact",
+            "button_style": "outline"
           }
         }
       },
       "block_order": [
-        "image_3D4ke4",
-        "text_block_UJnEck",
-        "images_6J8YUj"
+        "heading_cta",
+        "text_cta",
+        "button_shop",
+        "button_hello"
       ],
-      "name": "Customer care",
+      "name": "Call to action",
       "settings": {
-        "enable_divider": false,
-        "divider_color": "#dddcd5",
-        "page_width": "container-fluid",
+        "page_width": "container",
+        "accent_color": "#7a8f55",
+        "content_width": 1140,
+        "heading_size": 67,
+        "heading_size_mobile": 40,
+        "text_width": 460,
+        "text_width_mobile": 340,
         "color_scheme": "scheme-1",
-        "color_scheme_card": "",
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "padding_top_tab": 60,
-        "padding_bottom_tab": 60,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
-        "them_section_id": ""
+        "padding_top": 0,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
       }
     }
   },
@@ -281,6 +309,7 @@
     "section_page_header_BaDknx",
     "about_image_with_text_kz4fLw",
     "icon_card_blocks_PKXHeH",
-    "customer_care_U6h8Y4"
+    "image_band_AAFE3e",
+    "call_to_action_about"
   ]
 }
