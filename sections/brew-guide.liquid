@@ -51,7 +51,25 @@
       {%- if section.blocks.size > 0 -%}
         <ul class="brew-guide__cards" role="list">
           {%- for block in section.blocks -%}
-            <li class="brew-guide__card  color-{{ section.settings.color_scheme_card }} gradient" {{ block.shopify_attributes }}>
+            <li
+              class="brew-guide__card  color-{{ section.settings.color_scheme_card }} gradient{% if block.settings.bg_image != blank %} brew-guide__card--has-bg{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="brew-guide__card-bg" aria-hidden="true" style="--overlay-bg: {{ section.settings.overlay_color }};">
+                {%- if block.settings.bg_image != blank -%}
+                  {{
+                    block.settings.bg_image
+                    | image_url: width: 1200
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'brew-guide__card-bg__img',
+                      widths: '300, 450, 600, 750, 900, 1100, 1200',
+                      sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                      alt: ''
+                  }}
+                {%- endif -%}
+              </div>
+
               {%- if block.settings.image != blank or block.settings.icon != 'none' -%}
                 <span class="brew-guide__icon">
                   {%- if block.settings.image != blank -%}
@@ -158,6 +176,12 @@
       "default": "scheme-1"
     },
     {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Overlay card color",
+      "default": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)"
+    },
+    {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
     },
@@ -256,6 +280,12 @@
           "id": "image",
           "label": "Custom icon",
           "info": "Optional. Replaces the icon above."
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Card background image",
+          "info": "Optional. Leave empty to keep the default card background."
         },
         {
           "type": "text",
