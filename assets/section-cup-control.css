@@ -1,0 +1,205 @@
+/* Cup control — a centred intro over a run of icon steps. On desktop the steps
+   read across with an arrow between each pair; on mobile they stack into a
+   timeline, icon on the left with a hairline joining them. */
+
+.cup-control {
+  position: relative;
+}
+
+/* custom-grid.css gives .container width:100% plus padding with no
+   box-sizing, so it runs 2 x gutter past its parent. */
+.cup-control .container,
+.cup-control .container-fluid {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+   --------------------------------------------------------------------------- */
+.cup-control__header {
+  text-align: center;
+  padding-bottom: 4.8rem;
+}
+
+/* Eyebrow: .sub-heading supplies the 11px / .2em uppercase type; the rule is
+   the 26px dash that sits in front of it. */
+.cup-control__eyebrow {
+  justify-content: center;
+  margin: 0 0 1.2rem;
+  color: var(--cup-eyebrow, rgb(var(--color-sub-heading)));
+}
+
+.cup-control__eyebrow::before {
+  content: "";
+  display: block;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.cup-control__heading {
+  max-width: var(--cup-heading-width, 68rem);
+  margin: 0 auto;
+  line-height: 1.2;
+}
+
+/* .hxl's 2.9rem is a hair too wide here: it pulls "tea," down onto the second
+   line and splits the italic phrase. The design measures 2.8rem, which keeps
+   the accent clause whole. */
+@media screen and (max-width: 749px) {
+  .cup-control__heading.hxl {
+    font-size: calc(var(--font-heading-scale) * 2.8rem);
+  }
+}
+
+/* The accent half of the heading: italic, in the accent colour. */
+.cup-control__heading em,
+.cup-control__heading i {
+  font-style: italic;
+  color: var(--cup-accent, #7a8f55);
+}
+
+/* ---------------------------------------------------------------------------
+   Steps — mobile timeline
+   --------------------------------------------------------------------------- */
+.cup-control__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cup-row-gap, 2.2rem);
+  max-width: var(--cup-list-width, 104rem);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.cup-control__step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+/* The hairline joining one icon to the next. It starts at the icon's bottom
+   edge and runs the rest of the step plus the gap, so it meets the next icon
+   whatever height the labels take. */
+.cup-control__step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--cup-icon-size-mobile, 5.6rem) / 2);
+  top: var(--cup-icon-size-mobile, 5.6rem);
+  width: 1px;
+  height: calc(100% - var(--cup-icon-size-mobile, 5.6rem) + var(--cup-row-gap, 2.2rem));
+  background-color: rgba(var(--color-heading), 0.18);
+}
+
+.cup-control__icon {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cup-icon-size-mobile, 5.6rem);
+  height: var(--cup-icon-size-mobile, 5.6rem);
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-heading));
+}
+
+.cup-control__icon img,
+.cup-control__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cup-control__text {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+}
+
+.cup-control__label {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.7rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-heading));
+}
+
+.cup-control__note {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--cup-note, #66794a);
+}
+
+/* The arrows belong to the desktop run only. */
+.cup-control__arrow {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Desktop run
+   --------------------------------------------------------------------------- */
+@media screen and (min-width: 990px) {
+  .cup-control__header {
+    padding-bottom: 5.6rem;
+  }
+
+  .cup-control__list {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+  }
+
+  /* Equal-width steps put the icons on an even pitch; the arrows' padding sets
+     how far apart that pitch lands. */
+  .cup-control__step {
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .cup-control__step:not(:last-child)::before {
+    display: none;
+  }
+
+  .cup-control__icon {
+    width: var(--cup-icon-size, 6.4rem);
+    height: var(--cup-icon-size, 6.4rem);
+  }
+
+  .cup-control__text {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .cup-control__arrow {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    height: var(--cup-icon-size, 6.4rem);
+    padding: 0 var(--cup-arrow-gap, 1.6rem);
+    color: var(--cup-arrow, #d58c3f);
+  }
+
+  .cup-control__arrow svg {
+    display: block;
+    width: 1.4rem;
+    height: auto;
+  }
+}

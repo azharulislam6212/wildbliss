@@ -150,6 +150,90 @@
         "padding_bottom_mobile": 48
       }
     },
+    "cup_control_quality": {
+      "type": "cup-control",
+      "blocks": {
+        "step_harvest": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/span.svg",
+            "label": "Harvest",
+            "note": "Hand selected"
+          }
+        },
+        "step_facility": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/span_4976967b-542c-4054-9393-56e1ede01b74.svg",
+            "label": "Our Facility",
+            "note": "Near source"
+          }
+        },
+        "step_drying": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/span_4b4b233a-94b1-4ebc-a2ce-db95e7e26cd3.svg",
+            "label": "Gentle Drying",
+            "note": "In-house"
+          }
+        },
+        "step_sift": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/span_d2c4509c-4b98-4dbe-9f43-7ba922ee901a.svg",
+            "label": "Cut & Sift",
+            "note": "Prepared by us"
+          }
+        },
+        "step_packed": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/span_e03be16e-d2b4-45f4-868b-26fdea8cc0de.svg",
+            "label": "Packed at Source",
+            "note": "Sealed fresh"
+          }
+        },
+        "step_verified": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/span_97c18cd4-9abf-4982-beeb-9a4740e85950.svg",
+            "label": "Quality Verified",
+            "note": "Tested before release"
+          }
+        }
+      },
+      "block_order": [
+        "step_harvest",
+        "step_facility",
+        "step_drying",
+        "step_sift",
+        "step_packed",
+        "step_verified"
+      ],
+      "name": "Cup control",
+      "settings": {
+        "page_width": "container",
+        "eyebrow": "Source-to-cup control",
+        "heading": "From harvest to finished tea, <em>in our hands.<\/em>",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#7a8f55",
+        "arrow_color": "#d58c3f",
+        "note_color": "#66794a",
+        "color_scheme": "scheme-4",
+        "color_scheme_icon": "scheme-1",
+        "heading_width": 680,
+        "list_width": 1040,
+        "icon_size": 64,
+        "icon_size_mobile": 56,
+        "row_gap": 22,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 64,
+        "padding_bottom_mobile": 56
+      }
+    },
     "image_band_AAFE3e": {
       "type": "image-band",
       "name": "Image band",
@@ -330,6 +414,7 @@
     "rich_text_4hDiYr",
     "icon_card_blocks_B3YwgK",
     "main",
+    "cup_control_quality",
     "image_band_AAFE3e",
     "certification_band_JtHHyA",
     "call_to_action_about"

@@ -1,0 +1,374 @@
+{{ 'section-cup-control.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .cup-control-{{ section.id }} {
+    --cup-eyebrow: {{ section.settings.eyebrow_color }};
+    --cup-accent: {{ section.settings.accent_color }};
+    --cup-arrow: {{ section.settings.arrow_color }};
+    --cup-note: {{ section.settings.note_color }};
+    --cup-heading-width: {{ section.settings.heading_width }}px;
+    --cup-list-width: {{ section.settings.list_width }}px;
+    --cup-icon-size: {{ section.settings.icon_size }}px;
+    --cup-icon-size-mobile: {{ section.settings.icon_size_mobile }}px;
+    --cup-row-gap: {{ section.settings.row_gap }}px;
+  }
+{%- endstyle -%}
+
+<div
+  class="cup-control cup-control-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="cup-control__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="cup-control__eyebrow sub-heading">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          {%- comment -%}
+            Wrap the accent half of the heading in <em>: it turns italic and
+            takes the accent colour.
+          {%- endcomment -%}
+          <h2 class="cup-control__heading hxl inline-richtext">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ol class="cup-control__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- unless forloop.first -%}
+          <li class="cup-control__arrow" role="presentation" aria-hidden="true">
+            <svg viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path
+                d="M0 6H14M8 12L14 6L8 0"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </li>
+        {%- endunless -%}
+
+        <li class="cup-control__step" {{ block.shopify_attributes }}>
+          <span class="cup-control__icon color-{{ section.settings.color_scheme_icon }} gradient">
+            {%- if block.settings.icon != blank -%}
+              {% render 'icon-img' with image, image: block.settings.icon %}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </span>
+
+          <div class="cup-control__text">
+            {%- if block.settings.label != blank -%}
+              <h3 class="cup-control__label">{{ block.settings.label | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.note != blank -%}
+              <p class="cup-control__note">{{ block.settings.note | escape }}</p>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cup control",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Source-to-cup control"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Wrap the accent words in <em> to set them italic in the accent colour.",
+      "default": "From harvest to finished tea, <em>in our hands.</em>"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow colour",
+      "default": "#a05e12"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Heading accent colour",
+      "default": "#7a8f55"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow colour",
+      "default": "#d58c3f"
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "Step note colour",
+      "default": "#66794a"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_icon",
+      "label": "Icon circle colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "heading_width",
+      "min": 400,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Heading width",
+      "default": 680
+    },
+    {
+      "type": "range",
+      "id": "list_width",
+      "min": 700,
+      "max": 1280,
+      "step": 10,
+      "unit": "px",
+      "label": "Step run width",
+      "info": "Sets how far apart the icons sit on desktop.",
+      "default": 1040
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 40,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon circle size",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon circle size on mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between steps on mobile",
+      "default": 22
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Leave empty to use a placeholder image."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Harvest"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note",
+          "default": "Hand selected"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cup control",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "label": "Harvest",
+            "note": "Hand selected"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Our Facility",
+            "note": "Near source"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Gentle Drying",
+            "note": "In-house"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Cut & Sift",
+            "note": "Prepared by us"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Packed at Source",
+            "note": "Sealed fresh"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "label": "Quality Verified",
+            "note": "Tested before release"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
