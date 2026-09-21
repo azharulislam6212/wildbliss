@@ -1,0 +1,464 @@
+{{ 'section-solar-highlight.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .solar-highlight-{{ section.id }} {
+    --solar-eyebrow: {{ section.settings.eyebrow_color }};
+    --solar-accent: {{ section.settings.accent_color }};
+    --solar-ratio: {{ section.settings.ratio }};
+    --solar-ratio-mobile: {{ section.settings.ratio_mobile }};
+    --solar-radius: {{ section.settings.radius }}px;
+    --solar-media-width: {{ section.settings.media_width }}fr;
+    --solar-icon-size: {{ section.settings.icon_size }}px;
+    --solar-fallback: {{ section.settings.fallback_gradient }};
+  }
+{%- endstyle -%}
+
+<div
+  class="solar-highlight solar-highlight-{{ section.id }} solar-highlight--media-{{ section.settings.media_position }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    <div class="solar-highlight__inner">
+      <figure
+        class="solar-highlight__figure"
+        {% if section.settings.image != blank %}
+          style="--solar-focal: {{ section.settings.image.presentation.focal_point }};"
+        {% endif %}
+      >
+        {%- if section.settings.image != blank -%}
+          {% render 'responsive-img',
+            image: section.settings.image,
+            sizes: '(min-width: 990px) 45vw, 100vw'
+          %}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+
+        {%- if section.settings.caption != blank -%}
+          <figcaption class="solar-highlight__pill">{{ section.settings.caption | escape }}</figcaption>
+        {%- endif -%}
+      </figure>
+
+      <div class="solar-highlight__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="solar-highlight__eyebrow sub-heading">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          {%- comment -%}
+            Wrap the accent half of the heading in <em>: it turns italic and
+            takes the accent colour.
+          {%- endcomment -%}
+          <h2 class="solar-highlight__heading hxl inline-richtext">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="solar-highlight__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- liquid
+          assign features = section.blocks | where: 'type', 'feature'
+          assign buttons = section.blocks | where: 'type', 'button'
+        -%}
+
+        {%- if features.size > 0 -%}
+          <ul class="solar-highlight__features" role="list">
+            {%- for block in features -%}
+              <li class="solar-highlight__feature" {{ block.shopify_attributes }}>
+                <span class="solar-highlight__feature-icon" aria-hidden="true">
+                  {%- if block.settings.icon != blank -%}
+                    {% render 'icon-img' with image, image: block.settings.icon %}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </span>
+                <span class="solar-highlight__feature-label">{{ block.settings.label | escape }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if buttons.size > 0 -%}
+          <div class="solar-highlight__buttons">
+            {%- for block in buttons -%}
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  {% if block.settings.button_link == blank %}
+                    role="link"
+                    aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.button_link }}"
+                  {% endif %}
+                  class="button button--{{ block.settings.button_style }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Solar highlight",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "Leave empty to use a placeholder image."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption pill",
+      "info": "Optional. Sits in the bottom-left corner of the card.",
+      "default": "Photo: the Wild Bliss facility in Romania – solar panels on the roof, meadow and hills behind"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Sustainability at source"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Wrap the accent words in <em> to set them italic in the accent colour.",
+      "default": "Crafted with <em>Solar Power.</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Our herbs are dried, prepared, and packed close to source in our Romanian facility, where solar energy supports our production process. It's a more thoughtful way to care for freshness, quality, and our environmental footprint.</p>"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow colour",
+      "default": "#a05e12"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "info": "Used for the italic half of the heading, the caption pill and the placeholder art.",
+      "default": "#7a8f55"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Photo position"
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "min": 380,
+      "max": 760,
+      "step": 4,
+      "label": "Photo column width",
+      "info": "Share of the row given to the photo; the text column always takes 532.",
+      "default": 588
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "options": [
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        },
+        {
+          "value": "3 / 2",
+          "label": "Classic (3:2)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Widescreen (16:9)"
+        }
+      ],
+      "default": "4 / 3",
+      "label": "Photo shape"
+    },
+    {
+      "type": "select",
+      "id": "ratio_mobile",
+      "options": [
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        },
+        {
+          "value": "3 / 2",
+          "label": "Classic (3:2)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        }
+      ],
+      "default": "4 / 3",
+      "label": "Photo shape on mobile"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Photo corner radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 24,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Feature icon size",
+      "default": 36
+    },
+    {
+      "type": "color_background",
+      "id": "fallback_gradient",
+      "label": "Photo placeholder",
+      "info": "Shown behind the line art when no photo is set.",
+      "default": "linear-gradient(160deg, #eef1e1 0%, #e2e8d2 55%, #d5ddc3 100%)"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Leave empty to use the leaf icon."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Packed at Source"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Explore Our Process"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Filled"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            }
+          ],
+          "default": "primary"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Solar highlight",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "label": "Packed at Source"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "label": "Solar-Supported Production"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "label": "Closer to Nature"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore Our Process",
+            "button_style": "primary"
+          }
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_label": "See Our Facility",
+            "button_style": "outline"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,198 @@
+/* Process steps — a left-aligned intro (eyebrow + heading with an italic
+   accent) over a row of image cards, each with a numbered badge, a title and a
+   line of copy. A hairline runs behind the badges and joins the columns. */
+
+.process-steps {
+  position: relative;
+}
+
+/* custom-grid.css gives .container width:100% plus padding with no
+   box-sizing, so it runs 2 x gutter past its parent. */
+.process-steps .container,
+.process-steps .container-fluid {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+   --------------------------------------------------------------------------- */
+.process-steps__header {
+  padding-bottom: 4rem;
+}
+
+/* Eyebrow: .sub-heading supplies the 11px / .2em uppercase type; the rule is
+   the 26px dash that sits in front of it. */
+.process-steps__eyebrow {
+  margin: 0 0 1.2rem;
+  color: var(--steps-eyebrow, rgb(var(--color-sub-heading)));
+}
+
+.process-steps__eyebrow::before {
+  content: "";
+  display: block;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.process-steps__heading {
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* The accent half of the heading: italic, in the accent colour. */
+.process-steps__heading em,
+.process-steps__heading i {
+  font-style: italic;
+  color: var(--steps-accent, #7a8f55);
+}
+
+/* ---------------------------------------------------------------------------
+   List
+   --------------------------------------------------------------------------- */
+.process-steps__track {
+  position: relative;
+}
+
+.process-steps__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--steps-gap, 2.2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The hairline joining the badges. Its offset is a margin-top percentage, which
+   resolves against the list's WIDTH — so it tracks the card height (column
+   width / ratio) without needing the rendered height. Desktop only: the mobile
+   design stacks the steps and drops the line. */
+.process-steps__rule {
+  display: none;
+}
+
+.process-steps__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Card ---------------------------------------------------------------------- */
+.process-steps__figure {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: var(--steps-ratio, 3 / 2);
+  border-radius: var(--steps-radius, 1.6rem);
+  background-color: rgb(var(--color-background));
+  background-image: var(--steps-fallback);
+}
+
+/* The figure's aspect-ratio gives a definite height, so the photo and the
+   placeholder both fill it in normal flow. */
+.process-steps__figure img,
+.process-steps__figure svg.placeholder-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--steps-focal, center);
+}
+
+/* Caption pill, 18px in from the bottom-left corner of the card. */
+.process-steps__pill {
+  position: absolute;
+  left: 1.8rem;
+  bottom: 1.4rem;
+  max-width: calc(100% - 3.6rem);
+  padding: 0.5rem 1rem;
+  border-radius: 10rem;
+  background-color: rgba(var(--color-background), 0.55);
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--steps-accent, #7a8f55);
+}
+
+/* Badge --------------------------------------------------------------------- */
+.process-steps__badge {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  margin-top: 1.8rem;
+  border-radius: 50%;
+  background-color: rgb(var(--color-heading));
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.8rem;
+  line-height: 1;
+  color: rgb(var(--color-background));
+}
+
+/* Text ---------------------------------------------------------------------- */
+.process-steps__title {
+  margin: 1.2rem 0 0;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: 2.2rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-heading));
+}
+
+.process-steps__text {
+  margin: 2rem 0 0;
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: rgb(var(--color-foreground));
+}
+
+.process-steps__text > :first-child {
+  margin-top: 0;
+}
+
+.process-steps__text > :last-child {
+  margin-bottom: 0;
+}
+
+.process-steps__text p {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Desktop
+   --------------------------------------------------------------------------- */
+@media screen and (min-width: 750px) {
+  .process-steps__header {
+    padding-bottom: 5rem;
+  }
+
+  .process-steps__list {
+    grid-template-columns: repeat(var(--steps-columns, 3), minmax(0, 1fr));
+  }
+
+  .process-steps__rule {
+    display: block;
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 0;
+    height: 1px;
+    /* card height + card-to-badge gap + half the badge */
+    margin-top: calc(
+      (100% - (var(--steps-columns, 3) - 1) * var(--steps-gap, 2.2rem)) /
+        var(--steps-columns, 3) / var(--steps-ratio-value, 1.5) + 1.8rem + 2.2rem
+    );
+    background-color: rgba(var(--color-heading), 0.18);
+    pointer-events: none;
+  }
+}

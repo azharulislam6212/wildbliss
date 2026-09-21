@@ -1,0 +1,448 @@
+{{ 'section-collection-zone.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection-zone.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .collection-zone-{{ section.id }} {
+    --zone-eyebrow: {{ section.settings.eyebrow_color }};
+    --zone-accent: {{ section.settings.accent_color }};
+    --zone-highlight: {{ section.settings.highlight_color }};
+    --zone-pin: {{ section.settings.pin_color }};
+    --zone-pin-rgb: {{ section.settings.pin_color.red }}, {{ section.settings.pin_color.green }}, {{ section.settings.pin_color.blue }};
+    --zone-ratio: {{ section.settings.map_ratio }};
+  }
+{%- endstyle -%}
+
+<collection-zone
+  class="collection-zone collection-zone-{{ section.id }} collection-zone--map-{{ section.settings.map_position }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    <div class="collection-zone__inner">
+      <div class="collection-zone__map">
+        <div class="collection-zone__map-media">
+          {%- if section.settings.map_image != blank -%}
+            {% render 'responsive-img',
+              image: section.settings.map_image,
+              sizes: '(min-width: 990px) 55vw, 100vw'
+            %}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        {%- for block in section.blocks -%}
+          <span
+            class="collection-zone__pin collection-zone__pin--label-{{ block.settings.label_position }}"
+            style="--pin-x: {{ block.settings.pin_x }}%; --pin-y: {{ block.settings.pin_y }}%; --pin-delay: {{ forloop.index0 | times: 0.35 }}s;"
+            data-zone-pin="{{ block.id }}"
+            aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-hidden="true"
+            {{ block.shopify_attributes }}
+          >
+            <span class="collection-zone__pin-mark"></span>
+            <span class="collection-zone__pin-label">{{ block.settings.name | escape }}</span>
+          </span>
+        {%- endfor -%}
+
+        {%- if section.settings.map_caption != blank -%}
+          <p class="collection-zone__map-caption">{{ section.settings.map_caption | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="collection-zone__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="collection-zone__eyebrow sub-heading">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- comment -%}
+          Every region's copy is rendered and all but the first hidden, so the
+          section still reads in full with scripting off and nothing has to be
+          fetched when a pill is chosen.
+        {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          <div
+            class="collection-zone__panel"
+            id="ZonePanel-{{ section.id }}-{{ block.id }}"
+            data-zone-panel="{{ block.id }}"
+            role="tabpanel"
+            aria-labelledby="ZonePill-{{ section.id }}-{{ block.id }}"
+            {% unless forloop.first %}
+              hidden
+            {% endunless %}
+          >
+            {%- if block.settings.heading != blank -%}
+              <h2 class="collection-zone__heading">{{ block.settings.heading | escape }}</h2>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <div class="collection-zone__text rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div
+            class="collection-zone__pills"
+            role="tablist"
+            {% if section.settings.pills_label != blank %}
+              aria-label="{{ section.settings.pills_label | escape }}"
+            {% endif %}
+          >
+            {%- for block in section.blocks -%}
+              <button
+                type="button"
+                class="collection-zone__pill"
+                id="ZonePill-{{ section.id }}-{{ block.id }}"
+                data-zone-pill="{{ block.id }}"
+                role="tab"
+                aria-controls="ZonePanel-{{ section.id }}-{{ block.id }}"
+                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+              >
+                {{ block.settings.name | escape }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</collection-zone>
+
+{% schema %}
+{
+  "name": "Collection zone",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Wild collection zone"
+    },
+    {
+      "type": "image_picker",
+      "id": "map_image",
+      "label": "Map artwork",
+      "info": "Leave empty to use the built-in Carpathian map."
+    },
+    {
+      "type": "text",
+      "id": "map_caption",
+      "label": "Map caption",
+      "default": "Stylized map · Carpathian arc highlight"
+    },
+    {
+      "type": "text",
+      "id": "pills_label",
+      "label": "Region list label",
+      "info": "Read out by screen readers before the region buttons.",
+      "default": "Choose a collection region"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow colour",
+      "default": "#a05e12"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Map caption colour",
+      "default": "#66794a"
+    },
+    {
+      "type": "color",
+      "id": "pin_color",
+      "label": "Pin colour",
+      "default": "#d58c3f"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Selected region highlight",
+      "default": "#91a66a"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "map_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Map position"
+    },
+    {
+      "type": "select",
+      "id": "map_ratio",
+      "options": [
+        {
+          "value": "676 / 536",
+          "label": "Built-in map (676:536)"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        },
+        {
+          "value": "3 / 2",
+          "label": "Classic (3:2)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        }
+      ],
+      "default": "676 / 536",
+      "label": "Map shape"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "region",
+      "name": "Region",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Region name",
+          "info": "Used on the map pin and on the button.",
+          "default": "Eastern Carpathians"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Eastern Carpathians"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>The long eastern ridge — certified-organic wild collection areas, gathered by hand in season and dried close to the meadow.</p>"
+        },
+        {
+          "type": "range",
+          "id": "pin_x",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Pin position — across",
+          "default": 58
+        },
+        {
+          "type": "range",
+          "id": "pin_y",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Pin position — down",
+          "default": 43
+        },
+        {
+          "type": "select",
+          "id": "label_position",
+          "options": [
+            {
+              "value": "right",
+              "label": "Right of the pin"
+            },
+            {
+              "value": "left",
+              "label": "Left of the pin"
+            }
+          ],
+          "default": "right",
+          "label": "Pin label side"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection zone",
+      "blocks": [
+        {
+          "type": "region",
+          "settings": {
+            "name": "Maramureş",
+            "heading": "Maramureş",
+            "text": "<p>Northern meadows and forest edges, hand-gathered in short seasonal windows.</p>",
+            "pin_x": 35,
+            "pin_y": 15
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "name": "Bucovina",
+            "heading": "Bucovina",
+            "text": "<p>Cool, wooded uplands where the herbs carry a deeper, resinous aroma.</p>",
+            "pin_x": 50,
+            "pin_y": 23
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "name": "Eastern Carpathians",
+            "heading": "Eastern Carpathians",
+            "text": "<p>The long eastern ridge — certified-organic wild collection areas, gathered by hand in season and dried close to the meadow.</p>",
+            "pin_x": 58,
+            "pin_y": 43
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "name": "Southern Carpathians",
+            "heading": "Southern Carpathians",
+            "text": "<p>High alpine pasture, thin air and long light — slow-growing, concentrated herbs.</p>",
+            "pin_x": 32,
+            "pin_y": 67
+          }
+        },
+        {
+          "type": "region",
+          "settings": {
+            "name": "Apuseni Mountains",
+            "heading": "Apuseni Mountains",
+            "text": "<p>Limestone plateaus and hay meadows worked the same way for generations.</p>",
+            "pin_x": 27,
+            "pin_y": 40
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,209 @@
+/* Solar highlight — a media card beside an eyebrow / heading / copy stack, a
+   wrapping row of icon + label features and up to two buttons. */
+
+.solar-highlight {
+  position: relative;
+}
+
+/* custom-grid.css gives .container width:100% plus padding with no
+   box-sizing, so it runs 2 x gutter past its parent. */
+.solar-highlight .container,
+.solar-highlight .container-fluid {
+  box-sizing: border-box;
+}
+
+.solar-highlight__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 3.2rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Media
+   --------------------------------------------------------------------------- */
+.solar-highlight__figure {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: var(--solar-ratio-mobile, 4 / 3);
+  border-radius: var(--solar-radius, 1.6rem);
+  background-color: rgb(var(--color-background));
+  background-image: var(--solar-fallback);
+}
+
+/* The figure's aspect-ratio gives a definite height, so the photo and the
+   placeholder both fill it in normal flow. */
+.solar-highlight__figure img,
+.solar-highlight__figure svg.placeholder-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--solar-focal, center);
+}
+
+/* Caption pill, 18px in from the bottom-left corner of the card. */
+.solar-highlight__pill {
+  position: absolute;
+  left: 1.8rem;
+  bottom: 1.4rem;
+  max-width: calc(100% - 3.6rem);
+  padding: 0.5rem 1rem;
+  border-radius: 1.2rem;
+  background-color: rgba(var(--color-background), 0.55);
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--solar-accent, #7a8f55);
+}
+
+/* ---------------------------------------------------------------------------
+   Content
+   --------------------------------------------------------------------------- */
+
+/* Eyebrow: .sub-heading supplies the 11px / .2em uppercase type; the rule is
+   the 26px dash that sits in front of it. */
+.solar-highlight__eyebrow {
+  margin: 0 0 1.2rem;
+  color: var(--solar-eyebrow, rgb(var(--color-sub-heading)));
+}
+
+.solar-highlight__eyebrow::before {
+  content: "";
+  display: block;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.solar-highlight__heading {
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* The accent half of the heading: italic, in the accent colour. */
+.solar-highlight__heading em,
+.solar-highlight__heading i {
+  font-style: italic;
+  color: var(--solar-accent, #7a8f55);
+}
+
+.solar-highlight__text {
+  margin: 2rem 0 0;
+  font-size: 1.6rem;
+  line-height: 1.65;
+  color: rgb(var(--color-foreground));
+}
+
+.solar-highlight__text > :first-child {
+  margin-top: 0;
+}
+
+.solar-highlight__text > :last-child {
+  margin-bottom: 0;
+}
+
+/* Features ------------------------------------------------------------------
+   A wrapping row, not a grid: each pair sits as close as its label needs and
+   the row breaks where it runs out of room, as drawn. */
+.solar-highlight__features {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2.8rem;
+  row-gap: 1.2rem;
+  margin: 2.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.solar-highlight__feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.solar-highlight__feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--solar-icon-size, 3.6rem);
+  height: var(--solar-icon-size, 3.6rem);
+  border: 1px solid rgba(var(--color-heading), 0.18);
+  border-radius: 50%;
+  color: rgb(var(--color-heading));
+}
+
+.solar-highlight__feature-icon svg,
+.solar-highlight__feature-icon img {
+  display: block;
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+}
+
+.solar-highlight__feature-label {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: rgb(var(--color-heading));
+  font-weight: 600;
+}
+
+/* Buttons ------------------------------------------------------------------- */
+.solar-highlight__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 2.8rem;
+}
+
+.solar-highlight__buttons .button {
+  box-sizing: border-box;
+  flex: 1 1 14rem;
+  /* The stock button is a fixed 5.6rem tall; let a wrapped label grow it. */
+  height: auto;
+  min-height: 5.6rem;
+  border-radius: 10rem;
+}
+
+/* The outline button is drawn as a hairline in the heading colour, which
+   neither stock outline variant does on a light scheme. */
+.solar-highlight__buttons .button--outline {
+  background-color: transparent;
+  border: 1px solid rgba(var(--color-heading), 0.18);
+  color: rgb(var(--color-heading));
+}
+
+.solar-highlight__buttons .button--outline:hover {
+  border-color: rgba(var(--color-heading), 0.45);
+}
+
+/* ---------------------------------------------------------------------------
+   Desktop
+   --------------------------------------------------------------------------- */
+@media screen and (min-width: 990px) {
+  .solar-highlight__inner {
+    grid-template-columns: minmax(0, var(--solar-media-width, 588fr)) minmax(0, 532fr);
+    gap: 6.4rem;
+  }
+
+  /* Flipping the order alone would leave the wide track on the text, so the
+     tracks swap with it. */
+  .solar-highlight--media-right .solar-highlight__inner {
+    grid-template-columns: minmax(0, 532fr) minmax(0, var(--solar-media-width, 588fr));
+  }
+
+  .solar-highlight--media-right .solar-highlight__figure {
+    order: 2;
+  }
+
+  .solar-highlight__figure {
+    aspect-ratio: var(--solar-ratio, 4 / 3);
+  }
+
+  .solar-highlight__buttons .button {
+    flex: 0 0 auto;
+  }
+}

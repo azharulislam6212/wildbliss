@@ -32,7 +32,7 @@
         "page_width": "container",
         "content_alignment": "center",
         "accent_color": "#7a8f55",
-        "sub_heading_color": "#3A443C",
+        "sub_heading_color": "#3a443c",
         "content_width": 1140,
         "heading_size": 60,
         "heading_size_mobile": 32,
@@ -82,6 +82,225 @@
         "padding_bottom_tab": 0,
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0
+      }
+    },
+    "collection_zone_source": {
+      "type": "collection-zone",
+      "blocks": {
+        "region_maramures": {
+          "type": "region",
+          "settings": {
+            "name": "Maramureş",
+            "heading": "Maramureş",
+            "text": "<p>Northern meadows and forest edges, hand-gathered in short seasonal windows.<\/p>",
+            "pin_x": 35,
+            "pin_y": 15,
+            "label_position": "right"
+          }
+        },
+        "region_bucovina": {
+          "type": "region",
+          "settings": {
+            "name": "Bucovina",
+            "heading": "Bucovina",
+            "text": "<p>Cool, wooded uplands where the herbs carry a deeper, resinous aroma.<\/p>",
+            "pin_x": 50,
+            "pin_y": 23,
+            "label_position": "right"
+          }
+        },
+        "region_eastern": {
+          "type": "region",
+          "settings": {
+            "name": "Eastern Carpathians",
+            "heading": "Eastern Carpathians",
+            "text": "<p>The long eastern ridge — certified-organic wild collection areas, gathered by hand in season and dried close to the meadow.<\/p>",
+            "pin_x": 58,
+            "pin_y": 43,
+            "label_position": "right"
+          }
+        },
+        "region_southern": {
+          "type": "region",
+          "settings": {
+            "name": "Southern Carpathians",
+            "heading": "Southern Carpathians",
+            "text": "<p>High alpine pasture, thin air and long light — slow-growing, concentrated herbs.<\/p>",
+            "pin_x": 32,
+            "pin_y": 67,
+            "label_position": "right"
+          }
+        },
+        "region_apuseni": {
+          "type": "region",
+          "settings": {
+            "name": "Apuseni Mountains",
+            "heading": "Apuseni Mountains",
+            "text": "<p>Limestone plateaus and hay meadows worked the same way for generations.<\/p>",
+            "pin_x": 27,
+            "pin_y": 40,
+            "label_position": "right"
+          }
+        }
+      },
+      "block_order": [
+        "region_maramures",
+        "region_bucovina",
+        "region_eastern",
+        "region_southern",
+        "region_apuseni"
+      ],
+      "name": "Collection zone",
+      "settings": {
+        "page_width": "container",
+        "eyebrow": "Wild collection zone",
+        "map_image": "shopify:\/\/shop_images\/Stylized_map_of_Romania_highlighting_the_Carpathian_region.svg",
+        "map_caption": "Stylized map · Carpathian arc highlight",
+        "pills_label": "Choose a collection region",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#66794a",
+        "pin_color": "#d58c3f",
+        "highlight_color": "#91a66a",
+        "map_position": "left",
+        "map_ratio": "676 \/ 536",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
+      }
+    },
+    "solar_highlight_source": {
+      "type": "solar-highlight",
+      "blocks": {
+        "feature_packed": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_8b46526b-e9fb-44b5-b2f3-611b33c3d8a7.svg",
+            "label": "Packed at Source"
+          }
+        },
+        "feature_solar": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_d23c10a9-1977-434b-ae06-25b03095e459.svg",
+            "label": "Solar-Supported Production"
+          }
+        },
+        "feature_nature": {
+          "type": "feature",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_0260f6f6-cd32-496a-9e7b-8ccfaccf41f2.svg",
+            "label": "Closer to Nature"
+          }
+        },
+        "button_process": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore Our Process",
+            "button_link": "#process_step",
+            "button_style": "primary"
+          }
+        },
+        "button_facility": {
+          "type": "button",
+          "settings": {
+            "button_label": "See Our Facility",
+            "button_link": "",
+            "button_style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "feature_packed",
+        "feature_solar",
+        "feature_nature",
+        "button_process",
+        "button_facility"
+      ],
+      "name": "Solar highlight",
+      "settings": {
+        "page_width": "container",
+        "image": "shopify:\/\/shop_images\/div.r43.svg",
+        "caption": "Photo: the Wild Bliss facility in Romania – solar panels on the roof, meadow and hills behind",
+        "eyebrow": "Sustainability at source",
+        "heading": "Crafted with <em>Solar Power.<\/em>",
+        "text": "<p>Our herbs are dried, prepared, and packed close to source in our Romanian facility, where solar energy supports our production process. It's a more thoughtful way to care for freshness, quality, and our environmental footprint.<\/p>",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#7a8f55",
+        "media_position": "left",
+        "media_width": 588,
+        "ratio": "4 \/ 3",
+        "ratio_mobile": "4 \/ 3",
+        "radius": 16,
+        "icon_size": 36,
+        "fallback_gradient": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "color_scheme": "scheme-4",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
+      }
+    },
+    "process_steps_source": {
+      "type": "process-steps",
+      "blocks": {
+        "step_fresh": {
+          "type": "step",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/div.r32_63cfd53b-c838-4a59-ad5d-f213f7fc7c12.svg",
+            "caption": "Photo: freshly picked herbs in a gathering basket",
+            "title": "Fresh herbs",
+            "text": "<p>Hand-picked at peak bloom, in the morning, in season.<\/p>"
+          }
+        },
+        "step_drying": {
+          "type": "step",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/div.r32_1bb36cfb-f6a2-42be-9abb-ce40af28b0a0.svg",
+            "caption": "Photo: herbs air-drying on racks in a wooden barn",
+            "title": "Drying",
+            "text": "<p>Air-dried within hours, on site, never heat-blasted.<\/p>"
+          }
+        },
+        "step_packaging": {
+          "type": "step",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/div.r32_5e978855-da27-48fe-aeb2-4272becf582d.svg",
+            "caption": "Photo: hands packing dried herbs into canisters",
+            "title": "Packaging",
+            "text": "<p>Sealed close to the harvest so freshness travels with it.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_fresh",
+        "step_drying",
+        "step_packaging"
+      ],
+      "name": "Process steps",
+      "settings": {
+        "page_width": "container",
+        "eyebrow": "From meadow to canister",
+        "heading": "Three steps, <em>hours apart.<\/em>",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#7a8f55",
+        "ratio": "3 \/ 2",
+        "radius": 16,
+        "column_gap": 22,
+        "fallback_gradient": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
       }
     },
     "call_to_action_about": {
@@ -145,6 +364,9 @@
     "rich_text_4hDiYr",
     "main",
     "image_band_AAFE3e",
+    "collection_zone_source",
+    "solar_highlight_source",
+    "process_steps_source",
     "call_to_action_about"
   ]
 }

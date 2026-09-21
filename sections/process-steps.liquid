@@ -1,0 +1,371 @@
+{{ 'section-process-steps.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  comment
+    aspect-ratio can't be divided by in calc(), so the hairline offset needs the
+    ratio as a plain number alongside the CSS value.
+  endcomment
+  case section.settings.ratio
+    when '1 / 1'
+      assign ratio_value = 1
+    when '4 / 3'
+      assign ratio_value = 1.3333
+    when '16 / 9'
+      assign ratio_value = 1.7778
+    else
+      assign ratio_value = 1.5
+  endcase
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .process-steps-{{ section.id }} {
+    --steps-eyebrow: {{ section.settings.eyebrow_color }};
+    --steps-accent: {{ section.settings.accent_color }};
+    --steps-ratio: {{ section.settings.ratio }};
+    --steps-ratio-value: {{ ratio_value }};
+    --steps-radius: {{ section.settings.radius }}px;
+    --steps-gap: {{ section.settings.column_gap }}px;
+    --steps-columns: {{ section.blocks.size | at_least: 1 | at_most: 4 }};
+    --steps-fallback: {{ section.settings.fallback_gradient }};
+  }
+{%- endstyle -%}
+
+<div id="{{ section.settings.them_section_id |  default:"process_step" }}"
+  class="process-steps process-steps-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="process-steps__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="process-steps__eyebrow sub-heading">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          {%- comment -%}
+            Wrap the accent half of the heading in <em>: it turns italic and
+            takes the accent colour.
+          {%- endcomment -%}
+          <h2 class="process-steps__heading hxl inline-richtext">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="process-steps__track">
+      <span class="process-steps__rule" aria-hidden="true"></span>
+
+      <ol class="process-steps__list" role="list">
+        {%- for block in section.blocks -%}
+        {%- liquid
+          assign step_number = forloop.index
+          if step_number < 10
+            assign step_number = step_number | prepend: '0'
+          endif
+        -%}
+          <li class="process-steps__step" {{ block.shopify_attributes }}>
+            <figure
+              class="process-steps__figure"
+              {% if block.settings.image != blank %}
+                style="--steps-focal: {{ block.settings.image.presentation.focal_point }};"
+              {% endif %}
+            >
+              {%- if block.settings.image != blank -%}
+                {% render 'responsive-img',
+                  image: block.settings.image,
+                  sizes: '(min-width: 750px) 33vw, 100vw'
+                %}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+
+              {%- if block.settings.caption != blank -%}
+                <figcaption class="process-steps__pill">{{ block.settings.caption | escape }}</figcaption>
+              {%- endif -%}
+            </figure>
+
+            <span class="process-steps__badge" aria-hidden="true">{{ step_number }}</span>
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="process-steps__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <div class="process-steps__text rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Process steps",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "From meadow to canister"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Wrap the accent words in <em> to set them italic in the accent colour.",
+      "default": "Three steps, <em>hours apart.</em>"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow colour",
+      "default": "#a05e12"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "info": "Used for the italic half of the heading, the caption pills and the placeholder art.",
+      "default": "#7a8f55"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "options": [
+        {
+          "value": "3 / 2",
+          "label": "Classic (3:2)"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "16 / 9",
+          "label": "Widescreen (16:9)"
+        }
+      ],
+      "default": "3 / 2",
+      "label": "Card shape"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Card corner radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between steps",
+      "default": 22
+    },
+    {
+      "type": "color_background",
+      "id": "fallback_gradient",
+      "label": "Card placeholder",
+      "info": "Shown behind the line art when a step has no photo.",
+      "default": "linear-gradient(160deg, #eef1e1 0%, #e2e8d2 55%, #d5ddc3 100%)"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    },
+     {
+      "type": "text",
+      "id": "them_section_id",
+      "label": "Section Id"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo",
+          "info": "Leave empty to use a placeholder image."
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption pill",
+          "info": "Optional. Sits in the bottom-left corner of the card.",
+          "default": "Photo: freshly picked herbs in a gathering basket"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Fresh herbs"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Hand-picked at peak bloom, in the morning, in season.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Process steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "caption": "Photo: freshly picked herbs in a gathering basket",
+            "title": "Fresh herbs",
+            "text": "<p>Hand-picked at peak bloom, in the morning, in season.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "caption": "Photo: herbs air-drying on racks in a wooden barn",
+            "title": "Drying",
+            "text": "<p>Air-dried within hours, on site, never heat-blasted.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "caption": "Photo: hands packing dried herbs into canisters",
+            "title": "Packaging",
+            "text": "<p>Sealed close to the harvest so freshness travels with it.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

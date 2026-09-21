@@ -1,5 +1,142 @@
 {
   "sections": {
+    "rich_text_4hDiYr": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_eRGLGR": {
+          "type": "caption",
+          "settings": {
+            "caption": "Quality & testing"
+          }
+        },
+        "heading_FYh89X": {
+          "type": "heading",
+          "settings": {
+            "heading": "Verified <em>Quality<\/em>"
+          }
+        },
+        "text_mmg8W6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every herb is carefully selected, tested and handled with<br\/>care.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "caption_eRGLGR",
+        "heading_FYh89X",
+        "text_mmg8W6"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "page_width": "container",
+        "content_alignment": "center",
+        "accent_color": "#7a8f55",
+        "sub_heading_color": "#3a443c",
+        "content_width": 1140,
+        "heading_size": 60,
+        "heading_size_mobile": 32,
+        "text_width": 680,
+        "text_width_mobile": 450,
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 20,
+        "padding_top_tab": 72,
+        "padding_bottom_tab": 20,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "icon_card_blocks_B3YwgK": {
+      "type": "icon-card-blocks",
+      "blocks": {
+        "icon_card_3HhnPT": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"35\" height=\"35\" viewBox=\"0 0 35 35\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M14.5 27.5C21.6797 27.5 27.5 21.6797 27.5 14.5C27.5 7.3203 21.6797 1.5 14.5 1.5C7.3203 1.5 1.5 7.3203 1.5 14.5C1.5 21.6797 7.3203 27.5 14.5 27.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M33.5004 33.5004L23.9004 23.9004\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M20.5 8.5C14.5 8.5 10.5 12.5 10.5 18.5C16.5 18.5 20.5 14.5 20.5 8.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M10.5 18.5L17.5 11.5\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
+            "caption": "",
+            "title": "Identity",
+            "rich_text": "Verified botanical identity.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_xhBHWq": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"31\" height=\"40\" viewBox=\"0 0 31 40\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M9.19379 1.5H21.1938M11.1938 1.5V11.5L2.19379 29.5C1.70745 30.4214 1.46943 31.4536 1.50314 32.4949C1.53686 33.5362 1.84115 34.5508 2.38606 35.4388C2.93098 36.3268 3.69774 37.0577 4.61088 37.5593C5.52401 38.061 6.55204 38.3163 7.59379 38.3H22.7938C23.8355 38.3163 24.8636 38.061 25.7767 37.5593C26.6898 37.0577 27.4566 36.3268 28.0015 35.4388C28.5464 34.5508 28.8507 33.5362 28.8844 32.4949C28.9181 31.4536 28.6801 30.4214 28.1938 29.5L19.1938 11.5V1.5\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M10.1934 25.5L14.1934 29.5L21.1934 22.5\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "caption": "",
+            "title": "Content Verified",
+            "rich_text": "Key plant markers tested.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_FUBWGd": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"40\" height=\"41\" viewBox=\"0 0 40 41\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M24 1.5C24 1.5 38 16.5 38 25.5C38 29.213 36.525 32.774 33.8995 35.3995C31.274 38.025 27.713 39.5 24 39.5C20.287 39.5 16.726 38.025 14.1005 35.3995C11.475 32.774 10 29.213 10 25.5C10 16.5 24 1.5 24 1.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M18 23.5L22 27.5L30 19.5\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "caption": "",
+            "title": "Purity",
+            "rich_text": "Heavy metals and microbiology tested.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_HFb3TW": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"39\" height=\"39\" viewBox=\"0 0 39 39\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M19.5 37.5C29.4411 37.5 37.5 29.4411 37.5 19.5C37.5 9.55887 29.4411 1.5 19.5 1.5C9.55887 1.5 1.5 9.55887 1.5 19.5C1.5 29.4411 9.55887 37.5 19.5 37.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M28.5 10.5C18.5 10.5 12.5 16.5 12.5 26.5C22.5 26.5 28.5 20.5 28.5 10.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M12.5 26.5L21.5 17.5\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "caption": "",
+            "title": "Organic",
+            "rich_text": "Certified organic sourcing.",
+            "text": "",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "icon_card_3HhnPT",
+        "icon_card_xhBHWq",
+        "icon_card_FUBWGd",
+        "icon_card_HFb3TW"
+      ],
+      "name": "Icon Card Blocks",
+      "settings": {
+        "page_width": "container",
+        "subheading": "",
+        "heading": "",
+        "heading_size": "hxl",
+        "text": "",
+        "columns": 4,
+        "icon_size": 24,
+        "color_sub_heading": "#91a66a",
+        "color_accent": "#7a8f55",
+        "color_scheme": "scheme-1",
+        "color_scheme_card": "scheme-877af017-ed23-475a-945f-3ed37b1df4d4",
+        "overlauy_color": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "them_section_id": ""
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -13,221 +150,11 @@
         "padding_bottom_mobile": 48
       }
     },
-    "section_page_header_BaDknx": {
-      "type": "section-page-header",
-      "blocks": {
-        "pre_heading_VMyEhM": {
-          "type": "pre_heading",
-          "settings": {
-            "pre_heading": "About us"
-          }
-        },
-        "heading_fkagCf": {
-          "type": "heading",
-          "settings": {
-            "heading": "From Our Family <em>to Yours<\/em>",
-            "heading_size": "hxxl"
-          }
-        },
-        "text_G9LPDm": {
-          "type": "text",
-          "settings": {
-            "text": "<em>A small company with deep roots in the mountains of Romania.<\/em>"
-          }
-        }
-      },
-      "block_order": [
-        "pre_heading_VMyEhM",
-        "heading_fkagCf",
-        "text_G9LPDm"
-      ],
-      "name": "Page Header",
-      "settings": {
-        "allow_transparent_header": false,
-        "page_width": "container",
-        "banner_height": "exlarge",
-        "image": "shopify:\/\/shop_images\/section.phero-bleed.svg",
-        "text_align": "vertical-center horizontal-left",
-        "color_accent": "#e3b469",
-        "color_scheme": "scheme-2",
-        "overlay_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "padding_top_tab": 40,
-        "padding_bottom_tab": 40,
-        "padding_top_mobile": 24,
-        "padding_bottom_mobile": 24
-      }
-    },
-    "about_image_with_text_kz4fLw": {
-      "type": "about-image-with-text",
-      "blocks": {
-        "caption_EzGaeE": {
-          "type": "caption",
-          "settings": {
-            "caption": "Founder story"
-          }
-        },
-        "heading_U9cCAa": {
-          "type": "heading",
-          "settings": {
-            "heading": "Why Wild Bliss <em>exists.<\/em>"
-          }
-        },
-        "image_cynGEf": {
-          "type": "image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/div.r45.svg",
-            "image_caption": ""
-          }
-        },
-        "text_WkppgW": {
-          "type": "text",
-          "settings": {
-            "text": "<p>I was born in Romania and raised in a remote village near the Carpathians, where nature was part of everyday life. As a child, I spent my days fly fishing, gathering wild herbs and berries, and learning the quiet traditions that connected our family<br\/>to the land.<br\/><br\/>Herbal teas were a daily ritual in our home — simple, fragrant infusions made from plants collected with care and enjoyed across generations. Years later, after moving to the United States, I searched for the same herbs I remembered from childhood, but the teas I found often lacked the vivid aroma, flavor, and botanical character I grew up with. It became clear to me that true quality depends not only on the plant itself, but on the care taken after harvest.<\/p>"
-          }
-        },
-        "block_quote_PDLNnn": {
-          "type": "block_quote",
-          "settings": {
-            "text": "<p>Wild Bliss was born from that belief: pure Romanian botanicals,<br\/>carefully sourced and thoughtfully crafted with respect for origin,<br\/>freshness, and tradition.<\/p>"
-          }
-        },
-        "attribution_HkW4xE": {
-          "type": "attribution",
-          "settings": {
-            "text": "— S.I. Farcas, Founder"
-          }
-        }
-      },
-      "block_order": [
-        "caption_EzGaeE",
-        "heading_U9cCAa",
-        "image_cynGEf",
-        "text_WkppgW",
-        "block_quote_PDLNnn",
-        "attribution_HkW4xE"
-      ],
-      "name": "About image with text",
-      "settings": {
-        "page_width": "container",
-        "accent_color": "#7a8f55",
-        "media_width": 42,
-        "column_gap": 64,
-        "card_ratio": "476 \/ 595",
-        "card_radius": 12,
-        "card_fallback": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
-        "heading_size": 47,
-        "heading_size_mobile": 32,
-        "quote_indent": 23,
-        "color_scheme": "",
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "padding_top_tab": 76,
-        "padding_bottom_tab": 76,
-        "padding_top_mobile": 56,
-        "padding_bottom_mobile": 56
-      }
-    },
-    "icon_card_blocks_PKXHeH": {
-      "type": "icon-card-blocks",
-      "blocks": {
-        "icon_card_EQyNhq": {
-          "type": "icon_card",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Frame_58def85f-e8b8-4d20-9670-7837c4a7dd72.svg",
-            "svg_icon": "",
-            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
-            "caption": "",
-            "title": "Integrity",
-            "rich_text": "We make only claims we canstand behind — and verifywhat matters.",
-            "text": "",
-            "collection": "",
-            "button_text": "",
-            "button_url": "",
-            "button_style": "primary"
-          }
-        },
-        "icon_card_rJqXLc": {
-          "type": "icon_card",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Frame-1.svg",
-            "svg_icon": "",
-            "caption": "",
-            "title": "Authentic Origin",
-            "rich_text": "From biodiverse Carpathianlandscapes, where herbsdevelop natural aroma, color,and character.",
-            "text": "",
-            "collection": "",
-            "button_text": "",
-            "button_url": "",
-            "button_style": "primary"
-          }
-        },
-        "icon_card_zcmn4g": {
-          "type": "icon_card",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Frame-2.svg",
-            "svg_icon": "",
-            "caption": "",
-            "title": "Craftsmanship",
-            "rich_text": "Harvested with care, gentlydried, and packed close tosource.",
-            "text": "",
-            "collection": "",
-            "button_text": "",
-            "button_url": "",
-            "button_style": "primary"
-          }
-        },
-        "icon_card_Yzwnpp": {
-          "type": "icon_card",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/Frame-3.svg",
-            "svg_icon": "",
-            "caption": "",
-            "title": "Transparency",
-            "rich_text": "Clear origin, simpleingredients, and testing youcan trust.",
-            "text": "",
-            "collection": "",
-            "button_text": "",
-            "button_url": "",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "icon_card_EQyNhq",
-        "icon_card_rJqXLc",
-        "icon_card_zcmn4g",
-        "icon_card_Yzwnpp"
-      ],
-      "name": "Icon Card Blocks",
-      "settings": {
-        "page_width": "container",
-        "subheading": "What we hold to",
-        "heading": "<p>Four standards we <em>never<br\/>compromise.<\/em><\/p>",
-        "heading_size": "hxl",
-        "text": "",
-        "columns": 4,
-        "icon_size": 34,
-        "color_sub_heading": "#a05e12",
-        "color_accent": "#7a8f55",
-        "color_scheme": "",
-        "color_scheme_card": "scheme-877af017-ed23-475a-945f-3ed37b1df4d4",
-        "overlauy_color": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "padding_top_tab": 80,
-        "padding_bottom_tab": 80,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48,
-        "them_section_id": ""
-      }
-    },
     "image_band_AAFE3e": {
       "type": "image-band",
       "name": "Image band",
       "settings": {
-        "image": "shopify:\/\/shop_images\/div.r219.svg",
+        "image": "shopify:\/\/shop_images\/div.r219_c4b2efb3-0113-432a-8399-814ce53d85e0.svg",
         "pill_text": "",
         "note": "<p>Every lot is tested for identity, purity, heavy metals and microbiology before it is packed.<\/p>",
         "page_width": "container",
@@ -243,8 +170,103 @@
         "padding_bottom": 96,
         "padding_top_tab": 76,
         "padding_bottom_tab": 76,
-        "padding_top_mobile": 56,
+        "padding_top_mobile": 48,
         "padding_bottom_mobile": 48
+      }
+    },
+    "certification_band_JtHHyA": {
+      "type": "certification-band",
+      "blocks": {
+        "item_Jfa36g": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg-cropped.png",
+            "svg_icon": "",
+            "label": "USDA Organic",
+            "link": ""
+          }
+        },
+        "item_e3XP3H": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo-1.png",
+            "svg_icon": "",
+            "label": "Pharmacopoeia",
+            "link": ""
+          }
+        },
+        "item_8hMyNa": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo-2.png",
+            "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M13.75 7.5C13.75 12.5 10 16.25 5 16.25C5 21.25 8.75 25 13.75 25C18.75 25 22.5 21.25 22.5 16.25C22.5 11.25 18.75 7.5 13.75 7.5Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M5 16.25C5 13.9294 5.92187 11.7038 7.56282 10.0628C9.20376 8.42187 11.4294 7.5 13.75 7.5\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
+            "label": "Caffeine Free",
+            "link": ""
+          }
+        },
+        "item_EPFtCG": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo-4.png",
+            "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 3.75C15 10 11.25 13.75 11.25 18.75C11.25 19.7446 11.6451 20.6984 12.3483 21.4017C13.0516 22.1049 14.0054 22.5 15 22.5C15.9946 22.5 16.9484 22.1049 17.6517 21.4017C18.3549 20.6984 18.75 19.7446 18.75 18.75C18.75 13.75 15 10 15 3.75Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M6.25 23.75L23.75 6.25\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
+            "label": "Gluten Free",
+            "link": ""
+          }
+        },
+        "item_iaeqwA": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/cert_VEGAN.png",
+            "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 26.25C8.75 21.25 5 16.25 5 11.25C5 9.93823 5.41273 8.65972 6.17974 7.59556C6.94674 6.5314 8.02913 5.73555 9.27358 5.32073C10.518 4.90591 11.8614 4.89316 13.1135 5.28429C14.3656 5.67542 15.4629 6.45059 16.25 7.5C17.0609 7.09738 17.9496 6.87574 18.8546 6.85041C19.7596 6.82508 20.6593 6.99667 21.4914 7.35331C22.3236 7.70994 23.0683 8.24311 23.6741 8.91592C24.2799 9.58873 24.7323 10.3851 25 11.25C25 12.25 24.75 13.25 24.375 14.25\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M17.5 21.25C20 21.25 23.75 18.75 25 15\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
+            "label": "Certified Vegan",
+            "link": ""
+          }
+        },
+        "item_UAVMFE": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo-3.png",
+            "svg_icon": "",
+            "label": "carpathian wild",
+            "link": ""
+          }
+        },
+        "item_3EfTMU": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/ecocert.png",
+            "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 26.25C21.2132 26.25 26.25 21.2132 26.25 15C26.25 8.7868 21.2132 3.75 15 3.75C8.7868 3.75 3.75 8.7868 3.75 15C3.75 21.2132 8.7868 26.25 15 26.25Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M15 8.75C11.25 11.25 11.25 18.75 15 21.25C18.75 18.75 18.75 11.25 15 8.75Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
+            "label": "Ecocert",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_Jfa36g",
+        "item_e3XP3H",
+        "item_8hMyNa",
+        "item_EPFtCG",
+        "item_iaeqwA",
+        "item_UAVMFE",
+        "item_3EfTMU"
+      ],
+      "name": "Certification band",
+      "settings": {
+        "page_width": "container",
+        "subheading": "",
+        "heading": "",
+        "heading_size": "hxl",
+        "columns": 5,
+        "columns_mobile": "2",
+        "icon_size": 74,
+        "show_border": true,
+        "color_scheme": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_tab": 50,
+        "padding_bottom_tab": 50,
+        "padding_top_mobile": 46,
+        "padding_bottom_mobile": 46
       }
     },
     "call_to_action_about": {
@@ -253,28 +275,28 @@
         "heading_cta": {
           "type": "heading",
           "settings": {
-            "heading": "Thank you for bringing <em>our mountains home.<\/em>"
+            "heading": "Transparency is<em> the whole point.<\/em>"
           }
         },
         "text_cta": {
           "type": "text",
           "settings": {
-            "text": "<p>Every canister carries a little of the village we grew up in. We hope it finds a place in your kitchen, and your rituals.<\/p>"
+            "text": "<p>From sourcing to testing, we believe every step should be clear. See how our teas are made, where our herbs come from, and what we verify before they reach your cup.<\/p>"
           }
         },
         "button_shop": {
           "type": "button",
           "settings": {
-            "button_label": "Shop our Teas",
-            "button_link": "shopify:\/\/collections\/all",
+            "button_label": "Ask a question",
+            "button_link": "shopify:\/\/pages\/contact",
             "button_style": "primary"
           }
         },
         "button_hello": {
           "type": "button",
           "settings": {
-            "button_label": "Share Feedback",
-            "button_link": "shopify:\/\/pages\/contact",
+            "button_label": "See where we source",
+            "button_link": "shopify:\/\/pages\/our-source",
             "button_style": "outline"
           }
         }
@@ -289,12 +311,12 @@
       "settings": {
         "page_width": "container",
         "accent_color": "#7a8f55",
-        "content_width": 1140,
+        "content_width": 990,
         "heading_size": 67,
         "heading_size_mobile": 40,
-        "text_width": 460,
-        "text_width_mobile": 340,
-        "color_scheme": "scheme-1",
+        "text_width": 480,
+        "text_width_mobile": 390,
+        "color_scheme": "scheme-4",
         "padding_top": 96,
         "padding_bottom": 96,
         "padding_top_tab": 80,
@@ -305,11 +327,11 @@
     }
   },
   "order": [
+    "rich_text_4hDiYr",
+    "icon_card_blocks_B3YwgK",
     "main",
-    "section_page_header_BaDknx",
-    "about_image_with_text_kz4fLw",
-    "icon_card_blocks_PKXHeH",
     "image_band_AAFE3e",
+    "certification_band_JtHHyA",
     "call_to_action_about"
   ]
 }
