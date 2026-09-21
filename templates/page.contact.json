@@ -46,63 +46,67 @@
         "padding_bottom_mobile": 32
       }
     },
-    "contact_panel_contact": {
+    "contact_panel_BMbRHm": {
       "type": "contact-panel",
       "blocks": {
-        "row_phone": {
+        "icon_block_yPmbCA": {
           "type": "icon_block",
           "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_23bef119-74a5-48f4-a5fe-13d859e730b1.svg",
             "title": "Phone",
-            "text": "<p>312 910 0031</p>"
+            "text": "<p><a href=\"tel:312 910 0031\" title=\"tel:312 910 0031\">312 910 0031<\/a><\/p>"
           }
         },
-        "row_support": {
+        "icon_block_PENRna": {
           "type": "icon_block",
           "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_65839efe-1e65-48a9-ab37-191cbcff938e.svg",
             "title": "Customer support",
-            "text": "<p>CS@wildblissorganics.com</p>"
+            "text": "<p><a href=\"mailto:CS@wildblissorganics.com\" title=\"mailto:CS@wildblissorganics.com\">CS@wildblissorganics.com<\/a><\/p>"
           }
         },
-        "row_wholesale": {
+        "icon_block_7htktN": {
           "type": "icon_block",
           "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_9866ff7c-9eaa-43b6-b60c-4353aa54c8ed.svg",
             "title": "Wholesale",
-            "text": "<p>sales@wildblissorganics.com</p>"
+            "text": "<p><a href=\"mailto:sales@wildblissorganics.com\" title=\"mailto:sales@wildblissorganics.com\">sales@wildblissorganics.com<\/a><\/p>"
           }
         },
-        "office_block": {
+        "office_NUEWd3": {
           "type": "office",
           "settings": {
             "heading": "Office",
-            "address": "<p>843 N Ashland Ave.<br/>Chicago, IL 60622</p>",
-            "image_caption": "Photo: Chicago office – exterior or a warm interior detail"
+            "address": "<p>843 N Ashland Ave. Chicago, IL 60622<\/p>",
+            "image": "shopify:\/\/shop_images\/div.r32.svg",
+            "image_caption": ""
           }
         }
       },
       "block_order": [
-        "row_phone",
-        "row_support",
-        "row_wholesale",
-        "office_block"
+        "icon_block_yPmbCA",
+        "icon_block_PENRna",
+        "icon_block_7htktN",
+        "office_NUEWd3"
       ],
       "name": "Contact panel",
       "settings": {
         "page_width": "container",
         "reach_heading": "Reach us",
-        "color_accent": "#a05e12",
-        "accent_color": "#7a8f55",
-        "color_scheme": "scheme-1",
-        "color_scheme_card": "scheme-4",
+        "color_accent": "#A05E12",
+        "accent_color": "#7A8F55",
+        "color_scheme": "",
+        "color_scheme_card": "",
         "reach_width": 55,
         "panel_radius": 16,
         "icon_size": 48,
-        "photo_ratio": "3 / 2",
-        "motif_height": 142,
-        "padding_top": 0,
-        "padding_bottom": 120,
-        "padding_top_tab": 0,
-        "padding_bottom_tab": 80,
-        "padding_top_mobile": 0,
+        "photo_ratio": "3 \/ 2",
+        "photo_fallback": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 76,
+        "padding_bottom_tab": 76,
+        "padding_top_mobile": 48,
         "padding_bottom_mobile": 48
       }
     },
@@ -252,7 +256,7 @@
         "icon_widget_DbFU4a"
       ],
       "settings": {
-        "page_width": "container-fluid",
+        "page_width": "container",
         "color_accent": "#ff0000",
         "color_scheme": "",
         "color_scheme_card": "",
@@ -267,7 +271,7 @@
   },
   "order": [
     "rich_text_contact",
-    "contact_panel_contact",
+    "contact_panel_BMbRHm",
     "main",
     "form"
   ]

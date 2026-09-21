@@ -8,6 +8,7 @@
     {{ section.settings.color_accent.blue }};
   }
 
+
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
@@ -34,7 +35,11 @@
     --contact-icon-size: {{ section.settings.icon_size }}px;
     --contact-photo-ratio: {{ section.settings.photo_ratio }};
     --contact-photo-fallback: {{ section.settings.photo_fallback }};
-    --contact-motif-height: {{ section.settings.motif_height }}px;
+  }
+
+  .contact-panel-{{ section.id }} .contact-panel__office {
+         --color-accent: {{ section.settings.color_accent.red }}, {{ section.settings.color_accent.green }},  {{ section.settings.color_accent.blue }};
+  
   }
 {%- endstyle -%}
 
@@ -112,12 +117,9 @@
                         sizes: '(min-width: 990px) 40vw, 100vw'
                       %}
                     {%- else -%}
-                      {%- comment -%}
-                        No photo yet: the card keeps its shape and shows the
-                        botanical mark over the placeholder gradient, as drawn.
-                      {%- endcomment -%}
+                  
                       <span class="contact-panel__motif" aria-hidden="true">
-                        {{- 'motif-founder.svg' | inline_asset_content -}}
+                        {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
                       </span>
                     {%- endif -%}
 
@@ -252,16 +254,6 @@
         "label": "Photo placeholder",
         "info": "Shown behind the botanical mark when no photo is set.",
         "default": "linear-gradient(160deg, #eef1e1 0%, #e2e8d2 55%, #d5ddc3 100%)"
-      },
-      {
-        "type": "range",
-        "id": "motif_height",
-        "min": 60,
-        "max": 300,
-        "step": 2,
-        "unit": "px",
-        "label": "Mark height",
-        "default": 142
       },
       {
         "type": "header",
