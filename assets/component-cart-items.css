@@ -269,7 +269,7 @@ line-height: 150%;
 letter-spacing: 0.01em;
 
 /* Primary/primary-6 */
-color: #FF0000;
+color: rgb(var(--color-accent));
 
  
 margin: -3px 0px;

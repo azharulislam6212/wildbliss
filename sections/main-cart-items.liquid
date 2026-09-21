@@ -490,21 +490,21 @@
               <a href="{{ routes.all_products_collection_url }}" class="button button--primary">
                   {{- 'general.continue_shopping' | t -}}
                 </a>
-                <button  type="button" class="button button--primary-outline clear-cart-btn">
+                <button  type="button" class="button button--secondary clear-cart-btn">
                 Clear Cart
                 </button>
             </div>
     
             </div>
 
-          {%- if cart.item_count > 0 -%}
+          {% comment %} {%- if cart.item_count > 0 -%}
                 {%- assign upsell_url = routes.product_recommendations_url
                   | append: '?section_id=main-cart-items&product_id='
                   | append: cart.items[0].product_id
                   | append: '&limit=4'
                 -%}
                 {%- render 'cart-upsell-page', title: settings.cart_upsell_title, url: upsell_url -%}
-            {%- endif -%}
+            {%- endif -%} {% endcomment %}
 
          </div>
 
@@ -582,39 +582,8 @@
                        <div class="cart-divider"></div>
 
 
-                       <div class="summary-row">
-                        <span class="summary__title">Delivery Date</span>
-                        <span class="summary__total-value">  <delivery-date data-days="5"></delivery-date> </span>
-                      </div>
-
-                       <div class="cart-divider"></div>
-
-
-                 
-
-                      <script>
-                       class DeliveryDate extends HTMLElement {
-                      connectedCallback() {
-                        this.render();
-                      }
-
-                      render() {
-                        const days = Number(this.dataset.days || 5);
-
-                        const delivery = new Date();
-                        delivery.setDate(delivery.getDate() + days);
-
-                        this.textContent = delivery.toLocaleDateString("en-US", {
-                          weekday: "long",
-                          month: "long",
-                          day: "numeric",
-                        });
-                      }
-                    }
-
-                    customElements.define("delivery-date", DeliveryDate);
-                      </script>
-
+                  
+ 
 
                          <discount-code>
 
@@ -639,20 +608,7 @@
                         </discount-code>  
     
 
-                      {% comment %}
-                        <small class="tax-note caption-large rte">
-                          {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
-                            {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                          {%- elsif cart.taxes_included -%}
-                            {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
-                          {%- elsif shop.shipping_policy.body != blank -%}
-                            {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
-                          {%- else -%}
-                            {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
-                          {%- endif -%}
-                        </small>
-                      {% endcomment %}
-
+                  
                       
                     </div>
 
