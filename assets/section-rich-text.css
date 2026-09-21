@@ -27,7 +27,7 @@
 .rich-text__caption {
   justify-content: center;
   margin: 0 0 1.4rem;
-  color: rgb(var(--color-heading));
+  color: rgb(var(--color-sub-heading));
 }
 
 .rich-text--left .rich-text__caption {

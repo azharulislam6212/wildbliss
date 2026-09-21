@@ -21,6 +21,7 @@
   }
 
   .rich-text-{{ section.id }} {
+    --color-sub-heading:{{ section.settings.sub_heading_color.red }}, {{ section.settings.sub_heading_color.green }},  {{ section.settings.sub_heading_color.blue }}; 
     --rt-accent: {{ section.settings.accent_color }};
     --rt-max-width: {{ section.settings.content_width }}px;
     --rt-heading-size: {{ section.settings.heading_size }}px;
@@ -142,6 +143,12 @@
       "default": "#7A8F55",
       "label": "Accent colour",
       "info": "Used for the italic half of the heading."
+    },
+        {
+      "type": "color",
+      "id": "sub_heading_color",
+      "default": "#7A8F55",
+      "label": "Sub heading colour"
     },
     {
       "type": "header",

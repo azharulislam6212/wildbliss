@@ -32,6 +32,7 @@
         "page_width": "container",
         "content_alignment": "center",
         "accent_color": "#7a8f55",
+        "sub_heading_color": "#7a8f55",
         "content_width": 1140,
         "heading_size": 60,
         "heading_size_mobile": 32,
@@ -93,8 +94,8 @@
       "settings": {
         "page_width": "container",
         "reach_heading": "Reach us",
-        "color_accent": "#A05E12",
-        "accent_color": "#7A8F55",
+        "color_accent": "#a05e12",
+        "accent_color": "#7a8f55",
         "color_scheme": "",
         "color_scheme_card": "",
         "reach_width": 55,
@@ -125,147 +126,86 @@
     },
     "form": {
       "type": "contact-form",
+      "settings": {
+        "page_width": "container",
+        "eyebrow": "Write to us",
+        "heading": "Send a <em>message.<\/em>",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#7a8f55",
+        "subject_options": "Customer support\nOrder support\nWholesale\nGeneral enquiry",
+        "button_label": "Send Message",
+        "color_scheme": "scheme-4",
+        "color_scheme_card": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 76,
+        "padding_bottom_tab": 76,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "image_band_nKHDYh": {
+      "type": "image-band",
+      "name": "Image band",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/div.r219.svg",
+        "pill_text": "",
+        "note": "",
+        "page_width": "container",
+        "max_width": 1216,
+        "ratio": "7 \/ 3",
+        "ratio_mobile": "4 \/ 3",
+        "radius": 16,
+        "note_width": 600,
+        "accent_color": "#7a8f55",
+        "fallback_gradient": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "color_scheme": "",
+        "padding_top": 96,
+        "padding_bottom": 70,
+        "padding_top_tab": 76,
+        "padding_bottom_tab": 50,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "rich_text_LBrBBd": {
+      "type": "rich-text",
       "blocks": {
-        "heading_MNQgPy": {
+        "caption_ETa6ix": {
+          "type": "caption",
+          "settings": {
+            "caption": "Our door is open"
+          }
+        },
+        "heading_dQ6mxM": {
           "type": "heading",
           "settings": {
-            "heading": "Contact Roseville Meat Company",
-            "heading_size": "h0"
-          }
-        },
-        "text_WhQiTr": {
-          "type": "text",
-          "settings": {
-            "text": "<p>You’ll find the crew at Roseville Meat Company serving our clients seven-days-a-week! Come by and see why we’re everyone’s favorite local butcher.<\/p>",
-            "text_style": "body",
-            "text_size": "large"
-          }
-        },
-        "notice_FWU333": {
-          "type": "notice",
-          "settings": {
-            "text": "<p><a href=\"\/pages\/faq\" title=\"Faq\">Visit our FAQ page <\/a>for the most common questions.<\/p>"
-          }
-        },
-        "form_9KrDBq": {
-          "type": "form",
-          "settings": {
-            "heading": "",
-            "heading_size": "h0",
-            "button_style": "primary",
-            "color_scheme": ""
-          }
-        },
-        "icon_block_heading_hgLTte": {
-          "type": "icon_block_heading",
-          "settings": {
-            "heading": "Just look for “Sir Rose”, our famous four-legged statue and you’ll know you’ve found us!"
-          }
-        },
-        "icon_block_WA8tDG": {
-          "type": "icon_block",
-          "settings": {
-            "title": "Address",
-            "text": "<p>700 Atlantic St  Roseville, CA 95678<\/p>"
-          }
-        },
-        "icon_block_8MCyNX": {
-          "type": "icon_block",
-          "settings": {
-            "title": "Contact",
-            "text": "<p><a href=\"tel:(916) 782 - 2705\" title=\"tel:(916) 782 - 2705\">(916) 782 - 2705<\/a><br\/><a href=\"mailto:hello@example.com\" title=\"mailto:hello@example.com\">hello@example.com<\/a><\/p>"
-          }
-        },
-        "icon_block_EQY3Ej": {
-          "type": "icon_block",
-          "settings": {
-            "title": "Opening Hours",
-            "text": "<p>Mon-Sat: 8am-6pm<br\/>Sun: 10am-5pm<\/p>"
-          }
-        },
-        "map_iryeNr": {
-          "type": "map",
-          "settings": {
-            "map": "<iframe\n  src=\"https:\/\/www.google.com\/maps?q=700+Atlantic+St,+Roseville,+CA+95678&layer=c&cbll=38.7527,-121.2868&cbp=12,90,0,0,0&output=svembed\"\n  width=\"100%\"\n  height=\"440\"\n  style=\"border:0;\"\n  loading=\"lazy\"\n  allowfullscreen>\n<\/iframe>"
-          }
-        },
-        "map_NXGWtf": {
-          "type": "map",
-          "settings": {
-            "map": "<iframe\n  src=\"https:\/\/www.google.com\/maps?q=700+Atlantic+St,+Roseville,+CA+95678&output=embed\"\n  width=\"100%\"\n  height=\"440\"\n  style=\"border:0;\"\n  loading=\"lazy\"\n  allowfullscreen>\n<\/iframe>"
-          }
-        },
-        "image_widget_P6gy3t": {
-          "type": "image_widget",
-          "settings": {
-            "heading": "Meats Make Every Meal Special!",
-            "button_label": "SHOP NOW",
-            "button_link": "shopify:\/\/collections\/beef"
-          }
-        },
-        "image_widget_pBz7DL": {
-          "type": "image_widget",
-          "settings": {
-            "heading": "Ask About Our Exceptional Pet Foods",
-            "button_label": "SHOP NOW",
-            "button_link": "shopify:\/\/collections\/exotic-meats"
-          }
-        },
-        "icon_widget_AmAt3r": {
-          "type": "icon_widget",
-          "settings": {
-            "heading": "Selections & Special Orders",
-            "text": "<p>Please call for availability of products as not all items are available at all times.<\/p>",
-            "button_label": "CALL US",
-            "button_link": "tel:(916) 782 - 2705"
-          }
-        },
-        "image_widget_WAyFzn": {
-          "type": "image_widget",
-          "settings": {
-            "heading": "Delicious Prime Rib: Video Tutorial",
-            "button_label": "SHOP NOW",
-            "button_link": "shopify:\/\/collections\/exotic-meats"
-          }
-        },
-        "icon_widget_DbFU4a": {
-          "type": "icon_widget",
-          "settings": {
-            "heading": "More Video Tutorials",
-            "text": "<p>Make the most of your high-quality Roseville Meat Company products! <a href=\"https:\/\/rosevillemeats.com\/video-tutorials\/\" target=\"_blank\"> Click Here For Short Tutorials<\/a><\/p>",
-            "button_label": "",
-            "button_link": ""
+            "heading": "<em>\"Every conversation begins witha cup of tea.\"<\/em>"
           }
         }
       },
       "block_order": [
-        "heading_MNQgPy",
-        "text_WhQiTr",
-        "notice_FWU333",
-        "form_9KrDBq",
-        "icon_block_heading_hgLTte",
-        "icon_block_WA8tDG",
-        "icon_block_8MCyNX",
-        "icon_block_EQY3Ej",
-        "map_iryeNr",
-        "map_NXGWtf",
-        "image_widget_P6gy3t",
-        "image_widget_pBz7DL",
-        "icon_widget_AmAt3r",
-        "image_widget_WAyFzn",
-        "icon_widget_DbFU4a"
+        "caption_ETa6ix",
+        "heading_dQ6mxM"
       ],
+      "name": "Rich text",
       "settings": {
         "page_width": "container",
-        "color_accent": "#ff0000",
-        "color_scheme": "",
-        "color_scheme_card": "",
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "padding_top_tab": 60,
-        "padding_bottom_tab": 60,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
+        "content_alignment": "center",
+        "accent_color": "#4e5c50",
+        "sub_heading_color": "#a05e12",
+        "content_width": 560,
+        "heading_size": 40,
+        "heading_size_mobile": 26,
+        "text_width": 420,
+        "text_width_mobile": 340,
+        "color_scheme": "scheme-1",
+        "padding_top": 100,
+        "padding_bottom": 80,
+        "padding_top_tab": 72,
+        "padding_bottom_tab": 40,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
       }
     }
   },
@@ -273,6 +213,8 @@
     "rich_text_contact",
     "contact_panel_BMbRHm",
     "main",
-    "form"
+    "form",
+    "image_band_nKHDYh",
+    "rich_text_LBrBBd"
   ]
 }

@@ -266,9 +266,9 @@
     "contact": {
       "form": {
         "title": "Contact form",
-        "name": "Full Name:",
-        "email": "Email Address",
-        "phone": "Phone Number",
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
         "comment": "Message",
         "send": "Send Message",
         "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",

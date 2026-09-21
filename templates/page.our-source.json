@@ -1,0 +1,150 @@
+{
+  "sections": {
+    "rich_text_4hDiYr": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_eRGLGR": {
+          "type": "caption",
+          "settings": {
+            "caption": "Our source"
+          }
+        },
+        "heading_FYh89X": {
+          "type": "heading",
+          "settings": {
+            "heading": "From the <em>Carpathian <\/em>Region"
+          }
+        },
+        "text_mmg8W6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Shaped by wild meadows, forest edges, clean mountain air, and mineral-rich soils, the<br\/>Carpathian Region gives our herbs their natural depth, aroma, and character.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "caption_eRGLGR",
+        "heading_FYh89X",
+        "text_mmg8W6"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "page_width": "container",
+        "content_alignment": "center",
+        "accent_color": "#7a8f55",
+        "sub_heading_color": "#3A443C",
+        "content_width": 1140,
+        "heading_size": 60,
+        "heading_size_mobile": 32,
+        "text_width": 680,
+        "text_width_mobile": 450,
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 20,
+        "padding_top_tab": 72,
+        "padding_bottom_tab": 20,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "hied_page_title": false,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "image_band_AAFE3e": {
+      "type": "image-band",
+      "name": "Image band",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/div.r219_ade11e4c-5b85-4557-8d67-d636638a2561.svg",
+        "pill_text": "",
+        "note": "",
+        "page_width": "container",
+        "max_width": 1216,
+        "ratio": "7 \/ 3",
+        "ratio_mobile": "4 \/ 3",
+        "radius": 16,
+        "note_width": 600,
+        "accent_color": "#7a8f55",
+        "fallback_gradient": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_tab": 0,
+        "padding_bottom_tab": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "call_to_action_about": {
+      "type": "call-to-action",
+      "blocks": {
+        "heading_cta": {
+          "type": "heading",
+          "settings": {
+            "heading": "Closer to the source. <em>Closer to nature.<\/em>"
+          }
+        },
+        "text_cta": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every canister carries a little of the village we grew up in. We hope it finds a place in your kitchen, and your rituals.<\/p>"
+          }
+        },
+        "button_shop": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop our Teas",
+            "button_link": "shopify:\/\/collections\/all",
+            "button_style": "primary"
+          }
+        },
+        "button_hello": {
+          "type": "button",
+          "settings": {
+            "button_label": "How we verify quality",
+            "button_link": "shopify:\/\/pages\/quality-and-testing",
+            "button_style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cta",
+        "text_cta",
+        "button_shop",
+        "button_hello"
+      ],
+      "name": "Call to action",
+      "settings": {
+        "page_width": "container",
+        "accent_color": "#7a8f55",
+        "content_width": 780,
+        "heading_size": 67,
+        "heading_size_mobile": 40,
+        "text_width": 460,
+        "text_width_mobile": 340,
+        "color_scheme": "scheme-4",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
+      }
+    }
+  },
+  "order": [
+    "rich_text_4hDiYr",
+    "main",
+    "image_band_AAFE3e",
+    "call_to_action_about"
+  ]
+}
