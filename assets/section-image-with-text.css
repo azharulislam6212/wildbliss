@@ -1,0 +1,201 @@
+/* Image with text — design layer.
+   component-image-with-text.css is shared with multirow and image-with-card,
+   so the refreshed look lives here instead and is scoped to
+   .image-with-text--framed, which only this section carries. Everything the
+   stock section already does still works; this only restyles it. */
+
+.image-with-text--framed .image-with-text__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--iwt-gap, 3.2rem);
+  align-items: center;
+}
+
+/* The stock grid is a flex row with negative margins and ::after spacers; none
+   of that applies once the grid above takes over. */
+.image-with-text--framed .image-with-text__grid > .grid__item {
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* The stock "text first" modifier reverses a flex row; with a grid the media
+   moves instead, at every width — the design stacks text above the image. */
+.image-with-text--framed .image-with-text__grid--reverse .image-with-text__media-item {
+  order: 2;
+}
+
+.image-with-text--framed .grid__item::after,
+.image-with-text--framed .image-with-text__media-item::after,
+.image-with-text--framed .image-with-text__text-item::after {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Media
+   --------------------------------------------------------------------------- */
+.image-with-text--framed .image-with-text__media-item > * {
+  width: 100%;
+}
+
+.image-with-text--framed .image-with-text__media {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  aspect-ratio: var(--iwt-ratio-mobile, 4 / 5);
+  border: 0;
+  border-radius: var(--iwt-radius, 1.6rem);
+  box-shadow: none;
+  background-color: rgb(var(--color-background));
+  background-image: var(--iwt-fallback);
+}
+
+.image-with-text--framed .image-with-text__media img,
+.image-with-text--framed .image-with-text__media svg.placeholder-svg {
+ 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-with-text--framed .image-with-text__media--placeholder::after {
+  display: none;
+}
+
+/* Caption pill, 18px in from the bottom-left corner of the image. */
+.image-with-text__pill {
+  position: absolute;
+  left: 1.8rem;
+  bottom: 1.4rem;
+  z-index: 1;
+  max-width: calc(100% - 3.6rem);
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 10rem;
+  background-color: rgba(var(--color-background), 0.55);
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--iwt-accent, #7a8f55);
+}
+
+/* ---------------------------------------------------------------------------
+   Content
+   --------------------------------------------------------------------------- */
+.image-with-text--framed .image-with-text__content {
+  padding: 0;
+  min-height: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.image-with-text--framed .image-with-text__content > * + * {
+  margin-top: 0;
+}
+
+/* Eyebrow: the caption block carries .sub-heading for the 11px / .2em type;
+   the rule is the 26px dash in front of it. */
+.image-with-text--framed .image-with-text__text--caption {
+  margin: 0 0 1.2rem;
+  font-size: 11px;
+  line-height: 18px;
+  letter-spacing: 0.2em;
+  color: var(--iwt-eyebrow, rgb(var(--color-sub-heading)));
+}
+
+.image-with-text--framed .image-with-text__text--caption::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.image-with-text--framed .image-with-text__heading {
+  margin: 0;
+  line-height: 1.1;
+}
+
+/* Only when a pixel size is set; otherwise the block's size class still rules.
+   Two classes deep so it beats .h0/.h1/.hxl from base.css. */
+.image-with-text--framed .image-with-text__heading--sized {
+  font-size: var(--iwt-heading-size-mobile, 4.2rem);
+}
+
+/* The accent half of the heading: italic, in the accent colour. */
+.image-with-text--framed .image-with-text__heading em,
+.image-with-text--framed .image-with-text__heading i {
+  font-style: italic;
+  color: var(--iwt-accent, #7a8f55);
+}
+
+.image-with-text--framed .image-with-text__text:not(.image-with-text__text--caption) {
+  margin: 2rem 0 0;
+  max-width: var(--iwt-text-width, 42rem);
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.78;
+  color: rgb(var(--color-foreground));
+}
+
+.image-with-text--framed .image-with-text__text:not(.image-with-text__text--caption) p {
+  margin: 0;
+}
+
+.image-with-text--framed .image-with-text__text:not(.image-with-text__text--caption) > :first-child {
+  margin-top: 0;
+}
+
+.image-with-text--framed .image-with-text__text:not(.image-with-text__text--caption) > :last-child {
+  margin-bottom: 0;
+}
+
+/* Button ------------------------------------------------------------------- */
+.image-with-text--framed .image-with-text__content .button {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 3.2rem;
+  border-radius: 10rem;
+}
+
+.image-with-text__button-arrow {
+  display: block;
+  flex: 0 0 auto;
+  width: 0.9rem;
+  height: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   Desktop
+   --------------------------------------------------------------------------- */
+@media screen and (min-width: 990px) {
+  .image-with-text--framed .image-with-text__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--iwt-gap-desktop, 6.4rem);
+  }
+
+
+  .image-with-text--framed .image-with-text__media {
+    aspect-ratio: var(--iwt-ratio, 4 / 5);
+  }
+
+  .image-with-text--framed .image-with-text__heading--sized {
+    font-size: var(--iwt-heading-size, 7.8rem);
+  }
+
+  .image-with-text--framed .image-with-text__text:not(.image-with-text__text--caption) {
+    font-size: 2.1rem;
+    line-height: 1.75;
+  }
+
+  .image-with-text--framed .image-with-text__content .button {
+    width: auto;
+  }
+}

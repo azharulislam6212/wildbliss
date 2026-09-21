@@ -1,4 +1,5 @@
 {{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+{{ 'section-image-with-text.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -11,6 +12,23 @@
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
+  }
+
+  .image-with-text-{{ section.id }} {
+    --iwt-eyebrow: {{ section.settings.eyebrow_color }};
+    --iwt-accent: {{ section.settings.accent_color }};
+    --iwt-radius: {{ section.settings.image_radius }}px;
+    --iwt-ratio: {{ section.settings.image_ratio }};
+    --iwt-ratio-mobile: {{ section.settings.image_ratio_mobile }};
+    --iwt-text-width: {{ section.settings.text_width }}px;
+    --iwt-gap-desktop: {{ section.settings.column_gap }}px;
+    --iwt-fallback: {{ section.settings.fallback_gradient }};
+    {%- if section.settings.heading_size > 0 -%}
+      --iwt-heading-size: {{ section.settings.heading_size }}px;
+    {%- endif -%}
+    {%- if section.settings.heading_size_mobile > 0 -%}
+      --iwt-heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+    {%- endif -%}
   }
 {%- endstyle -%}
 
@@ -25,8 +43,8 @@
 -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.section_color_scheme }}">
-  <div class="page-width">
-    <div class="image-with-text image-with-text--{{ section.settings.content_layout }} isolate{% if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0 %} collapse-borders{% endif %}{% unless section.settings.color_scheme == section.settings.section_color_scheme and settings.media_border_thickness > 0 and settings.text_boxes_shadow_opacity == 0 and settings.text_boxes_border_thickness == 0 or settings.text_boxes_border_opacity == 0 %} collapse-corners{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <div class="{{ section.settings.page_width }}">
+    <div class="image-with-text image-with-text--framed image-with-text-{{ section.id }} image-with-text--{{ section.settings.content_layout }} isolate{% if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0 %} collapse-borders{% endif %}{% unless section.settings.color_scheme == section.settings.section_color_scheme and settings.media_border_thickness > 0 and settings.text_boxes_shadow_opacity == 0 and settings.text_boxes_border_thickness == 0 or settings.text_boxes_border_opacity == 0 %} collapse-corners{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %}">
         <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item">
           <div
@@ -57,7 +75,12 @@
             {%- else -%}
               {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
+
+          
           </div>
+            {%- if section.settings.image_caption != blank -%}
+              <p class="image-with-text__pill">{{ section.settings.image_caption | escape }}</p>
+            {%- endif -%}
         </div>
         <div class="image-with-text__text-item grid__item">
           <div
@@ -68,14 +91,14 @@
               {% case block.type %}
                 {%- when 'heading' -%}
                   <h2
-                    class="image-with-text__heading inline-richtext {{ block.settings.heading_size }}"
+                    class="image-with-text__heading inline-richtext {{ block.settings.heading_size }}{% if section.settings.heading_size > 0 or section.settings.heading_size_mobile > 0 %} image-with-text__heading--sized{% endif %}"
                     {{ block.shopify_attributes }}
                   >
                     {{ block.settings.heading }}
                   </h2>
                 {%- when 'caption' -%}
                   <p
-                    class="image-with-text__text image-with-text__text--caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }} {{ block.settings.text_style }}"
+                    class="image-with-text__text image-with-text__text--caption sub-heading {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }} {{ block.settings.text_style }}"
                     {{ block.shopify_attributes }}
                   >
                     {{ block.settings.caption | escape }}
@@ -101,6 +124,22 @@
                       <span class="button--text">
                         {{ block.settings.button_label | escape }}
                       </span>
+                      <svg
+                        class="image-with-text__button-arrow"
+                        viewBox="0 0 10 8"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path
+                          d="M0 4H9M5.5 7.5L9 4L5.5 0.5"
+                          stroke="currentColor"
+                          stroke-width="1.2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
                     </a>
                   {%- endif -%}
               {%- endcase -%}
@@ -112,6 +151,7 @@
   </div>
 </div>
 
+
 {% schema %}
 {
   "name": "t:sections.image-with-text.name",
@@ -120,6 +160,132 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        },
+        {
+          "value": "page-width",
+          "label": "Page width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "image_caption",
+      "label": "Image caption pill",
+      "info": "Optional. Sits in the bottom-left corner of the image.",
+      "default": "Photo: glass cup of herbal tea with gentle steam"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow colour",
+      "default": "#a05e12"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent colour",
+      "info": "Used for the italic half of the heading and the caption pill.",
+      "default": "#7a8f55"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "4 / 5",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Tall (3:4)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        }
+      ],
+      "default": "4 / 5",
+      "label": "Image shape"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "options": [
+        {
+          "value": "4 / 5",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Tall (3:4)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Standard (4:3)"
+        }
+      ],
+      "default": "4 / 5",
+      "label": "Image shape on mobile"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Image corner radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_width",
+      "min": 240,
+      "max": 720,
+      "step": 10,
+      "unit": "px",
+      "label": "Text measure",
+      "info": "How wide the body copy runs before it wraps.",
+      "default": 420
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between image and text",
+      "default": 64
+    },
+    {
+      "type": "color_background",
+      "id": "fallback_gradient",
+      "label": "Image placeholder",
+      "info": "Shown behind the placeholder art when no image is set.",
+      "default": "linear-gradient(160deg, #eef1e1 0%, #e2e8d2 55%, #d5ddc3 100%)"
+    },
     {
       "type": "image_picker",
       "id": "image",

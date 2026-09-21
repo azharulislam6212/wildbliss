@@ -1,0 +1,114 @@
+/* Brewing tips — a centred intro over a row of small icon cards. */
+
+.brewing-tips {
+  position: relative;
+}
+
+/* custom-grid.css gives .container width:100% plus padding with no
+   box-sizing, so it runs 2 x gutter past its parent. */
+.brewing-tips .container,
+.brewing-tips .container-fluid {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+   --------------------------------------------------------------------------- */
+.brewing-tips__header {
+  text-align: center;
+  padding-bottom: 4rem;
+}
+
+/* Eyebrow: .sub-heading supplies the 11px / .2em uppercase type; the rule is
+   the 26px dash that sits in front of it. */
+.brewing-tips__eyebrow {
+  justify-content: center;
+  margin: 0 0 1.2rem;
+  color: var(--tips-eyebrow, rgb(var(--color-sub-heading)));
+}
+
+.brewing-tips__eyebrow::before {
+  content: "";
+  display: block;
+  width: 2.6rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.brewing-tips__heading {
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* The accent half of the heading: italic, in the accent colour. */
+.brewing-tips__heading em,
+.brewing-tips__heading i {
+  font-style: italic;
+  color: var(--tips-accent, #7a8f55);
+}
+
+/* ---------------------------------------------------------------------------
+   Cards
+   --------------------------------------------------------------------------- */
+.brewing-tips__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--tips-gap, 1.8rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brewing-tips__card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+  padding: 3.6rem 2rem 3.2rem;
+  border: 1px solid rgba(var(--color-heading), 0.18);
+  border-radius: var(--tips-radius, 1.4rem);
+  text-align: center;
+}
+
+.brewing-tips__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--tips-icon-size, 3rem);
+  color: rgb(var(--color-heading));
+}
+
+.brewing-tips__icon img,
+.brewing-tips__icon svg {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: calc(var(--tips-icon-size, 3rem) * 2);
+  object-fit: contain;
+}
+
+.brewing-tips__label {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: 1.8rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-heading));
+}
+
+/* ---------------------------------------------------------------------------
+   Desktop
+   --------------------------------------------------------------------------- */
+@media screen and (min-width: 750px) {
+  .brewing-tips__header {
+    padding-bottom: 5rem;
+  }
+
+  .brewing-tips__list {
+    grid-template-columns: repeat(var(--tips-columns, 4), minmax(0, 1fr));
+  }
+}

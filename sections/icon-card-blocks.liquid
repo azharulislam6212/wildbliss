@@ -133,6 +133,10 @@
               {% if block.settings.text != blank %}
                 <p class="icon-card__text">{{ block.settings.text }}</p>
               {% endif %}
+
+              {% if block.settings.list != blank %}
+                <div class="icon-card__list rte">{{ block.settings.list }}</div>
+              {% endif %}
           </{% if card_url != blank %}a{% else %}div{% endif %}>
         </div>
       {%- endfor -%}
@@ -377,6 +381,12 @@
           "id": "text",
           "default": "St John's Wort · Linden · Lemon Balm",
           "label": "Herbs / footnote"
+        },
+        {
+          "type": "richtext",
+          "id": "list",
+          "label": "List",
+          "info": "Optional. Shown under the herb line. Use the bulleted-list button to get the dot markers."
         },
         {
           "type": "collection",

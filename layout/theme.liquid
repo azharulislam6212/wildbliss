@@ -374,9 +374,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     {% sections 'header-group' %}
 
-    {%- unless template.name == 'index' or  template.suffix == "about"  or  template.suffix == "contact" -%}
+    {%- if template.name == 'product'  -%}
       {% render 'breadcrumbs' %}
-    {%- endunless -%}
+    {%- endif -%}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}

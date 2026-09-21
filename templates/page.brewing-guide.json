@@ -2,6 +2,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "hied_page_title": false,
         "padding_top": 64,
@@ -11,9 +12,342 @@
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 48
       }
+    },
+    "image_with_text_brew": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_brew": {
+          "type": "caption",
+          "settings": {
+            "caption": "Brewing guide",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading_brew": {
+          "type": "heading",
+          "settings": {
+            "heading": "Perfect <em>Brew<\/em>",
+            "heading_size": "hxxl"
+          }
+        },
+        "text_brew": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Simple brewing methods for roots, leaves and<br\/>flowers.<\/p>",
+            "text_style": "body",
+            "text_size": "medium"
+          }
+        },
+        "button_brew": {
+          "type": "button",
+          "settings": {
+            "button_label": "Find your tea",
+            "button_link": "shopify:\/\/collections\/all",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "caption_brew",
+        "heading_brew",
+        "text_brew",
+        "button_brew"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "page_width": "container",
+        "image_caption": "Photo: glass cup of herbal tea with gentle steam",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#7a8f55",
+        "image_ratio": "4 \/ 5",
+        "image_ratio_mobile": "4 \/ 5",
+        "image_radius": 16,
+        "text_width": 420,
+        "column_gap": 64,
+        "fallback_gradient": "linear-gradient(160deg, rgba(238, 241, 225, 1), rgba(226, 232, 210, 1) 55%, rgba(213, 221, 195, 1) 100%)",
+        "image": "shopify:\/\/shop_images\/div.r45_32c8f572-1562-421b-ada9-6abe9b1f9b7e.svg",
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
+      }
+    },
+    "icon_card_blocks_3hgTbx": {
+      "type": "icon-card-blocks",
+      "blocks": {
+        "icon_card_RpcyQB": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"27\" height=\"27\" viewBox=\"0 0 27 27\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M13.5 24.5C16.2614 24.5 18.5 22.2614 18.5 19.5C18.5 16.7386 16.2614 14.5 13.5 14.5C10.7386 14.5 8.5 16.7386 8.5 19.5C8.5 22.2614 10.7386 24.5 13.5 24.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M13.5 1.5C15.0913 1.5 16.6174 2.13214 17.7426 3.25736C18.8679 4.38258 19.5 5.9087 19.5 7.5C21.0913 7.5 22.6174 8.13214 23.7426 9.25736C24.8679 10.3826 25.5 11.9087 25.5 13.5C25.5 15.0913 24.8679 16.6174 23.7426 17.7426C22.6174 18.8679 21.0913 19.5 19.5 19.5C19.5 21.0913 18.8679 22.6174 17.7426 23.7426C16.6174 24.8679 15.0913 25.5 13.5 25.5C11.9087 25.5 10.3826 24.8679 9.25736 23.7426C8.13214 22.6174 7.5 21.0913 7.5 19.5C5.9087 19.5 4.38258 18.8679 3.25736 17.7426C2.13214 16.6174 1.5 15.0913 1.5 13.5C1.5 11.9087 2.13214 10.3826 3.25736 9.25736C4.38258 8.13214 5.9087 7.5 7.5 7.5C7.5 5.9087 8.13214 4.38258 9.25736 3.25736C10.3826 2.13214 11.9087 1.5 13.5 1.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
+            "caption": "",
+            "title": "Flowers",
+            "rich_text": "",
+            "text": "Delicate · aromatic · quick to open",
+            "list": "<ul><li>Chamomile<\/li><li>Linden<\/li><li>Elderflower<\/li><li>Yarrow<\/li><\/ul>",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_TM6aqg": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"42\" height=\"35\" viewBox=\"0 0 42 35\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M40 1.5C20 1.5 8 13.5 8 33.5C28 33.5 40 21.5 40 1.5Z\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<path d=\"M8 33.5L30 11.5\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "caption": "",
+            "title": "Leaves",
+            "rich_text": "",
+            "text": "Green · savoury · everyday",
+            "list": "<ul><li>Lemon Balm<\/li><li>Raspberry<\/li><li>Hawthorn<\/li><li>Nettle<\/li><li>St. John's Wort<\/li><\/ul>",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        },
+        "icon_card_kVjnLt": {
+          "type": "icon_card",
+          "settings": {
+            "svg_icon": "<svg width=\"31\" height=\"39\" viewBox=\"0 0 31 39\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15.5 1.5V15.5M15.5 15.5C7.5 15.5 3.5 21.5 1.5 31.5M15.5 15.5C23.5 15.5 27.5 21.5 29.5 31.5M15.5 15.5V37.5M9.5 25.5C7.5 27.5 5.5 31.5 5.5 35.5M21.5 25.5C23.5 27.5 25.5 31.5 25.5 35.5\" stroke=\"#4E5C50\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\/>\n<\/svg>",
+            "caption": "",
+            "title": "Roots",
+            "rich_text": "",
+            "text": "Deep · earthy · slow to give",
+            "list": "<ul><li>Burdock<\/li><li>Dandelion<\/li><\/ul>",
+            "collection": "",
+            "button_text": "",
+            "button_url": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "icon_card_RpcyQB",
+        "icon_card_TM6aqg",
+        "icon_card_kVjnLt"
+      ],
+      "name": "Icon Card Blocks",
+      "settings": {
+        "page_width": "container",
+        "subheading": "Know your herb",
+        "heading": "<p>Flowers, leaves <em>and roots.<\/em><\/p>",
+        "heading_size": "hxl",
+        "text": "<p>Every Wild Bliss tea belongs to one of three families — and each family<br\/>likes to be brewed a little differently.<\/p>",
+        "columns": 3,
+        "icon_size": 24,
+        "color_sub_heading": "#a05e12",
+        "color_accent": "#7a8f55",
+        "color_scheme": "scheme-1",
+        "color_scheme_card": "scheme-877af017-ed23-475a-945f-3ed37b1df4d4",
+        "overlauy_color": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 76,
+        "padding_bottom_tab": 76,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "them_section_id": ""
+      }
+    },
+    "brewing_instructions_brew": {
+      "type": "brewing-instructions",
+      "blocks": {
+        "method_flowers": {
+          "type": "method",
+          "settings": {
+            "title": "Flowers & Leaves",
+            "color_scheme": "scheme-1",
+            "row_1_icon": "shopify:\/\/shop_images\/span_614873a9-b74e-4b40-9837-3d6f54467121.svg",
+            "row_1_title": "95–100°C water",
+            "row_1_note": "Just off the boil",
+            "row_2_icon": "shopify:\/\/shop_images\/span_a87fd2f1-a4ea-4277-9f07-ccc957894ea3.svg",
+            "row_2_title": "Steep 10–15 minutes",
+            "row_2_note": "Longer for a fuller cup",
+            "row_3_icon": "shopify:\/\/shop_images\/span_3f024ef9-17ea-4626-9e42-d4cc075908ba.svg",
+            "row_3_title": "Cover while steeping",
+            "row_3_note": "Keeps the aromatic oils in the cup",
+            "row_4_title": "",
+            "row_4_note": ""
+          }
+        },
+        "method_roots": {
+          "type": "method",
+          "settings": {
+            "title": "Roots",
+            "color_scheme": "scheme-3",
+            "row_1_icon": "shopify:\/\/shop_images\/span_f81ff1a9-a249-4cad-94dc-a4e192bac4e8.svg",
+            "row_1_title": "Boil for 2 minutes",
+            "row_1_note": "A gentle simmer draws out the root",
+            "row_2_icon": "shopify:\/\/shop_images\/span_ac90a6d6-51e1-4eee-a93e-0515a1a4ef04.svg",
+            "row_2_title": "Allow to cool",
+            "row_2_note": "Until comfortable to drink",
+            "row_3_icon": "shopify:\/\/shop_images\/span_902a9e73-ac7d-432b-9c16-a2cca4f70654.svg",
+            "row_3_title": "Serve hot or chilled",
+            "row_3_note": "Both ways are traditional",
+            "row_4_title": "",
+            "row_4_note": ""
+          }
+        }
+      },
+      "block_order": [
+        "method_flowers",
+        "method_roots"
+      ],
+      "name": "Brewing instructions",
+      "settings": {
+        "page_width": "container",
+        "eyebrow": "Brewing instructions",
+        "heading": "Two methods. <em>That's all.<\/em>",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#7a8f55",
+        "color_scheme": "scheme-4",
+        "column_gap": 22,
+        "card_radius": 16,
+        "card_padding": 40,
+        "icon_size": 46,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
+      }
+    },
+    "brewing_tips_brew": {
+      "type": "brewing-tips",
+      "blocks": {
+        "tip_cover": {
+          "type": "tip",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_3008ce3a-76d2-4f91-a24d-ce3a877eb36d.svg",
+            "label": "Cover while steeping"
+          }
+        },
+        "tip_water": {
+          "type": "tip",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_7a143723-3dc2-4ea2-b5cc-4b418d3a81d6.svg",
+            "label": "Use fresh water"
+          }
+        },
+        "tip_temp": {
+          "type": "tip",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_0dc02d16-40cf-476b-a360-cb0cb26af54e.svg",
+            "label": "Enjoy hot or iced"
+          }
+        },
+        "tip_store": {
+          "type": "tip",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame_2ec21c5e-1c16-4924-96cc-21a7af33cd1b.svg",
+            "label": "Store herbs in a cool, dry place"
+          }
+        }
+      },
+      "block_order": [
+        "tip_cover",
+        "tip_water",
+        "tip_temp",
+        "tip_store"
+      ],
+      "name": "Brewing tips",
+      "settings": {
+        "page_width": "container",
+        "eyebrow": "Brewing tips",
+        "heading": "Small habits, <em>better cups.<\/em>",
+        "eyebrow_color": "#a05e12",
+        "accent_color": "#7a8f55",
+        "color_scheme": "scheme-1",
+        "color_scheme_card": "scheme-1",
+        "columns": 4,
+        "card_gap": 18,
+        "card_radius": 14,
+        "icon_size": 40,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "padding_top_tab": 80,
+        "padding_bottom_tab": 80,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 56
+      }
+    },
+    "section_page_header_TkJQVk": {
+      "type": "section-page-header",
+      "blocks": {
+        "pre_heading_bDhfVJ": {
+          "type": "pre_heading",
+          "settings": {
+            "pre_heading": "About us"
+          }
+        },
+        "heading_Nqgmfr": {
+          "type": "heading",
+          "settings": {
+            "heading": "Every cup begins <em>with care.<\/em>",
+            "heading_size": "hxxl"
+          }
+        },
+        "text_NDEdHd": {
+          "type": "text",
+          "settings": {
+            "text": "<em>From the meadow to your kettle, nothing is rushed.<\/em>"
+          }
+        },
+        "button_cYYjxn": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Our Teas",
+            "button_url": "shopify:\/\/collections\/all",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "pre_heading_bDhfVJ",
+        "heading_Nqgmfr",
+        "text_NDEdHd",
+        "button_cYYjxn"
+      ],
+      "name": "Page Header",
+      "settings": {
+        "allow_transparent_header": false,
+        "page_width": "container",
+        "banner_height": "exlarge",
+        "image": "shopify:\/\/shop_images\/section.phero-bleed.svg",
+        "text_align": "vertical-center horizontal-center",
+        "color_accent": "#e3b469",
+        "color_scheme": "scheme-2",
+        "overlay_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_tab": 40,
+        "padding_bottom_tab": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "image_with_text_brew",
+    "icon_card_blocks_3hgTbx",
+    "brewing_instructions_brew",
+    "brewing_tips_brew",
+    "section_page_header_TkJQVk"
   ]
 }

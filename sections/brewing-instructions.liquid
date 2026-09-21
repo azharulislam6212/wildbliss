@@ -1,0 +1,393 @@
+{{ 'section-brewing-instructions.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top_tab }}px;
+      padding-bottom: {{ section.settings.padding_bottom_tab }}px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .brewing-instructions-{{ section.id }} {
+    --brew-eyebrow: {{ section.settings.eyebrow_color }};
+    --brew-accent: {{ section.settings.accent_color }};
+    --brew-gap: {{ section.settings.column_gap }}px;
+    --brew-radius: {{ section.settings.card_radius }}px;
+    --brew-card-padding: {{ section.settings.card_padding }}px;
+    --brew-icon-size: {{ section.settings.icon_size }}px;
+    --brew-columns: {{ section.blocks.size | at_least: 1 | at_most: 3 }};
+  }
+{%- endstyle -%}
+
+<div
+  class="brewing-instructions brewing-instructions-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="{{ section.settings.page_width }}">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="brewing-instructions__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="brewing-instructions__eyebrow sub-heading">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          {%- comment -%}
+            Wrap the accent half of the heading in <em>: it turns italic and
+            takes the accent colour.
+          {%- endcomment -%}
+          <h2 class="brewing-instructions__heading hxl inline-richtext">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul class="brewing-instructions__list" role="list">
+      {%- for block in section.blocks -%}
+        <li
+          class="brewing-instructions__card color-{{ block.settings.color_scheme }} gradient"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.title != blank -%}
+            <h3 class="brewing-instructions__title">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+
+          <ul class="brewing-instructions__rows" role="list">
+            {%- comment -%}
+              Four fixed row slots keep each method together in one block, so a
+              card is edited as a unit rather than by ordering loose blocks.
+            {%- endcomment -%}
+            {%- for i in (1..4) -%}
+              {%- liquid
+                assign title_key = 'row_' | append: i | append: '_title'
+                assign note_key = 'row_' | append: i | append: '_note'
+                assign icon_key = 'row_' | append: i | append: '_icon'
+                assign row_title = block.settings[title_key]
+                assign row_note = block.settings[note_key]
+                assign row_icon = block.settings[icon_key]
+              -%}
+              {%- if row_title != blank or row_note != blank -%}
+                <li class="brewing-instructions__row">
+                  <span class="brewing-instructions__icon">
+                    {%- if row_icon != blank -%}
+                      {% render 'icon-img' with image, image: row_icon %}
+                    {%- else -%}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </span>
+
+                  <div class="brewing-instructions__row-text">
+                    {%- if row_title != blank -%}
+                      <h4 class="brewing-instructions__row-title">{{ row_title | escape }}</h4>
+                    {%- endif -%}
+                    {%- if row_note != blank -%}
+                      <p class="brewing-instructions__row-note">{{ row_note | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Brewing instructions",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_width",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "container-fluid",
+          "label": "Full Width"
+        }
+      ],
+      "default": "container",
+      "label": "Layout Width"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Brewing instructions"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Wrap the accent words in <em> to set them italic in the accent colour.",
+      "default": "Two methods. <em>That's all.</em>"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow colour",
+      "default": "#a05e12"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Heading accent colour",
+      "default": "#7a8f55"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Gap between cards",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Card corner radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Card padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Row icon size",
+      "default": 46
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tab",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Tab",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Top Mobile",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding Bottom Mobile",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "method",
+      "name": "Method card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card title",
+          "default": "Flowers & Leaves"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Card colour scheme",
+          "default": "scheme-1"
+        },
+        {
+          "type": "image_picker",
+          "id": "row_1_icon",
+          "label": "Row 1 icon",
+          "info": "Leave empty to use a placeholder image."
+        },
+        {
+          "type": "text",
+          "id": "row_1_title",
+          "label": "Row 1 title"
+        },
+        {
+          "type": "text",
+          "id": "row_1_note",
+          "label": "Row 1 note"
+        },
+        {
+          "type": "image_picker",
+          "id": "row_2_icon",
+          "label": "Row 2 icon"
+        },
+        {
+          "type": "text",
+          "id": "row_2_title",
+          "label": "Row 2 title"
+        },
+        {
+          "type": "text",
+          "id": "row_2_note",
+          "label": "Row 2 note"
+        },
+        {
+          "type": "image_picker",
+          "id": "row_3_icon",
+          "label": "Row 3 icon"
+        },
+        {
+          "type": "text",
+          "id": "row_3_title",
+          "label": "Row 3 title"
+        },
+        {
+          "type": "text",
+          "id": "row_3_note",
+          "label": "Row 3 note"
+        },
+        {
+          "type": "image_picker",
+          "id": "row_4_icon",
+          "label": "Row 4 icon"
+        },
+        {
+          "type": "text",
+          "id": "row_4_title",
+          "label": "Row 4 title"
+        },
+        {
+          "type": "text",
+          "id": "row_4_note",
+          "label": "Row 4 note"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brewing instructions",
+      "blocks": [
+        {
+          "type": "method",
+          "settings": {
+            "title": "Flowers & Leaves",
+            "color_scheme": "scheme-1",
+            "row_1_title": "95–100°C water",
+            "row_1_note": "Just off the boil",
+            "row_2_title": "Steep 10–15 minutes",
+            "row_2_note": "Longer for a fuller cup",
+            "row_3_title": "Cover while steeping",
+            "row_3_note": "Keeps the aromatic oils in the cup"
+          }
+        },
+        {
+          "type": "method",
+          "settings": {
+            "title": "Roots",
+            "color_scheme": "scheme-3",
+            "row_1_title": "Boil for 2 minutes",
+            "row_1_note": "A gentle simmer draws out the root",
+            "row_2_title": "Allow to cool",
+            "row_2_note": "Until comfortable to drink",
+            "row_3_title": "Serve hot or chilled",
+            "row_3_note": "Both ways are traditional"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

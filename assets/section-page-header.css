@@ -92,14 +92,29 @@ max-width: 938px;
     gap: 2px;
     margin: 0 0 24px;
 }
+
+.horizontal-center .page-banner-pre_heading{
+    justify-content: center;
+}
+.horizontal-right .page-banner-pre_heading{
+    justify-content: end;
+}
 .page-banner__text {
     max-width: 426px;
 font-weight: 400;
 font-size: 21.3px;
 line-height: 35px;
- 
 
 }
+
+.horizontal-center .page-banner__text {
+margin: 0 auto;
+}
+
+.horizontal-right .page-banner__text {
+    margin-left: auto;
+}
+
 .page-banner__text  em{
     display: block;
    font-family: var(--font-heading-family);
@@ -119,4 +134,6 @@ line-height: 35px;
 
 
 
- 
+ .page-banner__text + .button{
+    margin-top: 30px;
+ }
