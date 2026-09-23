@@ -15,7 +15,7 @@ if (!customElements.get('product-media')) {
         mediaColor: 'data-media-color',
         thumbnail: '[data-thumbnail]'
       };
-
+      this.filterMediaBy = this.dataset.galleryFilter;
       this.selectedMediaIndex =
         Number(
           this.querySelector(this.selectors.slider)?.querySelector('[data-selected]')?.dataset.index
@@ -287,6 +287,49 @@ if (!customElements.get('product-media')) {
       // the same as swiping or using the arrows.
       this.settings.instances.slider.slideTo(index);
       this.settings.instances.thumbs?.slideTo(index);
+    }
+
+       filterMedia({ name, value }) {
+      if (name !== this.filterMediaBy) return;
+
+      const filteredMedia = this.querySelectorAll(
+        `${this.selectors.mediaItem}[${this.selectors.mediaColor}="${value}"], ${this.selectors.thumbnail}[${this.selectors.mediaColor}="${value}"]`
+      );
+      const hasFilteredMedia = filteredMedia.length !== 0;
+
+      this.querySelectorAll(
+        `${this.selectors.mediaItem}, ${this.selectors.thumbnail}`
+      ).forEach(media => {
+        if (!hasFilteredMedia) {
+          media.classList.add('swiper-slide');
+          media.classList.remove('hidden');
+        } else {
+          media.classList.remove('swiper-slide');
+          media.classList.add('hidden');
+        }
+      });
+
+      const inactiveSliderInstance =
+        !this.settings.instances.slider ||
+        this.settings.instances.slider?.destroyed;
+
+      if (!hasFilteredMedia && !inactiveSliderInstance) {
+        this.settings.instances.slider.update();
+        this.settings.instances.thumbs?.update();
+        return;
+      }
+
+      this.querySelectorAll(
+        `${this.selectors.mediaItem}[${this.selectors.mediaColor}="${value}"], ${this.selectors.thumbnail}[${this.selectors.mediaColor}="${value}"]`
+      ).forEach(media => {
+        media.classList.add('swiper-slide');
+        media.classList.remove('hidden');
+      });
+
+      if (inactiveSliderInstance) return;
+
+      this.settings.instances.slider.update();
+      this.settings.instances.thumbs?.update();
     }
 
     setThumbsHeight() {

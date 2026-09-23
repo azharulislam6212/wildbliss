@@ -556,6 +556,19 @@
   {
     "name": "t:settings_schema.cards.name",
     "settings": [
+          {
+        "type": "text",
+        "id": "swatches_option",
+        "label": "Filter Option",
+        "default": "Format",
+      },
+    {
+        "type": "checkbox",
+        "id": "enable_images_filtering",
+        "label": "Enable images filtering",
+        "default": false,
+        "info": "ilters product images, based on the theme settings color option name and images SEO text(alt text)"
+      },
       {
         "type": "select",
         "id": "card_style",

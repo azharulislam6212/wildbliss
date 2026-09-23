@@ -43,7 +43,7 @@
           "type": "button",
           "settings": {
             "button_label": "Find your tea",
-            "button_link": "shopify:\/\/collections\/all",
+            "button_link": "#icon_card_section",
             "button_style": "primary"
           }
         }

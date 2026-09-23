@@ -125,6 +125,7 @@
             "title": "Calm & Mood",
             "rich_text": "",
             "text": "St John's Wort · Linden · Lemon Balm",
+            "list": "",
             "collection": "calm-mood",
             "button_text": "Explore",
             "button_url": "",
@@ -139,6 +140,7 @@
             "title": "Daily Detox",
             "rich_text": "",
             "text": "Dandelion Root · Burdock · Nettle",
+            "list": "",
             "collection": "daily-detox",
             "button_text": "Explore",
             "button_url": "",
@@ -153,6 +155,7 @@
             "title": "Heart & Circulation",
             "rich_text": "",
             "text": "Hawthorn Leaf & Flower · Yarrow Flower",
+            "list": "",
             "collection": "heart-circulation",
             "button_text": "Explore",
             "button_url": "",
@@ -167,6 +170,7 @@
             "title": "Breathe Easy",
             "rich_text": "",
             "text": "Elderflower · Thyme · Linden",
+            "list": "",
             "collection": "breathe-easy",
             "button_text": "Explore",
             "button_url": "",
@@ -181,6 +185,7 @@
             "title": "Women's Cycle",
             "rich_text": "",
             "text": "Raspberry Leaf · Yarrow",
+            "list": "",
             "collection": "womens-cycle",
             "button_text": "Explore",
             "button_url": "",
@@ -195,6 +200,7 @@
             "title": "Bladder & Urinary",
             "rich_text": "",
             "text": "Nettle Leaf · Yarrow Flower",
+            "list": "",
             "collection": "bladder-urinary",
             "button_text": "Explore",
             "button_url": "",
@@ -263,7 +269,7 @@
           "type": "numbered_item",
           "settings": {
             "number": "01",
-            "heading": "Wild, not farmed",
+            "heading": "Wild foraged, whenever possible",
             "text": "<p>To withstand extreme cold, heat, and natural threats, wild plants develop complex protective compounds that are difficult to reproduce under cultivation.<\/p>"
           }
         },
@@ -295,8 +301,8 @@
       "name": "Image with card",
       "settings": {
         "page_width": "container",
-        "image": "shopify:\/\/shop_images\/div.story-visual.png",
-        "height": "adapt",
+        "image": "shopify:\/\/shop_images\/wild_herbs_collection.jpg",
+        "height": "medium",
         "desktop_image_width": "medium",
         "layout": "image_first",
         "image_behavior": "none",
@@ -327,12 +333,21 @@
             "link": ""
           }
         },
+        "item_rBBDXt": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/logo-3.png",
+            "svg_icon": "",
+            "label": "SINGLE ORIGIN",
+            "link": ""
+          }
+        },
         "item_pmzANQ": {
           "type": "item",
           "settings": {
             "image": "shopify:\/\/shop_images\/logo-1.png",
             "svg_icon": "",
-            "label": "Pharmacopoeia",
+            "label": "Quality  tested",
             "link": ""
           }
         },
@@ -363,15 +378,6 @@
             "link": ""
           }
         },
-        "item_rBBDXt": {
-          "type": "item",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/logo-3.png",
-            "svg_icon": "",
-            "label": "carpathian wild",
-            "link": ""
-          }
-        },
         "item_DpPmHj": {
           "type": "item",
           "settings": {
@@ -384,11 +390,11 @@
       },
       "block_order": [
         "item_kT7p7t",
+        "item_rBBDXt",
         "item_pmzANQ",
         "item_VD3F8p",
         "item_4YE8yE",
         "item_WH3UPC",
-        "item_rBBDXt",
         "item_DpPmHj"
       ],
       "name": "Certification band",
@@ -399,7 +405,7 @@
         "heading_size": "hxl",
         "columns": 5,
         "columns_mobile": "2",
-        "icon_size": 74,
+        "icon_size": 80,
         "show_border": true,
         "color_scheme": "",
         "padding_top": 50,
@@ -420,7 +426,7 @@
         "heading_size": "hxl",
         "section_text": "Tea Bags • Loose Leaf • Value Packs",
         "collection": "feartured-collection",
-        "products_to_show": 4,
+        "products_to_show": 12,
         "layout_type": "grid",
         "enable_mobile_carousel": true,
         "column": "4",
@@ -434,7 +440,7 @@
         "meta_line": "vendor",
         "show_secondary_image": false,
         "show_rating": true,
-        "quick_add": "standard",
+        "quick_add": "none",
         "autoplay_enabled": false,
         "autoplay_timeout": 5,
         "loop_enabled": false,
@@ -466,32 +472,32 @@
         "product_card_Qzp7dc": {
           "type": "product_card",
           "settings": {
-            "product": "organic-wild-elderflower",
+            "product": "calm-mood-ritual",
             "label": "3-Tea bundle",
-            "heading": "",
+            "heading": "The Calm Trio",
             "description": "Linden · St John's Wort · Lemon Balm — for winding down.",
             "link": "",
             "placeholder_text": "Select a product to show pricing",
             "color_scheme": ""
           }
         },
-        "product_card_LA8BCU": {
+        "product_card_zjTGft": {
           "type": "product_card",
           "settings": {
-            "product": "organic-wild-elderflower",
+            "product": "daily-detox",
             "label": "3-Tea bundle",
-            "heading": "",
-            "description": "Linden · St John's Wort · Lemon Balm — for winding down.",
+            "heading": "The Detox Trio",
+            "description": "Dandelion · Burdock · Nettle — for gentle reset.",
             "link": "",
             "placeholder_text": "Select a product to show pricing",
-            "color_scheme": ""
+            "color_scheme": "scheme-1"
           }
         }
       },
       "block_order": [
         "promo_BLinMb",
         "product_card_Qzp7dc",
-        "product_card_LA8BCU"
+        "product_card_zjTGft"
       ],
       "name": "Subscribe and save",
       "settings": {

@@ -349,7 +349,10 @@ if (!customElements.get('product-info')) {
             return;
           }
 
-          this.updateMedia(html, variant?.featured_media?.id);
+           this.updateMedia(html, variant?.featured_media?.id);
+     
+      
+
 
           const updateSourceFromDestination = (id, shouldHide = (source) => false) => {
             const source = html.getElementById(`${id}-${this.sectionId}`);
@@ -415,11 +418,12 @@ if (!customElements.get('product-info')) {
         document.querySelectorAll(selectors).forEach(({ classList }) => classList.add('hidden'));
       }
 
+
+
+
       updateMedia(html, variantFeaturedMediaId) {
         if (!variantFeaturedMediaId) return;
 
-        // The product template renders its gallery as a <product-media> slider,
-        // which has none of the <media-gallery> markup the block below expects.
         if (this.updateProductMediaGallery(html, variantFeaturedMediaId)) {
           this.updateMediaModal(html);
           return;
@@ -486,6 +490,7 @@ if (!customElements.get('product-info')) {
           `${this.dataset.section}-${variantFeaturedMediaId}`,
           true
         );
+
 
         this.updateMediaModal(html);
       }

@@ -63,13 +63,14 @@
           "settings": {
             "image_1": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg-cropped.png",
             "label_1": "USDA Organic",
-            "label_2": "",
-            "image_3": "shopify:\/\/shop_images\/logo-2.png",
-            "label_3": "Caffeine Free",
-            "image_4": "shopify:\/\/shop_images\/logo-4.png",
-            "label_4": "Gluten Free",
-            "image_5": "shopify:\/\/shop_images\/cert_VEGAN.png",
-            "label_5": "Certified Vegan",
+            "image_2": "shopify:\/\/shop_images\/logo-3.png",
+            "label_2": "Single Source",
+            "image_3": "shopify:\/\/shop_images\/logo-1.png",
+            "label_3": "Quality Tested",
+            "image_4": "shopify:\/\/shop_images\/logo-2.png",
+            "label_4": "Caffeine Free",
+            "image_5": "shopify:\/\/shop_images\/logo-4.png",
+            "label_5": "Gluten Free",
             "image_6": "shopify:\/\/shop_images\/ecocert.png",
             "label_6": "Ecocert"
           }

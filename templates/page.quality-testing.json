@@ -59,6 +59,7 @@
             "title": "Identity",
             "rich_text": "Verified botanical identity.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -73,6 +74,7 @@
             "title": "Content Verified",
             "rich_text": "Key plant markers tested.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -87,6 +89,7 @@
             "title": "Purity",
             "rich_text": "Heavy metals and microbiology tested.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -101,6 +104,7 @@
             "title": "Organic",
             "rich_text": "Certified organic sourcing.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -231,7 +235,8 @@
         "padding_top_tab": 80,
         "padding_bottom_tab": 80,
         "padding_top_mobile": 64,
-        "padding_bottom_mobile": 56
+        "padding_bottom_mobile": 56,
+        "them_section_id": ""
       }
     },
     "image_band_AAFE3e": {
@@ -261,12 +266,12 @@
     "certification_band_JtHHyA": {
       "type": "certification-band",
       "blocks": {
-        "item_Jfa36g": {
+        "item_EPFtCG": {
           "type": "item",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg-cropped.png",
-            "svg_icon": "",
-            "label": "USDA Organic",
+            "image": "shopify:\/\/shop_images\/logo-4.png",
+            "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 3.75C15 10 11.25 13.75 11.25 18.75C11.25 19.7446 11.6451 20.6984 12.3483 21.4017C13.0516 22.1049 14.0054 22.5 15 22.5C15.9946 22.5 16.9484 22.1049 17.6517 21.4017C18.3549 20.6984 18.75 19.7446 18.75 18.75C18.75 13.75 15 10 15 3.75Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M6.25 23.75L23.75 6.25\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
+            "label": "Gluten Free",
             "link": ""
           }
         },
@@ -279,21 +284,21 @@
             "link": ""
           }
         },
+        "item_Jfa36g": {
+          "type": "item",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Black_and_White_Organic_Seal_svg-cropped.png",
+            "svg_icon": "",
+            "label": "USDA Organic",
+            "link": ""
+          }
+        },
         "item_8hMyNa": {
           "type": "item",
           "settings": {
             "image": "shopify:\/\/shop_images\/logo-2.png",
             "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M13.75 7.5C13.75 12.5 10 16.25 5 16.25C5 21.25 8.75 25 13.75 25C18.75 25 22.5 21.25 22.5 16.25C22.5 11.25 18.75 7.5 13.75 7.5Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M5 16.25C5 13.9294 5.92187 11.7038 7.56282 10.0628C9.20376 8.42187 11.4294 7.5 13.75 7.5\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
             "label": "Caffeine Free",
-            "link": ""
-          }
-        },
-        "item_EPFtCG": {
-          "type": "item",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/logo-4.png",
-            "svg_icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M15 3.75C15 10 11.25 13.75 11.25 18.75C11.25 19.7446 11.6451 20.6984 12.3483 21.4017C13.0516 22.1049 14.0054 22.5 15 22.5C15.9946 22.5 16.9484 22.1049 17.6517 21.4017C18.3549 20.6984 18.75 19.7446 18.75 18.75C18.75 13.75 15 10 15 3.75Z\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<path d=\"M6.25 23.75L23.75 6.25\" stroke=\"#4E5C50\" stroke-width=\"1.75\"><\/path>\n<\/svg>",
-            "label": "Gluten Free",
             "link": ""
           }
         },
@@ -326,10 +331,10 @@
         }
       },
       "block_order": [
-        "item_Jfa36g",
-        "item_e3XP3H",
-        "item_8hMyNa",
         "item_EPFtCG",
+        "item_e3XP3H",
+        "item_Jfa36g",
+        "item_8hMyNa",
         "item_iaeqwA",
         "item_UAVMFE",
         "item_3EfTMU"

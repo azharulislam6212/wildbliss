@@ -120,16 +120,51 @@
     <script src="{{- 'product-media.js' | asset_url -}}" defer="defer" data-theme-script></script>
   {%- endif -%}
 
+{%-liquid
+
+  assign current_variant = product.selected_or_first_available_variant
+  if settings.enable_images_filtering
+  assign color_filter_option = settings.swatches_option | split: ',' | first
+  assign color_option_position = product.options_by_name[color_filter_option].position | minus: 1
+  assign current_color = current_variant.options[color_option_position]
+  assign color_splitter = '|' | append: color_filter_option | append: ':'
+  endif
+
+  if settings.enable_images_filtering and product.has_only_default_variant == false
+    assign medias_alt_array = product.media | map: 'alt'
+    assign color_media_size = 0
+    assign current_color_media_size = 0
+    for media_alt in medias_alt_array
+      if media_alt contains color_splitter
+        assign media_color = media_alt | split: color_splitter | last
+      else
+        continue
+      endif
+
+      if media_color == current_color
+        assign current_color_media_size = current_color_media_size | plus: 1
+      endif
+
+      assign color_media_size = color_media_size | plus: 1
+    endfor
+  endif
+-%}
+
+
   {%- capture thumbs_html -%}
     <div class="product__media-thumbs  {%- unless section.settings.gallery_type contains 'thumbs' %}   large-up-hide  {%- endunless -%}  {%- if section.settings.enable_mobile_thumbs == false %}  small-hide    medium-hide {%- endif -%}">
       <div class="swiper" data-thumbs>
         <div class="swiper-wrapper {%if  section.settings.gallery_type == 'thumbs-bottom'%} row-cols-5 {%- endif -%}">
           {%- for media in product.media -%}
-          
+            {%- if settings.enable_images_filtering -%}
+            {%- assign media_color = media.alt | split: color_splitter | last -%}
+          {%- endif -%}
   
-            <div
-              class="swiper-slide  {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
-              data-thumbnail
+            <div data-id="{{ media.id }}"
+              class="{% if settings.enable_images_filtering and current_color != media_color and color_media_size > 0 and current_color_media_size > 0 %}hidden{% else %}swiper-slide{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
+              data-thumbnail      {% if media_color and media.alt contains color_splitter %}
+              data-media-color="{{- media_color -}}"
+            {% endif %}
             >
               {%- render 'product-thumbnail-custom', media: media, media_size: section.settings.gallery_image_size -%}
             </div>
@@ -190,6 +225,9 @@
                 {%- elsif section.settings.gallery_type != 'thumbs-bottom' -%}
                   data-thumbs-layout="{{- section.settings.gallery_type | remove: 'thumbs-' -}}"
                 {% endif %}
+         {% if settings.enable_images_filtering %}
+              data-gallery-filter="{{- color_filter_option -}}"
+            {% endif %}
                 data-thumbs-per-view="{{ section.settings.thumbs_per_view }}"
                 data-thumbs-per-view-mobile="{{ section.settings.thumbs_per_view_mobile }}"
               >
@@ -202,14 +240,20 @@
                     <div class="swiper product__swiper" data-slider>
                       <div class="product__media-track swiper-wrapper">
                         {%- for media in product.media -%}
+                            {%- if settings.enable_images_filtering -%}
+                        {%- assign media_color = media.alt | split: color_splitter | last -%}
+                      {%- endif -%}
                           <div
-                            class="product__media-slide swiper-slide"
+                            class="product__media-slide {% if settings.enable_images_filtering and current_color != media_color and color_media_size > 0 and current_color_media_size > 0 %} hidden{% else %} swiper-slide{% endif %}"
                             data-media-item
                             data-media-id="{{- media.id -}}"
                             data-index="{{- forloop.index0 -}}"
                             {%- if product.selected_or_first_available_variant.featured_media.id == media.id %}
                               data-selected
                             {%- endif %}
+                              {% if media_color and media.alt contains color_splitter %}
+                          data-media-color="{{- media_color -}}"
+                        {% endif %}
                           >
                             {%- render 'product-media-custom',
                               media: media,
