@@ -32,6 +32,8 @@
     "inputs_shadow_horizontal_offset": 0,
     "inputs_shadow_vertical_offset": 4,
     "inputs_shadow_blur": 5,
+    "enable_images_filtering": true,
+  
     "card_style": "card",
     "card_image_padding": 0,
     "card_text_alignment": "left",
@@ -218,7 +220,7 @@
       "scheme-3": {
         "settings": {
           "accent": "#adbb8c",
-          "background": "#4E5C50",
+          "background": "#4e5c50",
           "background_gradient": "",
           "heading": "#fffdf4",
           "sub_heading": "#a05e12",

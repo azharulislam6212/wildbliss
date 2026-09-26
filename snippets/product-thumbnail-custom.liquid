@@ -11,15 +11,8 @@
 
  {% comment %} {% render 'responsive-img' with image: media.preview_image %} {% endcomment %}
  {% render 'icon-img' with image, image: media.preview_image %}
-
-    {%- comment -%}
-      The image alt text doubles as the caption shown over the thumbnail.
-    {%- endcomment -%}
-    {%- assign thumbnail_label = media.alt | default: media.preview_image.alt -%}
-    {%- if thumbnail_label != blank -%}
-      <span class="product__thumbnail-label">{{ thumbnail_label }}</span>
-    {%- endif -%}
   </div><!-- /.media -->
+
 
   {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
                  <span class="video-play">

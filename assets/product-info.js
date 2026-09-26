@@ -91,7 +91,30 @@ if (!customElements.get('product-info')) {
 
         this.initQuantityHandlers();
         this.applyCustomOptionPairing();
+        this.initMediaOnLoad();
         this.dispatchEvent(new CustomEvent('product-info:loaded', { bubbles: true }));
+      }
+
+      // Runs the same filter + featured-media selection a variant change does,
+      // so the gallery is right on a fresh page load too.
+      initMediaOnLoad() {
+        if (!this.querySelector('product-media')) return;
+
+        this.currentVariant = this.getSelectedVariant(this);
+
+        const filterName = this.querySelector('product-media').dataset.galleryFilter;
+        const selectedInput = filterName
+          ? Array.from(this.querySelectorAll('[data-name]')).find(
+              (input) => input.dataset.name === filterName && isOptionInputSelected(input)
+            )
+          : null;
+        this.mediaSelection = selectedInput ? { name: selectedInput.dataset.name, value: selectedInput.value } : null;
+
+        // product-media.js loads after this file and starts swiper a frame
+        // after it connects, so wait for both before touching the slider.
+        customElements.whenDefined('product-media').then(() =>
+          requestAnimationFrame(() => requestAnimationFrame(() => this.updateMedia(this.mediaSelection)))
+        );
       }
 
       addPreProcessCallback(callback) {
@@ -133,8 +156,14 @@ if (!customElements.get('product-info')) {
         // has already captured the option values it is about to ask for.
         this.applyCustomOptionPairing({ autoSelect: false });
 
-        this.resetProductFormState();
+        // Filter the gallery by the clicked value right away (alt-text
+        // filtering); the variant's featured image is selected once the
+        // section request below tells us which variant this is.
+        this.mediaSelection = { name: target.dataset.name, value: target.value };
+        this.updateMedia(this.mediaSelection, { scroll: true });
 
+        this.resetProductFormState();
+        
         const productUrl = target.dataset.productUrl || this.pendingRequestUrl || this.dataset.url;
         this.pendingRequestUrl = productUrl;
         const shouldSwapProduct = this.dataset.url !== productUrl;
@@ -349,10 +378,9 @@ if (!customElements.get('product-info')) {
             return;
           }
 
-           this.updateMedia(html, variant?.featured_media?.id);
-     
-      
-
+          this.currentVariant = variant;
+          this.updateMediaFromHtml(html, variant.featured_media?.id);
+          this.updateMedia(this.mediaSelection, { scroll: true });
 
           const updateSourceFromDestination = (id, shouldHide = (source) => false) => {
             const source = html.getElementById(`${id}-${this.sectionId}`);
@@ -421,10 +449,53 @@ if (!customElements.get('product-info')) {
 
 
 
-      updateMedia(html, variantFeaturedMediaId) {
+      // Filters <product-media> by the selected option value (media alt text
+      // "...|Color:Red") and moves the slider to the current variant's
+      // featured image.
+      updateMedia(data, { scroll = false } = {}) {
+        const container = this.closest('.product-container') || this.closest('quick-add-modal') || this;
+        const productMedia = this.querySelector('product-media') || container.querySelector('product-media');
+        if (!productMedia) return;
+
+        if (data?.name && productMedia.hasAttribute('data-gallery-filter')) {
+          productMedia.filterMedia?.(data);
+        }
+
+        const mediaId = this.currentVariant?.featured_media?.id;
+        if (!mediaId) return;
+
+        // Hidden (filtered out) media lose .swiper-slide, so only count the
+        // visible ones to get the index swiper knows about.
+        const slides = Array.from(productMedia.querySelectorAll('[data-media-item]'));
+        const targetSlide = slides.find((slide) => Number(slide.dataset.mediaId) === Number(mediaId));
+
+        slides.forEach((slide) => slide.classList.remove('selected'));
+        if (!targetSlide) {
+          console.warn('[updateMedia] No matching slide found for mediaId:', mediaId);
+          return;
+        }
+        targetSlide.classList.add('selected');
+
+        if (targetSlide.classList.contains('hidden')) return;
+
+        const swiper = productMedia.settings?.instances?.slider;
+        if (swiper && !swiper.destroyed) {
+          const index = Array.from(swiper.slides).indexOf(targetSlide);
+          if (index === -1) return;
+          swiper.slideTo(index, 300);
+          productMedia.settings.instances.thumbs?.slideTo(index);
+        } else if (scroll) {
+          productMedia.setActiveMedia?.(mediaId);
+        }
+      }
+
+      // Keeps the gallery markup in step with the section response: swaps in
+      // the new <product-media> when the media set changed, or falls back to
+      // the Dawn <media-gallery>.
+      updateMediaFromHtml(html, variantFeaturedMediaId) {
         if (!variantFeaturedMediaId) return;
 
-        if (this.updateProductMediaGallery(html, variantFeaturedMediaId)) {
+        if (this.updateProductMediaGallery(html)) {
           this.updateMediaModal(html);
           return;
         }
@@ -504,7 +575,7 @@ if (!customElements.get('product-info')) {
       // Moves the <product-media> slider (and its thumbs) to the variant's
       // featured image. Returns false when the section uses <media-gallery>
       // instead, so the caller falls back to that markup.
-      updateProductMediaGallery(html, variantFeaturedMediaId) {
+      updateProductMediaGallery(html) {
         const gallery = this.querySelector('product-media');
         if (!gallery) return false;
 
@@ -521,16 +592,10 @@ if (!customElements.get('product-info')) {
           gallery.replaceWith(newGallery);
 
           // connectedCallback defers swiper init by a frame, so select after it.
-          requestAnimationFrame(() =>
-            requestAnimationFrame(() =>
-              this.querySelector('product-media')?.setActiveMedia?.(variantFeaturedMediaId)
-            )
-          );
-
-          return true;
+          requestAnimationFrame(() => requestAnimationFrame(() => this.updateMedia(null)));
         }
 
-        gallery.setActiveMedia?.(variantFeaturedMediaId);
+        // Selecting the featured media itself is left to updateMedia().
         return true;
       }
 

@@ -161,7 +161,7 @@
           {%- endif -%}
   
             <div data-id="{{ media.id }}"
-              class="{% if settings.enable_images_filtering and current_color != media_color and color_media_size > 0 and current_color_media_size > 0 %}hidden{% else %}swiper-slide{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
+              class="{% if settings.enable_images_filtering and current_color != media_color and color_media_size > 0 and current_color_media_size > 0 %}hidden{% else %}carousel-slide{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
               data-thumbnail      {% if media_color and media.alt contains color_splitter %}
               data-media-color="{{- media_color -}}"
             {% endif %}

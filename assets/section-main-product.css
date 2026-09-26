@@ -3823,38 +3823,8 @@ variant-selects{
   border-color: rgb(var(--color-heading));
 }
 
-/* Thumbnail caption ------------------------------------------------------- */
-
-/* Specific enough to beat base.css's `.media > *` rule, which otherwise
-   stretches the caption over the whole thumbnail. */
-.product__thumbnail .media > .product__thumbnail-label {
-  position: absolute;
-  top: auto;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.6rem;
-  padding: 0.2rem 0rem;
-  background: var(--gallery-caption-bg, rgba(60, 70, 62, 0.55));
-  color: #fffdf4;
-  font-family: var(--font-heading-family);
-  font-style: italic;
-  font-weight: var(--font-body-weight);
-  font-size: 1.3rem;
-  line-height: 1.4;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 /* Arrows ------------------------------------------------------------------ */
+
 
 .product__media-slider .swiper-navigation {
   position: absolute;

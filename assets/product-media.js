@@ -16,11 +16,16 @@ if (!customElements.get('product-media')) {
         thumbnail: '[data-thumbnail]'
       };
       this.filterMediaBy = this.dataset.galleryFilter;
-      this.selectedMediaIndex =
-        Number(
-          this.querySelector(this.selectors.slider)?.querySelector('[data-selected]')?.dataset.index
-        ) || 0;
-
+      // Index among the visible slides only: media hidden by the alt-text
+      // filter are not swiper slides, so data-index would be off.
+      const visibleSlides = Array.from(
+        this.querySelector(this.selectors.slider)?.querySelectorAll(`${this.selectors.mediaItem}.swiper-slide`) || []
+      );
+      this.selectedMediaIndex = Math.max(
+        visibleSlides.findIndex(slide => slide.hasAttribute('data-selected')),
+        0
+      );
+      
       this.breakpoints = {
         mobile: 320,
         desktop: 990,
@@ -43,6 +48,8 @@ if (!customElements.get('product-media')) {
             watchOverflow: true,
             watchSlidesVisibility: true,
             watchSlidesProgress: true,
+            observer: true,
+            observeParents: true,
             pagination: {
               el: '.swiper-pagination',
               type: 'progressbar'
@@ -65,6 +72,8 @@ if (!customElements.get('product-media')) {
             slidesPerView: this.getThumbsPerView(),
             watchOverflow: true,
             watchSlidesProgress: true,
+            observer: true,
+            observeParents: true,
             setWrapperSize: true,
             navigation: {
               nextEl: '[data-thumbs-next]',
@@ -131,14 +140,19 @@ if (!customElements.get('product-media')) {
 
 
     init() {
-      if (typeof PhotoSwipeLightbox !== 'undefined') {
-        const photoSwipeLightboxInstance = new PhotoSwipeLightbox({
-          gallery: this,
-          children: 'a[data-pswp-image]',
-          pswpModule: PhotoSwipe
-        });
+      // A lightbox failure must never stop the sliders from starting.
+      try {
+        if (typeof PhotoSwipeLightbox !== 'undefined') {
+          const photoSwipeLightboxInstance = new PhotoSwipeLightbox({
+            gallery: this,
+            children: 'a[data-pswp-image]',
+            pswpModule: PhotoSwipe
+          });
 
-        photoSwipeLightboxInstance.init();
+          photoSwipeLightboxInstance.init();
+        }
+      } catch (error) {
+        console.error(error);
       }
 
       this.initSliders();
@@ -203,11 +217,17 @@ if (!customElements.get('product-media')) {
         this.settings.options.slider
       );
 
-      requestAnimationFrame(() => {
-        this.settings.instances.slider?.update();
-        this.settings.instances.slider?.updateSlides();
-        this.settings.instances.slider?.updateSize();
-      });
+      // On a fresh page load swiper can measure the gallery before the section
+      // CSS and images have settled, leaving the thumbs unsized (no gaps, no
+      // active thumb) until a variant change calls update(). Re-measure both
+      // once layout is ready.
+      const refresh = () => this.updateSwipers();
+      requestAnimationFrame(refresh);
+      if (document.readyState === 'complete') {
+        setTimeout(refresh, 100);
+      } else {
+        window.addEventListener('load', refresh, { once: true });
+      }
 
       // Sync thumbs and main slider
       if (this.settings.elements.thumbs) {
@@ -232,6 +252,20 @@ if (!customElements.get('product-media')) {
 
       // extra trigger in case "init" event fires late
       this.loadActiveVideo();
+    }
+
+    updateSwipers() {
+      const { slider, thumbs } = this.settings.instances;
+      [thumbs, slider].forEach(instance => {
+        if (!instance || instance.destroyed) return;
+        instance.updateSize();
+        instance.updateSlides();
+        instance.update();
+      });
+      if (slider && !slider.destroyed) {
+        thumbs?.slideTo(slider.activeIndex, 0);
+        slider.thumbs?.update?.(true);
+      }
     }
 
     destroySwiper() {
@@ -263,11 +297,12 @@ if (!customElements.get('product-media')) {
         media => Number(media.dataset.mediaId) === mediaId
       );
 
-      if (!mediaFound) return;
+      if (!mediaFound || mediaFound.classList.contains('hidden')) return;
 
-      const index = mediaFound.dataset.index
-        ? Number(mediaFound.dataset.index)
-        : mediaItems.indexOf(mediaFound);
+      // Position among the visible slides, so alt-text filtering is respected.
+      const index = mediaItems
+        .filter(media => media.classList.contains('swiper-slide'))
+        .indexOf(mediaFound);
 
       if (!this.settings.instances.slider || this.settings.instances.slider?.destroyed) {
         // Grid layout: every image is already on the page, so only pull the
