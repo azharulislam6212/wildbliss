@@ -159,8 +159,10 @@ if (!customElements.get('product-info')) {
         // Filter the gallery by the clicked value right away (alt-text
         // filtering); the variant's featured image is selected once the
         // section request below tells us which variant this is.
+        // The clicked value knows its variant, so a Size click can move the
+        // slider now instead of waiting on the request.
         this.mediaSelection = { name: target.dataset.name, value: target.value };
-        this.updateMedia(this.mediaSelection, { scroll: true });
+        this.updateMedia(this.mediaSelection, { scroll: true, variantId: target.dataset.variantId || null });
 
         this.resetProductFormState();
         
@@ -452,7 +454,7 @@ if (!customElements.get('product-info')) {
       // Filters <product-media> by the selected option value (media alt text
       // "...|Color:Red") and moves the slider to the current variant's
       // featured image.
-      updateMedia(data, { scroll = false } = {}) {
+      updateMedia(data, { scroll = false, variantId } = {}) {
         const container = this.closest('.product-container') || this.closest('quick-add-modal') || this;
         const productMedia = this.querySelector('product-media') || container.querySelector('product-media');
         if (!productMedia) return;
@@ -461,7 +463,7 @@ if (!customElements.get('product-info')) {
           productMedia.filterMedia?.(data);
         }
 
-        const mediaId = this.currentVariant?.featured_media?.id;
+        const mediaId = this.getSelectedMediaId(productMedia, variantId);
         if (!mediaId) return;
 
         // Hidden (filtered out) media lose .swiper-slide, so only count the
@@ -476,9 +478,23 @@ if (!customElements.get('product-info')) {
         }
         targetSlide.classList.add('selected');
 
-        if (targetSlide.classList.contains('hidden')) return;
-
         const swiper = productMedia.settings?.instances?.slider;
+
+        // The variant's own image may be missing the filter tag in its alt text
+        // (e.g. a "75 Tea Bags" image without "|Format:Tea Bags"), so the
+        // filter hid it. The selected variant's image always belongs in view.
+        if (targetSlide.classList.contains('hidden')) {
+          const thumb = productMedia.querySelector(`[data-thumbnail][data-id="${mediaId}"]`);
+          [targetSlide, thumb].forEach((media) => {
+            if (!media) return;
+            media.classList.remove('hidden');
+            media.classList.add('swiper-slide');
+          });
+          if (swiper && !swiper.destroyed) {
+            swiper.update();
+            productMedia.settings.instances.thumbs?.update();
+          }
+        }
         if (swiper && !swiper.destroyed) {
           const index = Array.from(swiper.slides).indexOf(targetSlide);
           if (index === -1) return;
@@ -487,6 +503,53 @@ if (!customElements.get('product-info')) {
         } else if (scroll) {
           productMedia.setActiveMedia?.(mediaId);
         }
+      }
+
+      // Image for the current selection, mirroring selected_media_id in
+      // main-product.liquid: an image whose alt tags ("...|Format:Loose
+      // Leaf|Size:100 Servings") all match the selected values wins, the one
+      // matching the most non-filter options first; otherwise the variant's
+      // own image. `variantId` is the variant a click just picked, passed
+      // before this.currentVariant has caught up.
+      getSelectedMediaId(productMedia, variantId) {
+        const selected = {};
+        this.querySelectorAll('variant-selects [data-name]').forEach((input) => {
+          if (isOptionInputSelected(input)) selected[input.dataset.name] = normalizeOptionText(input.value);
+        });
+
+        const filterName = productMedia.dataset.galleryFilter;
+        let bestSlide = null;
+        let bestScore = 0;
+
+        productMedia.querySelectorAll('[data-media-item][data-media-alt]').forEach((slide) => {
+          let score = 0;
+
+          for (const tag of slide.dataset.mediaAlt.split('|').slice(1)) {
+            if (!tag.includes(':')) continue;
+            const parts = tag.split(':');
+            const name = parts[0].trim();
+            if (!(name in selected)) continue;
+            if (normalizeOptionText(parts[parts.length - 1]) !== selected[name]) return;
+            if (name !== filterName) score++;
+          }
+
+          if (score > bestScore) {
+            bestScore = score;
+            bestSlide = slide;
+          }
+        });
+
+        if (bestSlide) return bestSlide.dataset.mediaId;
+
+        if (variantId !== undefined) {
+          try {
+            return JSON.parse(productMedia.dataset.variantMedia || '{}')[variantId] || null;
+          } catch (error) {
+            return null;
+          }
+        }
+
+        return this.currentVariant?.featured_media?.id;
       }
 
       // Keeps the gallery markup in step with the section response: swaps in

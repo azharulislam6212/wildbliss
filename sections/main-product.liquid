@@ -136,7 +136,7 @@
     assign current_color_media_size = 0
     for media_alt in medias_alt_array
       if media_alt contains color_splitter
-        assign media_color = media_alt | split: color_splitter | last
+        assign media_color = media_alt | split: color_splitter | last | split: '|' | first | strip
       else
         continue
       endif
@@ -150,6 +150,49 @@
   endif
 -%}
 
+{%- comment -%}
+  Image shown for the selected variant. Alt text can tag an image with any
+  option, e.g. "Front|Format:Loose Leaf|Size:100 Servings". The image whose
+  tags all match the selected variant and that matches the most options other
+  than the filter option wins; otherwise the variant's own image is used.
+  product-media.js runs the same match when the selection changes.
+{%- endcomment -%}
+{%- liquid
+  assign selected_media_id = current_variant.featured_media.id
+  assign best_media_score = 0
+  for media in product.media
+    unless media.alt contains '|'
+      continue
+    endunless
+    assign media_score = 0
+    assign media_mismatch = false
+    assign media_tags = media.alt | split: '|'
+    for media_tag in media_tags offset: 1
+      unless media_tag contains ':'
+        continue
+      endunless
+      assign tag_name = media_tag | split: ':' | first | strip
+      assign tag_value = media_tag | split: ':' | last | strip
+      assign tag_option = product.options_by_name[tag_name]
+      unless tag_option
+        continue
+      endunless
+      assign tag_position = tag_option.position | minus: 1
+      if current_variant.options[tag_position] != tag_value
+        assign media_mismatch = true
+        break
+      endif
+      if tag_name != color_filter_option
+        assign media_score = media_score | plus: 1
+      endif
+    endfor
+    if media_mismatch == false and media_score > best_media_score
+      assign best_media_score = media_score
+      assign selected_media_id = media.id
+    endif
+  endfor
+-%}
+
 
   {%- capture thumbs_html -%}
     <div class="product__media-thumbs  {%- unless section.settings.gallery_type contains 'thumbs' %}   large-up-hide  {%- endunless -%}  {%- if section.settings.enable_mobile_thumbs == false %}  small-hide    medium-hide {%- endif -%}">
@@ -157,11 +200,11 @@
         <div class="swiper-wrapper {%if  section.settings.gallery_type == 'thumbs-bottom'%} row-cols-5 {%- endif -%}">
           {%- for media in product.media -%}
             {%- if settings.enable_images_filtering -%}
-            {%- assign media_color = media.alt | split: color_splitter | last -%}
+            {%- assign media_color = media.alt | split: color_splitter | last | split: '|' | first | strip -%}
           {%- endif -%}
   
             <div data-id="{{ media.id }}"
-              class="{% if settings.enable_images_filtering and current_color != media_color and color_media_size > 0 and current_color_media_size > 0 %}hidden{% else %}carousel-slide{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
+              class="{% if settings.enable_images_filtering and current_color != media_color and media.id != selected_media_id and color_media_size > 0 and current_color_media_size > 0 %}hidden{% else %}carousel-slide{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
               data-thumbnail      {% if media_color and media.alt contains color_splitter %}
               data-media-color="{{- media_color -}}"
             {% endif %}
@@ -228,6 +271,11 @@
          {% if settings.enable_images_filtering %}
               data-gallery-filter="{{- color_filter_option -}}"
             {% endif %}
+                data-variant-media='{
+                  {%- for variant in product.variants -%}
+                    "{{ variant.id }}":{{ variant.featured_media.id | default: 0 }}{% unless forloop.last %},{% endunless %}
+                  {%- endfor -%}
+                }'
                 data-thumbs-per-view="{{ section.settings.thumbs_per_view }}"
                 data-thumbs-per-view-mobile="{{ section.settings.thumbs_per_view_mobile }}"
               >
@@ -241,14 +289,15 @@
                       <div class="product__media-track swiper-wrapper">
                         {%- for media in product.media -%}
                             {%- if settings.enable_images_filtering -%}
-                        {%- assign media_color = media.alt | split: color_splitter | last -%}
+                        {%- assign media_color = media.alt | split: color_splitter | last | split: '|' | first | strip -%}
                       {%- endif -%}
                           <div
-                            class="product__media-slide {% if settings.enable_images_filtering and current_color != media_color and color_media_size > 0 and current_color_media_size > 0 %} hidden{% else %} swiper-slide{% endif %}"
+                            class="product__media-slide {% if settings.enable_images_filtering and current_color != media_color and media.id != selected_media_id and color_media_size > 0 and current_color_media_size > 0 %} hidden{% else %} swiper-slide{% endif %}"
                             data-media-item
                             data-media-id="{{- media.id -}}"
+                            data-media-alt="{{- media.alt | escape -}}"
                             data-index="{{- forloop.index0 -}}"
-                            {%- if product.selected_or_first_available_variant.featured_media.id == media.id %}
+                            {%- if selected_media_id == media.id %}
                               data-selected
                             {%- endif %}
                               {% if media_color and media.alt contains color_splitter %}
