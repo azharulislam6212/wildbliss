@@ -180,6 +180,13 @@
   border-color: rgba(var(--color-heading), 0.45);
 }
 
+/* Tighter side padding on mobile so two buttons fit side by side. */
+@media screen and (max-width: 989px) {
+  .solar-highlight__buttons .button {
+    padding: 0 12px;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Desktop
    --------------------------------------------------------------------------- */

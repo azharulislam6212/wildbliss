@@ -459,6 +459,12 @@ if (!customElements.get('product-info')) {
         const productMedia = this.querySelector('product-media') || container.querySelector('product-media');
         if (!productMedia) return;
 
+        // Variant metafield images take over the gallery when the variant has
+        // any; otherwise the product media below work exactly as before.
+        const variantImagesState = this.updateVariantImages(productMedia, variantId);
+        if (variantImagesState === 'active' || variantImagesState === 'pending') return;
+        if (variantImagesState === 'restored' && !data?.name) data = this.mediaSelection;
+
         if (data?.name && productMedia.hasAttribute('data-gallery-filter')) {
           productMedia.filterMedia?.(data);
         }
@@ -503,6 +509,68 @@ if (!customElements.get('product-info')) {
         } else if (scroll) {
           productMedia.setActiveMedia?.(mediaId);
         }
+      }
+
+      // Shows the selected variant's metafield images (custom.variant_images,
+      // rendered by main-product.liquid as [data-variant-media-item] slides
+      // and [data-variant-thumbnail] thumbs) in place of the product media.
+      // Returns:
+      //   'active'   – the variant has images and they are now shown
+      //   'pending'  – variant images are showing but the new variant is not
+      //                known yet (the section request will call again)
+      //   'restored' – variant images were hidden, product media shown again
+      //   'none'     – nothing to do, product media untouched
+      updateVariantImages(productMedia, variantId) {
+        const variantSlides = Array.from(productMedia.querySelectorAll('[data-variant-media-item]'));
+        if (!variantSlides.length) return 'none';
+
+        const variantThumbs = Array.from(productMedia.querySelectorAll('[data-variant-thumbnail]'));
+        const productSlides = Array.from(productMedia.querySelectorAll('[data-media-item]'));
+        const productThumbs = Array.from(productMedia.querySelectorAll('[data-thumbnail]'));
+        const wasActive = variantSlides.some((slide) => slide.classList.contains('swiper-slide'));
+
+        const id = variantId !== undefined ? variantId : this.currentVariant?.id;
+        if (!id) return wasActive ? 'pending' : 'none';
+
+        const show = (element, visible, visibleClasses) => {
+          element.classList.toggle('hidden', !visible);
+          visibleClasses.forEach((className) => element.classList.toggle(className, visible));
+        };
+        const isSelectedVariant = (element) => String(element.dataset.variantId) === String(id);
+
+        const matchingSlides = variantSlides.filter(isSelectedVariant);
+
+        if (!matchingSlides.length && !wasActive) return 'none';
+
+        const hasImages = matchingSlides.length > 0;
+
+        variantSlides.forEach((slide) => show(slide, hasImages && isSelectedVariant(slide), ['swiper-slide']));
+        variantThumbs.forEach((thumb) =>
+          show(thumb, hasImages && isSelectedVariant(thumb), ['carousel-slide', 'swiper-slide'])
+        );
+
+        // Product media are hidden while variant images are shown, and all
+        // brought back when switching to a variant without images (the
+        // alt-text filter in updateMedia() then narrows them down again).
+        productSlides.forEach((slide) => show(slide, !hasImages, ['swiper-slide']));
+        productThumbs.forEach((thumb) => show(thumb, !hasImages, ['carousel-slide', 'swiper-slide']));
+
+        productSlides.forEach((slide) => slide.classList.remove('selected'));
+        variantSlides.forEach((slide) => slide.classList.remove('selected'));
+        if (hasImages) matchingSlides[0].classList.add('selected');
+
+        const swiper = productMedia.settings?.instances?.slider;
+        const thumbs = productMedia.settings?.instances?.thumbs;
+        if (swiper && !swiper.destroyed) {
+          swiper.update();
+          thumbs?.update();
+          if (hasImages) {
+            swiper.slideTo(0, 300);
+            thumbs?.slideTo(0);
+          }
+        }
+
+        return hasImages ? 'active' : 'restored';
       }
 
       // Image for the current selection, mirroring selected_media_id in

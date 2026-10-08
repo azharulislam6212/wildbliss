@@ -64,7 +64,8 @@
       "type": "image-band",
       "name": "Image band",
       "settings": {
-        "image": "shopify:\/\/shop_images\/div.r219_ade11e4c-5b85-4557-8d67-d636638a2561.svg",
+        "image": "shopify:\/\/shop_images\/Hand_Picking.jpg",
+        "image_mobile": "shopify:\/\/shop_images\/Hand_Picking_bee86ba3-094b-4eb1-bda8-ead6d9fdfcd7.jpg",
         "pill_text": "",
         "note": "",
         "page_width": "container",
@@ -223,8 +224,8 @@
       "name": "Solar highlight",
       "settings": {
         "page_width": "container",
-        "image": "shopify:\/\/shop_images\/div.r43.svg",
-        "caption": "Photo: the Wild Bliss facility in Romania – solar panels on the roof, meadow and hills behind",
+        "image": "shopify:\/\/shop_images\/solar_fabrica2.png",
+        "caption": "",
         "eyebrow": "Sustainability at source",
         "heading": "Crafted with <em>Solar Power.<\/em>",
         "text": "<p>Our herbs are dried, prepared, and packed close to source in our Romanian facility, where solar energy supports our production process. It's a more thoughtful way to care for freshness, quality, and our environmental footprint.<\/p>",

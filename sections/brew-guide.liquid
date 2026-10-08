@@ -1,5 +1,32 @@
 {{ 'section-brew-guide.css' | asset_url | stylesheet_tag }}
 
+{%- comment -%}
+  Content comes from the product's custom.brew_guide metaobject when one is
+  linked: its heading fields override the section's, and its cards replace
+  the section's blocks. Products without one fall back to the section.
+{%- endcomment -%}
+{%- liquid
+  assign guide = product.metafields.custom.brew_guide.value
+
+  assign heading = section.settings.heading
+  assign heading_accent = section.settings.heading_accent
+  assign card_count = section.blocks.size
+  assign guide_cards = blank
+
+  if guide != blank
+    if guide.heading.value != blank
+      assign heading = guide.heading.value | escape
+    endif
+    if guide.heading_accent.value != blank
+      assign heading_accent = guide.heading_accent.value | escape
+    endif
+    if guide.cards.value.size > 0
+      assign guide_cards = guide.cards.value
+      assign card_count = guide_cards.size
+    endif
+  endif
+-%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top_mobile }}px;
@@ -22,8 +49,9 @@
 
   .brew-guide-{{ section.id }} {
     --brew-accent: {{ section.settings.accent_color }};
-    --brew-columns: {{ section.blocks.size | at_least: 1 | at_most: 4 }};
+    --brew-columns: {{ card_count | at_least: 1 | at_most: 4 }};
     --brew-columns-mobile: {{ section.settings.columns_mobile }};
+    --brew-image-text: {{ section.settings.image_text_color | default: '#ffffff' }};
   }
 {%- endstyle -%}
 
@@ -35,69 +63,80 @@
 >
   <div class="{{ section.settings.page_width }}">
     <div class="brew-guide__inner">
-      {%- if section.settings.heading != blank or section.settings.heading_accent != blank -%}
+      {%- if heading != blank or heading_accent != blank -%}
         <h2 class="brew-guide__heading">
-          {%- if section.settings.heading != blank -%}
-            <span class="brew-guide__heading-line">{{ section.settings.heading }}</span>
+          {%- if heading != blank -%}
+            <span class="brew-guide__heading-line">{{ heading }}</span>
           {%- endif -%}
-          {%- if section.settings.heading_accent != blank -%}
+          {%- if heading_accent != blank -%}
             <span class="brew-guide__heading-line brew-guide__heading-accent">
-              {{- section.settings.heading_accent -}}
+              {{- heading_accent -}}
             </span>
           {%- endif -%}
         </h2>
       {%- endif -%}
 
-      {%- if section.blocks.size > 0 -%}
+      {%- if card_count > 0 -%}
         <ul class="brew-guide__cards" role="list">
-          {%- for block in section.blocks -%}
-            <li
-              class="brew-guide__card  color-{{ section.settings.color_scheme_card }} gradient{% if block.settings.bg_image != blank %} brew-guide__card--has-bg{% endif %}"
-              {{ block.shopify_attributes }}
-            >
-              <div class="brew-guide__card-bg" aria-hidden="true" style="--overlay-bg: {{ section.settings.overlay_color }};">
-                {%- if block.settings.bg_image != blank -%}
-                  {{
-                    block.settings.bg_image
-                    | image_url: width: 1200
-                    | image_tag:
-                      loading: 'lazy',
-                      class: 'brew-guide__card-bg__img',
-                      widths: '300, 450, 600, 750, 900, 1100, 1200',
-                      sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
-                      alt: ''
-                  }}
-                {%- endif -%}
-              </div>
+          {%- if guide_cards != blank -%}
+            {%- for card in guide_cards -%}
+              {%- liquid
+                # The icon field may be the preset name (text) or the icon
+                # file itself; a file goes to the image slot instead.
+                assign card_icon = 'none'
+                assign card_image = card.icon_image.value | default: card.image.value
+                if card.icon.type contains 'file_reference' or card.icon.type contains 'url'
+                  if card_image == blank
+                    assign card_image = card.icon.value
+                  endif
+                elsif card.icon.value != blank
+                  assign card_icon = card.icon.value | downcase | strip
+                endif
 
-              {%- if block.settings.image != blank or block.settings.icon != 'none' -%}
-                <span class="brew-guide__icon">
-                  {%- if block.settings.image != blank -%}
-                    <img
-                      src="{{ block.settings.image | image_url: width: 120 }}"
-                      alt="{{ block.settings.image.alt | escape }}"
-                      width="{{ block.settings.image.width }}"
-                      height="{{ block.settings.image.height }}"
-                      loading="lazy"
-                    >
-                  {%- else -%}
-                    {%- render 'icon-brew', icon: block.settings.icon -%}
-                  {%- endif -%}
-                </span>
-              {%- endif -%}
+                # Image fields may be a single file or a "list of files"
+                # (MediaListDrop). A list has no URL of its own, so take its
+                # first file; a for loop is the one way that works on both.
+                if card.icon_image.type contains 'list.'
+                  for file in card.icon_image.value limit: 1
+                    assign card_image = file
+                  endfor
+                endif
 
-              {%- if block.settings.value != blank or block.settings.label != blank -%}
-                <span class="brew-guide__text">
-                  {%- if block.settings.value != blank -%}
-                    <span class="brew-guide__value">{{ block.settings.value }}</span>
-                  {%- endif -%}
-                  {%- if block.settings.label != blank -%}
-                    <span class="brew-guide__label">{{ block.settings.label }}</span>
-                  {%- endif -%}
-                </span>
-              {%- endif -%}
-            </li>
-          {%- endfor -%}
+                assign card_bg = card.background_image.value
+                if card.background_image.type contains 'list.'
+                  assign card_bg = blank
+                  for file in card.background_image.value limit: 1
+                    assign card_bg = file
+                  endfor
+                endif
+
+                assign card_value = card.value.value | escape
+                assign card_label = card.label.value | escape
+              -%}
+              {%- render 'brew-guide-card',
+                icon: card_icon,
+                image: card_image,
+                bg_image: card_bg,
+                value: card_value,
+                label: card_label,
+                color_scheme: section.settings.color_scheme_card,
+                overlay_color: section.settings.overlay_color
+              -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              {%- render 'brew-guide-card',
+                icon: block.settings.icon,
+                image: block.settings.image,
+                bg_image: block.settings.bg_image,
+                value: block.settings.value,
+                label: block.settings.label,
+                color_scheme: section.settings.color_scheme_card,
+                overlay_color: section.settings.overlay_color,
+                attributes: block.shopify_attributes
+              -%}
+            {%- endfor -%}
+          {%- endif -%}
         </ul>
       {%- endif -%}
     </div>
@@ -110,7 +149,14 @@
   "tag": "section",
   "class": "section",
   "max_blocks": 6,
+  "enabled_on": {
+    "templates": ["product"]
+  },
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "Products with a Brew guide metaobject (custom.brew_guide) use its heading and cards. The settings and blocks below are the fallback for products without one."
+    },
     {
       "type": "text",
       "id": "heading",
@@ -179,7 +225,15 @@
       "type": "color_background",
       "id": "overlay_color",
       "label": "Overlay card color",
-      "default": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)"
+      "info": "Sits over the card background image. Use alpha above 0, or the overlay is invisible.",
+      "default": "linear-gradient(to top, rgba(18, 22, 14, 0.85), rgba(18, 22, 14, 0.55), rgba(18, 22, 14, 0.25))"
+    },
+    {
+      "type": "color",
+      "id": "image_text_color",
+      "label": "Text colour on image cards",
+      "info": "Used on cards that have a background image, so the copy reads over a dark overlay.",
+      "default": "#ffffff"
     },
     {
       "type": "header",

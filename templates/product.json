@@ -256,7 +256,7 @@
             "icon": "cup",
             "image": "shopify:\/\/shop_images\/Frame_7.svg",
             "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
-            "value": "1 bag",
+            "value": "1 tbsp (2g)",
             "label": "Per cup"
           }
         },
@@ -265,7 +265,7 @@
           "settings": {
             "icon": "temperature",
             "image": "shopify:\/\/shop_images\/Frame_6.svg",
-            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
+            "bg_image": "shopify:\/\/shop_images\/Whistling_Orange_Kettle_on_Gas_Stove.jpg",
             "value": "95°C",
             "label": "Water"
           }
@@ -276,7 +276,7 @@
             "icon": "time",
             "image": "shopify:\/\/shop_images\/Frame_5.svg",
             "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
-            "value": "5–7 min",
+            "value": "10–15 min",
             "label": "Covered steep"
           }
         }
@@ -294,8 +294,9 @@
         "page_width": "container",
         "columns_mobile": "1",
         "color_scheme": "scheme-6",
-        "color_scheme_card": "",
-        "overlay_color": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)",
+        "color_scheme_card": "scheme-1",
+        "overlay_color": "linear-gradient(to top, rgba(18, 22, 14, 0.85), rgba(18, 22, 14, 0.55), rgba(18, 22, 14, 0.25))",
+        "image_text_color": "#ffffff",
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_tab": 64,

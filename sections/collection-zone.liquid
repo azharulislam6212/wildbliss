@@ -78,8 +78,10 @@
         {%- comment -%}
           Every region's copy is rendered and all but the first hidden, so the
           section still reads in full with scripting off and nothing has to be
-          fetched when a pill is chosen.
+          fetched when a pill is chosen. The panels share one grid cell, so the
+          area is always as tall as the longest copy and nothing jumps.
         {%- endcomment -%}
+        <div class="collection-zone__panels">
         {%- for block in section.blocks -%}
           <div
             class="collection-zone__panel"
@@ -100,6 +102,7 @@
             {%- endif -%}
           </div>
         {%- endfor -%}
+        </div>
 
         {%- if section.blocks.size > 0 -%}
           <div

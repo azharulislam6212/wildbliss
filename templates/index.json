@@ -29,7 +29,7 @@
             "button_label_1": "Shop Our Teas",
             "button_link_1": "shopify:\/\/collections\/all",
             "button_style_1": "primary",
-            "button_label_2": "The Wild Bliss difference",
+            "button_label_2": "The Wild Bliss Difference",
             "button_link_2": "#image_with_card",
             "button_style_2": "secondary-outline"
           }
@@ -48,7 +48,7 @@
         "image_overlay_opacity": 0,
         "image_height": "large",
         "image_behavior": "none",
-        "desktop_content_position": "middle-left",
+        "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
         "show_text_box": false,
         "color_scheme": "scheme-2",
@@ -307,7 +307,7 @@
       "settings": {
         "page_width": "container",
         "image": "shopify:\/\/shop_images\/wild_herbs_collection.jpg",
-        "height": "medium",
+        "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
         "image_behavior": "none",

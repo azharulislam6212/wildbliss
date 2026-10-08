@@ -1,0 +1,102 @@
+{%- comment -%}
+  One Brew Guide card. Used for both the section's own blocks and the cards
+  read from a product's brew_guide metaobject, so both render identically.
+
+  Accepts:
+  - icon: {String} 'cup' | 'temperature' | 'time' | 'none'
+  - image: {Object|String} Custom icon image (optional)
+  - bg_image: {Object|String} Card background image (optional)
+
+  Images may be a theme image, a metaobject file (MediaImage, or GenericFile
+  for SVGs and other non-image uploads) or a plain URL string. Only true
+  images go through image_url; anything else would throw "invalid url input",
+  so it is used by its URL instead.
+  - value: {String} Main value, e.g. "95°C"
+  - label: {String} Caption under the value
+  - color_scheme: {String} Card colour scheme
+  - overlay_color: {String} Background overlay
+  - attributes: {String} block.shopify_attributes (optional)
+{%- endcomment -%}
+
+{%- liquid
+  if icon == blank
+    assign icon = 'none'
+  endif
+
+  # A "list of files" field hands over an array; use its first file. (A
+  # string's .first is a single character, which has neither property.)
+  if image.first.media_type != blank or image.first.url != blank
+    assign image = image.first
+  endif
+  if bg_image.first.media_type != blank or bg_image.first.url != blank
+    assign bg_image = bg_image.first
+  endif
+
+  # "shopify" = can use image_url, "url" = plain src, "none" = nothing.
+  assign image_kind = 'none'
+  if image.media_type == 'image' or image.aspect_ratio != blank
+    assign image_kind = 'shopify'
+  elsif image.url != blank
+    assign image_kind = 'url'
+    assign image_src = image.url
+  elsif image != blank and image contains '/'
+    assign image_kind = 'url'
+    assign image_src = image
+  endif
+
+  assign bg_kind = 'none'
+  if bg_image.media_type == 'image' or bg_image.aspect_ratio != blank
+    assign bg_kind = 'shopify'
+  elsif bg_image.url != blank
+    assign bg_kind = 'url'
+    assign bg_src = bg_image.url
+  elsif bg_image != blank and bg_image contains '/'
+    assign bg_kind = 'url'
+    assign bg_src = bg_image
+  endif
+-%}
+
+<li
+  class="brew-guide__card  color-{{ color_scheme }} gradient{% if bg_kind != 'none' %} brew-guide__card--has-bg{% endif %}"
+  {{ attributes }}
+>
+  <div class="brew-guide__card-bg" aria-hidden="true" style="--overlay-bg: {{ overlay_color }};">
+    {%- if bg_kind == 'url' -%}
+      <img src="{{ bg_src }}" class="brew-guide__card-bg__img" alt="" width="1200" height="1200" loading="lazy">
+    {%- elsif bg_kind == 'shopify' -%}
+      {{
+        bg_image
+        | image_url: width: 1200
+        | image_tag:
+          loading: 'lazy',
+          class: 'brew-guide__card-bg__img',
+          widths: '300, 450, 600, 750, 900, 1100, 1200',
+          sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+          alt: ''
+      }}
+    {%- endif -%}
+  </div>
+
+  {%- if image_kind != 'none' or icon != 'none' -%}
+    <span class="brew-guide__icon">
+      {%- if image_kind == 'url' -%}
+        <img src="{{ image_src }}" alt="{{ image.alt | escape }}" width="34" height="34" loading="lazy">
+      {%- elsif image_kind == 'shopify' -%}
+        {{ image | image_url: width: 120 | image_tag: loading: 'lazy', alt: image.alt }}
+      {%- else -%}
+        {%- render 'icon-brew', icon: icon -%}
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+
+  {%- if value != blank or label != blank -%}
+    <span class="brew-guide__text">
+      {%- if value != blank -%}
+        <span class="brew-guide__value">{{ value }}</span>
+      {%- endif -%}
+      {%- if label != blank -%}
+        <span class="brew-guide__label">{{ label }}</span>
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+</li>

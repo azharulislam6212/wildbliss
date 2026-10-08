@@ -191,8 +191,24 @@
   color: var(--zone-eyebrow, rgb(var(--color-sub-heading)));
 }
 
+/* Every panel sits in the same grid cell, so the stack takes the height of
+   the longest copy. Hidden panels keep their space but are invisible (and out
+   of the accessibility tree), so switching regions never moves the pills or
+   re-centres the column. */
+.collection-zone__panels {
+  display: grid;
+}
+
+.collection-zone__panel {
+  grid-area: 1 / 1;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
 .collection-zone__panel[hidden] {
-  display: none;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .collection-zone__heading {
@@ -282,7 +298,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .collection-zone__pin::before {
+  .collection-zone__pin::before,
+  .collection-zone__panel {
     transition: none;
   }
 

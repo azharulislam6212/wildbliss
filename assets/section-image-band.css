@@ -25,6 +25,8 @@
   border-radius: var(--band-radius, 1.6rem);
   background-color: rgb(var(--color-background));
   background-image: var(--band-fallback);
+  margin: 0;
+  width: 100%;
 }
 
 .image-band__figure img,

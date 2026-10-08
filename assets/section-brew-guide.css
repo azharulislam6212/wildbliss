@@ -85,6 +85,14 @@ letter-spacing: -0.36px;
   overflow: hidden;
 }
 
+/* Copy over a background image sits on the dark overlay, so it switches to
+   the light "Text colour on image cards" setting. */
+.brew-guide__card--has-bg .brew-guide__icon,
+.brew-guide__card--has-bg .brew-guide__value,
+.brew-guide__card--has-bg .brew-guide__label {
+  color: var(--brew-image-text, #fff);
+}
+
 .brew-guide__card-bg__img {
   position: absolute;
   inset: 0;
@@ -115,6 +123,8 @@ letter-spacing: -0.36px;
 }
 
 .brew-guide__icon img {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 

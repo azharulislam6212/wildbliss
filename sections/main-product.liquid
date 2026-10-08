@@ -193,6 +193,24 @@
   endfor
 -%}
 
+{%- comment -%}
+  Variant images (metafield custom.variant_images, list of files). Every
+  variant's images are rendered into the slider and thumbs, tagged with
+  data-variant-id; only the selected variant's are visible. A variant with
+  images replaces the product media in the gallery, a variant without keeps the
+  product media as before. product-info.js switches them on variant change.
+{%- endcomment -%}
+{%- liquid
+  assign has_variant_images = false
+  for variant in product.variants
+    if variant.metafields.custom.variant_images.value.size > 0
+      assign has_variant_images = true
+      break
+    endif
+  endfor
+  assign current_variant_images_size = current_variant.metafields.custom.variant_images.value.size | default: 0
+-%}
+
 
   {%- capture thumbs_html -%}
     <div class="product__media-thumbs  {%- unless section.settings.gallery_type contains 'thumbs' %}   large-up-hide  {%- endunless -%}  {%- if section.settings.enable_mobile_thumbs == false %}  small-hide    medium-hide {%- endif -%}">
@@ -204,7 +222,7 @@
           {%- endif -%}
   
             <div data-id="{{ media.id }}"
-              class="{% if settings.enable_images_filtering and current_color != media_color and media.id != selected_media_id and color_media_size > 0 and current_color_media_size > 0 %}hidden{% else %}carousel-slide{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
+              class="{% if current_variant_images_size > 0 %}hidden{% elsif settings.enable_images_filtering and current_color != media_color and media.id != selected_media_id and color_media_size > 0 and current_color_media_size > 0 %}hidden{% else %}carousel-slide{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
               data-thumbnail      {% if media_color and media.alt contains color_splitter %}
               data-media-color="{{- media_color -}}"
             {% endif %}
@@ -212,6 +230,21 @@
               {%- render 'product-thumbnail-custom', media: media, media_size: section.settings.gallery_image_size -%}
             </div>
           {%- endfor -%}
+
+          {%- comment -%} Variant metafield images (custom.variant_images) {%- endcomment -%}
+          {%- if has_variant_images -%}
+            {%- for variant in product.variants -%}
+              {%- for image in variant.metafields.custom.variant_images.value -%}
+                <div data-id="{{ image.id }}"
+                  class="{% if variant.id == current_variant.id %}carousel-slide swiper-slide{% else %}hidden{% endif %} {%if  section.settings.gallery_type == 'thumbs-bottom'%} col {%- endif -%}"
+                  data-variant-thumbnail
+                  data-variant-id="{{ variant.id }}"
+                >
+                  {%- render 'product-thumbnail-custom', media: image, media_size: section.settings.gallery_image_size -%}
+                </div>
+              {%- endfor -%}
+            {%- endfor -%}
+          {%- endif -%}
         </div>
         <div class="product__media-thumbs-arrows">
           {%- comment -%}
@@ -279,7 +312,7 @@
                 data-thumbs-per-view="{{ section.settings.thumbs_per_view }}"
                 data-thumbs-per-view-mobile="{{ section.settings.thumbs_per_view_mobile }}"
               >
-                {%- if product.media.size > 1 -%}
+                {%- if product.media.size > 1 or has_variant_images -%}
                   {%- if section.settings.gallery_type == 'thumbs-left' -%}
                     {{- thumbs_html -}}
                   {%- endif -%}
@@ -292,7 +325,7 @@
                         {%- assign media_color = media.alt | split: color_splitter | last | split: '|' | first | strip -%}
                       {%- endif -%}
                           <div
-                            class="product__media-slide {% if settings.enable_images_filtering and current_color != media_color and media.id != selected_media_id and color_media_size > 0 and current_color_media_size > 0 %} hidden{% else %} swiper-slide{% endif %}"
+                            class="product__media-slide {% if current_variant_images_size > 0 %} hidden{% elsif settings.enable_images_filtering and current_color != media_color and media.id != selected_media_id and color_media_size > 0 and current_color_media_size > 0 %} hidden{% else %} swiper-slide{% endif %}"
                             data-media-item
                             data-media-id="{{- media.id -}}"
                             data-media-alt="{{- media.alt | escape -}}"
@@ -315,6 +348,29 @@
                           </div>
                           <!-- /.product__media-slide -->
                         {%- endfor -%}
+
+                        {%- comment -%} Variant metafield images (custom.variant_images) {%- endcomment -%}
+                        {%- if has_variant_images -%}
+                          {%- for variant in product.variants -%}
+                            {%- for image in variant.metafields.custom.variant_images.value -%}
+                              <div
+                                class="product__media-slide {% if variant.id == current_variant.id %} swiper-slide{% else %} hidden{% endif %}"
+                                data-variant-media-item
+                                data-variant-id="{{- variant.id -}}"
+                                data-media-id="{{- image.id -}}"
+                              >
+                                {%- render 'product-media-custom',
+                                  media: image,
+                                  product_ref: product,
+                                  preload_media: false,
+                                  media_size: section.settings.gallery_image_size,
+                                  disable_zoom_icon: section.settings.disable_zoom_icon,
+                                  enable_zoom: section.settings.enable_zoom
+                                -%}
+                              </div>
+                            {%- endfor -%}
+                          {%- endfor -%}
+                        {%- endif -%}
                       </div>
                       <!-- /.product__media-track -->
 
