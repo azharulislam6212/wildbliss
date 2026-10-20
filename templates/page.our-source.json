@@ -18,7 +18,7 @@
         "text_mmg8W6": {
           "type": "text",
           "settings": {
-            "text": "<p>Shaped by wild meadows, forest edges, clean mountain air, and mineral-rich soils, the<br\/>Carpathian Region gives our herbs their natural depth, aroma, and character.<\/p>"
+            "text": "<p>Shaped by wild meadows, forest edges, clean mountain air, and mineral-rich soils, the Carpathian Region gives our herbs their natural depth, aroma, and character.<\/p>"
           }
         }
       },
@@ -253,8 +253,8 @@
         "step_fresh": {
           "type": "step",
           "settings": {
-            "image": "shopify:\/\/shop_images\/div.r32_63cfd53b-c838-4a59-ad5d-f213f7fc7c12.svg",
-            "caption": "Photo: freshly picked herbs in a gathering basket",
+            "image": "shopify:\/\/shop_images\/Hand_Gathering_Thyme.jpg",
+            "caption": "",
             "title": "Fresh herbs",
             "text": "<p>Hand-picked at peak bloom, in the morning, in season.<\/p>"
           }
@@ -262,8 +262,8 @@
         "step_drying": {
           "type": "step",
           "settings": {
-            "image": "shopify:\/\/shop_images\/div.r32_1bb36cfb-f6a2-42be-9abb-ce40af28b0a0.svg",
-            "caption": "Photo: herbs air-drying on racks in a wooden barn",
+            "image": "shopify:\/\/shop_images\/Thyme3_638bfb60-d46b-4914-9d8a-d9974573011f.jpg",
+            "caption": "",
             "title": "Drying",
             "text": "<p>Air-dried within hours, on site, never heat-blasted.<\/p>"
           }
@@ -271,8 +271,8 @@
         "step_packaging": {
           "type": "step",
           "settings": {
-            "image": "shopify:\/\/shop_images\/div.r32_5e978855-da27-48fe-aeb2-4272becf582d.svg",
-            "caption": "Photo: hands packing dried herbs into canisters",
+            "image": "shopify:\/\/shop_images\/Packaging_in_wild.jpg",
+            "caption": "",
             "title": "Packaging",
             "text": "<p>Sealed close to the harvest so freshness travels with it.<\/p>"
           }
@@ -286,8 +286,8 @@
       "name": "Process steps",
       "settings": {
         "page_width": "container",
-        "eyebrow": "From meadow to canister",
-        "heading": "Three steps, <em>hours apart.<\/em>",
+        "eyebrow": "FRESHNESS SEALED AT SOURCE",
+        "heading": "Meadow to pack, <em>within days.<\/em>",
         "eyebrow_color": "#a05e12",
         "accent_color": "#7a8f55",
         "ratio": "3 \/ 2",

@@ -77,20 +77,20 @@
         "image_cynGEf": {
           "type": "image",
           "settings": {
-            "image": "shopify:\/\/shop_images\/div.r45.svg",
+            "image": "shopify:\/\/shop_images\/founder.jpg",
             "image_caption": ""
           }
         },
         "text_WkppgW": {
           "type": "text",
           "settings": {
-            "text": "<p>I was born in Romania and raised in a remote village near the Carpathians, where nature was part of everyday life. As a child, I spent my days fly fishing, gathering wild herbs and berries, and learning the quiet traditions that connected our family<br\/>to the land.<br\/><br\/>Herbal teas were a daily ritual in our home — simple, fragrant infusions made from plants collected with care and enjoyed across generations. Years later, after moving to the United States, I searched for the same herbs I remembered from childhood, but the teas I found often lacked the vivid aroma, flavor, and botanical character I grew up with. It became clear to me that true quality depends not only on the plant itself, but on the care taken after harvest.<\/p>"
+            "text": "<p>I was born in Romania and raised in a remote village near the Carpathians, where nature was part of everyday life. As a child, I spent my days fly fishing, gathering wild herbs and berries, and learning the quiet traditions that connected our family to the land.<br\/><br\/>Herbal teas were a daily ritual in our home — simple, fragrant infusions made from plants collected with care and enjoyed across generations. Years later, after moving to the United States, I searched for the same herbs I remembered from childhood, but the teas I found often lacked the vivid aroma, flavor, and botanical character I grew up with. It became clear to me that true quality depends not only on the plant itself, but on the care taken after harvest.<\/p>"
           }
         },
         "block_quote_PDLNnn": {
           "type": "block_quote",
           "settings": {
-            "text": "<p>Wild Bliss was born from that belief: pure Romanian botanicals,<br\/>carefully sourced and thoughtfully crafted with respect for origin,<br\/>freshness, and tradition.<\/p>"
+            "text": "<p>Wild Bliss was born from that belief: pure Romanian botanicals, carefully sourced and thoughtfully crafted with respect for origin,<br\/>freshness, and tradition.<\/p>"
           }
         },
         "attribution_HkW4xE": {
@@ -140,8 +140,9 @@
             "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
             "caption": "",
             "title": "Integrity",
-            "rich_text": "We make only claims we canstand behind — and verifywhat matters.",
+            "rich_text": "We make only claims we can stand behind — and verify what matters.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -155,8 +156,9 @@
             "svg_icon": "",
             "caption": "",
             "title": "Authentic Origin",
-            "rich_text": "From biodiverse Carpathianlandscapes, where herbsdevelop natural aroma, color,and character.",
+            "rich_text": "From biodiverse Carpathian landscapes, where herbs develop natural aroma, color,and character.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -170,8 +172,9 @@
             "svg_icon": "",
             "caption": "",
             "title": "Craftsmanship",
-            "rich_text": "Harvested with care, gentlydried, and packed close tosource.",
+            "rich_text": "Harvested with care, gently dried, and packed close to source.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -185,8 +188,9 @@
             "svg_icon": "",
             "caption": "",
             "title": "Transparency",
-            "rich_text": "Clear origin, simpleingredients, and testing youcan trust.",
+            "rich_text": "Clear origin, simple ingredients, and testing you can trust.",
             "text": "",
+            "list": "",
             "collection": "",
             "button_text": "",
             "button_url": "",
@@ -227,7 +231,7 @@
       "type": "image-band",
       "name": "Image band",
       "settings": {
-        "image": "shopify:\/\/shop_images\/div.r219.svg",
+        "image": "shopify:\/\/shop_images\/SJW_4.jpg",
         "pill_text": "",
         "note": "<p>Every lot is tested for identity, purity, heavy metals and microbiology before it is packed.<\/p>",
         "page_width": "container",

@@ -254,7 +254,7 @@
           "type": "spec",
           "settings": {
             "icon": "cup",
-            "image": "shopify:\/\/shop_images\/Frame_7.svg",
+            "image": "shopify:\/\/shop_images\/icon-1.svg",
             "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
             "value": "1 tbsp (2g)",
             "label": "Per cup"
@@ -264,7 +264,7 @@
           "type": "spec",
           "settings": {
             "icon": "temperature",
-            "image": "shopify:\/\/shop_images\/Frame_6.svg",
+            "image": "shopify:\/\/shop_images\/icon-2.svg",
             "bg_image": "shopify:\/\/shop_images\/Whistling_Orange_Kettle_on_Gas_Stove.jpg",
             "value": "95°C",
             "label": "Water"
@@ -274,7 +274,7 @@
           "type": "spec",
           "settings": {
             "icon": "time",
-            "image": "shopify:\/\/shop_images\/Frame_5.svg",
+            "image": "shopify:\/\/shop_images\/icon-3.svg",
             "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
             "value": "10–15 min",
             "label": "Covered steep"
@@ -289,14 +289,14 @@
       "name": "Brew Guide",
       "settings": {
         "heading": "The perfect",
-        "heading_accent": "cup.",
+        "heading_accent": "brew.",
         "accent_color": "#7a8f55",
         "page_width": "container",
         "columns_mobile": "1",
         "color_scheme": "scheme-6",
         "color_scheme_card": "scheme-1",
-        "overlay_color": "linear-gradient(to top, rgba(18, 22, 14, 0.85), rgba(18, 22, 14, 0.55), rgba(18, 22, 14, 0.25))",
-        "image_text_color": "#ffffff",
+        "overlay_color": "radial-gradient(rgba(17, 22, 14, 0), rgba(18, 22, 14, 0) 99%, rgba(18, 22, 14, 0.55) 99%, rgba(18, 22, 14, 0.85) 100%)",
+        "image_text_color": "#fffdf4",
         "padding_top": 64,
         "padding_bottom": 64,
         "padding_top_tab": 64,

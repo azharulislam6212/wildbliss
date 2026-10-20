@@ -18,7 +18,7 @@
         "text_mmg8W6": {
           "type": "text",
           "settings": {
-            "text": "<p>Every herb is carefully selected, tested and handled with<br\/>care.<\/p>"
+            "text": "<p>Every herb is carefully selected, tested and handled with care.<\/p>"
           }
         }
       },
@@ -218,7 +218,7 @@
       "settings": {
         "page_width": "container",
         "eyebrow": "Source-to-cup control",
-        "heading": "From harvest to finished tea, <em>in our hands.<\/em>",
+        "heading": "From harvest to finished tea, <em>&nbsp; &nbsp; &nbsp; in our hands.<\/em>",
         "eyebrow_color": "#a05e12",
         "accent_color": "#7a8f55",
         "arrow_color": "#d58c3f",
