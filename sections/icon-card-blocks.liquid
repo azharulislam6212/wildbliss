@@ -32,6 +32,9 @@
 
   .icon-cards-{{ section.id }} {
     --icon-card-icon-size: {{ section.settings.icon_size }}px;
+    --icon-card-overlay-color: {{ section.settings.overlay_color }};
+    --icon-card-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --icon-card-overlay-direction: {{ section.settings.overlay_gradient_direction }};
   }
 
 
@@ -81,8 +84,7 @@
               style="--animation-order: {{ forloop.index }};"
             {% endif %}
           >
-
-          <div class="icon-card-bg" aria-hidden="true" style="--overlay-bg: {{ section.settings.overlauy_color }};">
+          <div class="icon-card-bg{% if block.settings.bg_image != blank and section.settings.show_overlay %} icon-card-bg--overlay icon-card-bg--overlay-{{ section.settings.overlay_style }}{% endif %}" aria-hidden="true">
             {%- if block.settings.bg_image != blank -%}
               {{
                 block.settings.bg_image
@@ -99,16 +101,15 @@
           </div>
 
 
-            <div class="icon-card__icon">
-              {% if block.settings.image != blank %}
-                {% render 'icon-img' with image, image: block.settings.image %}
-
-              {% elsif block.settings.svg_icon != blank %}
-                {{ block.settings.svg_icon }}
-              {% else %}
-                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-              {% endif %}
-            </div>
+            {%- if block.settings.image != blank or block.settings.svg_icon != blank -%}
+              <div class="icon-card__icon">
+                {% if block.settings.image != blank %}
+                  {% render 'icon-img' with image, image: block.settings.image %}
+                {% else %}
+                  {{ block.settings.svg_icon }}
+                {% endif %}
+              </div>
+            {%- endif -%}
 
             <div class="icon-card__content">
               {% if block.settings.title != blank %}
@@ -260,13 +261,57 @@
       "type": "color_scheme",
       "id": "color_scheme_card",
       "label": "Card color",
-      "default": "scheme-1"
+      "default": "scheme-2"
     },
-      {
-      "type": "color_background",
-      "id": "overlauy_color",
-      "label": "Overlay card color",
-      "default": "linear-gradient(to top,#fffdf4fa,#fffdf4f0,#fffdf473)"
+    {
+      "type": "header",
+      "content": "Card media overlay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Media overlay",
+      "info": "Applied to cards that have a background image.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 25
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "select",
+      "id": "overlay_gradient_direction",
+      "label": "Gradient direction",
+      "options": [
+        { "value": "to top", "label": "Up" },
+        { "value": "to bottom", "label": "Down" },
+        { "value": "to left", "label": "Left" },
+        { "value": "to right", "label": "Right" }
+      ],
+      "default": "to top",
+      "visible_if": "{{ section.settings.overlay_style == 'gradient' }}"
     },
     {
       "type": "header",

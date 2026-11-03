@@ -109,12 +109,17 @@ color: #FFFFFF;
         z-index: -1;
           border-radius: 8px;
 }
-.icon-card-bg::after{
+.icon-card-bg--overlay::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: var(--overlay-bg);
-      border-radius: 8px;
+    border-radius: 8px;
+    background: var(--icon-card-overlay-color, #000);
+    opacity: var(--icon-card-overlay-opacity, 0.25);
+    pointer-events: none;
+}
+.icon-card-bg--overlay-gradient::after {
+    background: linear-gradient(var(--icon-card-overlay-direction, to top), var(--icon-card-overlay-color, #000), transparent);
 }
 
 .icon-card-bg .cap {
@@ -284,7 +289,7 @@ letter-spacing: 0.01em;
   padding: 2.8rem;
   border: 1px solid rgba(var(--color-foreground), 0.1);
   border-radius: 8px;
-  color: inherit;
+  color: rgb(var(--color-foreground));
   text-decoration: none;
   transition: border-color 0.2s ease;
 }
@@ -387,6 +392,7 @@ a.icon-card:hover .icon-card__link svg {
 .icon-card__rich_text{
   margin: 5px 0 14px;
   font-size: 15px;
+  color: rgb(var(--color-foreground));
 }
 /* ---------------------------------------------------------------------------
    Optional bulleted list under the herb line
@@ -437,3 +443,5 @@ a.icon-card:hover .icon-card__link svg {
 .icon-card__list p {
   margin: 0;
 }
+
+
