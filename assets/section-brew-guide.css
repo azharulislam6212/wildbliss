@@ -64,10 +64,24 @@ letter-spacing: -0.36px;
    Card background + overlay, same treatment as the icon cards
    (section-icon-card-blocks.css)
    --------------------------------------------------------------------------- */
+/* base.css gives .gradient a fixed background-attachment. On Android
+   (Chrome / Samsung Internet) that layer is painted over z-index: -1
+   children, hiding the image, so scope it to the card instead. */
+.brew-guide__card.gradient {
+  background-attachment: scroll;
+  transform: perspective(0);
+}
+
+/* Image layer sits at 0 and the copy above it at 1 — no negative z-index. */
+.brew-guide__card > :not(.brew-guide__card-bg) {
+  position: relative;
+  z-index: 1;
+}
+
 .brew-guide__card-bg {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   border-radius: inherit;
   background: rgb(var(--color-background));
   background: var(--gradient-background);
@@ -79,6 +93,12 @@ letter-spacing: -0.36px;
   inset: 0;
   border-radius: inherit;
   background: var(--overlay-bg);
+}
+
+/* Give image cards a real shape so the cover-fit image is not cropped into
+   a thin strip when the card is wide. Content can still grow it. */
+.brew-guide__card--has-bg {
+  aspect-ratio: 4 / 3;
 }
 
 .brew-guide__card--has-bg .brew-guide__card-bg {
@@ -171,7 +191,33 @@ letter-spacing: -0.36px;
   }
 
   .brew-guide__cards {
-    grid-template-columns: repeat(var(--brew-columns-mobile, 1), minmax(0, 1fr));
     gap: 1.2rem;
+  }
+
+  .brew-guide__card {
+    gap: 1.6rem;
+    padding: 2.4rem 1.6rem;
+  }
+}
+
+/* Mobile ------------------------------------------------------------------ */
+
+@media screen and (max-width: 576px) {
+  .brew-guide__cards {
+    grid-template-columns: repeat(var(--brew-columns-mobile, 1), minmax(0, 1fr));
+  }
+
+  .brew-guide__card {
+    min-height: 14rem;
+    padding: 2.4rem 1.2rem;
+  }
+
+  .brew-guide__value {
+    font-size: 2rem;
+  }
+
+  .brew-guide__label {
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
   }
 }

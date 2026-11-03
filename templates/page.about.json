@@ -18,6 +18,7 @@
       "blocks": {
         "pre_heading_VMyEhM": {
           "type": "pre_heading",
+          "disabled": true,
           "settings": {
             "pre_heading": "About us"
           }
@@ -46,7 +47,7 @@
         "allow_transparent_header": false,
         "page_width": "container",
         "banner_height": "exlarge",
-        "image": "shopify:\/\/shop_images\/section.phero-bleed.svg",
+        "image": "shopify:\/\/shop_images\/Hand_Picking_Yarrow.jpg",
         "text_align": "vertical-center horizontal-left",
         "color_accent": "#e3b469",
         "color_scheme": "scheme-2",
@@ -135,9 +136,8 @@
         "icon_card_EQyNhq": {
           "type": "icon_card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame_58def85f-e8b8-4d20-9670-7837c4a7dd72.svg",
             "svg_icon": "",
-            "bg_image": "shopify:\/\/shop_images\/HERO_1.png",
+            "bg_image": "shopify:\/\/shop_images\/Gloved_Hands_Sorting_Elderflowers_in_Lab_Tray_1.png",
             "caption": "",
             "title": "Integrity",
             "rich_text": "We make only claims we can stand behind — and verify what matters.",
@@ -152,11 +152,11 @@
         "icon_card_rJqXLc": {
           "type": "icon_card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame-1.svg",
             "svg_icon": "",
+            "bg_image": "shopify:\/\/shop_images\/BORN_IN_THE_CARPATHIANS_-_CHAMOMILE_MB.png",
             "caption": "",
             "title": "Authentic Origin",
-            "rich_text": "From biodiverse Carpathian landscapes, where herbs develop natural aroma, color,and character.",
+            "rich_text": "From biodiverse Carpathian landscapes, where herbs develop natural aroma, color, and character.",
             "text": "",
             "list": "",
             "collection": "",
@@ -168,8 +168,8 @@
         "icon_card_zcmn4g": {
           "type": "icon_card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame-2.svg",
             "svg_icon": "",
+            "bg_image": "shopify:\/\/shop_images\/Wild_Bliss_Tea_Packaging_Sealing_Station_2.png",
             "caption": "",
             "title": "Craftsmanship",
             "rich_text": "Harvested with care, gently dried, and packed close to source.",
@@ -184,8 +184,8 @@
         "icon_card_Yzwnpp": {
           "type": "icon_card",
           "settings": {
-            "image": "shopify:\/\/shop_images\/Frame-3.svg",
             "svg_icon": "",
+            "bg_image": "shopify:\/\/shop_images\/Wild_Bliss_Herbal_Tea_Pouches_on_Rustic_Wood.png",
             "caption": "",
             "title": "Transparency",
             "rich_text": "Clear origin, simple ingredients, and testing you can trust.",
@@ -231,7 +231,7 @@
       "type": "image-band",
       "name": "Image band",
       "settings": {
-        "image": "shopify:\/\/shop_images\/SJW_4.jpg",
+        "image": "shopify:\/\/shop_images\/Microscope_Analysis_of_a_Green_Leaf.png",
         "pill_text": "",
         "note": "<p>Every lot is tested for identity, purity, heavy metals and microbiology before it is packed.<\/p>",
         "page_width": "container",
